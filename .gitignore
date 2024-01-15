@@ -1,0 +1,5 @@
+# TypeScript compiled files
+/dist
+
+# Node modules
+/node_modules
