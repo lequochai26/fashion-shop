@@ -1,8 +1,15 @@
 import Session from "./Session";
 import SessionFactory from "./interfaces/SessionFactory";
 
+/**
+ * Bản triển khai đơn giản, dễ sử dụng của SessionFactory (bộ quản lý phiên làm việc người dùng)
+ */
 export default class SimpleSessionFactory implements SessionFactory {
     // Static methods:
+    /**
+     * Yêu cầu cấp mã phiên mới
+     * @returns Mã phiên mới được cấp
+     */
     public static generateId(): string {
         return new Date()
         .getTime()
@@ -18,31 +25,29 @@ export default class SimpleSessionFactory implements SessionFactory {
     }
 
     // Methods:
-    public get(sessionId: string, createIfUndefined?: boolean | undefined): Session | undefined {
-        if (!this.sessionStorage[sessionId]) {
-            if (createIfUndefined) {
-                sessionStorage[sessionId] = {};
-            }
-        }
-
-        return sessionStorage[sessionId];
+    public get(sessionId: string): Session | undefined {
+        return this.sessionStorage[sessionId];
     }
 
-    public create(sessionId: string): Session {
-        if (sessionStorage[sessionId]) {
-            throw new Error(`Session with ID "${sessionId}" already exist!`);
-        }
+    public create(): [string, Session] {
+        // Generate new id
+        const id: string = SimpleSessionFactory.generateId();
 
-        sessionStorage[sessionId] = {};
-        return sessionStorage[sessionId];
+        // Create new session for given id
+        this.sessionStorage[id] = new Session();
+
+        // Returning
+        return [ id, this.sessionStorage[id] ];
     }
 
     public clear(sessionId: string): void {
-        if (!sessionStorage[sessionId]) {
-            throw new Error(`Session with ID "${sessionId}" doesn't exist!`);
+        // Session with given id not exist case
+        if (!this.sessionStorage[sessionId]) {
+            throw new Error(`Session with given ID "${sessionId}" doesn't exist!`);
         }
 
-        sessionStorage[sessionId] = undefined;
+        // Clear session with given session id
+        this.sessionStorage[sessionId] = undefined as any;
     }
 }
 
