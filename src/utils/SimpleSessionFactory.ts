@@ -39,7 +39,7 @@ export default class SimpleSessionFactory implements SessionFactory {
 
     public clear(sessionId: string): void {
         if (!sessionStorage[sessionId]) {
-            throw new Error(`Session with ID "${sessionId} doesn't exist!"`);
+            throw new Error(`Session with ID "${sessionId}" doesn't exist!`);
         }
 
         sessionStorage[sessionId] = undefined;
