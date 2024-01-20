@@ -32,6 +32,45 @@ export default class Session {
     public get(key: string): SessionValue | undefined {
         return this.values[key];
     }
+
+    /**
+     * Truy vấn tất cả khóa mà phiên này đang lưu giữ
+     * @returns Danh sách khóa
+     */
+    public getKeys(): string[] {
+        return Object.keys(this.values);
+    }
+
+    /**
+     * Truy vấn tất cả dữ liệu mà phiên này đang lưu giữ
+     * @returns Danh sách dữ liệu
+     */
+    public getValues(): any[] {
+        return Object.values(this.values);
+    }
+    
+    /**
+     * Truy vấn tất cả khóa và dữ liệu mà phiên này đang lưu giữ
+     * @returns Mảng với phần tử đầu tiên là danh sách khóa và phần tử thứ hai là danh sách dữ liệu
+     */
+    public getAll(): [ string[], any[] ] {
+        return [
+            Object.keys(this.values),
+            Object.values(this.values)
+        ];
+    }
+
+    /**
+     * Xóa dữ liệu tương ứng với khóa được lưu trong phiên này
+     * @param key Khóa
+     */
+    public remove(key: string): void {
+        if (!this.values[key]) {
+            throw new Error(`No item with the key "${key}" exist in this session!`);
+        }
+
+        delete(this.values[key]);
+    }
 }
 
 type SessionValues = { [ index: string]: SessionValue };
