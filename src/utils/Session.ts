@@ -45,7 +45,7 @@ export default class Session {
      * Truy vấn tất cả dữ liệu mà phiên này đang lưu giữ
      * @returns Danh sách dữ liệu
      */
-    public getValues(): any[] {
+    public getValues(): SessionValue[] {
         return Object.values(this.values);
     }
     
@@ -53,7 +53,7 @@ export default class Session {
      * Truy vấn tất cả khóa và dữ liệu mà phiên này đang lưu giữ
      * @returns Mảng với phần tử đầu tiên là danh sách khóa và phần tử thứ hai là danh sách dữ liệu
      */
-    public getAll(): [ string[], any[] ] {
+    public getAll(): [ string[], SessionValue[] ] {
         return [
             Object.keys(this.values),
             Object.values(this.values)
