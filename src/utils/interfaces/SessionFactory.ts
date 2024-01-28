@@ -1,9 +1,18 @@
+import { Request } from "express";
 import Session from "../Session";
 
 /**
  * Bộ quản lý phiên làm việc của người dùng
  */
 export default interface SessionFactory {
+    /**
+     * Truy vấn hoặc tạo mới phiên làm việc của người dùng
+     * @param request Yêu cầu HTTP
+     * @param response Phản hồi HTTP
+     * @returns Phiên làm việc
+     */
+    get(request: Request, response: Response): Session;
+
     /**
      * Truy vấn phiên làm việc của người dùng
      * @param sessionId Mã phiên làm việc (được lấy từ cookie máy khách)
