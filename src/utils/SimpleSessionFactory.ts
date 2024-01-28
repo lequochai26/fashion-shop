@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import Session from "./Session";
 import SessionFactory from "./interfaces/SessionFactory";
 
@@ -25,6 +26,38 @@ export default class SimpleSessionFactory implements SessionFactory {
     }
 
     // Methods:
+    public retrieve(request: Request, response: Response): Session {
+        // Local functions:
+        function newSession(self: SimpleSessionFactory, response: Response): Session {
+            // Create new session
+            const [ sessionId, session ]: [ string, Session ] = self.create();
+
+            // Assign sessionId into response's cookies
+            response.cookie("sessionId", sessionId);
+
+            // Return session
+            return session;
+        }
+
+        // Executions:
+        // Get sessionId from request's cookies
+        const sessionId: string | undefined = request.cookies.sessionId;
+
+        // sessionId not found case
+        if (!sessionId) {
+            return newSession(this, response);
+        }
+
+        // Session with given sessionId not found case
+        if (!this.sessionStorage[sessionId]) {
+            return newSession(this, response);
+        }
+
+        // Session found successfully case
+        // Return session with given sessionId
+        return this.sessionStorage[sessionId];
+    }
+
     public get(sessionId: string): Session | undefined {
         return this.sessionStorage[sessionId];
     }
