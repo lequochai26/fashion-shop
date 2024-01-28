@@ -1,4 +1,4 @@
-import { Request } from "express";
+import { Request, Response } from "express";
 import Session from "../Session";
 
 /**
