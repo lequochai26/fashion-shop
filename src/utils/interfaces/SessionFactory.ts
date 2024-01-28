@@ -11,7 +11,7 @@ export default interface SessionFactory {
      * @param response Phản hồi HTTP
      * @returns Phiên làm việc
      */
-    get(request: Request, response: Response): Session;
+    retrieve(request: Request, response: Response): Session;
 
     /**
      * Truy vấn phiên làm việc của người dùng
