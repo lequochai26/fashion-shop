@@ -24,7 +24,11 @@ export async function get(collectionName: string, filter: any): Promise<WithId<D
 
     // Find one
     try {
-        return collection.findOne(filter);
+        const result: WithId<Document> | null = await collection.findOne(filter);
+
+        connection.close();
+
+        return result;
     }
     catch (error: any) {
         connection.close();
@@ -38,7 +42,11 @@ export async function getAll(collectionName: string): Promise<WithId<Document>[]
 
     // Find many
     try {
-        return collection.find().toArray();
+        const result: WithId<Document>[] = await collection.find().toArray();
+
+        connection.close();
+
+        return result
     }
     catch (error: any) {
         connection.close();
@@ -52,7 +60,11 @@ export async function getByFilter(collectionName: string, filter: any): Promise<
 
     // Find by filter and return
     try {
-        return collection.find(filter).toArray();
+        const result: WithId<Document>[] = await collection.find(filter).toArray();
+
+        connection.close();
+
+        return result;
     }
     catch (error: any) {
         connection.close();
@@ -67,6 +79,7 @@ export async function insert(collectionName: string, target: any): Promise<void>
     // Insert one
     try {
         await collection.insertOne(target);
+        connection.close();
     }
     catch (error: any) {
         connection.close();
@@ -81,6 +94,7 @@ export async function update(collectionName: string, target: any, filter: any): 
     // Update one
     try {
         await collection.updateOne(filter, {$set: target});
+        connection.close();
     }
     catch (error: any) {
         connection.close();
@@ -95,6 +109,7 @@ export async function remove(collectionName: string, filter: any): Promise<void>
     // Delete one
     try {
         await collection.deleteOne(filter);
+        connection.close();
     }
     catch (error: any) {
         connection.close();
