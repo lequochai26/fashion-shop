@@ -1,4 +1,8 @@
+import { config } from "dotenv";
 import { Collection, Db, Document, MongoClient, WithId } from "mongodb";
+
+// .env config
+config();
 
 // URL
 const url: string = process.env.URL as string;
