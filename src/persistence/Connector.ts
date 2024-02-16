@@ -18,6 +18,12 @@ interface AccessCollectionPath {
 }
 
 // Get function
+/**
+ * Truy vấn một document khớp với điều kiện được cung cấp.
+ * @param collectionName Tên collection
+ * @param filter Điều kiện
+ * @returns Document khớp với filter được cung cấp hoặc không có document nào khớp cả
+ */
 export async function get(collectionName: string, filter: any): Promise<WithId<Document> | null> {
     // Access collection
     const { connection, collection }: AccessCollectionPath = await accessCollection(collectionName);
@@ -36,6 +42,11 @@ export async function get(collectionName: string, filter: any): Promise<WithId<D
     }
 }
 
+/**
+ * Truy vấn tất cả documents thuộc collection được chỉ định.
+ * @param collectionName Tên collection
+ * @returns Danh sách các documents thuộc collection được chỉ định
+ */
 export async function getAll(collectionName: string): Promise<WithId<Document>[]> {
     // Access collection
     const { connection, collection }: AccessCollectionPath = await accessCollection(collectionName);
@@ -54,6 +65,12 @@ export async function getAll(collectionName: string): Promise<WithId<Document>[]
     }
 }
 
+/**
+ * Truy vấn danh sách nhiều documents khớp với điều kiện được cung cấp từ collection được chỉ định.
+ * @param collectionName Tên collection
+ * @param filter Điều kiện truy vấn
+ * @returns Danh sách các documents khớp với điều kiện
+ */
 export async function getByFilter(collectionName: string, filter: any): Promise<WithId<Document>[]> {
     // Access collection
     const { connection, collection }: AccessCollectionPath = await accessCollection(collectionName);
@@ -72,6 +89,11 @@ export async function getByFilter(collectionName: string, filter: any): Promise<
     }
 }
 
+/**
+ * Thêm mới một đối tượng vào collection được chỉ định.
+ * @param collectionName Tên collection
+ * @param target Đối tượng lưu
+ */
 export async function insert(collectionName: string, target: any): Promise<void> {
     // Access collection
     const { connection, collection }: AccessCollectionPath = await accessCollection(collectionName);
@@ -87,6 +109,12 @@ export async function insert(collectionName: string, target: any): Promise<void>
     }
 }
 
+/**
+ * Cập nhật một document khớp với điều kiện ở collection được chỉ định bằng một đối tượng bất kỳ.
+ * @param collectionName Tên collection
+ * @param target Đối tượng sẽ cập nhật cho document
+ * @param filter Điều kiện cập nhật
+ */
 export async function update(collectionName: string, target: any, filter: any): Promise<void> {
     // Access collection
     const { connection, collection }: AccessCollectionPath = await accessCollection(collectionName);
@@ -102,6 +130,11 @@ export async function update(collectionName: string, target: any, filter: any): 
     }
 }
 
+/**
+ * Xóa một document khớp với điều kiện khỏi collection được chỉ định.
+ * @param collectionName Tên collection
+ * @param filter Điều kiện xóa
+ */
 export async function remove(collectionName: string, filter: any): Promise<void> {
     // Access collection
     const { connection, collection }: AccessCollectionPath = await accessCollection(collectionName);
