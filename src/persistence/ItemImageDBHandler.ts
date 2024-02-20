@@ -6,28 +6,35 @@ import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 import Converter from "../utils/interfaces/Converter";
 
 export default class ItemImageDBHandler implements DBHandler<ItemImageData,ItemImagePrimaryKey>{
- //fields:
- private itemImageDataConverter: Converter<WithId<Document>, ItemImageData>;
+    // Static fields:
+    private static collectionName: string = "ItemImage";
 
- //constructor:
- public constructor(itemImageDataConverter: Converter<WithId<Document>, ItemImageData>) {
-     this.itemImageDataConverter = itemImageDataConverter;
- }
- async get(pKey: ItemImagePrimaryKey): Promise<ItemImageData | undefined> {
-    //Methods:
-    const document: WithId<Document> | null = await get("CartItem", pKey);
+    //fields:
+    private itemImageDataConverter: Converter<WithId<Document>, ItemImageData>;
 
-    if (!document) {
-        return;
+    //constructor:
+    public constructor(itemImageDataConverter: Converter<WithId<Document>, ItemImageData>) {
+        this.itemImageDataConverter = itemImageDataConverter;
     }
-    return this.itemImageDataConverter.convert(document);
-}
 
+    //  Methods:
+    async get(pKey: ItemImagePrimaryKey): Promise<ItemImageData | undefined> {
+        //Methods:
+        const document: WithId<Document> | null = await get(
+            ItemImageDBHandler.collectionName,
+            pKey
+        );
 
+        if (!document) {
+            return;
+        }
+
+        return this.itemImageDataConverter.convert(document);
+    }
 
     //getAll
     async getAll(): Promise<ItemImageData[]> {
-        const documents: WithId<Document>[] = await getAll("ItemImage")
+        const documents: WithId<Document>[] = await getAll(ItemImageDBHandler.collectionName);
 
         const itemImageDataList: ItemImageData[] = [];
 
@@ -41,7 +48,10 @@ export default class ItemImageDBHandler implements DBHandler<ItemImageData,ItemI
 
     
     async getByFilter(filter: any): Promise<ItemImageData[]> {
-        const documents: WithId<Document>[] = await getByFilter("ItemImage", filter)
+        const documents: WithId<Document>[] = await getByFilter(
+            ItemImageDBHandler.collectionName,
+            filter
+        );
 
         const itemImageDataList: ItemImageData[] = [];
 
@@ -50,27 +60,38 @@ export default class ItemImageDBHandler implements DBHandler<ItemImageData,ItemI
                 this.itemImageDataConverter.convert(document)
             );
         }
+
         return itemImageDataList;
     }
 
    async insert(target: ItemImageData): Promise<void> {
-     await insert("ItemImage", target)
+        return insert(ItemImageDBHandler.collectionName, target);
     }
+
    async update(target: ItemImageData): Promise<void> {
         const pKey: ItemImagePrimaryKey = {
             path: target.path,
             itemId: target.itemId,
-        }
+        };
+
+        return update(
+            ItemImageDBHandler.collectionName,
+            target,
+            pKey
+        );
     }
+
    async remove(target: ItemImageData): Promise<void> {
         const pKey: ItemImagePrimaryKey = {
             path: target.path,
             itemId: target.itemId,
-        }
+        };
+
         await this.removeByPrimaryKey(pKey);
     }
+
     async removeByPrimaryKey(pKey: ItemImagePrimaryKey): Promise<void> {
-        await remove ("ItemImage", pKey)
+        await remove (ItemImageDBHandler.collectionName, pKey);
     }
     
 }
