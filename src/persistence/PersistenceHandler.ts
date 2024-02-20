@@ -1,12 +1,20 @@
+import BrandData from "./data/BrandData";
 import CartItemData from "./data/CartItemData";
+import ItemData from "./data/ItemData";
 import ItemImageData from "./data/ItemImageData";
 import ItemTypeData from "./data/ItemTypeData";
+import OrderData from "./data/OrderData";
+import OrderItemData from "./data/OrderItemData";
+import UserData from "./data/UserData";
+import VerificationCodeData from "./data/VerificationCodeData";
 import CartItemPrimaryKey from "./pkeys/CartItemPrimaryKey";
 import ItemImagePrimaryKey from "./pkeys/ItemImagePrimaryKey";
+import OrderItemPrimaryKey from "./pkeys/OrderItemPrimaryKey";
+import VerificationCodePrimaryKey from "./pkeys/VerificationCodePrimaryKey";
 
 export default interface PersistenceHandler {
-    // Cart Item Handler
-    getCartItem(pKey: CartItemPrimaryKey): Promise<CartItemData>;
+    // CartItem Handle Methods
+    getCartItem(pKey: CartItemPrimaryKey): Promise<CartItemData | undefined>;
     getAllCartItems(): Promise<CartItemData[]>
     getCartItemsByFilter(filter: any): Promise<CartItemData[]>
     insertCartItem(target: CartItemData): Promise<void>
@@ -14,8 +22,8 @@ export default interface PersistenceHandler {
     removeCartItem(target: CartItemData): Promise<void>
     removeCartItemByPrimaryKey(pKey: CartItemPrimaryKey): Promise<void>
 
-    // Item image
-    getItemImage(pKey: ItemImagePrimaryKey): Promise<ItemImageData>
+    // ItemImage Handle Methods
+    getItemImage(pKey: ItemImagePrimaryKey): Promise<ItemImageData | undefined>
     getAllItemImages(): Promise<ItemImageData[]>
     getItemImagesByFilter(filter: any): Promise<ItemImageData[]>
     insertItemImage(target: ItemImageData): Promise<void>
@@ -23,115 +31,66 @@ export default interface PersistenceHandler {
     removeItemImage(target: ItemImageData): Promise<void>
     removeItemImageByPrimaryKey(pKey: ItemImagePrimaryKey): Promise<void>
 
+    // ItemType Handle Methods
+    getItemType(pKey: string): Promise<ItemTypeData | undefined>
+    getItemTypesAll(): Promise<ItemTypeData[]>
+    getItemTypesByFilter(filter: any): Promise<ItemTypeData[]>
+    insertItemType(target: ItemTypeData): Promise<void>
+    updateItemType(target: ItemTypeData): Promise<void>
+    removeItemType(target: ItemTypeData): Promise<void>
+    removeItemTypeByPrimaryKey(pKey: string): Promise<void>
 
+    // Brand Handle Methods
+    getBrand(pKey:string): Promise<BrandData | undefined>
+    getAllBrands(): Promise<BrandData[]>
+    getBrandsByFilter(filter:any): Promise<BrandData[]>
+    insertBrand(target:BrandData): Promise<void>
+    updateBrand(target:BrandData): Promise<void>
+    removeBrand(target:BrandData): Promise<void>
+    removeBrandByPrimaryKey(pKey:string): Promise<void>
 
-getItemType(pKey: string): Promise<ItemTypeData>
+    // User Handle Methods
+    getUser(pKey: string): Promise<UserData | undefined>
+    getAllUsers(): Promise<UserData[]>
+    getUsersByFilter(filter: any): Promise<UserData[]>
+    insertUser(target: UserData): Promise<void>
+    updateUser(target:UserData): Promise<void>
+    removeUser(target:UserData): Promise<void>
+    removeUserByPrimaryKey(pKey: string): Promise<void>
 
-getItemTypesAll(): Promise<ItemTypeData[]>
+    // Item Handle Methods
+    getItem(pKey: string): Promise<ItemData | undefined>
+    getAllItems(): Promise<ItemData[]>
+    getItemsByFilter(filter: any): Promise<ItemData[]>
+    insertItem(target: ItemData): Promise<void>
+    updateItem(target: ItemData): Promise<void>
+    removeItem(target: ItemData): Promise<void>
+    removeItemByPrimaryKey(pKey: string): Promise<void>
 
-getItemTypesByFilter(filter: any): Promise<ItemTypeData[]>
+    // Order Handle Methods
+    getOrder(pKey: string): Promise<OrderData | undefined>
+    getAllOrders(): Promise<OrderData[]>
+    getOrdersByFilter(filer: any): Promise<OrderData[]>
+    insertOrder(target: OrderData): Promise<void>
+    updateOrder(target:OrderData): Promise<void>
+    removeOrder(target:OrderData): Promise<void>
+    removeOrderByPrimaryKey(pKey: string): Promise<void>
 
-insertItemType(target: ItemTypeData): Promise<void>
+    // OrderItem Handle Methods
+    getOrderItem(pKey: OrderItemPrimaryKey): Promise<OrderItemData | undefined>
+    getAllOrderItems(): Promise<OrderItemData[]>
+    getOrderItemsByFilter(filter: any): Promise<OrderItemData[]>
+    insertOrderItem(target: OrderItemData): Promise<void>
+    updateOrderItem(target: OrderItemData): Promise<void>
+    removeOrderItem(target: OrderItemData): Promise<void>
+    removeOrderItemByPrimaryKey(pKey: OrderItemPrimaryKey): Promise<void>
 
-updateItemType(target: ItemTypeData): Promise<void>
-
-removeItemType(target: ItemTypeData): Promise<void>
-
-removeItemTypeByPrimaryKey(pKey: string): Promise<void>
-
-
-
-+ getBrand(string): BrandData
-
-+ getAllBrands(): BrandData[]
-
-+ getBrandsByFilter(any): BrandData[]
-
-+ insertBrand(BrandData): void
-
-+ updateBrand(BrandData): void
-
-+ removeBrand(BrandData): void
-
-+ removeBrandByPrimaryKey(string): void
-
-
-
-+ getUser(string): UserData
-
-+ getAllUsers(): UserData[]
-
-+ getUsersByFilter(any): UserData[]
-
-+ insertUser(UserData): void
-
-+ updateUser(UserData): void
-
-+ removeUser(UserData): void
-
-+ removeUserByPrimaryKey(string): void
-
-
-
-+ getItem(string): ItemData
-
-+ getAllItems(): ItemData[]
-
-+ getItemsByFilter(any): ItemData[]
-
-+ insertItem(ItemData): void
-
-+ updateItem(ItemData): void
-
-+ removeItem(ItemData): void
-
-+ removeItemByPrimaryKey(string): void
-
-
-
-+ getOrder(string): OrderData
-
-+ getAllOrders(): OrderData[]
-
-+ getOrdersByFilter(any): OrderData[]
-
-+ insertOrder(OrderData): void
-
-+ updateOrder(OrderData): void
-
-+ removeOrder(OrderData): void
-
-+ removeOrderByPrimaryKey(string): void
-
-
-
-+ getOrderItem(OrderItemPrimaryKey): OrderItemData
-
-+ getAllOrderItems(): OrderItemData[]
-
-+ getOrderItemsByFilter(any): OrderItemData[]
-
-+ insertOrderItem(OrderItemData): void
-
-+ updateOrderItem(OrderItemData): void
-
-+ removeOrderItem(OrderItemData): void
-
-+ removeOrderItemByPrimaryKey(OrderItemPrimaryKey): void
-
-
-
-+ getVerificationCode(VerificationCodePrimaryKey): VerificationCodeData
-
-+ getAllVerificationCodes(): VerificationCodeData[]
-
-+ getVerificationCodesByFilter(any): VerificationCodeData[]
-
-+ insertVerificationCode(VerificationCodeData): void
-
-+ updateVerificationCode(VerificationCodeData): void
-
-+ removeVerificationCode(VerificationCodeData): void
-
-+ removeVerificationCodeByPrimaryKey(VerificationCodePrimaryKey): void
+    // VerificationCode Handle Methods
+    getVerificationCode(pKey: VerificationCodePrimaryKey): Promise<VerificationCodeData | undefined>
+    getAllVerificationCodes(): Promise<VerificationCodeData[]>
+    getVerificationCodesByFilter(filter: any): Promise<VerificationCodeData[]>
+    insertVerificationCode(target: VerificationCodeData): Promise<void>
+    updateVerificationCode(target: VerificationCodeData): Promise<void>
+    removeVerificationCode(target: VerificationCodeData): Promise<void>
+    removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void>
 }
