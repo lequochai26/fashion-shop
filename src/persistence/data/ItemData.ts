@@ -6,7 +6,7 @@ export default interface ItemData{
     price: number;    
     amount: number;    
     gender: boolean;   
-    metadata: string;   
+    metadata?: string;   
     type: string;    
     brand: string;
 }
