@@ -8,6 +8,15 @@ export default class ItemDataConverter implements Converter<WithId<Document>,Ite
     public convert(document: WithId<Document>): ItemData {
         return{
             id: document.id,
+            avatar: document.avatar,
+            name: document.name,   
+            description: document.description,    
+            price: document.price,    
+            amount: document.amount,    
+            gender: document.gender,   
+            metadata: document.metadata, 
+            type: document.type,   
+            brand: document.brand,
         }
     }
 }

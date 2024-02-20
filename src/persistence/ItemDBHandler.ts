@@ -1,10 +1,10 @@
-import { WithId } from "mongodb";
+import { WithId,Document} from "mongodb";
 import DBHandler from "./DBHandler";
 import ItemDataConverter from "./converters/ItemDataConverter";
 import ItemData from "./data/ItemData";
-import { get } from "./Connector";
+import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 
-export default class BrandDataDBHandler implements DBHandler<ItemData,string>{
+export default class ItemDBHandler implements DBHandler<ItemData,string>{
     //static fileds các biến được khai báo với từ khóa static trong một lớp. Static fields chỉ có một bản sao duy nhất trong bộ nhớ 
     //và được chia sẻ bởi tất cả các đối tượng của lớp đó
     private static itemData: string = "ItemData";
@@ -25,50 +25,50 @@ export default class BrandDataDBHandler implements DBHandler<ItemData,string>{
         }
         //tim document phu hop voi pkey(dung filter)
         //chuyen document sang DTO
-        const brandData: BrandData = this.brandDataConverter.convert(documentBrand);
+        const itemData: ItemData = this.itemDataConverter.convert(documentItem);
         //return, ben day chi viec goi ben Converter
-        return brandData;
+        return itemData;
     }
-    public async getAll(): Promise<BrandData[]> {
-        const documentBrands: WithId<Document>[] = await getAll(
-            BrandDataDBHandler.brandData
+    public async getAll(): Promise<ItemData[]> {
+        const documentItems: WithId<Document>[] = await getAll(
+            ItemDBHandler.itemData
         );
          //tao ra 1 list chua dto,dcument la du lieu tho
-        const brandList: BrandData[]=[];
+        const itemList: ItemData[]=[];
         //chuyen doi document sang dữ liệu DTO và thêm vào list
-        for(const documentBrand of documentBrands){
+        for(const documentItem of documentItems){
             //cd
-            const brandData: BrandData = this.brandDataConverter.convert(documentBrand);
+            const brandData: ItemData = this.itemDataConverter.convert(documentItem);
             //add
-            brandList.push(brandData);
+            itemList.push(brandData);
         }
-        return brandList;
+        return itemList;
     }
-    public async getByFilter(filter: any): Promise<BrandData[]> {
-        const documentBrands: WithId<Document>[] = await getByFilter(
-            BrandDataDBHandler.brandData,filter
+    public async getByFilter(filter: any): Promise<ItemData[]> {
+        const documentItems: WithId<Document>[] = await getByFilter(
+            ItemDBHandler.itemData,filter
         );
          //tao ra 1 list chua dto,dcument la du lieu tho
-        const brandList: BrandData[]=[];
+        const itemList: ItemData[]=[];
         //chuyen doi document sang dữ liệu DTO và thêm vào list
-        for(const documentBrand of documentBrands){
+        for(const documentItem of documentItems){
             //cd
-            const brandData: BrandData = this.brandDataConverter.convert(documentBrand);
+            const itemData: ItemData = this.itemDataConverter.convert(documentItem);
             //add
-            brandList.push(brandData);
+            itemList.push(itemData);
         }
-        return brandList;
+        return itemList;
     }
-    public async insert(target: BrandData): Promise<void> {
+    public async insert(target: ItemData): Promise<void> {
         //add, sau khi add thi thoat ra
-       return insert(BrandDataDBHandler.brandData,target);
+       return insert(ItemDBHandler.itemData,target);
     }
-    public async update(target: BrandData): Promise<void> {
+    public async update(target: ItemData): Promise<void> {
         //Tạo primary cho target(dùng filter để cập nhật document)
-        const pKeyBrand = { id: target.id };
-        return update(BrandDataDBHandler.brandData,target,pKeyBrand);
+        const pKeyItem = { id: target.id };
+        return update(ItemDBHandler.itemData,target,pKeyItem);
     }
-    public async remove(target: BrandData): Promise<void> {
+    public async remove(target: ItemData): Promise<void> {
         return this.removeByPrimaryKey(target.id);
     }
     public async removeByPrimaryKey(pKey: string): Promise<void> {
@@ -76,7 +76,7 @@ export default class BrandDataDBHandler implements DBHandler<ItemData,string>{
         const primaryKey  = {
             id : pKey,
        };
-      return remove(BrandDataDBHandler.brandData,primaryKey);
+      return remove(ItemDBHandler.itemData,primaryKey);
     }
     
 }
