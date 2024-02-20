@@ -1,30 +1,76 @@
+import { Document, WithId } from "mongodb";
+import Converter from "../utils/interfaces/Converter";
 import DBHandler from "./DBHandler";
 import UserData from "./data/UserData";
+import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 
 export default class UserDBHandler implements DBHandler<UserData, string>{
     //fields:
-    
-    
-    get(pKey: string): Promise<UserData | undefined> {
-        throw new Error("Method not implemented.");
+    private userDataConverter: Converter<WithId<Document>,UserData>;
+
+    private static collectionName :string = "User";
+
+    //constructor
+    public constructor(userDataConverter : Converter<WithId<Document>, UserData>){
+        this.userDataConverter = userDataConverter;
     }
-    getAll(): Promise<UserData[]> {
-        throw new Error("Method not implemented.");
+
+    async get(pKey: string): Promise<UserData | undefined> {
+        const document : WithId<Document> | null = await get(UserDBHandler.collectionName,pKey);
+
+        if(!document){
+            return;
+        };
+
+        return this.userDataConverter.convert(document);
     }
-    getByFilter(filter: any): Promise<UserData[]> {
-        throw new Error("Method not implemented.");
+
+    async getAll(): Promise<UserData[]> {
+        const documents: WithId<Document>[] = await getAll(UserDBHandler.collectionName);
+
+        const userDataList : UserData[] = [];
+
+        for(const document of documents){
+            userDataList.push(
+                this.userDataConverter.convert(document)
+            );
+        }
+
+        return userDataList;
     }
-    insert(target: UserData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async getByFilter(filter: any): Promise<UserData[]> {
+        const documents : WithId<Document>[] = await getByFilter(UserDBHandler.collectionName,filter);
+
+        const userDataList : UserData[] = [];
+         
+        for(const document of documents){
+            userDataList.push(
+                this.userDataConverter.convert(document)
+            );
+        }
+
+        return userDataList;
     }
-    update(target: UserData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async insert(target: UserData): Promise<void> {
+        await insert(UserDBHandler.collectionName, target);
     }
-    remove(target: UserData): Promise<void> {
-        throw new Error("Method not implemented.");
+    async update(target: UserData): Promise<void> {
+        const pKey = {
+             email: target.email
+        }
+        
+        await update(UserDBHandler.collectionName, target,pKey);
     }
-    removeByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    async remove(target: UserData): Promise<void> {
+        await this.removeByPrimaryKey(target.email);
+    }
+    async removeByPrimaryKey(email: string): Promise<void> {
+        const pKey = {
+            email : email
+        }
+        await remove(UserDBHandler.collectionName, pKey);
     }
     
 }
