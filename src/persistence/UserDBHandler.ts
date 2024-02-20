@@ -6,7 +6,7 @@ import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 
 export default class UserDBHandler implements DBHandler<UserData, string>{
     //fields:
-    private userDataConverter: Converter<WithId<Document>,UserData>;
+    private userDataConverter: Converter<WithId<Document>, UserData>;
 
     private static collectionName :string = "User";
 
@@ -16,7 +16,11 @@ export default class UserDBHandler implements DBHandler<UserData, string>{
     }
 
     async get(pKey: string): Promise<UserData | undefined> {
-        const document : WithId<Document> | null = await get(UserDBHandler.collectionName,pKey);
+        const filter = {
+            email: pKey
+        };
+
+        const document : WithId<Document> | null = await get(UserDBHandler.collectionName, filter);
 
         if(!document){
             return;
@@ -40,7 +44,7 @@ export default class UserDBHandler implements DBHandler<UserData, string>{
     }
 
     async getByFilter(filter: any): Promise<UserData[]> {
-        const documents : WithId<Document>[] = await getByFilter(UserDBHandler.collectionName,filter);
+        const documents : WithId<Document>[] = await getByFilter(UserDBHandler.collectionName, filter);
 
         const userDataList : UserData[] = [];
          
@@ -56,6 +60,7 @@ export default class UserDBHandler implements DBHandler<UserData, string>{
     async insert(target: UserData): Promise<void> {
         await insert(UserDBHandler.collectionName, target);
     }
+
     async update(target: UserData): Promise<void> {
         const pKey = {
              email: target.email
@@ -63,9 +68,11 @@ export default class UserDBHandler implements DBHandler<UserData, string>{
         
         await update(UserDBHandler.collectionName, target,pKey);
     }
+
     async remove(target: UserData): Promise<void> {
         await this.removeByPrimaryKey(target.email);
     }
+
     async removeByPrimaryKey(email: string): Promise<void> {
         const pKey = {
             email : email
