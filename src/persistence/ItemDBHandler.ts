@@ -15,17 +15,25 @@ export default class ItemDBHandler implements DBHandler<ItemData,string>{
         this.itemDataConverter = itemDataConverter;
     }
     public async get(pKey: string): Promise<ItemData | undefined> {
+        const filter = {
+            id: pKey
+        };
+
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
         const documentItem: WithId<Document> | null = await get(
-            ItemDBHandler.itemData,pKey
+            ItemDBHandler.itemData,
+            filter
         );
+
         //ko co thi return underfined
         if(!documentItem){
             return;
         }
+
         //tim document phu hop voi pkey(dung filter)
         //chuyen document sang DTO
         const itemData: ItemData = this.itemDataConverter.convert(documentItem);
+        
         //return, ben day chi viec goi ben Converter
         return itemData;
     }
