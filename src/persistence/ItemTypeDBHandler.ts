@@ -4,7 +4,7 @@ import ItemTypeDataConverter from "./converters/ItemTypeDataConverter";
 import ItemTypeData from "./data/ItemTypeData";
 import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 
-export default class ItemTypeDataDBHandler implements DBHandler<ItemTypeData,string>{
+export default class ItemTypeDBHandler implements DBHandler<ItemTypeData,string>{
     //static fileds các biến được khai báo với từ khóa static trong một lớp. Static fields chỉ có một bản sao duy nhất trong bộ nhớ 
     //và được chia sẻ bởi tất cả các đối tượng của lớp đó
     private static collectionNameItemType: string = "ItemTypeData";
@@ -25,7 +25,7 @@ export default class ItemTypeDataDBHandler implements DBHandler<ItemTypeData,str
         
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
         const documentItem: WithId<Document> | null = await get(
-            ItemTypeDataDBHandler.collectionNameItemType,filter
+            ItemTypeDBHandler.collectionNameItemType,filter
         );
         
         //ko co thi return underfined
@@ -43,7 +43,7 @@ export default class ItemTypeDataDBHandler implements DBHandler<ItemTypeData,str
 
     public async getAll(): Promise<ItemTypeData[]> {
         const documentItems: WithId<Document>[] = await getAll(
-            ItemTypeDataDBHandler.collectionNameItemType
+            ItemTypeDBHandler.collectionNameItemType
         );
          
         //tao ra 1 list chua dto,dcument la du lieu tho
@@ -62,7 +62,7 @@ export default class ItemTypeDataDBHandler implements DBHandler<ItemTypeData,str
     
     public async getByFilter(filter: any): Promise<ItemTypeData[]> {
         const documentItems: WithId<Document>[] = await getByFilter(
-            ItemTypeDataDBHandler.collectionNameItemType,filter
+            ItemTypeDBHandler.collectionNameItemType,filter
         );
         
         //tao ra 1 list chua dto,dcument la du lieu tho
@@ -81,13 +81,13 @@ export default class ItemTypeDataDBHandler implements DBHandler<ItemTypeData,str
     
     public async insert(target: ItemTypeData): Promise<void> {
        //add, sau khi add thi thoat ra
-       return insert(ItemTypeDataDBHandler.collectionNameItemType,target);
+       return insert(ItemTypeDBHandler.collectionNameItemType,target);
     }
     
     public async update(target: ItemTypeData): Promise<void> {
         //Tạo primary cho target(dùng filter để cập nhật document)
         const pKeyItem = { id: target.id };
-        return update(ItemTypeDataDBHandler.collectionNameItemType,target,pKeyItem);
+        return update(ItemTypeDBHandler.collectionNameItemType,target,pKeyItem);
     }
     
     public async remove(target: ItemTypeData): Promise<void> {
@@ -101,7 +101,7 @@ export default class ItemTypeDataDBHandler implements DBHandler<ItemTypeData,str
             id : pKey,
        };
       
-       return remove(ItemTypeDataDBHandler.collectionNameItemType,primaryKey);
+       return remove(ItemTypeDBHandler.collectionNameItemType,primaryKey);
     }
     
 }
