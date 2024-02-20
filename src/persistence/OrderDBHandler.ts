@@ -1,10 +1,9 @@
 import { WithId,Document} from "mongodb";
 import DBHandler from "./DBHandler";
-import ItemDataConverter from "./converters/OrderDataConverter";
-import ItemData from "./data/OrderData";
 import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 import OrderData from "./data/OrderData";
 import OrderDataConverter from "./converters/OrderDataConverter";
+import ItemData from "./data/ItemData";
 
 export default class OrderDBHandler implements DBHandler<OrderData,string>{
     //static fileds các biến được khai báo với từ khóa static trong một lớp. Static fields chỉ có một bản sao duy nhất trong bộ nhớ 
@@ -16,7 +15,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
     public constructor(orderDataConverter: OrderDataConverter){
         this.OrderDataConverter = orderDataConverter;
     }
-    public async get(pKey: string): Promise<ItemData | undefined> {
+    public async get(pKey: string): Promise<OrderData | undefined> {
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
         const documentOrder: WithId<Document> | null = await get(
             OrderDBHandler.orderData,pKey
