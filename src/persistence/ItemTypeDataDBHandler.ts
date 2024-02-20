@@ -16,9 +16,11 @@ export default class ItemTypeDataDBHandler implements DBHandler<ItemTypeData,str
     }
     //method
     public async get(pKey: string): Promise<ItemTypeData | undefined> {
+        //tao doi tuong filter (ham get chi nhan 1 doi tuong)
+        const filter ={id:pKey}
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
         const documentItem: WithId<Document> | null = await get(
-            ItemTypeDataDBHandler.itemTypeData,pKey
+            ItemTypeDataDBHandler.itemTypeData,filter
         );
         //ko co thi return underfined
         if(!documentItem){
