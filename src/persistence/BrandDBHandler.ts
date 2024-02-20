@@ -4,7 +4,7 @@ import BrandDataConverter from "./converters/BrandDataConverter";
 import BrandData from "./data/BrandData";
 import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 
-export default class BrandDataDBHandler implements DBHandler<BrandData,string>{
+export default class BrandDBHandler implements DBHandler<BrandData,string>{
     //static fileds các biến được khai báo với từ khóa static trong một lớp. Static fields chỉ có một bản sao duy nhất trong bộ nhớ 
     //và được chia sẻ bởi tất cả các đối tượng của lớp đó
     private static collectioNameBrand: string = "BrandData";
@@ -22,7 +22,7 @@ export default class BrandDataDBHandler implements DBHandler<BrandData,string>{
        
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
         const documentBrand: WithId<Document> | null = await get(
-            BrandDataDBHandler.collectioNameBrand,
+            BrandDBHandler.collectioNameBrand,
             filter
         );
         
@@ -42,7 +42,7 @@ export default class BrandDataDBHandler implements DBHandler<BrandData,string>{
     public async getAll(): Promise<BrandData[]> {
         
         const documentBrands: WithId<Document>[] = await getAll(
-            BrandDataDBHandler.collectioNameBrand      
+            BrandDBHandler.collectioNameBrand      
             );
         
         //tao ra 1 list chua dto,dcument la du lieu tho
@@ -61,7 +61,7 @@ export default class BrandDataDBHandler implements DBHandler<BrandData,string>{
     }
     public async getByFilter(filter: any): Promise<BrandData[]> {
         const documentBrands: WithId<Document>[] = await getByFilter(
-            BrandDataDBHandler.collectioNameBrand,filter
+            BrandDBHandler.collectioNameBrand,filter
         );
         
         //tao ra 1 list chua dto(data transfer object),dcument la du lieu tho
@@ -80,14 +80,14 @@ export default class BrandDataDBHandler implements DBHandler<BrandData,string>{
 
     public async insert(target: BrandData): Promise<void> {
         //add, sau khi add thi thoat ra
-       return insert(BrandDataDBHandler.collectioNameBrand,target);
+       return insert(BrandDBHandler.collectioNameBrand,target);
     }
 
     public async update(target: BrandData): Promise<void> {
         //Tạo primary cho target(dùng filter để cập nhật document)
         const pKeyBrand = { id: target.id };
         
-        return update(BrandDataDBHandler.collectioNameBrand,target,pKeyBrand);
+        return update(BrandDBHandler.collectioNameBrand,target,pKeyBrand);
     }
 
     public async remove(target: BrandData): Promise<void> {
@@ -100,7 +100,7 @@ export default class BrandDataDBHandler implements DBHandler<BrandData,string>{
             id : pKey,
         };
         
-        return remove(BrandDataDBHandler.collectioNameBrand,primaryKey);
+        return remove(BrandDBHandler.collectioNameBrand,primaryKey);
     }
     
 }
