@@ -1,6 +1,6 @@
 import { Document, WithId } from "mongodb";
 import DBHandler from "./DBHandler";
-import BrandDataConverter from "./converters/BrandDateConverter";
+import BrandDataConverter from "./converters/BrandDataConverter";
 import BrandData from "./data/BrandData";
 import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 
