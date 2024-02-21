@@ -33,7 +33,7 @@ export default interface PersistenceHandler {
 
     // ItemType Handle Methods
     getItemType(pKey: string): Promise<ItemTypeData | undefined>
-    getItemTypesAll(): Promise<ItemTypeData[]>
+    getAllItemTypes(): Promise<ItemTypeData[]>
     getItemTypesByFilter(filter: any): Promise<ItemTypeData[]>
     insertItemType(target: ItemTypeData): Promise<void>
     updateItemType(target: ItemTypeData): Promise<void>
