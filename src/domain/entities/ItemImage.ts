@@ -18,6 +18,6 @@ export default class ItemImage {
     }
 
     public set Path(path: string | undefined){
-        this.Path = path;
+        this.path = path;
     }
 }
