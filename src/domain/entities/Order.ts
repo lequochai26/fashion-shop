@@ -1,4 +1,4 @@
-export default class VerificationCode {
+export default class Order {
     // Fields:
     private id?: string | undefined;
     private type?: string | undefined;
@@ -29,7 +29,7 @@ export default class VerificationCode {
     // Methods:
     //ID
     public get Id(): string | undefined {
-        return this.Id;
+        return this.id;
     }
     public set Id(id: string | undefined) {
         this.id = id;
