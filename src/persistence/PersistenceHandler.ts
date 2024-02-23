@@ -70,7 +70,7 @@ export default interface PersistenceHandler {
     // Order Handle Methods
     getOrder(pKey: string): Promise<OrderData | undefined>
     getAllOrders(): Promise<OrderData[]>
-    getOrdersByFilter(filer: any): Promise<OrderData[]>
+    getOrdersByFilter(filter: any): Promise<OrderData[]>
     insertOrder(target: OrderData): Promise<void>
     updateOrder(target:OrderData): Promise<void>
     removeOrder(target:OrderData): Promise<void>

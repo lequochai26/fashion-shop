@@ -24,6 +24,7 @@ export default class PersistenceHandlerImpl implements PersistenceHandler {
     private orderDBHandler?: DBHandler<OrderData, string> | undefined;
     private orderItemDBHandler?: DBHandler<OrderItemData, OrderItemPrimaryKey> | undefined;
     private userDBHandler?: DBHandler<UserData, string> | undefined;
+    private verificationCodeDBHandler?: DBHandler<VerificationCodeData, VerificationCodePrimaryKey> | undefined;
 
     // Constructor:
     public constructor(
@@ -34,7 +35,8 @@ export default class PersistenceHandlerImpl implements PersistenceHandler {
         itemTypeDBHandler?: DBHandler<ItemTypeData, string> | undefined,
         orderDBHandler?: DBHandler<OrderData, string> | undefined,
         orderItemDBHandler?: DBHandler<OrderItemData, OrderItemPrimaryKey> | undefined,
-        userDBHandler?: DBHandler<UserData, string> | undefined
+        userDBHandler?: DBHandler<UserData, string> | undefined,
+        verificationCodeDBHandler?: DBHandler<VerificationCodeData, VerificationCodePrimaryKey> | undefined
     ) {
         this.brandDBHandler = brandDBHandler;
         this.cartItemDBHandler = cartItemDBHandler;
@@ -44,6 +46,7 @@ export default class PersistenceHandlerImpl implements PersistenceHandler {
         this.orderDBHandler = orderDBHandler;
         this.orderItemDBHandler = orderItemDBHandler;
         this.userDBHandler = userDBHandler;
+        this.verificationCodeDBHandler = verificationCodeDBHandler;
     }
 
     // Private methods:
@@ -77,6 +80,66 @@ export default class PersistenceHandlerImpl implements PersistenceHandler {
         }
 
         return executable(this.itemTypeDBHandler);
+    }
+
+    private async useBrandDBHandler<T>(
+        executable: (brandDBHandler: DBHandler<BrandData, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.brandDBHandler) {
+            throw new Error("brandDBHandler field is missing!");
+        }
+
+        return executable(this.brandDBHandler);
+    }
+
+    private async useUserDBHandler<T>(
+        executable: (userDBHandler: DBHandler<UserData, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.userDBHandler) {
+            throw new Error("userDBHandler field is missing!");
+        }
+
+        return executable(this.userDBHandler);
+    }
+
+    private async useItemDBHandler<T>(
+        executable: (itemDBHandler: DBHandler<ItemData, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.itemDBHandler) {
+            throw new Error("itemDBHandler field is missing!");
+        }
+
+        return executable(this.itemDBHandler);
+    }
+
+    private async useOrderDBHandler<T>(
+        executable: (orderDBHandler: DBHandler<OrderData, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.orderDBHandler) {
+            throw new Error("orderDBHandler field is missing!");
+        }
+
+        return executable(this.orderDBHandler);
+    }
+
+    private async useOrderItemDBHandler<T>(
+        executable: (orderItemDBHandler: DBHandler<OrderItemData, OrderItemPrimaryKey>) => Promise<T>
+    ): Promise<T> {
+        if (!this.orderItemDBHandler) {
+            throw new Error("orderItemDBHandler field is missing!");
+        }
+
+        return executable(this.orderItemDBHandler);
+    }
+
+    private async useVerificationCodeDBHandler<T>(
+        executable: (veriicationCodeDBHandler: DBHandler<VerificationCodeData, VerificationCodePrimaryKey>) => Promise<T>
+    ): Promise<T> {
+        if (!this.verificationCodeDBHandler) {
+            throw new Error("verificationCodeDBHandler field is missing!");
+        }
+
+        return executable(this.verificationCodeDBHandler);
     }
 
    // Methods:
@@ -287,131 +350,340 @@ export default class PersistenceHandlerImpl implements PersistenceHandler {
         );
     }
 
-    getBrand(pKey: string): Promise<BrandData | undefined> {
-        throw new Error("Method not implemented.");
+    public async getBrand(pKey: string): Promise<BrandData | undefined> {
+        return this.useBrandDBHandler<BrandData | undefined>(
+            async function (brandDBHandler) {
+                return brandDBHandler.get(pKey);
+            }
+        );
     }
-    getAllBrands(): Promise<BrandData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllBrands(): Promise<BrandData[]> {
+        return this.useBrandDBHandler<BrandData[]>(
+            async function (brandDBHandler) {
+                return brandDBHandler.getAll();
+            }
+        );
     }
-    getBrandsByFilter(filter: any): Promise<BrandData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getBrandsByFilter(filter: any): Promise<BrandData[]> {
+        return this.useBrandDBHandler<BrandData[]>(
+            async function (brandDBHandler) {
+                return brandDBHandler.getByFilter(filter);
+            }
+        );
     }
-    insertBrand(target: BrandData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertBrand(target: BrandData): Promise<void> {
+        return this.useBrandDBHandler<void>(
+            async function (brandDBHandler) {
+                return brandDBHandler.insert(target);
+            }
+        );
     }
-    updateBrand(target: BrandData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateBrand(target: BrandData): Promise<void> {
+        return this.useBrandDBHandler<void>(
+            async function (brandDBHandler) {
+                return brandDBHandler.update(target);
+            }
+        );
     }
-    removeBrand(target: BrandData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeBrand(target: BrandData): Promise<void> {
+        return this.useBrandDBHandler<void>(
+            async function (brandDBHandler) {
+                return brandDBHandler.remove(target);
+            }
+        );
     }
-    removeBrandByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeBrandByPrimaryKey(pKey: string): Promise<void> {
+        return this.useBrandDBHandler<void>(
+            async function (brandDBHandler) {
+                return brandDBHandler.removeByPrimaryKey(pKey);
+            }
+        )
     }
-    getUser(pKey: string): Promise<UserData | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getUser(pKey: string): Promise<UserData | undefined> {
+        return this.useUserDBHandler<UserData | undefined>(
+            async function (userDBHandler) {
+                return userDBHandler.get(pKey);
+            }
+        );
     }
-    getAllUsers(): Promise<UserData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllUsers(): Promise<UserData[]> {
+        return this.useUserDBHandler<UserData[]>(
+            async function (userDBHandler) {
+                return userDBHandler.getAll();
+            }
+        );
     }
-    getUsersByFilter(filter: any): Promise<UserData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getUsersByFilter(filter: any): Promise<UserData[]> {
+        return this.useUserDBHandler<UserData[]>(
+            async function (userDBHandler) {
+                return userDBHandler.getByFilter(filter);
+            }
+        );
     }
-    insertUser(target: UserData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertUser(target: UserData): Promise<void> {
+        return this.useUserDBHandler<void>(
+            async function (userDBHandler) {
+                return userDBHandler.insert(target);
+            }
+        );
     }
-    updateUser(target: UserData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateUser(target: UserData): Promise<void> {
+        return this.useUserDBHandler<void>(
+            async function (userDBHandler) {
+                return userDBHandler.update(target);
+            }
+        );
     }
-    removeUser(target: UserData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeUser(target: UserData): Promise<void> {
+        return this.useUserDBHandler<void>(
+            async function (userDBHandler) {
+                return userDBHandler.remove(target);
+            }
+        );
     }
-    removeUserByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeUserByPrimaryKey(pKey: string): Promise<void> {
+        return this.useUserDBHandler<void>(
+            async function (userDBHandler) {
+                return userDBHandler.removeByPrimaryKey(pKey);
+            }
+        );
     }
-    getItem(pKey: string): Promise<ItemData | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getItem(pKey: string): Promise<ItemData | undefined> {
+        return this.useItemDBHandler<ItemData | undefined>(
+            async function (itemDBHandler) {
+                return itemDBHandler.get(pKey);
+            }
+        );
     }
-    getAllItems(): Promise<ItemData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllItems(): Promise<ItemData[]> {
+        return this.useItemDBHandler<ItemData[]>(
+            async function (itemDBHandler) {
+                return itemDBHandler.getAll();
+            }
+        );
     }
-    getItemsByFilter(filter: any): Promise<ItemData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getItemsByFilter(filter: any): Promise<ItemData[]> {
+        return this.useItemDBHandler<ItemData[]>(
+            async function (itemDBHandler) {
+                return itemDBHandler.getByFilter(filter);
+            }
+        );
     }
-    insertItem(target: ItemData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertItem(target: ItemData): Promise<void> {
+        return this.useItemDBHandler<void>(
+            async function (itemDBHandler) {
+                return itemDBHandler.insert(target);
+            }
+        );
     }
-    updateItem(target: ItemData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateItem(target: ItemData): Promise<void> {
+        return this.useItemDBHandler<void>(
+            async function (itemDBHandler) {
+                return itemDBHandler.update(target);
+            }
+        );
     }
-    removeItem(target: ItemData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeItem(target: ItemData): Promise<void> {
+        return this.useItemDBHandler<void>(
+            async function (itemDBHandler) {
+                return itemDBHandler.remove(target);
+            }
+        );
     }
-    removeItemByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeItemByPrimaryKey(pKey: string): Promise<void> {
+        return this.useItemDBHandler<void>(
+            async function (itemDBHandler) {
+                return itemDBHandler.removeByPrimaryKey(pKey);
+            }
+        );
     }
-    getOrder(pKey: string): Promise<OrderData | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getOrder(pKey: string): Promise<OrderData | undefined> {
+        return this.useOrderDBHandler<OrderData | undefined>(
+            async function (orderDBHandler) {
+                return orderDBHandler.get(pKey);
+            }
+        );
     }
-    getAllOrders(): Promise<OrderData[]> {
-        throw new Error("Method not implemented.");
+    
+    public async getAllOrders(): Promise<OrderData[]> {
+        return this.useOrderDBHandler<OrderData[]>(
+            async function (orderDBHandler) {
+                return orderDBHandler.getAll();
+            }
+        );
     }
-    getOrdersByFilter(filer: any): Promise<OrderData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getOrdersByFilter(filter: any): Promise<OrderData[]> {
+        return this.useOrderDBHandler<OrderData[]>(
+            async function (orderDBHandler) {
+                return orderDBHandler.getByFilter(filter);
+            }
+        )
     }
-    insertOrder(target: OrderData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertOrder(target: OrderData): Promise<void> {
+        return this.useOrderDBHandler<void>(
+            async function (orderDBHandler) {
+                return orderDBHandler.insert(target);
+            }
+        );
     }
-    updateOrder(target: OrderData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateOrder(target: OrderData): Promise<void> {
+        return this.useOrderDBHandler<void>(
+            async function (orderDBHandler) {
+                return orderDBHandler.update(target);
+            }
+        );
     }
-    removeOrder(target: OrderData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrder(target: OrderData): Promise<void> {
+        return this.useOrderDBHandler<void>(
+            async function (orderDBHandler) {
+                return orderDBHandler.remove(target);
+            }
+        );
     }
-    removeOrderByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrderByPrimaryKey(pKey: string): Promise<void> {
+        return this.useOrderDBHandler<void>(
+            async function (orderDBHandler) {
+                return orderDBHandler.removeByPrimaryKey(pKey);
+            }
+        );
     }
-    getOrderItem(pKey: OrderItemPrimaryKey): Promise<OrderItemData | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getOrderItem(pKey: OrderItemPrimaryKey): Promise<OrderItemData | undefined> {
+        return this.useOrderItemDBHandler<OrderItemData | undefined>(
+            async function (orderItemDBHandler) {
+                return orderItemDBHandler.get(pKey);
+            }
+        );
     }
-    getAllOrderItems(): Promise<OrderItemData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllOrderItems(): Promise<OrderItemData[]> {
+        return this.useOrderItemDBHandler<OrderItemData[]>(
+            async function (orderItemDBHandler) {
+                return orderItemDBHandler.getAll();
+            }
+        )
     }
-    getOrderItemsByFilter(filter: any): Promise<OrderItemData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getOrderItemsByFilter(filter: any): Promise<OrderItemData[]> {
+        return this.useOrderItemDBHandler<OrderItemData[]>(
+            async function (orderItemDBHandler) {
+                return orderItemDBHandler.getByFilter(filter);
+            }
+        );
     }
-    insertOrderItem(target: OrderItemData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertOrderItem(target: OrderItemData): Promise<void> {
+        return this.useOrderItemDBHandler<void>(
+            async function (orderItemDBHandler) {
+                return orderItemDBHandler.insert(target);
+            }
+        );
     }
-    updateOrderItem(target: OrderItemData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateOrderItem(target: OrderItemData): Promise<void> {
+        return this.useOrderItemDBHandler<void>(
+            async function (orderItemDBHandler) {
+                return orderItemDBHandler.update(target);
+            }
+        );
     }
-    removeOrderItem(target: OrderItemData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrderItem(target: OrderItemData): Promise<void> {
+        return this.useOrderItemDBHandler<void>(
+            async function (orderItemDBHandler) {
+                return orderItemDBHandler.remove(target);
+            }
+        );
     }
-    removeOrderItemByPrimaryKey(pKey: OrderItemPrimaryKey): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrderItemByPrimaryKey(pKey: OrderItemPrimaryKey): Promise<void> {
+        return this.useOrderItemDBHandler<void>(
+            async function (orderItemDBHandler) {
+                return orderItemDBHandler.removeByPrimaryKey(pKey)
+            }
+        );
     }
-    getVerificationCode(pKey: VerificationCodePrimaryKey): Promise<VerificationCodeData | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getVerificationCode(pKey: VerificationCodePrimaryKey): Promise<VerificationCodeData | undefined> {
+        return this.useVerificationCodeDBHandler<VerificationCodeData | undefined>(
+            async function (verificationCodeDBHandler) {
+                return verificationCodeDBHandler.get(pKey);
+            }
+        );
     }
-    getAllVerificationCodes(): Promise<VerificationCodeData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllVerificationCodes(): Promise<VerificationCodeData[]> {
+        return this.useVerificationCodeDBHandler<VerificationCodeData[]>(
+            async function (verificationCodeDBHandler) {
+                return verificationCodeDBHandler.getAll();
+            }
+        );
     }
-    getVerificationCodesByFilter(filter: any): Promise<VerificationCodeData[]> {
-        throw new Error("Method not implemented.");
+
+    public async getVerificationCodesByFilter(filter: any): Promise<VerificationCodeData[]> {
+        return this.useVerificationCodeDBHandler<VerificationCodeData[]>(
+            async function (verificationCodeDBHandler) {
+                return verificationCodeDBHandler.getByFilter(filter);
+            }
+        );
     }
-    insertVerificationCode(target: VerificationCodeData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertVerificationCode(target: VerificationCodeData): Promise<void> {
+        return this.useVerificationCodeDBHandler<void>(
+            async function (verificationCodeDBHandler) {
+                verificationCodeDBHandler.insert(target);
+            }
+        );
     }
-    updateVerificationCode(target: VerificationCodeData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateVerificationCode(target: VerificationCodeData): Promise<void> {
+        return this.useVerificationCodeDBHandler<void>(
+            async function (verificationCodeDBHandler) {
+                return verificationCodeDBHandler.update(target);
+            }
+        );
     }
-    removeVerificationCode(target: VerificationCodeData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeVerificationCode(target: VerificationCodeData): Promise<void> {
+        return this.useVerificationCodeDBHandler<void>(
+            async function (verificationCodeDBHandler) {
+                return verificationCodeDBHandler.remove(target);
+            }
+        );
     }
-    removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void> {
+        return this.useVerificationCodeDBHandler<void>(
+            async function (verificationCodeDBHandler) {
+                return verificationCodeDBHandler.removeByPrimaryKey(pKey);
+            }
+        );
     }
 
     // Getters / setters:
@@ -481,5 +753,15 @@ export default class PersistenceHandlerImpl implements PersistenceHandler {
 
     public set UserDBHandler(value: DBHandler<UserData, string> | undefined) {
         this.userDBHandler = value;
+    }
+
+    public get VerificationCodeDBHandler(): DBHandler<VerificationCodeData, VerificationCodePrimaryKey> | undefined {
+        return this.verificationCodeDBHandler;
+    }
+
+    public set VerificationCodeDBHandler(
+        verificationCodeDBHandler: DBHandler<VerificationCodeData, VerificationCodePrimaryKey> | undefined
+    ) {
+        this.verificationCodeDBHandler = verificationCodeDBHandler;
     }
 }
