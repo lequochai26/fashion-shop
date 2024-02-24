@@ -113,28 +113,150 @@ export default class VerificationCodeManager extends PersistenceHandlerHolder im
         return entity;
     }
 
-    getAll(path: any[]): Promise<VerificationCode[]> {
-        throw new Error("Method not implemented.");
+    public async getAll(path: any[]): Promise<VerificationCode[]> {
+        // Get all verification code data
+        const dataList: VerificationCodeData[] = await this.usePersistenceHandler(
+            async function (persistenceHandler) {
+                return persistenceHandler.getAllVerificationCodes();
+            }
+        );
+
+        // Result initialization
+        const result: VerificationCode[] = [];
+
+        // Converting data from data list to entities
+        for (const data of dataList) {
+            // Precheck path
+            let entity: VerificationCode | undefined = this.precheckPath({ code: data.code, email: data.email }, path);
+
+            if (entity) {
+                result.push(entity);
+                continue;
+            }
+
+            // Convert data to entity
+            entity = this.useVerificationCodeConverter(
+                function (verificationCodeConverter) {
+                    return verificationCodeConverter.convert(data);
+                }
+            );
+
+            // Push entity into path
+            path.push(entity);
+
+            // Setup entity's dependencies
+            this.setupDependencies(entity, path);
+
+            // Push entity into result
+            result.push(entity);
+        }
+
+        // Return result
+        return result;
     }
 
-    getByFilter(filter: any, path: any[]): Promise<VerificationCode[]> {
-        throw new Error("Method not implemented.");
+    public async getByFilter(filter: any, path: any[]): Promise<VerificationCode[]> {
+        // Get all data from db
+        const dataList: VerificationCodeData[] = await this.usePersistenceHandler(
+            async function (persistenceHandler) {
+                return persistenceHandler.getVerificationCodesByFilter(filter);
+            }
+        );
+
+        // Result initialization
+        const result: VerificationCode[] = [];
+
+        // Converting data into entities
+        for (const data of dataList) {
+            // Precheck path
+            let entity: VerificationCode | undefined = this.precheckPath({ email: data.email, code: data.code }, path);
+
+            if (entity) {
+                result.push(entity);
+                continue;
+            }
+
+            // Convert data into entity
+            entity = this.useVerificationCodeConverter(
+                function (verificationCodeConverter) {
+                    return verificationCodeConverter.convert(data);
+                }
+            );
+
+            // Push entity into path
+            path.push(entity);
+
+            // Setup dependencies for entity
+            this.setupDependencies(entity, path);
+
+            // Push entity into result
+            result.push(entity);
+        }
+
+        // Return result
+        return result;
     }
 
-    insert(target: VerificationCode): Promise<void> {
-        throw new Error("Method not implemented.");
+    public async insert(target: VerificationCode): Promise<void> {
+        const self = this;
+
+        return this.usePersistenceHandler(
+            async function (persistenceHandler) {
+                return persistenceHandler.insertVerificationCode(
+
+                    self.useVerificationCodeConverter(
+                        function (verificationCodeConverter) {
+                            return verificationCodeConverter.reverse(target);
+                        }
+                    )
+
+                );
+            }
+        )
     }
 
-    update(target: VerificationCode): Promise<void> {
-        throw new Error("Method not implemented.");
+    public async update(target: VerificationCode): Promise<void> {
+        const self = this;
+
+        return this.usePersistenceHandler(
+            async function (persistenceHandler) {
+                return persistenceHandler.updateVerificationCode(
+
+                    self.useVerificationCodeConverter(
+                        function (verificationCodeConverter) {
+                            return verificationCodeConverter.reverse(target);
+                        }
+                    )
+
+                );
+            }
+        );
     }
 
-    remove(target: VerificationCode): Promise<void> {
-        throw new Error("Method not implemented.");
+    public async remove(target: VerificationCode): Promise<void> {
+        const self = this;
+
+        return this.usePersistenceHandler(
+            async function (persistenceHandler) {
+                return persistenceHandler.removeVerificationCode(
+
+                    self.useVerificationCodeConverter(
+                        function (verificationCodeConverter) {
+                            return verificationCodeConverter.reverse(target);
+                        }
+                    )
+
+                );
+            }
+        );
     }
 
-    removeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void> {
-        throw new Error("Method not implemented.");
+    public async removeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void> {
+        return this.usePersistenceHandler(
+            async function (persistenceHandler) {
+                return persistenceHandler.removeVerificationCodeByPrimaryKey(pKey);
+            }
+        );
     }
 
     // Getters / setters:
