@@ -14,9 +14,9 @@ export default class User {
     private permission?: string | undefined;
 
     //Dependency
-    private orderedOrders?: Order[] | undefined;
-    private createdOrders?: Order[] | undefined;
-    private cart?: CartItem[] | undefined;
+    private orderedOrders?: Order[];
+    private createdOrders?: Order[];
+    private cart?: CartItem[];
     private verificationCode? : VerificationCode[];
 
     //constructor:
@@ -32,7 +32,7 @@ export default class User {
         orderedOrders?: Order[] | undefined,
         createdOrders?: Order[] | undefined,
         cart?: CartItem[] | undefined,
-        verificationCode? : VerificationCode[]
+        verificationCode? : VerificationCode[] | undefined
     ) {
         this.email = email;
         this.password = password;
