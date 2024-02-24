@@ -5,5 +5,5 @@ export default interface EntityManager<T, P> {
     insert(target: T): Promise<void>
     update(target: T): Promise<void>
     remove(target: T): Promise<void>
-    remove(pKey: P): Promise<void>
+    removeByPrimaryKey(pKey: P): Promise<void>
 }
