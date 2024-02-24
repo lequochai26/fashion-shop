@@ -30,8 +30,8 @@ export default class Item {
         amount?: number | undefined,
         gender?: Boolean | undefined,
         metadata?: string | undefined,
-        images?: ItemImage[],
-        orders?: OrderItem[],
+        images?: ItemImage[] | undefined,
+        orders?: OrderItem[] | undefined,
     ) {
         this.id = id;
         this.avatar = avatar;
