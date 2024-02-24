@@ -4,7 +4,7 @@ export default class Brand{
     //fields
     private id? : string | undefined;
     private name? : string | undefined;
-    private items?: Item[] | undefined; 
+    private items: Item[];
     
     
     //constructor
@@ -12,11 +12,10 @@ export default class Brand{
         id? : string | undefined,
         name? : string | undefined,
         items? : Item[] | undefined
-
     ){
         this.id = id;
         this.name = name;
-        this.items = items;
+        this.items = items || [];
     }
 
     //method
@@ -37,11 +36,11 @@ export default class Brand{
            this.name = name;
        }
     //item
-    public get Items(): Item[] | undefined {
+    public get Items(): Item[] {
            return this.items;
     }
     
-    public set Items(items: Item[] | undefined) {
+    public set Items(items: Item[]) {
            this.items = items;
     }
 
