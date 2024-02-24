@@ -10,7 +10,7 @@ export default class Order {
     private metadata?: string | undefined;
     private createBy?:User | undefined;
     private orderBy?:User | undefined;
-    private items?: OrderItem[];
+    private items: OrderItem[];
     
 
     // Constructor:
@@ -20,7 +20,7 @@ export default class Order {
         date?: Date | undefined,
         totalPrice?: number | undefined,
         metadata?: string | undefined,
-        items?: OrderItem[],
+        items?: OrderItem[] | undefined,
         createBy?:User | undefined,
         orderBy?:User | undefined,
     ) {
