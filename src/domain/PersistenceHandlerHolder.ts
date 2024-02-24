@@ -19,4 +19,13 @@ export default class PersistenceHandlerHolder {
 
         return executable(this.persistenceHandler);
     }
+
+    // Getters / setters:
+    public get PersistenceHandler(): PersistenceHandler | undefined {
+        return this.persistenceHandler;
+    }
+
+    public set PersistenceHandler(persistenceHandler: PersistenceHandler | undefined) {
+        this.persistenceHandler = persistenceHandler;
+    }
 }
