@@ -1,3 +1,8 @@
+import Brand from "./Brand";
+import ItemImage from "./ItemImage";
+import ItemType from "./ItemType";
+import OrderItem from "./OrderItem";
+
 export default class Item {
     // Fields:
     private id?: string | undefined;
@@ -8,12 +13,11 @@ export default class Item {
     private amount?: number | undefined;
     private gender?: Boolean | undefined;
     private metadata?: string | undefined;
-    /*
-        private type?: ItemType | undefined;
-        private brand?: Brand | undefined;
-        private images: Itemimage[];
-        private orders: OrderItem[];
-    */
+    private type?: ItemType | undefined;
+    private brand?: Brand | undefined;
+    private images: ItemImage[] | undefined 
+    private orders: OrderItem[] | undefined 
+    
     
 
     // Constructor:
@@ -103,7 +107,14 @@ export default class Item {
         this.metadata = metadata;
     }
 
-    /*
+    //TYPE
+    public get Type(): ItemType | undefined{
+        return this.type;
+    }
+    public set Type(type: ItemType | undefined){
+        this.type = type;
+    }
+    
     //BRAND
     public get Brand(): Brand | undefined{
         return this.brand;
@@ -113,6 +124,19 @@ export default class Item {
     }
 
     //IMAGES
+    public get Images(): ItemImage[] | undefined{
+        return this.images;
+    }
+    public set Images(images: ItemImage[] | undefined){
+        this.images = images;
+    }
+    
     //ORDER
-     */
+    public get Orders(): OrderItem[] | undefined{
+        return this.orders;
+    }
+    public set Orders(orders: OrderItem[] | undefined){
+        this.orders = orders;
+    }
+     
 }

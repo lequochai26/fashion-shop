@@ -1,3 +1,6 @@
+import OrderItem from "./OrderItem";
+import User from "./User";
+
 export default class Order {
     // Fields:
     private id?: string | undefined;
@@ -5,11 +8,10 @@ export default class Order {
     private date?: Date | undefined;
     private totalPrice?: number | undefined;
     private metadata?: string | undefined;
-    /*
-        private createBy:User | undefined;
-        private orderBy:User | undefined:
-        items: OrderItem[]
-    */
+    private createBy:User | undefined;
+    private orderBy:User | undefined;
+    private items: OrderItem[] | undefined
+    
 
     // Constructor:
     public constructor(
@@ -66,5 +68,29 @@ export default class Order {
     }
     public set MetaData(metadata: string | undefined){
         this.metadata = metadata;
+    }
+
+    //CREATEBY
+    public get CreateBy(): User | undefined{
+        return this.createBy;
+    }
+    public set CreateBy(createBy: User | undefined){
+        this.createBy = createBy;
+    }
+
+    //ORDERBY
+    public get OrderBy(): User | undefined{
+        return this.orderBy;
+    }
+    public set OrderBy(orderBy: User | undefined){
+        this.orderBy = orderBy;
+    }
+
+    //ITEMS
+    public get Items(): OrderItem[] | undefined{
+        return this.items;
+    }
+    public set Items(items: OrderItem[] | undefined){
+        this.items = items;
     }
 }
