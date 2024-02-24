@@ -13,6 +13,7 @@ export default class User {
     private avatar? : string | undefined;
     private permission?: string | undefined;
 
+    //Dependency
     private orderedOrders?: Order[] | undefined;
     private createdOrders?: Order[] | undefined;
     private cart?: CartItem[] | undefined;
