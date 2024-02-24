@@ -1,5 +1,6 @@
 import CartItem from "./CartItem";
 import Order from "./Order";
+import VerificationCode from "./VerificationCode";
 
 export default class User {
     //fields:
@@ -15,6 +16,7 @@ export default class User {
     private orderedOrders?: Order[] | undefined;
     private createdOrders?: Order[] | undefined;
     private cart?: CartItem[] | undefined;
+    private verificationCode? : VerificationCode[];
 
     //constructor:
     public constructor(
@@ -28,7 +30,8 @@ export default class User {
         permission?: string | undefined,
         orderedOrders?: Order[] | undefined,
         createdOrders?: Order[] | undefined,
-        cart?: CartItem[] | undefined
+        cart?: CartItem[] | undefined,
+        verificationCode? : VerificationCode[]
     ) {
         this.email = email;
         this.password = password;
@@ -41,6 +44,7 @@ export default class User {
         this.orderedOrders = orderedOrders || [];
         this.createdOrders = createdOrders || [];
         this.cart = cart || [];
+        this.verificationCode = verificationCode || [];
     }
 
     //methods:
@@ -119,5 +123,12 @@ export default class User {
     }
     public set Cart(cart : CartItem[] | undefined) {
         this.cart = cart;
+    }
+
+    public get VerificationCode() : VerificationCode[] | undefined{
+        return this.verificationCode;
+    }
+    public set VerificationCode(verificationCode : VerificationCode[] | undefined) {
+        this.verificationCode = verificationCode;
     }
 }
