@@ -1,5 +1,6 @@
 import VerificationCodeData from "../../persistence/data/VerificationCodeData";
 import ReversableConverter from "../../utils/interfaces/ReversableConverter";
+import User from "../entities/User";
 import VerificationCode from "../entities/VerificationCode";
 
 export default class VerificationCodeConverter implements ReversableConverter<VerificationCodeData, VerificationCode> {
@@ -14,10 +15,14 @@ export default class VerificationCodeConverter implements ReversableConverter<Ve
     public convert(from: VerificationCodeData): VerificationCode {
         const verificationCode = new VerificationCode();
 
+        const user: User = new User();
+        user.Email = from.email;
+
+        verificationCode.User = user;
         verificationCode.Code = from.code;
         verificationCode.Type = from.type;
         verificationCode.CreationTime = from.creationTime;
-        verificationCode.LifeTime = from.lifeTime;
+        verificationCode.LifeTime = from.lifeTime;        
 
         return verificationCode;
     }
