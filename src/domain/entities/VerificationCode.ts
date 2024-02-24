@@ -1,5 +1,8 @@
+import User from "./User";
+
 export default class VerificationCode {
     // Fields:
+    private user?: User | undefined;
     private code?: string | undefined;
     private type?: string | undefined;
     private creationTime?: string | undefined;
@@ -7,11 +10,13 @@ export default class VerificationCode {
 
     // Constructor:
     public constructor(
+        user?: User | undefined,
         code?: string | undefined,
         type?: string | undefined,
         creationTime?: string | undefined,
         lifeTime?: number | undefined
     ) {
+        this.user = user;
         this.code = code;
         this.type = type;
         this.creationTime = creationTime;
@@ -19,6 +24,14 @@ export default class VerificationCode {
     }
 
     // Methods:
+    public get User(): User | undefined {
+        return this.user;
+    }
+
+    public set User(user: User | undefined) {
+        this.user = user;
+    }
+
     public get Code(): string | undefined {
         return this.code;
     }
