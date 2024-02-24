@@ -8,9 +8,9 @@ export default class Order {
     private date?: Date | undefined;
     private totalPrice?: number | undefined;
     private metadata?: string | undefined;
-    private createBy:User | undefined;
-    private orderBy:User | undefined;
-    private items: OrderItem[] | undefined
+    private createBy?:User | undefined;
+    private orderBy?:User | undefined;
+    private items?: OrderItem[];
     
 
     // Constructor:
@@ -20,12 +20,18 @@ export default class Order {
         date?: Date | undefined,
         totalPrice?: number | undefined,
         metadata?: string | undefined,
+        items?: OrderItem[],
+        createBy?:User | undefined,
+        orderBy?:User | undefined,
     ) {
         this.id = id;
         this.type = type;
         this.date = date;
         this.totalPrice = totalPrice;
         this.metadata= metadata;
+        this.items = items || [];
+        this.createBy=createBy;
+        this.orderBy=orderBy;
     }
 
     // Methods:
@@ -87,10 +93,10 @@ export default class Order {
     }
 
     //ITEMS
-    public get Items(): OrderItem[] | undefined{
+    public get Items(): OrderItem[]{
         return this.items;
     }
-    public set Items(items: OrderItem[] | undefined){
+    public set Items(items: OrderItem[]){
         this.items = items;
     }
 }

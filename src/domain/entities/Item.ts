@@ -15,8 +15,8 @@ export default class Item {
     private metadata?: string | undefined;
     private type?: ItemType | undefined;
     private brand?: Brand | undefined;
-    private images: ItemImage[] | undefined 
-    private orders: OrderItem[] | undefined 
+    private images: ItemImage[];
+    private orders: OrderItem[];
     
     
 
@@ -30,6 +30,8 @@ export default class Item {
         amount?: number | undefined,
         gender?: Boolean | undefined,
         metadata?: string | undefined,
+        images?: ItemImage[],
+        orders?: OrderItem[],
     ) {
         this.id = id;
         this.avatar = avatar;
@@ -38,7 +40,9 @@ export default class Item {
         this.price = price;
         this.amount = amount;
         this.gender = gender;
-        this.metadata= metadata;
+        this.metadata = metadata;
+        this.images = images||[];
+        this.orders = orders||[];
     }
 
     // Methods:
@@ -124,18 +128,18 @@ export default class Item {
     }
 
     //IMAGES
-    public get Images(): ItemImage[] | undefined{
+    public get Images(): ItemImage[]{
         return this.images;
     }
-    public set Images(images: ItemImage[] | undefined){
+    public set Images(images: ItemImage[] ){
         this.images = images;
     }
-    
+
     //ORDER
-    public get Orders(): OrderItem[] | undefined{
+    public get Orders(): OrderItem[] {
         return this.orders;
     }
-    public set Orders(orders: OrderItem[] | undefined){
+    public set Orders(orders: OrderItem[]){
         this.orders = orders;
     }
      
