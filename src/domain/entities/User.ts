@@ -13,11 +13,11 @@ export default class User {
     private avatar? : string | undefined;
     private permission?: string | undefined;
 
-    //Dependency
-    private orderedOrders?: Order[];
-    private createdOrders?: Order[];
-    private cart?: CartItem[];
-    private verificationCode? : VerificationCode[];
+    //dependency:
+    private orderedOrders: Order[];
+    private createdOrders: Order[];
+    private cart: CartItem[];
+    private verificationCode : VerificationCode[];
 
     //constructor:
     public constructor(
@@ -105,31 +105,31 @@ export default class User {
         this.permission = permission;
     }
 
-    public get OrderedOrders() : Order[] | undefined{
+    public get OrderedOrders() : Order[] {
         return this.orderedOrders;
     }
-    public set OrderedOrders(orderedOrders : Order[] | undefined) {
+    public set OrderedOrders(orderedOrders : Order[] ) {
         this.orderedOrders = orderedOrders;
     }
 
-    public get CreatedOrders(): Order[] | undefined {
+    public get CreatedOrders(): Order[]  {
         return this.createdOrders;
     }
-    public set CreatedOrders(createdOrders: Order[] | undefined) {
+    public set CreatedOrders(createdOrders: Order[] ) {
         this.createdOrders = createdOrders;
     }
 
-    public get Cart() : CartItem[] | undefined {
+    public get Cart() : CartItem[]  {
         return this.cart;
     }
-    public set Cart(cart : CartItem[] | undefined) {
+    public set Cart(cart : CartItem[] ) {
         this.cart = cart;
     }
 
-    public get VerificationCode() : VerificationCode[] | undefined{
+    public get VerificationCode() : VerificationCode[] {
         return this.verificationCode;
     }
-    public set VerificationCode(verificationCode : VerificationCode[] | undefined) {
+    public set VerificationCode(verificationCode : VerificationCode[] ) {
         this.verificationCode = verificationCode;
     }
 }
