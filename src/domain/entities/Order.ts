@@ -8,8 +8,8 @@ export default class Order {
     private date?: Date | undefined;
     private totalPrice?: number | undefined;
     private metadata?: string | undefined;
-    private createBy?:User | undefined;
-    private orderBy?:User | undefined;
+    private createdBy?:User | undefined;
+    private orderedBy?:User | undefined;
     private items: OrderItem[];
     
 
@@ -21,8 +21,8 @@ export default class Order {
         totalPrice?: number | undefined,
         metadata?: string | undefined,
         items?: OrderItem[] | undefined,
-        createBy?:User | undefined,
-        orderBy?:User | undefined,
+        createdBy?:User | undefined,
+        orderedBy?:User | undefined,
     ) {
         this.id = id;
         this.type = type;
@@ -30,8 +30,8 @@ export default class Order {
         this.totalPrice = totalPrice;
         this.metadata= metadata;
         this.items = items || [];
-        this.createBy=createBy;
-        this.orderBy=orderBy;
+        this.createdBy=createdBy;
+        this.orderedBy=orderedBy;
     }
 
     // Methods:
@@ -77,19 +77,19 @@ export default class Order {
     }
 
     //CREATEBY
-    public get CreateBy(): User | undefined{
-        return this.createBy;
+    public get CreatedBy(): User | undefined{
+        return this.createdBy;
     }
-    public set CreateBy(createBy: User | undefined){
-        this.createBy = createBy;
+    public set CreatedBy(createdBy: User | undefined){
+        this.createdBy = createdBy;
     }
 
     //ORDERBY
-    public get OrderBy(): User | undefined{
-        return this.orderBy;
+    public get OrderedBy(): User | undefined{
+        return this.orderedBy;
     }
-    public set OrderBy(orderBy: User | undefined){
-        this.orderBy = orderBy;
+    public set OrderedBy(orderedBy: User | undefined){
+        this.orderedBy = orderedBy;
     }
 
     //ITEMS
