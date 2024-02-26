@@ -99,6 +99,7 @@ export default class CartItemManager extends PersistenceHandlerHolder implements
 
     // Methods
 
+    //Get
     public async get(pKey: CartItemPrimaryKey, path: any[]): Promise<CartItem | undefined> {
         //precheck pạt
         let entity: CartItem | undefined = this.precheckPath(pKey, path);
@@ -137,6 +138,8 @@ export default class CartItemManager extends PersistenceHandlerHolder implements
         return entity;
     }
 
+
+    //get ALl
     public async getAll(path: any[]): Promise<CartItem[]> {
         // Get all verification code data
         const dataList: CartItemData[] = await this.usePersistenceHandler(
@@ -180,6 +183,7 @@ export default class CartItemManager extends PersistenceHandlerHolder implements
     }
 
 
+    //get by filter
     public async getByFilter(filter: any, path: any[]): Promise<CartItem[]> {
         // Get all data from db
         const dataList: CartItemData[] = await this.usePersistenceHandler(
@@ -221,6 +225,9 @@ export default class CartItemManager extends PersistenceHandlerHolder implements
         // Return result
         return result;
     }
+
+
+    //Insert
     public async insert(target: CartItem): Promise<void> {
         const self = this;
 
@@ -238,7 +245,9 @@ export default class CartItemManager extends PersistenceHandlerHolder implements
             }
         )
     }
-    update(target: CartItem): Promise<void> {
+
+    //Update
+    public async update(target: CartItem): Promise<void> {
         const self = this;
 
         return this.usePersistenceHandler(
@@ -256,7 +265,8 @@ export default class CartItemManager extends PersistenceHandlerHolder implements
         )
     }
 
-    remove(target: CartItem): Promise<void> {
+    //Remove
+    public async remove(target: CartItem): Promise<void> {
         const self = this;
 
         return this.usePersistenceHandler(
@@ -274,7 +284,8 @@ export default class CartItemManager extends PersistenceHandlerHolder implements
         )
     }
 
-    removeByPrimaryKey(pKey: CartItemPrimaryKey): Promise<void> {
+    //removeByFilter
+    public async removeByPrimaryKey(pKey: CartItemPrimaryKey): Promise<void> {
         return this.usePersistenceHandler(
             async function (persistenceHandler) {
                 return persistenceHandler.removeCartItemByPrimaryKey(pKey);
