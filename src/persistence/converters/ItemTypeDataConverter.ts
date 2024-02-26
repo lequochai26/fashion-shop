@@ -4,7 +4,7 @@ import ItemTypeData from "../data/ItemTypeData";
 
 export default class ItemTypeDataConverter implements Converter<WithId<Document>, ItemTypeData>{
     
-    //constructer de để tránh lỗi khi tạo đối tượng mà không truyền vào tham số.
+    //constructer de tránh lỗi khi tạo đối tượng mà không truyền vào tham số.
     public constructor(){
 
     }
