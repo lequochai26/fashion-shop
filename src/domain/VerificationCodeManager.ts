@@ -25,16 +25,6 @@ export default class VerificationCodeManager extends PersistenceHandlerHolder im
     }
 
     // Private methods:
-    protected async usePersistenceHandler<T>(
-        executable: (persistenceHandler: PersistenceHandler) => Promise<T>
-    ): Promise<T> {
-        if (!this.persistenceHandler) {
-            throw new Error("persistenceHandler field is missing!");
-        }
-
-        return executable(this.persistenceHandler);
-    }
-
     private useVerificationCodeConverter<T>(
         executable: (verificationCodeConverter: ReversableConverter<VerificationCodeData, VerificationCode>) => T
     ): T {
