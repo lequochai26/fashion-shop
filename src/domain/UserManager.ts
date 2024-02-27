@@ -21,13 +21,13 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
 
     //Constructor:
     public constructor(
-        persistenHandler?: PersistenceHandler | undefined,
+        persistenceHandler?: PersistenceHandler | undefined,
         userConverter?: ReversableConverter<UserData,User> | undefined,
         orderManager?: EntityManager<Order,string> | undefined,
         cartItemManager?: EntityManager<CartItem,CartItemPrimaryKey> | undefined,
         verificationCodeManager?: EntityManager<VerificationCode,VerificationCodePrimaryKey> | undefined
     ) {
-        super(persistenHandler);
+        super(persistenceHandler);
         this.userConverter = userConverter;
         this.orderManager = orderManager;
         this.cartItemManager = cartItemManager;
