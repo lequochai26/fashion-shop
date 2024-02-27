@@ -4,8 +4,6 @@ import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import EntityManager from "./EntityManager";
 import PersistenceHandlerHolder from "./PersistenceHandlerHolder";
-import UserManager from "./UserManager";
-import OrderConverter from "./converters/OrderConverter";
 import Order from "./entities/Order";
 import OrderItem from "./entities/OrderItem";
 import User from "./entities/User";
@@ -42,6 +40,7 @@ export default class OrderManager extends PersistenceHandlerHolder implements En
     }
 
 
+
     private async useUserManager<T>(
         executable: (UserManager: EntityManager<User,string>)=>Promise<T>
     ):Promise<T>{
@@ -73,7 +72,7 @@ export default class OrderManager extends PersistenceHandlerHolder implements En
         //Items dependency
         entity.Items = await this.useOderItemManager(
             async function (orderItemManager) {
-                return orderItemManager.getByFilter({item:entity.Id as string},path);
+                return orderItemManager.getByFilter({orderId:entity.Id as string},path);
             }
         )
         

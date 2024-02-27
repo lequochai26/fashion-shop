@@ -119,14 +119,14 @@ export default class ItemManager extends PersistenceHandlerHolder implements Ent
         //ItemImage dependency
         entity.Images = await this.useItemImageManager(
             async function (itemImageManager) {
-                return itemImageManager.getByFilter({item:entity.Id as string}, path);
+                return itemImageManager.getByFilter({itemId:entity.Id as string}, path);
             }
         )
 
         //Order dependency
         entity.Orders = await this.useOrderItemManager(
             async function (orderItemManager) {
-                return orderItemManager.getByFilter({orderItem:entity.Id as string}, path);
+                return orderItemManager.getByFilter({itemId:entity.Id as string}, path);
             }
         )
     }
