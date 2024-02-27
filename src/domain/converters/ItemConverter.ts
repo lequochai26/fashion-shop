@@ -7,8 +7,10 @@ import ItemType from "../entities/ItemType";
 export default class ItemConverter implements ReversableConverter<ItemData,Item>{
     convert(from: ItemData): Item {
         const item: Item = new Item();
-        const itemType: ItemType = new ItemType();
+        let itemType: ItemType = new ItemType();
+        itemType.Id = from.type;
         const brand: Brand = new Brand();
+        brand.Id = from.brand;
 
         item.Id = from.id;
         item.Avatar = from.avatar;
