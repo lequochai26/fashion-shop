@@ -180,7 +180,7 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
                 continue;
             }
 
-            //Converti data to entity
+            //Convert data to entity
             entity =  this.useUserConverter(
                 function (userConverter) {
                     return userConverter.convert(data);
@@ -245,9 +245,9 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
     public async insert(target : User): Promise<void>{
         const self = this;
 
-        this.usePersistenceHandler (
+        return this.usePersistenceHandler (
             async function (persistenHandler) {
-                persistenHandler.insertUser(
+                return persistenHandler.insertUser(
 
                     self.useUserConverter(
                         function (userConverter) {
@@ -263,9 +263,9 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
     public async update(target : User) : Promise<void> {
         const self = this;
         
-        this.usePersistenceHandler(
+        return this.usePersistenceHandler(
             async function (persistenceHandler) {
-                persistenceHandler.updateUser(
+                return persistenceHandler.updateUser(
 
                     self.useUserConverter (
                         function (userConverter) {
@@ -281,9 +281,9 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
     public async remove(target : User) : Promise<void> {
         const self = this;
 
-        this.usePersistenceHandler(
+        return this.usePersistenceHandler(
             async function (persistenHandler) {
-                persistenHandler.removeUser(
+                return persistenHandler.removeUser(
 
                     self.useUserConverter(
                         function(userConverter) {
@@ -297,9 +297,9 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
     }
 
     public async removeByPrimaryKey(pKey: string): Promise<void> {
-        this.usePersistenceHandler(
+        return this.usePersistenceHandler(
             async function(persistenHandler) {
-                persistenHandler.removeUserByPrimaryKey(pKey);
+                return persistenHandler.removeUserByPrimaryKey(pKey);
             }
         )
     }
