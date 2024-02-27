@@ -61,7 +61,10 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
     //setup denpendencies
     private async setupDependencies(entity: ItemType, path: any[]): Promise<void>{
         //item
+        //await để đợi cho đến khi hàm useItemManager trả về kết quả
+        // trước khi gán giá trị cho entity.Items.
         entity.Items = await this.useItemManager(
+            //bat dong bo,xu li ko bi chan
             async function(itemManager){
                 return itemManager.getByFilter(
                     { itemType: entity.Id }, path);
@@ -180,7 +183,8 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
         return result;
     }
     public async insert(target: ItemType): Promise<void> {
-        const self = this;
+        const self = this; //để lưu trữ tham chiếu đến đối tượng hiện tại (instance)  
+        //truy cập vào các đt trong hàm async mà không bị mất tham chiếu.
 
         return this.usePersistenceHandler(
            async function (persistenceHandler) {
