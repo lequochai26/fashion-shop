@@ -320,54 +320,125 @@ export default class DomainManagerImpl implements DomainManager {
         throw new Error("Method not implemented.");
     }
 
-    getBrand(pKey: string, path: any[]): Promise<Brand | undefined> {
-        throw new Error("Method not implemented.");
+    public async getBrand(pKey: string, path: any[]): Promise<Brand | undefined> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.get(pKey, path);
+            }
+        );
     }
-    getAllBrands(path: any[]): Promise<Brand[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllBrands(path: any[]): Promise<Brand[]> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.getAll(path);
+            }
+        );
     }
-    getBrandsByFilter(filter: any, path: any[]): Promise<Brand[]> {
-        throw new Error("Method not implemented.");
+
+    public async getBrandsByFilter(filter: any, path: any[]): Promise<Brand[]> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.getByFilter(filter, path);
+            }
+        );
     }
-    insertBrand(target: Brand): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertBrand(target: Brand): Promise<void> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.insert(target);
+            }
+        );
     }
-    updateBrand(target: Brand): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateBrand(target: Brand): Promise<void> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.update(target);
+            }
+        );
     }
-    removeBrand(target: Brand): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeBrand(target: Brand): Promise<void> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.remove(target);
+            }
+        );
     }
-    removeBrandByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeBrandByPrimaryKey(pKey: string): Promise<void> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
+
     getBrandsByFilterFunc(filterFunc: (target: Brand) => boolean): Promise<Brand[]> {
         throw new Error("Method not implemented.");
     }
     searchBrands(pKey: string): Promise<Brand[]> {
         throw new Error("Method not implemented.");
     }
-    getUser(pKey: string, path: any[]): Promise<User | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getUser(pKey: string, path: any[]): Promise<User | undefined> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.get(pKey, path);
+            }
+        );
     }
-    getAllUsers(path: any[]): Promise<User[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllUsers(path: any[]): Promise<User[]> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.getAll(path);
+            }
+        );
     }
-    getUsersByFilter(filter: any, path: any[]): Promise<User[]> {
-        throw new Error("Method not implemented.");
+
+    public async getUsersByFilter(filter: any, path: any[]): Promise<User[]> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.getByFilter(filter, path);
+            }
+        );
     }
-    insertUser(target: User): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertUser(target: User): Promise<void> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.insert(target);
+            }
+        );
     }
-    updateUser(target: User): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateUser(target: User): Promise<void> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.update(target);
+            }
+        );
     }
-    removeUser(target: User): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeUser(target: User): Promise<void> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.remove(target);
+            }
+        );
     }
-    removeUserByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeUserByPrimaryKey(pKey: string): Promise<void> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
+
     getUsersByFilterFunc(filterFunc: (target: User) => boolean): Promise<User[]> {
         throw new Error("Method not implemented.");
     }
@@ -437,74 +508,180 @@ export default class DomainManagerImpl implements DomainManager {
     searchItems(pKey: string): Promise<Item[]> {
         throw new Error("Method not implemented.");
     }
-    getOrder(pKey: string, path: any[]): Promise<Order | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getOrder(pKey: string, path: any[]): Promise<Order | undefined> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.get(pKey, path);
+            }
+        );
     }
-    getAllOrders(path: any[]): Promise<Order[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllOrders(path: any[]): Promise<Order[]> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.getAll(path);
+            }
+        );
     }
-    getOrdersByFilter(filter: any, path: any[]): Promise<Order[]> {
-        throw new Error("Method not implemented.");
+
+    public async getOrdersByFilter(filter: any, path: any[]): Promise<Order[]> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.getByFilter(filter, path);
+            }
+        );
     }
-    insertOrder(target: Order): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertOrder(target: Order): Promise<void> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.insert(target);
+            }
+        );
     }
-    updateOrder(target: Order): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateOrder(target: Order): Promise<void> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.update(target);
+            }
+        );
     }
-    removeOrder(target: Order): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrder(target: Order): Promise<void> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.remove(target);
+            }
+        );
     }
-    removeOrderByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrderByPrimaryKey(pKey: string): Promise<void> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
+
     getOrdersByFilterFunc(filterFunc: (target: Order) => boolean): Promise<Order[]> {
         throw new Error("Method not implemented.");
     }
     searchOrders(pKey: string): Promise<Order[]> {
         throw new Error("Method not implemented.");
     }
-    getOrderItem(pKey: OrderItemPrimaryKey, path: any[]): Promise<OrderItem | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getOrderItem(pKey: OrderItemPrimaryKey, path: any[]): Promise<OrderItem | undefined> {
+        return this.useOrderItemManager(
+            async function (orderItemManager) {
+                return orderItemManager.get(pKey, path);
+            }
+        );
     }
-    getAllOrderItems(path: any[]): Promise<OrderItem[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllOrderItems(path: any[]): Promise<OrderItem[]> {
+        return this.useOrderItemManager(
+            async function (orderItemManager) {
+                return orderItemManager.getAll(path);
+            }
+        );
     }
-    getOrderItemsByFilter(filter: any, path: any[]): Promise<OrderItem[]> {
-        throw new Error("Method not implemented.");
+
+    public async getOrderItemsByFilter(filter: any, path: any[]): Promise<OrderItem[]> {
+        return this.useOrderItemManager(
+            async function (orderItemManager) {
+                return orderItemManager.getByFilter(filter, path);
+            }
+        );
     }
-    insertOrderItem(target: OrderItem): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertOrderItem(target: OrderItem): Promise<void> {
+        return this.useOrderItemManager(
+            async function (orderItemManager) {
+                return orderItemManager.insert(target);
+            }
+        );
     }
-    updateOrderItem(target: OrderItem): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateOrderItem(target: OrderItem): Promise<void> {
+        return this.useOrderItemManager(
+            async function (orderItemManager) {
+                return orderItemManager.update(target);
+            }
+        );
     }
-    removeOrderItem(target: OrderItem): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrderItem(target: OrderItem): Promise<void> {
+        return this.useOrderItemManager(
+            async function (orderItemManager) {
+                return orderItemManager.remove(target);
+            }
+        )
     }
-    removeOrderItemByPrimaryKey(pKey: OrderItemPrimaryKey): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeOrderItemByPrimaryKey(pKey: OrderItemPrimaryKey): Promise<void> {
+        return this.useOrderItemManager(
+            async function (orderItemManager) {
+                return orderItemManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
-    getVerificationCode(pKey: VerificationCodePrimaryKey, path: any[]): Promise<VerificationCode | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getVerificationCode(pKey: VerificationCodePrimaryKey, path: any[]): Promise<VerificationCode | undefined> {
+        return this.useVerificationCodeManager(
+            async function (verificationCodeManager) {
+                return verificationCodeManager.get(pKey, path);
+            }
+        );
     }
-    getAllVerificationCodes(path: any[]): Promise<VerificationCode[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllVerificationCodes(path: any[]): Promise<VerificationCode[]> {
+        return this.useVerificationCodeManager(
+            async function (verificationCodeManager) {
+                return verificationCodeManager.getAll(path);
+            }
+        );
     }
-    getVerificationCodesByFilter(filter: any, path: any[]): Promise<VerificationCode[]> {
-        throw new Error("Method not implemented.");
+
+    public async getVerificationCodesByFilter(filter: any, path: any[]): Promise<VerificationCode[]> {
+        return this.useVerificationCodeManager(
+            async function (verificationCodeManager) {
+                return verificationCodeManager.getByFilter(filter, path);
+            }
+        );
     }
-    insertVerificationCode(target: VerificationCode): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertVerificationCode(target: VerificationCode): Promise<void> {
+        return this.useVerificationCodeManager(
+            async function (verificationCodeManager) {
+                return verificationCodeManager.insert(target);
+            }
+        )
     }
-    updateVerificationCode(target: VerificationCode): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateVerificationCode(target: VerificationCode): Promise<void> {
+        return this.useVerificationCodeManager(
+            async function (verificationCodeManager) {
+                return verificationCodeManager.update(target);
+            }
+        );
     }
-    removeVerificationCode(target: VerificationCode): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeVerificationCode(target: VerificationCode): Promise<void> {
+        return this.useVerificationCodeManager(
+            async function (verificationCodeManager) {
+                return verificationCodeManager.remove(target);
+            }
+        );
     }
-    removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void> {
+        return this.useVerificationCodeManager(
+            async function (verificationCodeManager) {
+                return verificationCodeManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
 
     // Getters / setters:
