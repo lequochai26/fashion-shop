@@ -45,6 +45,16 @@ export default class ObjectsContainer {
         this.nodes[name] = { target: target, dependencies: dependencies || [] };
     }
 
+    public async load(objectsDeclaration: any): Promise<void> {
+        for (const objectDeclaration of objectsDeclaration) {
+            await this.declare(
+                objectDeclaration.prototype,
+                objectDeclaration.name,
+                objectDeclaration.dependencies
+            )
+        }
+    }
+
     public retrieve(name: string): any | undefined {
         return this.nodes[name]?.target;
     }
