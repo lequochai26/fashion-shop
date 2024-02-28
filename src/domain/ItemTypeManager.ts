@@ -73,11 +73,11 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
     }
     public async get(pKey: string, path: any[]): Promise<ItemType | undefined> {
         //check entity da co trong path chua
-        let enity : ItemType | undefined = this.precheckPath(pKey,path);
+        let entity : ItemType | undefined = this.precheckPath(pKey,path);
         //
         //convert r thi ko convert lai nua, lay tu trong path ra luon
-       if(enity){
-        return enity;
+       if(entity){
+        return entity;
        }
        //lay data voi pKey da co 
        const data: ItemTypeData | undefined = await this.usePersistenceHandler(
@@ -91,20 +91,20 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
        }
 
        //co data thi chuyen data thanh entity
-       enity = this.useItemtypeConverter(
+       entity = this.useItemtypeConverter(
          function (itemTypeConverter){
             return itemTypeConverter.convert(data);
          }
        );
        
        //day entity vao path sau khi converter
-       path.push(enity);
+       path.push(entity);
 
        //thiet lap cac denpendencies
-       this.setupDependencies(enity,path);
+       this.setupDependencies(entity,path);
 
        //return
-       return enity;
+       return entity;
 
     }
     public async getAll(path: any[]): Promise<ItemType[]> {
@@ -120,24 +120,27 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
         //cd data tu data list sang entities
         for(const data of dataBrandList){
             //check path
-            let enity : ItemType | undefined = this.precheckPath(data.id,path);
+            let entity : ItemType | undefined = this.precheckPath(data.id,path);
 
-            if(enity){
-                result.push(enity);
+            if(entity){
+                result.push(entity);
                 continue;
             }
 
             //cđ data sang entity
-            enity = this.useItemtypeConverter(
+            entity = this.useItemtypeConverter(
                 function(itemTypeConverter){
                     return itemTypeConverter.convert(data);
                 }
             )
             // day entity len path
-            path.push(enity);
+            path.push(entity);
+
+            //setup
+            this.setupDependencies(entity,path);
 
             // day entity vao result
-            result.push(enity);
+            result.push(entity);
 
         }
         //return result
@@ -156,27 +159,27 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
         //cd data tu data list sang entities
         for(const data of dataBrandList){
             //check path
-            let enity : ItemType | undefined = this.precheckPath(data.id,path);
+            let entity : ItemType | undefined = this.precheckPath(data.id,path);
 
-            if(enity){
-                result.push(enity);
+            if(entity){
+                result.push(entity);
                 continue;
             }
 
             //cđ data sang entity
-            enity = this.useItemtypeConverter(
+            entity = this.useItemtypeConverter(
                 function(itemTypeConverter){
                     return itemTypeConverter.convert(data);
                 }
             )
             // day entity len path
-            path.push(enity);
+            path.push(entity);
 
              //xet phu thuoc
-            this.setupDependencies(enity,path);
+            this.setupDependencies(entity,path);
 
             // day entity vao result
-            result.push(enity);
+            result.push(entity);
 
         }
         //return result
