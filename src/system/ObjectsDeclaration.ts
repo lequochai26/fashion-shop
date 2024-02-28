@@ -5,6 +5,7 @@ import ItemImageDBHandler from "../persistence/ItemImageDBHandler";
 import ItemTypeDBHandler from "../persistence/ItemTypeDBHandler";
 import OrderDBHandler from "../persistence/OrderDBHandler";
 import OrderItemDBHandler from "../persistence/OrderItemDBHandler";
+import PersistenceHandlerImpl from "../persistence/PersistenceHandlerImpl";
 import UserDBHandler from "../persistence/UserDBHandler";
 import VerificationCodeDBHandler from "../persistence/VerificationCodeDBHandler";
 import BrandDataConverter from "../persistence/converters/BrandDataConverter";
@@ -18,11 +19,13 @@ import UserDataConverter from "../persistence/converters/UserDataConverter";
 import VerificationCodeDataConverter from "../persistence/converters/VerificationCodeDataConverter";
 
 const objectsDeclaration = [
+    // cartItemDataConverter
     {
         prototype: CartItemDataConverter.prototype,
         name: "cartItemDataConverter"
     },
 
+    // cartItemDBHandler
     {
         prototype: CartItemDBHandler.prototype,
         name: "cartItemDBHandler",
@@ -31,11 +34,13 @@ const objectsDeclaration = [
         ]
     },
 
+    // itemImageDataConverter
     {
         prototype: ItemImageDataConverter.prototype,
         name: "itemImageDataConverter"
     },
 
+    // itemImageDBHandler
     {
         prototype: ItemImageDBHandler.prototype,
         name: "itemImageDBHandler",
@@ -44,24 +49,28 @@ const objectsDeclaration = [
         ]
     },
 
+    // itemTypeDataConverter
     {
         prototype: ItemTypeDataConverter.prototype,
         name: "itemTypeDataConverter"
     },
 
+    // itemTypeDBHandler
     {
         prototype: ItemTypeDBHandler.prototype,
         name: "itemTypeDBHandler",
         dependencies: [
-            [ "itemTypeConverter", "itemTypeDataConverter" ]
+            [ "itemTypeDataConverter", "itemTypeDataConverter" ]
         ]
     },
 
+    // brandDataConverter
     {
         prototype: BrandDataConverter.prototype,
         name: "brandDataConverter"
     },
 
+    // brandDBHandler
     {
         prototype: BrandDBHandler.prototype,
         name: "brandDBHandler",
@@ -70,11 +79,13 @@ const objectsDeclaration = [
         ]
     },
 
+    // userDataConverter
     {
         prototype: UserDataConverter.prototype,
         name: "userDataConverter"
     },
 
+    // userDBHandler
     {
         prototype: UserDBHandler.prototype,
         name: "userDBHandler",
@@ -83,11 +94,13 @@ const objectsDeclaration = [
         ]
     },
 
+    // itemDataConverter
     {
         prototype: ItemDataConverter.prototype,
         name: "itemDataConverter"
     },
 
+    // itemDBHandler
     {
         prototype: ItemDBHandler.prototype,
         name: "itemDBHandler",
@@ -96,24 +109,28 @@ const objectsDeclaration = [
         ]
     },
 
+    // orderDataConverter
     {
         prototype: OrderDataConverter.prototype,
         name: "orderDataConverter"
     },
 
+    // orderDBHandler
     {
         prototype: OrderDBHandler.prototype,
         name: "orderDBHandler",
         dependencies: [
-            [ "OrderDataConverter", "orderDataConverter" ]
+            [ "orderDataConverter", "orderDataConverter" ]
         ]
     },
 
+    // orderItemDataConverter
     {
         prototype: OrderItemDataConverter.prototype,
         name: "orderItemDataConverter"
     },
 
+    // orderItemDBHandler
     {
         prototype: OrderItemDBHandler.prototype,
         name: "orderItemDBHandler",
@@ -122,18 +139,39 @@ const objectsDeclaration = [
         ]
     },
 
+    // verificationCodeDataConverter
     {
         prototype: VerificationCodeDataConverter.prototype,
         name: "verificationCodeDataConverter"
     },
 
+    // verificationCodeDBHandler
     {
         prototype: VerificationCodeDBHandler.prototype,
         name: "verificationCodeDBHandler",
         dependencies: [
             [ "converter", "verificationCodeDataConverter" ]
         ]
-    }
+    },
+
+    // persistenceHandler
+    {
+        prototype: PersistenceHandlerImpl.prototype,
+        name: "persistenceHandler",
+        dependencies: [
+            [ "brandDBHandler", "brandDBHandler" ],
+            [ "cartItemDBHandler", "cartItemDBHandler" ],
+            [ "itemDBHandler", "itemDBHandler" ],
+            [ "itemImageDBHandler", "itemImageDBHandler" ],
+            [ "itemTypeDBHandler", "itemTypeDBHandler" ],
+            [ "orderDBHandler", "orderDBHandler" ],
+            [ "orderItemDBHandler", "orderItemDBHandler" ],
+            [ "userDBHandler", "userDBHandler" ],
+            [ "verificationCodeDBHandler", "verificationCodeDBHandler" ]
+        ]
+    },
+
+
 ];
 
 export default objectsDeclaration;
