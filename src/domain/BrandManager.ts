@@ -1,4 +1,5 @@
 
+import e from "express";
 import PersistenceHandler from "../persistence/PersistenceHandler";
 import BrandData from "../persistence/data/BrandData";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
@@ -79,11 +80,11 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
     
     public async get(pKey: string, path: any[]): Promise<Brand | undefined> {
         //check entity da co trong path chua
-        let enity : Brand | undefined = this.precheckPath(pKey,path);
+        let entity : Brand | undefined = this.precheckPath(pKey,path);
         //
         //convert r thi ko convert lai nua, lay tu trong path ra luon
-       if(enity){
-        return enity;
+       if(entity){
+        return entity;
        }
        //lay data voi pKey da co 
        const data: BrandData | undefined = await this.usePersistenceHandler(
@@ -97,20 +98,20 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
        }
 
        //co data thi chuyen data thanh entity
-       enity = this.useBrandConverter(
+       entity = this.useBrandConverter(
          function (brandConverter){
             return brandConverter.convert(data);
          }
        );
        
        //day entity vao path sau khi converter
-       path.push(enity);
+       path.push(entity);
 
        //thiet lap cac denpendencies
-       this.setupDependencies(enity,path);
+       this.setupDependencies(entity,path);
 
        //return
-       return enity;
+       return entity;
 
     }
     public async getAll(path: any[]): Promise<Brand[]> {
@@ -126,24 +127,27 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
         //cd data tu data list sang entities
         for(const data of dataBrandList){
             //check path
-            let enity : Brand | undefined = this.precheckPath(data.id,path);
+            let entity : Brand | undefined = this.precheckPath(data.id,path);
 
-            if(enity){
-                result.push(enity);
+            if(entity){
+                result.push(entity);
                 continue;
             }
 
             //cđ data sang entity
-            enity = this.useBrandConverter(
+            entity = this.useBrandConverter(
                 function(brandConverter){
                     return brandConverter.convert(data);
                 }
             )
             // day entity len path
-            path.push(enity);
+            path.push(entity);
+            
+            //set up
+            this.setupDependencies(entity,path);
 
             // day entity vao result
-            result.push(enity);
+            result.push(entity);
 
         }
         //return result
@@ -162,27 +166,27 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
             //cd data tu data list sang entities
             for(const data of dataBrandList){
                 //check path
-                let enity : Brand | undefined = this.precheckPath(data.id,path);
+                let entity : Brand | undefined = this.precheckPath(data.id,path);
     
-                if(enity){
-                    result.push(enity);
+                if(entity){
+                    result.push(entity);
                     continue;
                 }
     
                 //cđ data sang entity
-                enity = this.useBrandConverter(
+                entity = this.useBrandConverter(
                     function(brandConverter){
                         return brandConverter.convert(data);
                     }
                 )
                 // day entity len path
-                path.push(enity);
+                path.push(entity);
 
                 //xet phu thuoc
-                this.setupDependencies(enity,path);
+                this.setupDependencies(entity,path);
     
                 // day entity vao result
-                result.push(enity);
+                result.push(entity);
     
             }
             //return result
