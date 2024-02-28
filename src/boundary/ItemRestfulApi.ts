@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
 import DomainManager from "../domain/DomainManager";
-import RestfulApi from "./abstracts/RestfulApi";
+import RestfulApi from "./RestfulApi";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:

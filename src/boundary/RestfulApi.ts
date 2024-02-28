@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
-import RequestHandler from "../interfaces/RequestHandler";
-import DomainManager from "../../domain/DomainManager";
+import RequestHandler from "./interfaces/RequestHandler";
+import DomainManager from "../domain/DomainManager";
 
 export default abstract class RestfulApi implements RequestHandler {
     // Fields:
