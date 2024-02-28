@@ -1,4 +1,4 @@
-import { UnaryExpression } from "typescript";
+
 import PersistenceHandler from "../persistence/PersistenceHandler";
 import BrandData from "../persistence/data/BrandData";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
