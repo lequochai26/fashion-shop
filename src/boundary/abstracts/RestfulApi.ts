@@ -54,4 +54,12 @@ export default abstract class RestfulApi implements RequestHandler {
         return this.path;
     }
     
+    // Getters / setters:
+    public get DomainManager(): DomainManager | undefined {
+        return this.domainManager;
+    }
+
+    public set DomainManager(domainManager: DomainManager | undefined) {
+        this.domainManager = domainManager;
+    }
 }
