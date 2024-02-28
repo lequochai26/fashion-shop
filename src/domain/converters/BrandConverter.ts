@@ -1,6 +1,7 @@
 import BrandData from "../../persistence/data/BrandData";
 import ReversableConverter from "../../utils/interfaces/ReversableConverter";
 import Brand from "../entities/Brand";
+import Item from "../entities/Item";
 
 export default class BrandConverter implements ReversableConverter<BrandData,Brand>{
     //fields
@@ -11,6 +12,7 @@ export default class BrandConverter implements ReversableConverter<BrandData,Bra
 
     public convert(from: BrandData): Brand {
         const brand = new Brand();
+
 
         brand.Id = from.id;
         brand.Name = from.name;
