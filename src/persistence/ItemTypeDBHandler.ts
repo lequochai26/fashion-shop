@@ -1,4 +1,4 @@
-import { Document, WithId, WithoutId } from "mongodb";
+import { Document, WithId } from "mongodb";
 import DBHandler from "./DBHandler";
 import ItemTypeDataConverter from "./converters/ItemTypeDataConverter";
 import ItemTypeData from "./data/ItemTypeData";

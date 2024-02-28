@@ -13,7 +13,6 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
     
     //field
     private brandConverter?: ReversableConverter<BrandData, Brand> | undefined;
-   
     private itemManager?: EntityManager<Item, string> | undefined;
 
     
