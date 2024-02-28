@@ -7,7 +7,7 @@ import OrderDataConverter from "./converters/OrderDataConverter";
 export default class OrderDBHandler implements DBHandler<OrderData,string>{
     //static fileds các biến được khai báo với từ khóa static trong một lớp. Static fields chỉ có một bản sao duy nhất trong bộ nhớ 
     //và được chia sẻ bởi tất cả các đối tượng của lớp đó
-    private static orderData: string = "OrderData";
+    private static collectionName: string = "Order";
 
     //fields
     private OrderDataConverter: OrderDataConverter;
@@ -24,7 +24,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
 
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
         const documentOrder: WithId<Document> | null = await get(
-            OrderDBHandler.orderData,
+            OrderDBHandler.collectionName,
             filter
         );
 
@@ -43,7 +43,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
 
     public async getAll(): Promise<OrderData[]> {
         const documentOrders: WithId<Document>[] = await getAll(
-            OrderDBHandler.orderData
+            OrderDBHandler.collectionName
         );
 
          //tao ra 1 list chua dto,dcument la du lieu tho
@@ -62,7 +62,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
 
     public async getByFilter(filter: any): Promise<OrderData[]> {
         const documentOrders: WithId<Document>[] = await getByFilter(
-            OrderDBHandler.orderData,
+            OrderDBHandler.collectionName,
             filter
         );
 
@@ -82,13 +82,13 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
 
     public async insert(target: OrderData): Promise<void> {
         //add, sau khi add thi thoat ra
-       return insert(OrderDBHandler.orderData,target);
+       return insert(OrderDBHandler.collectionName,target);
     }
 
     public async update(target: OrderData): Promise<void> {
         //Tạo primary cho target(dùng filter để cập nhật document)
         const pKeyItem = { id: target.id };
-        return update(OrderDBHandler.orderData,target,pKeyItem);
+        return update(OrderDBHandler.collectionName,target,pKeyItem);
     }
 
     public async remove(target: OrderData): Promise<void> {
@@ -100,7 +100,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
         const primaryKey  = {
             id : pKey,
        };
-      return remove(OrderDBHandler.orderData,primaryKey);
+      return remove(OrderDBHandler.collectionName,primaryKey);
     }
     
 }
