@@ -7,6 +7,11 @@ import CartItemPrimaryKey from "./pkeys/CartItemPrimaryKey";
 
 
 export default class CartItemDBHandler implements DBHandler<CartItemData, CartItemPrimaryKey>{
+
+
+    //Static fields
+    private static collectionName: string = "CartItem"
+
     //fields:
     private cartItemDataConverter: Converter<WithId<Document>, CartItemData>;
 
@@ -14,9 +19,14 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
     public constructor(cartItemDataConverter: Converter<WithId<Document>, CartItemData>) {
         this.cartItemDataConverter = cartItemDataConverter;
     }
+
+    //Methods:
     async get(pKey: CartItemPrimaryKey): Promise<CartItemData | undefined> {
-        //Methods:
-        const document: WithId<Document> | null = await get("CartItem", pKey);
+        
+        const document: WithId<Document> | null = await get(
+            CartItemDBHandler.collectionName,
+             pKey
+             );
 
         if (!document) {
             return;
@@ -26,7 +36,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
 
     //getAll
     async getAll(): Promise<CartItemData[]> {
-        const documents: WithId<Document>[] = await getAll("CartItem")
+        const documents: WithId<Document>[] = await getAll(CartItemDBHandler.collectionName)
 
         const cartItemDataList: CartItemData[] = [];
 
@@ -41,7 +51,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
 
     //getByFilter
     async getByFilter(filter: any): Promise<CartItemData[]> {
-        const documents: WithId<Document>[] = await getByFilter("CartItem", filter)
+        const documents: WithId<Document>[] = await getByFilter(CartItemDBHandler.collectionName, filter)
 
         const cartItemDataList: CartItemData[] = [];
 
@@ -55,7 +65,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
 
     //insert
     async insert(target: CartItemData): Promise<void> {
-        await insert("CartItem", target)
+        await insert(CartItemDBHandler.collectionName, target)
     }
 
     //update
@@ -65,7 +75,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
             email: target.email,
             metadata: target.metadata,
         }
-        await update("CartItem", target, pKey)
+        await update(CartItemDBHandler.collectionName, target, pKey)
     }
 
     //remove 
@@ -79,6 +89,6 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
     }
 
     async removeByPrimaryKey(pKey: CartItemPrimaryKey): Promise<void> {
-        await remove("CartItem", pKey)
+        await remove(CartItemDBHandler.collectionName, pKey)
     }
 }

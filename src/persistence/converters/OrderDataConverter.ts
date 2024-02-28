@@ -3,6 +3,7 @@ import OrderData from "../data/OrderData";
 import Converter from "../../utils/interfaces/Converter";
 
 export default class OrderDataConverter implements Converter<WithId<Document>,OrderData>{
+    public constructor(){}
 
     public convert(document: WithId<Document>): OrderData {
         return{
@@ -11,8 +12,8 @@ export default class OrderDataConverter implements Converter<WithId<Document>,Or
             date: document.date, 
             totalPrice: document.totalPrice,
             metadata: document.metadata,
-            createdBy: document.createBy,
-            orderedBy: document.orderBy,
+            createdBy: document.createdBy,
+            orderedBy: document.orderedBy,
         }
     }
 }

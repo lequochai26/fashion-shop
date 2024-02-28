@@ -22,52 +22,52 @@ export default class ItemDBHandler implements DBHandler<ItemData,string>{
         };
 
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
-        const documentItem: WithId<Document> | null = await get(
+        const document: WithId<Document> | null = await get(
             ItemDBHandler.collectionName,
             filter
         );
 
         //ko co thi return underfined
-        if(!documentItem){
+        if(!document){
             return;
         }
 
         //tim document phu hop voi pkey(dung filter)
         //chuyen document sang DTO
-        const itemData: ItemData = this.itemDataConverter.convert(documentItem);
+        const itemData: ItemData = this.itemDataConverter.convert(document);
         
         //return, ben day chi viec goi ben Converter
         return itemData;
     }
     public async getAll(): Promise<ItemData[]> {
-        const documentItems: WithId<Document>[] = await getAll(
+        const documents: WithId<Document>[] = await getAll(
             ItemDBHandler.collectionName
         );
          //tao ra 1 list chua dto,dcument la du lieu tho
-        const itemList: ItemData[]=[];
+        const itemDataList: ItemData[]=[];
         //chuyen doi document sang dữ liệu DTO và thêm vào list
-        for(const documentItem of documentItems){
+        for(const document of documents){
             //cd
-            const brandData: ItemData = this.itemDataConverter.convert(documentItem);
+            const itemData: ItemData = this.itemDataConverter.convert(document);
             //add
-            itemList.push(brandData);
+            itemDataList.push(itemData);
         }
-        return itemList;
+        return itemDataList;
     }
     public async getByFilter(filter: any): Promise<ItemData[]> {
-        const documentItems: WithId<Document>[] = await getByFilter(
+        const documents: WithId<Document>[] = await getByFilter(
             ItemDBHandler.collectionName,filter
         );
          //tao ra 1 list chua dto,dcument la du lieu tho
-        const itemList: ItemData[]=[];
+        const itemDataList: ItemData[]=[];
         //chuyen doi document sang dữ liệu DTO và thêm vào list
-        for(const documentItem of documentItems){
+        for(const document of documents){
             //cd
-            const itemData: ItemData = this.itemDataConverter.convert(documentItem);
+            const itemData: ItemData = this.itemDataConverter.convert(document);
             //add
-            itemList.push(itemData);
+            itemDataList.push(itemData);
         }
-        return itemList;
+        return itemDataList;
     }
     public async insert(target: ItemData): Promise<void> {
         //add, sau khi add thi thoat ra
