@@ -50,6 +50,36 @@ export default class DomainManagerImpl implements DomainManager {
     }
 
     // Private methods:
+    private async useBrandManager<T>(
+        executable: (brandManager: EntityManager<Brand, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.brandManager) {
+            throw new Error("brandManager field is missing!");
+        }
+
+        return executable(this.brandManager);
+    }
+
+    private async useCartItemManager<T>(
+        executable: (cartItemManager: EntityManager<CartItem, CartItemPrimaryKey>) => Promise<T>
+    ): Promise<T> {
+        if (!this.cartItemManager) {
+            throw new Error("cartItemManager field is missing!");
+        }
+
+        return executable(this.cartItemManager);
+    }
+
+    private async useItemImageManager<T>(
+        executable: (itemImageManager: EntityManager<ItemImage, ItemImagePrimaryKey>) => Promise<T>
+    ): Promise<T> {
+        if (!this.itemImageManager) {
+            throw new Error("itemImageManager field is missing!");
+        }
+
+        return executable(this.itemImageManager);
+    }
+
     private async useItemManager<T>(
         executable: (itemManager: EntityManager<Item, string>) => Promise<T>
     ): Promise<T> {
@@ -60,79 +90,236 @@ export default class DomainManagerImpl implements DomainManager {
         return executable(this.itemManager);
     }
 
+    private async useItemTypeManager<T>(
+        executable: (itemTypeManager: EntityManager<ItemType, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.itemTypeManager) {
+            throw new Error("itemTypeManager field is missing!");
+        }
+
+        return executable(this.itemTypeManager);
+    }
+
+    private async useOrderItemManager<T>(
+        executable: (orderItemManager: EntityManager<OrderItem, OrderItemPrimaryKey>) => Promise<T>
+    ): Promise<T> {
+        if (!this.orderItemManager) {
+            throw new Error("orderItemManager field is missing!");
+        }
+
+        return executable(this.orderItemManager);
+    }
+
+    private async useOrderManager<T>(
+        executable: (orderManager: EntityManager<Order, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.orderManager) {
+            throw new Error("orderManager field is missing!");
+        }
+
+        return executable(this.orderManager);
+    }
+
+    private async useUserManager<T>(
+        executable: (userManager: EntityManager<User, string>) => Promise<T>
+    ): Promise<T> {
+        if (!this.userManager) {
+            throw new Error("userManager field is missing!");
+        }
+
+        return executable(this.userManager);
+    }
+
+    private async useVerificationCodeManager<T>(
+        executable: (verificationCodeManager: EntityManager<VerificationCode, VerificationCodePrimaryKey>) => Promise<T>
+    ): Promise<T> {
+        if (!this.verificationCodeManager) {
+            throw new Error("verificationCodeManager field is missing!");
+        }
+
+        return executable(this.verificationCodeManager);
+    }
+
     // Methods:
-    getCartItem(pKey: CartItemPrimaryKey, path: any[]): Promise<CartItem | undefined> {
-        throw new Error("Method not implemented.");
+    public async getCartItem(pKey: CartItemPrimaryKey, path: any[]): Promise<CartItem | undefined> {
+        return this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.get(pKey, path);
+            }
+        );
     }
-    getAllCartItems(path: any[]): Promise<CartItem[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllCartItems(path: any[]): Promise<CartItem[]> {
+        return this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.getAll(path);
+            }
+        );
     }
-    getCartItemsByFilter(filter: any, path: any[]): Promise<CartItem[]> {
-        throw new Error("Method not implemented.");
+
+    public async getCartItemsByFilter(filter: any, path: any[]): Promise<CartItem[]> {
+        return this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.getByFilter(filter, path);
+            }
+        )
     }
-    insertCartItem(target: CartItem): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertCartItem(target: CartItem): Promise<void> {
+        return this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.insert(target);
+            }
+        )
     }
-    updateCartItem(target: CartItem): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateCartItem(target: CartItem): Promise<void> {
+        return this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.update(target);
+            }
+        );
     }
-    removeCartItem(target: CartItem): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeCartItem(target: CartItem): Promise<void> {
+        return this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.remove(target);
+            }
+        )
     }
-    removeCartItemByPrimaryKey(pKey: CartItemPrimaryKey): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeCartItemByPrimaryKey(pKey: CartItemPrimaryKey): Promise<void> {
+        return this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
+
     getCartItemsByFilterFunc(filterFunc: (target: CartItem) => boolean): Promise<CartItem[]> {
         throw new Error("Method not implemented.");
     }
-    getItemImage(pKey: ItemImagePrimaryKey, path: any[]): Promise<ItemImage | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getItemImage(pKey: ItemImagePrimaryKey, path: any[]): Promise<ItemImage | undefined> {
+        return this.useItemImageManager(
+            async function (itemImageManager) {
+                return itemImageManager.get(pKey, path);
+            }
+        );
     }
-    getAllItemImages(path: any[]): Promise<ItemImage[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllItemImages(path: any[]): Promise<ItemImage[]> {
+        return this.useItemImageManager(
+            async function (itemImageManager) {
+                return itemImageManager.getAll(path);
+            }
+        );
     }
-    getItemImagesByFilter(filter: any, path: any[]): Promise<ItemImage[]> {
-        throw new Error("Method not implemented.");
+
+    public async getItemImagesByFilter(filter: any, path: any[]): Promise<ItemImage[]> {
+        return this.useItemImageManager(
+            async function (itemImageManager) {
+                return itemImageManager.getByFilter(filter, path);
+            }
+        );
     }
-    insertItemImage(target: ItemImage): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertItemImage(target: ItemImage): Promise<void> {
+        return this.useItemImageManager(
+            async function (itemImageManager) {
+                return itemImageManager.insert(target);
+            }
+        );
     }
-    updateItemImage(target: ItemImage): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateItemImage(target: ItemImage): Promise<void> {
+        return this.useItemImageManager(
+            async function (itemImageManager) {
+                return itemImageManager.update(target);
+            }
+        );
     }
-    removeItemImage(target: ItemImage): Promise<void> {
-        throw new Error("Method not implemented.");
+    public async removeItemImage(target: ItemImage): Promise<void> {
+        return this.useItemImageManager(
+            async function (itemImageManager) {
+                return itemImageManager.remove(target);
+            }
+        );
     }
-    removeItemImageByPrimaryKey(pKey: ItemImagePrimaryKey): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeItemImageByPrimaryKey(pKey: ItemImagePrimaryKey): Promise<void> {
+        return this.useItemImageManager(
+            async function (itemImageManager) {
+                return itemImageManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
-    getItemType(pKey: string, path: any[]): Promise<ItemType | undefined> {
-        throw new Error("Method not implemented.");
+
+    public async getItemType(pKey: string, path: any[]): Promise<ItemType | undefined> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.get(pKey, path);
+            }
+        );
     }
-    getAllItemTypes(path: any[]): Promise<ItemType[]> {
-        throw new Error("Method not implemented.");
+
+    public async getAllItemTypes(path: any[]): Promise<ItemType[]> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.getAll(path);
+            }
+        );
     }
-    getItemTypesByFilter(filter: any, path: any[]): Promise<ItemType[]> {
-        throw new Error("Method not implemented.");
+
+    public async getItemTypesByFilter(filter: any, path: any[]): Promise<ItemType[]> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.getByFilter(filter, path);
+            }
+        );
     }
-    insertItemType(target: ItemType): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async insertItemType(target: ItemType): Promise<void> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.insert(target);
+            }
+        );
     }
-    updateItemType(target: ItemType): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async updateItemType(target: ItemType): Promise<void> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.update(target);
+            }
+        );
     }
-    removeItemType(target: ItemType): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeItemType(target: ItemType): Promise<void> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.remove(target);
+            }
+        );
     }
-    removeItemTypeByPrimaryKey(pKey: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async removeItemTypeByPrimaryKey(pKey: string): Promise<void> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.removeByPrimaryKey(pKey);
+            }
+        );
     }
+
     getItemTypesByFilterFunc(filterFunc: (target: ItemType) => boolean): Promise<ItemType[]> {
         throw new Error("Method not implemented.");
     }
+
     searchItemTypes(pKey: string): Promise<ItemType[]> {
         throw new Error("Method not implemented.");
     }
+
     getBrand(pKey: string, path: any[]): Promise<Brand | undefined> {
         throw new Error("Method not implemented.");
     }
