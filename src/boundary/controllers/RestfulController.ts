@@ -1,5 +1,5 @@
 import DomainManager from "../../domain/DomainManager";
-import Controller from "./Controller";
+import Controller from "./interfaces/Controller";
 import RestfulControllerParam from "./RestfulControllerParam";
 
 export default abstract class RestfulController implements Controller<RestfulControllerParam, void> {
