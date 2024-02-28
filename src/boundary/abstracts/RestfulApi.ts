@@ -1,4 +1,4 @@
-import RequestHandler from "../interfaces/RequestHandlers";
+import RequestHandler from "../interfaces/RequestHandler";
 
 export default abstract class RestfulApi implements RequestHandler {
     // Fields:
