@@ -23,61 +23,61 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
         }
 
         //lấy document đầu tiên khớp với pKey (dùng filter) trong db.
-        const documentOrder: WithId<Document> | null = await get(
+        const document: WithId<Document> | null = await get(
             OrderDBHandler.collectionName,
             filter
         );
 
         //ko co thi return underfined
-        if(!documentOrder){
+        if(!document){
             return;
         }
 
         //tim document phu hop voi pkey(dung filter)
         //chuyen document sang DTO
-        const orderData: OrderData = this.OrderDataConverter.convert(documentOrder);
+        const orderData: OrderData = this.OrderDataConverter.convert(document);
 
         //return, ben day chi viec goi ben Converter
         return orderData;
     }
 
     public async getAll(): Promise<OrderData[]> {
-        const documentOrders: WithId<Document>[] = await getAll(
+        const documents: WithId<Document>[] = await getAll(
             OrderDBHandler.collectionName
         );
 
          //tao ra 1 list chua dto,dcument la du lieu tho
-        const orderList: OrderData[] = [];
+        const orderDataList: OrderData[] = [];
 
         //chuyen doi document sang dữ liệu DTO và thêm vào list
-        for(const documentOrder of documentOrders){
+        for(const document of documents){
             //cd
-            const orderData: OrderData = this.OrderDataConverter.convert(documentOrder);
+            const orderData: OrderData = this.OrderDataConverter.convert(document);
             //add
-            orderList.push(orderData);
+            orderDataList.push(orderData);
         }
 
-        return orderList;
+        return orderDataList;
     }
 
     public async getByFilter(filter: any): Promise<OrderData[]> {
-        const documentOrders: WithId<Document>[] = await getByFilter(
+        const documents: WithId<Document>[] = await getByFilter(
             OrderDBHandler.collectionName,
             filter
         );
 
          //tao ra 1 list chua dto,dcument la du lieu tho
-        const orderList: OrderData[] = [];
+        const orderDataList: OrderData[] = [];
 
         //chuyen doi document sang dữ liệu DTO và thêm vào list
-        for(const documentOrder of documentOrders){
+        for(const document of documents){
             //cd
-            const orderData: OrderData = this.OrderDataConverter.convert(documentOrder);
+            const orderData: OrderData = this.OrderDataConverter.convert(document);
             //add
-            orderList.push(orderData);
+            orderDataList.push(orderData);
         }
 
-        return orderList;
+        return orderDataList;
     }
 
     public async insert(target: OrderData): Promise<void> {
