@@ -4,11 +4,15 @@ import objectsDeclaration from './system/ObjectsDeclaration';
 import ObjectsContainer from './system/ObjectsContainer';
 import RestfulApisLoader from './system/RestfulApisLoader';
 import RestfulApi from './boundary/base_classes/RestfulApi';
+import cookieParser = require('cookie-parser');
 
 // Main function
 async function main() {
     // App initialization
     const app: Express = express();
+
+    // Include cookie parser into app
+    app.use(cookieParser());
 
     // Start listening
     app.listen(settings.port);
