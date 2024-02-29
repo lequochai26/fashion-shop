@@ -334,7 +334,7 @@ const objectsDeclaration = [
 
     // itemTypeConverter
     {
-        protoype: ItemTypeConverter.prototype,
+        prototype: ItemTypeConverter.prototype,
         name: "itemTypeConverter"
     },
 
@@ -367,7 +367,7 @@ const objectsDeclaration = [
     {
         target: new ItemRestfulApi(),
         name: "itemRestfulApi",
-        depenedencies: [
+        dependencies: [
             [ "domainManager", "domainManager" ]
         ]
     }
