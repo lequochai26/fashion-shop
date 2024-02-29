@@ -10,11 +10,11 @@ export default class ItemTypeDBHandler implements DBHandler<ItemTypeData,string>
     private static collectionName: string = "ItemType";
     
     //fields
-    private itemTypeConverter: ItemTypeDataConverter;
+    private itemTypeDataConverter: ItemTypeDataConverter;
     
     //constructor
     public constructor(itemTypeConverter: ItemTypeDataConverter){
-        this.itemTypeConverter = itemTypeConverter;
+        this.itemTypeDataConverter = itemTypeConverter;
     }
     //method
     public async get(pKey: string): Promise<ItemTypeData | undefined> {
@@ -35,7 +35,7 @@ export default class ItemTypeDBHandler implements DBHandler<ItemTypeData,string>
         
         //tim document phu hop voi pkey(dung filter)
         //chuyen document sang DTO
-        const itemTypeData: ItemTypeData = this.itemTypeConverter.convert(documentItem);
+        const itemTypeData: ItemTypeData = this.itemTypeDataConverter.convert(documentItem);
         
         //return, ben day chi viec goi ben Converter
         return itemTypeData;
@@ -52,7 +52,7 @@ export default class ItemTypeDBHandler implements DBHandler<ItemTypeData,string>
         //chuyen doi document sang dữ liệu DTO và thêm vào list
         for(const documentItem of documentItems){
             //cd
-            const itemTypeData: ItemTypeData = this.itemTypeConverter.convert(documentItem);
+            const itemTypeData: ItemTypeData = this.itemTypeDataConverter.convert(documentItem);
             //add
             itemTypeList.push(itemTypeData);
         }
@@ -71,7 +71,7 @@ export default class ItemTypeDBHandler implements DBHandler<ItemTypeData,string>
         //chuyen doi document sang dữ liệu DTO và thêm vào list
         for(const documentItem of documentItems){
             //cd
-            const itemTypeData: ItemTypeData = this.itemTypeConverter.convert(documentItem);
+            const itemTypeData: ItemTypeData = this.itemTypeDataConverter.convert(documentItem);
             //add
             itemTypeList.push(itemTypeData);
         }

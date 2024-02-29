@@ -58,4 +58,16 @@ export default class ObjectsContainer {
     public retrieve(name: string): any | undefined {
         return this.nodes[name]?.target;
     }
+
+    public retrieveAll(): any[] {
+        // Getting all objects in nodes
+        const result: any[] = Object.values(this.nodes).map(
+            function (node) {
+                return node.target;
+            }
+        );
+
+        // Return result
+        return result;
+    }
 }

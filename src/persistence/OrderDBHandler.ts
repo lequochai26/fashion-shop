@@ -10,11 +10,11 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
     private static collectionName: string = "Order";
 
     //fields
-    private OrderDataConverter: OrderDataConverter;
+    private orderDataConverter: OrderDataConverter;
 
     //constructor
     public constructor(orderDataConverter: OrderDataConverter){
-        this.OrderDataConverter = orderDataConverter;
+        this.orderDataConverter = orderDataConverter;
     }
 
     public async get(pKey: string): Promise<OrderData | undefined> {
@@ -35,7 +35,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
 
         //tim document phu hop voi pkey(dung filter)
         //chuyen document sang DTO
-        const orderData: OrderData = this.OrderDataConverter.convert(document);
+        const orderData: OrderData = this.orderDataConverter.convert(document);
 
         //return, ben day chi viec goi ben Converter
         return orderData;
@@ -52,7 +52,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
         //chuyen doi document sang dữ liệu DTO và thêm vào list
         for(const document of documents){
             //cd
-            const orderData: OrderData = this.OrderDataConverter.convert(document);
+            const orderData: OrderData = this.orderDataConverter.convert(document);
             //add
             orderDataList.push(orderData);
         }
@@ -72,7 +72,7 @@ export default class OrderDBHandler implements DBHandler<OrderData,string>{
         //chuyen doi document sang dữ liệu DTO và thêm vào list
         for(const document of documents){
             //cd
-            const orderData: OrderData = this.OrderDataConverter.convert(document);
+            const orderData: OrderData = this.orderDataConverter.convert(document);
             //add
             orderDataList.push(orderData);
         }
