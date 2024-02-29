@@ -8,7 +8,7 @@ import Item from "./entities/Item";
 import Order from "./entities/Order";
 import OrderItem from "./entities/OrderItem";
 
-export default class OrrderItemManager extends PersistenceHandlerHolder implements EntityManager<OrderItem,OrderItemPrimaryKey> {
+export default class OrderItemManager extends PersistenceHandlerHolder implements EntityManager<OrderItem,OrderItemPrimaryKey> {
     //Fields:
     private orderItemConverter: ReversableConverter<OrderItemData, OrderItem> | undefined;
     private orderManager: EntityManager<Order, string> | undefined;

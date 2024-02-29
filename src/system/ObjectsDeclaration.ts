@@ -1,4 +1,23 @@
 import ItemRestfulApi from "../boundary/ItemRestfulApi";
+import BrandManager from "../domain/BrandManager";
+import CartItemManager from "../domain/CartItemManager";
+import DomainManagerImpl from "../domain/DomainManagerImpl";
+import ItemImageManager from "../domain/ItemImageManager";
+import ItemManager from "../domain/ItemManager";
+import ItemTypeManager from "../domain/ItemTypeManager";
+import OrderItemManager from "../domain/OrderItemManager";
+import OrderManager from "../domain/OrderManager";
+import UserManager from "../domain/UserManager";
+import VerificationCodeManager from "../domain/VerificationCodeManager";
+import BrandConverter from "../domain/converters/BrandConverter";
+import CartItemConverter from "../domain/converters/CartItemConverter";
+import ItemConverter from "../domain/converters/ItemConverter";
+import ItemImageConverter from "../domain/converters/ItemImageConverter";
+import ItemTypeConverter from "../domain/converters/ItemTypeConverter";
+import OrderConverter from "../domain/converters/OrderConverter";
+import OrderItemConverter from "../domain/converters/OrderItemConverter";
+import UserConverter from "../domain/converters/UserConverter";
+import VerificationCodeConverter from "../domain/converters/VerificationCodeConverter";
 import BrandDBHandler from "../persistence/BrandDBHandler";
 import CartItemDBHandler from "../persistence/CartItemDBHandler";
 import ItemDBHandler from "../persistence/ItemDBHandler";
@@ -20,6 +39,7 @@ import UserDataConverter from "../persistence/converters/UserDataConverter";
 import VerificationCodeDataConverter from "../persistence/converters/VerificationCodeDataConverter";
 
 const objectsDeclaration = [
+    // PERSISTENCE LAYER
     // cartItemDataConverter
     {
         prototype: CartItemDataConverter.prototype,
@@ -172,6 +192,177 @@ const objectsDeclaration = [
         ]
     },
 
+    // DOMAIN LAYER
+    // brandManager
+    {
+        prototype: BrandManager.prototype,
+        name: "brandManager",
+        dependencies: [
+            [ "brandConverter", "brandConverter" ],
+            [ "itemManager", "itemManager" ]
+        ]
+    },
+
+    // cartItemManager
+    {
+        prototype: CartItemManager.prototype,
+        name: "cartItemManager",
+        dependencies: [
+            [ "cartItemConverter", "cartItemConverter" ],
+            [ "userManager", "userManager" ],
+            [ "itemManager", "itemManager" ]
+        ]
+    },
+
+    // itemImageManager
+    {
+        prototype: ItemImageManager.prototype,
+        name: "itemImageManager",
+        dependencies: [
+            [ "itemImageConverter", "itemImageConverter" ],
+            [ "itemManager", "itemManager" ]
+        ]
+    },
+
+    // itemManager
+    {
+        prototype: ItemManager.prototype,
+        name: "itemManager",
+        dependencies: [
+            [ "itemConverter", "itemConverter" ],
+            [ "itemTypeManager", "itemTypeManager" ],
+            [ "brandManager", "brandManager" ],
+            [ "itemImageManager", "itemImageManager" ],
+            [ "orderItemManager", "orderItemManager" ]
+        ]
+    },
+
+    // itemTypeManager
+    {
+        prototype: ItemTypeManager.prototype,
+        name: "itemTypeManager",
+        dependencies: [
+            [ "itemTypeConverter", "itemTypeConverter" ],
+            [ "itemManager", "itemManager" ]
+        ]
+    },
+
+    // orderItemManager
+    {
+        prototype: OrderItemManager.prototype,
+        name: "orderItemManager",
+        dependencies: [
+            [ "orderItemConverter", "orderItemConverter" ],
+            [ "orderManager", "orderManager" ],
+            [ "itemManager", "itemManager" ]
+        ]
+    },
+
+    // orderManager
+    {
+        prototype: OrderManager.prototype,
+        name: "orderManager",
+        dependencies: [
+            [ "orderConverter", "orderConverter" ],
+            [ "userManager", "userManager" ],
+            [ "orderItemManager", "orderItemManager" ]
+        ]
+    },
+
+    // userManager
+    {
+        prototype: UserManager.prototype,
+        name: "userManager",
+        dependencies: [
+            [ "userConverter", "userConverter" ],
+            [ "orderManager", "orderManager" ],
+            [ "cartItemManager", "cartItemManager" ],
+            [ "veriicationCodeManager", "verificationCodeManager" ]
+        ]
+    },
+
+    // verificationCodeManager
+    {
+        prototype: VerificationCodeManager.prototype,
+        name: "verificationCodeManager",
+        dependencies: [
+            [ "verificationCodeConverter", "verificationCodeConverter" ],
+            [ "userManager", "userManager" ]
+        ]
+    },
+
+    // domainManager
+    {
+        prototype: DomainManagerImpl.prototype,
+        name: "domainManager",
+        dependencies: [
+            [ "brandManager", "brandManager" ],
+            [ "cartItemManager", "cartItemManager" ],
+            [ "itemImageManager", "itemImageManager" ],
+            [ "itemManager", "itemManager" ],
+            [ "itemTypeManager", "itemTypeManager" ],
+            [ "orderItemManager", "orderItemManager" ],
+            [ "orderManager", "orderManager" ],
+            [ "userManager", "userManager" ],
+            [ "verificationCodeManager", "verificationCodeManager" ]
+        ]
+    },
+
+    // brandConverter
+    {
+        prototype: BrandConverter.prototype,
+        name: "brandConverter"
+    },
+
+    // cartItemConverter
+    {
+        prototype: CartItemConverter.prototype,
+        name: "cartItemConverter"
+    },
+
+    // itemConverter
+    {
+        prototype: ItemConverter.prototype,
+        name: "itemConverter"
+    },
+
+    // itemImageConverter
+    {
+        prototype: ItemImageConverter.prototype,
+        name: "itemImageConverter"
+    },
+
+    // itemTypeConverter
+    {
+        protoype: ItemTypeConverter.prototype,
+        name: "itemTypeConverter"
+    },
+
+    // orderConverter
+    {
+        prototype: OrderConverter.prototype,
+        name: "orderConverter"
+    },
+
+    // orderItemConverter
+    {
+        prototype: OrderItemConverter.prototype,
+        name: "orderItemConverter"
+    },
+
+    // userConverter
+    {
+        prototype: UserConverter.prototype,
+        name: "userConverter"
+    },
+
+    // verificationCodeConverter
+    {
+        prototype: VerificationCodeConverter.prototype,
+        name: "verificationCodeConverter"
+    },
+
+    // BOUNDARY LAYER
     // itemRestfulApi
     {
         target: new ItemRestfulApi(),
