@@ -8,7 +8,7 @@ export default class ObjectsContainer {
     }
 
     // Methods:
-    public async declare(
+    public async declareWithPrototype(
         prototype: object | null,
         name: string,
         dependencies?: [ string, string ][]
@@ -18,9 +18,18 @@ export default class ObjectsContainer {
             throw new Error(`Object with name '${name}' already exist!`);
         }
 
-        // Create new object base on given prototype
+        // Taget initialization
         const target = Object.create(prototype);
 
+        // Call declare method
+        return this.declare(target, name, dependencies);
+    }
+
+    public async declare(
+        target: any,
+        name: string,
+        dependencies?: [string, string][]
+    ): Promise<void> {
         // Setup dependencies for target
         if (dependencies) {
             for (const dependency of dependencies) {
@@ -47,7 +56,7 @@ export default class ObjectsContainer {
 
     public async load(objectsDeclaration: any): Promise<void> {
         for (const objectDeclaration of objectsDeclaration) {
-            await this.declare(
+            await this.declareWithPrototype(
                 objectDeclaration.prototype,
                 objectDeclaration.name,
                 objectDeclaration.dependencies
