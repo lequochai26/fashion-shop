@@ -56,11 +56,21 @@ export default class ObjectsContainer {
 
     public async load(objectsDeclaration: any): Promise<void> {
         for (const objectDeclaration of objectsDeclaration) {
+            if (objectDeclaration.target) {
+                await this.declare(
+                    objectDeclaration.target,
+                    objectDeclaration.name,
+                    objectDeclaration.dependencies
+                );
+
+                continue;
+            }
+            
             await this.declareWithPrototype(
                 objectDeclaration.prototype,
                 objectDeclaration.name,
                 objectDeclaration.dependencies
-            )
+            );
         }
     }
 
