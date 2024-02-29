@@ -4,11 +4,12 @@ import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import EntityManager from "./EntityManager";
 import PersistenceHandlerHolder from "./PersistenceHandlerHolder";
+import SearchableEntityManager from "./SearchableEntityManager";
 import Order from "./entities/Order";
 import OrderItem from "./entities/OrderItem";
 import User from "./entities/User";
 
-export default class OrderManager extends PersistenceHandlerHolder implements EntityManager<Order,string>{
+export default class OrderManager extends PersistenceHandlerHolder implements SearchableEntityManager<Order,string>{
     //FIELD
     private orderConverter?: ReversableConverter<OrderData,Order>|undefined;
     private userManager?: EntityManager<User, string> | undefined;
@@ -269,6 +270,20 @@ export default class OrderManager extends PersistenceHandlerHolder implements En
             }
         )
 
+    }
+
+    public async getByFilterFunc(filterFunc: (value: Order) => boolean): Promise<Order[]> {
+        return (await this.getAll([])).filter(
+            filterFunc
+        )
+    }
+
+    public async search(keyword: string): Promise<Order[]> {
+        return this.getByFilterFunc(
+            function (order: Order) {
+                return (`${order.Id} ${order.Date} ${order.CreatedBy?.Email} ${order.OrderedBy?.Email} ${order.Type}`.indexOf(keyword) !== -1);
+            }
+        )
     }
     
     //Getter and Setter
