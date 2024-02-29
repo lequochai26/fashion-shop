@@ -7,7 +7,7 @@ import { get, getAll, getByFilter, insert, remove, update } from "./Connector";
 export default class ItemTypeDBHandler implements DBHandler<ItemTypeData,string>{
     //static fileds các biến được khai báo với từ khóa static trong một lớp. Static fields chỉ có một bản sao duy nhất trong bộ nhớ 
     //và được chia sẻ bởi tất cả các đối tượng của lớp đó
-    private static collectionName: string = "ItemTypeData";
+    private static collectionName: string = "ItemType";
     
     //fields
     private itemTypeConverter: ItemTypeDataConverter;
