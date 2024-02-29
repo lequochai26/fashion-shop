@@ -198,6 +198,7 @@ const objectsDeclaration = [
         prototype: BrandManager.prototype,
         name: "brandManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "brandConverter", "brandConverter" ],
             [ "itemManager", "itemManager" ]
         ]
@@ -208,6 +209,7 @@ const objectsDeclaration = [
         prototype: CartItemManager.prototype,
         name: "cartItemManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "cartItemConverter", "cartItemConverter" ],
             [ "userManager", "userManager" ],
             [ "itemManager", "itemManager" ]
@@ -219,6 +221,7 @@ const objectsDeclaration = [
         prototype: ItemImageManager.prototype,
         name: "itemImageManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "itemImageConverter", "itemImageConverter" ],
             [ "itemManager", "itemManager" ]
         ]
@@ -229,6 +232,7 @@ const objectsDeclaration = [
         prototype: ItemManager.prototype,
         name: "itemManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "itemConverter", "itemConverter" ],
             [ "itemTypeManager", "itemTypeManager" ],
             [ "brandManager", "brandManager" ],
@@ -242,6 +246,7 @@ const objectsDeclaration = [
         prototype: ItemTypeManager.prototype,
         name: "itemTypeManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "itemTypeConverter", "itemTypeConverter" ],
             [ "itemManager", "itemManager" ]
         ]
@@ -252,6 +257,7 @@ const objectsDeclaration = [
         prototype: OrderItemManager.prototype,
         name: "orderItemManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "orderItemConverter", "orderItemConverter" ],
             [ "orderManager", "orderManager" ],
             [ "itemManager", "itemManager" ]
@@ -263,6 +269,7 @@ const objectsDeclaration = [
         prototype: OrderManager.prototype,
         name: "orderManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "orderConverter", "orderConverter" ],
             [ "userManager", "userManager" ],
             [ "orderItemManager", "orderItemManager" ]
@@ -274,6 +281,7 @@ const objectsDeclaration = [
         prototype: UserManager.prototype,
         name: "userManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "userConverter", "userConverter" ],
             [ "orderManager", "orderManager" ],
             [ "cartItemManager", "cartItemManager" ],
@@ -286,6 +294,7 @@ const objectsDeclaration = [
         prototype: VerificationCodeManager.prototype,
         name: "verificationCodeManager",
         dependencies: [
+            [ "persistenceHandler", "persistenceHandler" ],
             [ "verificationCodeConverter", "verificationCodeConverter" ],
             [ "userManager", "userManager" ]
         ]

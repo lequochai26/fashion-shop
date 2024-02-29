@@ -23,8 +23,6 @@ export default class ItemRestfulApi extends RestfulApi {
 
     // Methods:
     public async get(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        console.log(this.domainManager);
-
         // Get method query
         const method: string | undefined = request.query.method as (string | undefined);
 
