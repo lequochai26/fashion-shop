@@ -6,3 +6,6 @@
 
 # .env
 .env
+
+# /scripts/test.ts
+/scripts/test.ts
