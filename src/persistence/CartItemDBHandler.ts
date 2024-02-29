@@ -21,7 +21,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
     }
 
     //Methods:
-    async get(pKey: CartItemPrimaryKey): Promise<CartItemData | undefined> {
+    public async get(pKey: CartItemPrimaryKey): Promise<CartItemData | undefined> {
         
         const document: WithId<Document> | null = await get(
             CartItemDBHandler.collectionName,
@@ -35,7 +35,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
     }
 
     //getAll
-    async getAll(): Promise<CartItemData[]> {
+    public async getAll(): Promise<CartItemData[]> {
         const documents: WithId<Document>[] = await getAll(CartItemDBHandler.collectionName)
 
         const cartItemDataList: CartItemData[] = [];
@@ -50,7 +50,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
 
 
     //getByFilter
-    async getByFilter(filter: any): Promise<CartItemData[]> {
+    public async getByFilter(filter: any): Promise<CartItemData[]> {
         const documents: WithId<Document>[] = await getByFilter(CartItemDBHandler.collectionName, filter)
 
         const cartItemDataList: CartItemData[] = [];
@@ -64,12 +64,12 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
     }
 
     //insert
-    async insert(target: CartItemData): Promise<void> {
+    public async insert(target: CartItemData): Promise<void> {
         await insert(CartItemDBHandler.collectionName, target)
     }
 
     //update
-    async update(target: CartItemData): Promise<void> {
+    public async update(target: CartItemData): Promise<void> {
         const pKey: CartItemPrimaryKey = {
             itemId: target.itemId,
             email: target.email,
@@ -79,7 +79,7 @@ export default class CartItemDBHandler implements DBHandler<CartItemData, CartIt
     }
 
     //remove 
-    async remove(target: CartItemData): Promise<void> {
+    public async remove(target: CartItemData): Promise<void> {
         const pKey: CartItemPrimaryKey = {
             itemId: target.itemId,
             email: target.email,
