@@ -1,3 +1,4 @@
+import ItemRestfulApi from "../boundary/ItemRestfulApi";
 import BrandDBHandler from "../persistence/BrandDBHandler";
 import CartItemDBHandler from "../persistence/CartItemDBHandler";
 import ItemDBHandler from "../persistence/ItemDBHandler";
@@ -171,7 +172,14 @@ const objectsDeclaration = [
         ]
     },
 
-
+    // itemRestfulApi
+    {
+        target: new ItemRestfulApi(),
+        name: "itemRestfulApi",
+        depenedencies: [
+            [ "domainManager", "domainManager" ]
+        ]
+    }
 ];
 
 export default objectsDeclaration;
