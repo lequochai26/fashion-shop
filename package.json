@@ -7,7 +7,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "start": "node ./dist/src/index.js",
-    "builddb": "node ./dist/scripts/builddb.js"
+    "builddb": "node ./dist/scripts/builddb.js",
+    "test": "node ./dist/scripts/test.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,0 +1,26 @@
+[
+    {
+        "id": "FASHION_SET",
+        "name": "Set thời trang"
+    },
+
+    {
+        "id": "SHOES",
+        "name": "Giày"
+    },
+
+    {
+        "id": "SHIRT",
+        "name": "Áo"
+    },
+
+    {
+        "id": "PANTHS",
+        "name": "Quần"
+    },
+
+    {
+        "id": "ACCESSORY",
+        "name": "Phụ kiện"
+    }
+]
