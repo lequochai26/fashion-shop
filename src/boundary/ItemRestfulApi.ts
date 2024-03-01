@@ -6,19 +6,38 @@ import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import GetAllItemsController from "./controllers/GetAllItemsController";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
+import RestfulController from "./controllers/abstracts/RestfulController";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
     private static path: string = "/item";
 
+    // Fields:
+    private getAllItemsController: Controller<RestfulControllerParam, void>;
+    private newItemController: Controller<RestfulControllerParam, void>;
+    private getItemsByFilterController: Controller<RestfulControllerParam, void>;
+    private getItemController: Controller<RestfulControllerParam, void>;
+    private getItemsByKeywordController: Controller<RestfulControllerParam, void>;
+    private updateItemController: Controller<RestfulControllerParam, void>;
+    private removeItemController: Controller<RestfulControllerParam, void>;
+
     // Constructor:
     public constructor(
-        domainManager?: DomainManager | undefined
+        domainManager?: DomainManager | undefined,
+        getAllItemsController?: Controller<RestfulControllerParam, void>,
+        newItemController?: Controller<RestfulControllerParam, void>,
+        getItemsByFilterController?: Controller<RestfulControllerParam, void>,
+        getItemController?: Controller<RestfulControllerParam, void>,
+        getItemsByKeywordController?: Controller<RestfulControllerParam, void>,
+        updateItemController?: Controller<RestfulControllerParam, void>,
+        removeItemController?: Controller<RestfulControllerParam, void>,
     ) {
         super(
             ItemRestfulApi.path,
             domainManager
         );
+
+        this.getAllItemsController = getAllItemsController || new GetAllItemsController(this.domainManager);
     }
 
     // Methods:
