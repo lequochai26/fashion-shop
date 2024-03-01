@@ -12,4 +12,6 @@ export default interface ItemInfo {
     metadata?: string | undefined;
     type?: ItemInfoItemType | undefined;
     brand?: ItemInfoBrand | undefined;
+    images: string[];
+    orders: string[];
 }
