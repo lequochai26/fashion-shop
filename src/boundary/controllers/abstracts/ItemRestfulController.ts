@@ -6,26 +6,15 @@ import RestfulController from "./RestfulController";
 
 export default abstract class ItemRestfulController extends RestfulController {
     // Fields:
-    private itemInfoConverter?: Converter<Item, ItemInfo> | undefined;
+    protected itemInfoConverter: Converter<Item, ItemInfo>;
 
     // Constructors:
     public constructor(
-        domainManager?: DomainManager | undefined,
-        itemInfoConverter?: Converter<Item, ItemInfo> | undefined
+        itemInfoConverter: Converter<Item, ItemInfo>,
+        domainManager?: DomainManager | undefined
     ) { 
         super(domainManager);
 
         this.itemInfoConverter = itemInfoConverter;
-    }
-
-    // Methods:
-    protected useItemInfoConverter<T>(
-        executable: (itemInfoConverter: Converter<Item, ItemInfo>) => T
-    ): T {
-        if (!this.itemInfoConverter) {
-            throw new Error("itemInfoConverter field is missing!");
-        }
-
-        return executable(this.itemInfoConverter);
     }
 }
