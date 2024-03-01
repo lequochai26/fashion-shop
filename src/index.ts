@@ -15,11 +15,24 @@ async function main() {
     app.use(cookieParser());
 
     // Start listening
-    app.listen(settings.port);
+    const server = app.listen(settings.port);
 
     // Load objects from objects declaration
     const objectsContainer: ObjectsContainer = new ObjectsContainer();
-    await objectsContainer.load(objectsDeclaration);
+    try {
+        await objectsContainer.load(objectsDeclaration);
+    }
+    catch (error: any) {
+        // Error occurred while loading objects from objects declaration
+        // Stop server
+        server.close();
+
+        // Error logging
+        console.error(error);
+
+        // Exit main function
+        return;
+    }
 
     // Get RestfulApis from objects loadded
     const restfulApisLoader: RestfulApisLoader = new RestfulApisLoader();
