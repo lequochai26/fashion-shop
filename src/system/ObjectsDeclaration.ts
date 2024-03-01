@@ -1,6 +1,8 @@
 import ItemRestfulApi from "../boundary/ItemRestfulApi";
+import RequestHandler from "../boundary/interfaces/RequestHandler";
 import BrandManager from "../domain/BrandManager";
 import CartItemManager from "../domain/CartItemManager";
+import DomainManager from "../domain/DomainManager";
 import DomainManagerImpl from "../domain/DomainManagerImpl";
 import ItemImageManager from "../domain/ItemImageManager";
 import ItemManager from "../domain/ItemManager";
@@ -374,11 +376,13 @@ const objectsDeclaration = [
     // BOUNDARY LAYER
     // itemRestfulApi
     {
-        target: new ItemRestfulApi(),
-        name: "itemRestfulApi",
-        dependencies: [
-            [ "domainManager", "domainManager" ]
-        ]
+        provider: {
+            func: function ([ domainManager ]: [ DomainManager ]): RequestHandler {
+                return new ItemRestfulApi(domainManager);
+            },
+            params: [ 'domainManager' ]
+        },
+        name: "itemRestfulApi"
     }
 ];
 
