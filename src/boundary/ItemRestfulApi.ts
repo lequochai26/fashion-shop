@@ -39,17 +39,17 @@ export default class ItemRestfulApi extends RestfulApi {
 
         this.getAllItemsController = getAllItemsController || new GetAllItemsController(this.domainManager);
 
-        this.newItemController = newItemController || new MethodUnimplementedController();
+        this.newItemController = newItemController || this.methodUnimplementedController;
 
-        this.getItemsByFilterController = getItemsByFilterController || new MethodUnimplementedController();
+        this.getItemsByFilterController = getItemsByFilterController || this.methodUnimplementedController;
 
-        this.getItemController = getItemController || new MethodUnimplementedController();
+        this.getItemController = getItemController || this.methodUnimplementedController;
 
-        this.getItemsByKeywordController = getItemsByKeywordController || new MethodUnimplementedController();
+        this.getItemsByKeywordController = getItemsByKeywordController || this.methodUnimplementedController;
 
-        this.updateItemController = updateItemController || new MethodUnimplementedController();
+        this.updateItemController = updateItemController || this.methodUnimplementedController;
 
-        this.removeItemController = removeItemController || new MethodUnimplementedController();
+        this.removeItemController = removeItemController || this.methodUnimplementedController;
     }
 
     // Methods:
