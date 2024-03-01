@@ -6,7 +6,7 @@ import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import GetAllItemsController from "./controllers/GetAllItemsController";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
-import RestfulController from "./controllers/abstracts/RestfulController";
+import MethodUnimplementedController from "./controllers/MethodUnimplementedController";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
@@ -38,6 +38,18 @@ export default class ItemRestfulApi extends RestfulApi {
         );
 
         this.getAllItemsController = getAllItemsController || new GetAllItemsController(this.domainManager);
+
+        this.newItemController = newItemController || new MethodUnimplementedController();
+
+        this.getItemsByFilterController = getItemsByFilterController || new MethodUnimplementedController();
+
+        this.getItemController = getItemController || new MethodUnimplementedController();
+
+        this.getItemsByKeywordController = getItemsByKeywordController || new MethodUnimplementedController();
+
+        this.updateItemController = updateItemController || new MethodUnimplementedController();
+
+        this.removeItemController = removeItemController || new MethodUnimplementedController();
     }
 
     // Methods:
@@ -51,21 +63,43 @@ export default class ItemRestfulApi extends RestfulApi {
         // Switch method
         switch (method) {
             case 'getAll': {
-                controller = new GetAllItemsController(this.domainManager);
+                controller = this.getAllItemsController;
+                break;
+            }
+
+            case 'new': {
+                controller = this.newItemController;
+                break;
+            }
+
+            case 'getByFilter': {
+                controller = this.getItemsByFilterController;
+                break;
+            }
+
+            case 'get': {
+                controller = this.getItemController;
+                break;
+            }
+
+            case 'getByKeyword': {
+                controller = this.getItemsByKeywordController;
+                break;
+            }
+
+            case 'update': {
+                controller = this.updateItemController;
+                break;
+            }
+
+            case 'remove': {
+                controller = this.removeItemController;
                 break;
             }
 
             default: {
-                controller = {
-                    async execute({ response }: RestfulControllerParam): Promise<void> {
-                        response.json(
-                            {
-                                success: false,
-                                message: "Invalid method name or method not found!"
-                            }
-                        )
-                    },
-                }
+                controller = this.invalidMethodController;
+                break;
             }
         }
 
