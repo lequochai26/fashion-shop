@@ -6,7 +6,6 @@ import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import GetAllItemsController from "./controllers/GetAllItemsController";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
-import MethodUnimplementedController from "./controllers/MethodUnimplementedController";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
