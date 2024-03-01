@@ -8,10 +8,10 @@ import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 export default class GetAllItemsController extends ItemRestfulController {
     // Constructors:
     public constructor(
-        domainManager?: DomainManager | undefined,
-        itemInfoConverter?: Converter<Item, ItemInfo> | undefined
+        itemInfoConverter: Converter<Item, ItemInfo>,
+        domainManager?: DomainManager | undefined
     ) {
-        super(domainManager, itemInfoConverter);
+        super(itemInfoConverter, domainManager);
     }
 
     // Methods:
@@ -35,11 +35,7 @@ export default class GetAllItemsController extends ItemRestfulController {
                 success: true,
                 result: items.map(
                     function (item: Item): ItemInfo {
-                        return self.useItemInfoConverter(
-                            function (itemInfoConverter) {
-                                return itemInfoConverter.convert(item);
-                            }
-                        )
+                        return self.itemInfoConverter.convert(item);
                     }
                 )
             }
