@@ -6,12 +6,14 @@ import DomainManager from "../../domain/DomainManager";
 import Controller from "../controllers/interfaces/Controller";
 import RestfulControllerParam from "../controllers/interfaces/RestfulControllerParam";
 import InvalidMethodController from "../controllers/InvalidMethodController";
+import MethodUnimplementedController from "../controllers/MethodUnimplementedController";
 
 export default abstract class RestfulApi implements RequestHandler {
     // Fields:
     protected path: string;
     protected domainManager?: DomainManager | undefined;
     protected invalidMethodController: Controller<RestfulControllerParam, void>;
+    protected methodUnimplementedController: Controller<RestfulControllerParam, void>;
 
     // Constructor:
     public constructor(
@@ -21,6 +23,7 @@ export default abstract class RestfulApi implements RequestHandler {
         this.path = path;
         this.domainManager = domainManager;
         this.invalidMethodController = new InvalidMethodController();
+        this.methodUnimplementedController = new MethodUnimplementedController();
     }
 
     // Protected methods:
