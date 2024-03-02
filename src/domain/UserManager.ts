@@ -5,12 +5,13 @@ import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePri
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import EntityManager from "./EntityManager";
 import PersistenceHandlerHolder from "./PersistenceHandlerHolder";
+import SearchableEntityManager from "./SearchableEntityManager";
 import CartItem from "./entities/CartItem";
 import Order from "./entities/Order";
 import User from "./entities/User";
 import VerificationCode from "./entities/VerificationCode";
 
-export default class UserManager extends PersistenceHandlerHolder implements EntityManager<User,string> {
+export default class UserManager extends PersistenceHandlerHolder implements SearchableEntityManager<User,string> {
     //Fields: 
     private userConverter?: ReversableConverter<UserData, User> | undefined;
     
@@ -300,6 +301,20 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
         return this.usePersistenceHandler(
             async function(persistenHandler) {
                 return persistenHandler.removeUserByPrimaryKey(pKey);
+            }
+        )
+    }
+
+    public async getByFilterFunc(filterFunc: (value: User) => boolean): Promise<User[]> {
+        return (await this.getAll([])).filter(
+            filterFunc
+        )
+    }
+
+    public async search(keyword: string): Promise<User[]> {
+        return this.getByFilterFunc(
+            function (user : User) {
+                return (`${user.Email} ${user.FullName} ${user.Gender} ${user.Permission} ${user.PhoneNumber} ${user.Permission}`.indexOf(keyword) !== -1)
             }
         )
     }
