@@ -69,11 +69,6 @@ export default class ItemRestfulApi extends RestfulApi {
                 break;
             }
 
-            case 'new': {
-                controller = this.newItemController;
-                break;
-            }
-
             case 'getByFilter': {
                 controller = this.getItemsByFilterController;
                 break;
@@ -89,16 +84,6 @@ export default class ItemRestfulApi extends RestfulApi {
                 break;
             }
 
-            case 'update': {
-                controller = this.updateItemController;
-                break;
-            }
-
-            case 'remove': {
-                controller = this.removeItemController;
-                break;
-            }
-
             default: {
                 controller = this.invalidMethodController;
                 break;
@@ -107,6 +92,24 @@ export default class ItemRestfulApi extends RestfulApi {
 
         // Execute controller
         return controller.execute(
+            { request: request, response: response }
+        );
+    }
+
+    public async post(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
+        return this.newItemController.execute(
+            { request: request, response: response }
+        );
+    }
+
+    public async put(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
+        return this.updateItemController.execute(
+            { request: request, response: response }
+        );
+    }
+
+    public async del(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
+        return this.removeItemController.execute(
             { request: request, response: response }
         );
     }
