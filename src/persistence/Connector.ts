@@ -32,12 +32,12 @@ export async function get(collectionName: string, filter: any): Promise<WithId<D
     try {
         const result: WithId<Document> | null = await collection.findOne(filter);
 
-        connection.close();
+        await connection.close();
 
         return result;
     }
     catch (error: any) {
-        connection.close();
+        await connection.close();
         throw error;
     }
 }
@@ -55,12 +55,12 @@ export async function getAll(collectionName: string): Promise<WithId<Document>[]
     try {
         const result: WithId<Document>[] = await collection.find().toArray();
 
-        connection.close();
+        await connection.close();
 
         return result
     }
     catch (error: any) {
-        connection.close();
+        await connection.close();
         throw error;
     }
 }
@@ -79,12 +79,12 @@ export async function getByFilter(collectionName: string, filter: any): Promise<
     try {
         const result: WithId<Document>[] = await collection.find(filter).toArray();
 
-        connection.close();
+        await connection.close();
 
         return result;
     }
     catch (error: any) {
-        connection.close();
+        await connection.close();
         throw error;
     }
 }
@@ -101,10 +101,10 @@ export async function insert(collectionName: string, target: any): Promise<void>
     // Insert one
     try {
         await collection.insertOne(target);
-        connection.close();
+        await connection.close();
     }
     catch (error: any) {
-        connection.close();
+        await connection.close();
         throw error;
     }
 }
@@ -122,10 +122,10 @@ export async function update(collectionName: string, target: any, filter: any): 
     // Update one
     try {
         await collection.updateOne(filter, {$set: target});
-        connection.close();
+        await connection.close();
     }
     catch (error: any) {
-        connection.close();
+        await connection.close();
         throw error;
     }
 }
@@ -142,10 +142,10 @@ export async function remove(collectionName: string, filter: any): Promise<void>
     // Delete one
     try {
         await collection.deleteOne(filter);
-        connection.close();
+        await connection.close();
     }
     catch (error: any) {
-        connection.close();
+        await connection.close();
         throw error;
     }
 }
