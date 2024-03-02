@@ -127,7 +127,7 @@ export default class OrderManager extends PersistenceHandlerHolder implements Se
         path.push(entity);
 
         //cai dat su phu thuoc cho thuc the
-        this.setupDependencies(entity,path);
+        await this.setupDependencies(entity,path);
 
         //tra ve thuc the
         return entity;
@@ -165,7 +165,7 @@ export default class OrderManager extends PersistenceHandlerHolder implements Se
             path.push(entity);
 
             //cai dat entity cua dependencies
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
 
             //day entity vao result
             result.push(entity);
@@ -208,7 +208,7 @@ export default class OrderManager extends PersistenceHandlerHolder implements Se
             path.push(entity);
 
             //cai dat dependencies entity
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
 
             //day entity vao result 
             result.push(entity);

@@ -4,9 +4,8 @@ import ItemImagePrimaryKey from "../persistence/pkeys/ItemImagePrimaryKey";
 import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import EntityManager from "./EntityManager";
-import ItemImageManager from "./ItemImageManager";
 import PersistenceHandlerHolder from "./PersistenceHandlerHolder";
-import ItemConverter from "./converters/ItemConverter";
+import SearchableEntityManager from "./SearchableEntityManager";
 import Brand from "./entities/Brand";
 import Item from "./entities/Item";
 import ItemImage from "./entities/ItemImage";
@@ -14,7 +13,7 @@ import ItemType from "./entities/ItemType";
 import Order from "./entities/Order";
 import OrderItem from "./entities/OrderItem";
 
-export default class ItemManager extends PersistenceHandlerHolder implements EntityManager<Item,string>{
+export default class ItemManager extends PersistenceHandlerHolder implements SearchableEntityManager<Item,string>{
     //FIELD
     private itemConverter?: ReversableConverter<ItemData, Item>;
     private itemTypeManager?: EntityManager<ItemType, string> | undefined;
@@ -164,7 +163,7 @@ export default class ItemManager extends PersistenceHandlerHolder implements Ent
         //day entity len path
         path.push(entity);
         //cai dat dependency cho entity
-        this.setupDependencies(entity,path);
+        await this.setupDependencies(entity,path);
         //tra ve entity
 
         return entity;
@@ -196,7 +195,7 @@ export default class ItemManager extends PersistenceHandlerHolder implements Ent
             //day entity len path
             path.push(entity);
             //cai dat entity cua dependency
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
             //day entity vao result
             result.push(entity);
         }
@@ -232,7 +231,7 @@ export default class ItemManager extends PersistenceHandlerHolder implements Ent
             //day entity len path
             path.push(entity);
             //cai dat dependency
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
             //day entity vao result
             result.push(entity)
         }
@@ -291,6 +290,20 @@ export default class ItemManager extends PersistenceHandlerHolder implements Ent
         return this.usePersistenceHandler(
             async function (persistenceHandler) {
                 return persistenceHandler.removeItemByPrimaryKey(pKey);
+            }
+        )
+    }
+
+    public async getByFilterFunc(filterFunc: (value: Item) => boolean): Promise<Item[]> {
+        return (await this.getAll([])).filter(
+            filterFunc
+        )
+    }
+
+    public async search(keyword: string): Promise<Item[]> {
+        return this.getByFilterFunc(
+            function (item: Item) {
+                return (`${item.Id}  ${item.Name} ${item.Price} ${item.Type}`.indexOf(keyword) !== -1);
             }
         )
     }
