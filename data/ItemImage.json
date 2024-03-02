@@ -1,0 +1,202 @@
+[
+    {
+        "itemId": "SHIRT001",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT002",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT003",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT004",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT005",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT006",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT007",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT008",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT009",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHIRT010",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES001",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES002",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES003",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES004",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES005",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES006",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES007",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES008",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES009",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "SHOES010",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS001",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS002",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS003",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS004",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS005",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS006",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS007",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS008",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS009",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "PANTS010",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY001",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY002",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY003",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY004",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY005",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY006",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY007",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY008",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY009",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "ACCESSORY010",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET001",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET002",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET003",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET004",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET005",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET006",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET007",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET008",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET009",
+        "path": "/items/item1.png"
+    },
+    {
+        "itemId": "FASHION_SET010",
+        "path": "/items/item1.png"
+    }
+]

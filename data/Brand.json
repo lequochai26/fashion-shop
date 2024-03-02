@@ -1,0 +1,30 @@
+[
+    {
+        "id": "GUCCI",
+        "name": "Gucci"
+    },
+    {
+        "id": "VERSACE",
+        "name": "Versace"
+    },
+    {
+        "id": "PRADA",
+        "name": "Prada"
+    },
+    {
+        "id": "LOUIS_VUITTON",
+        "name": "Louis Vuitton"
+    },
+    {
+        "id": "BURBERRY",
+        "name": "Burberry"
+    },
+    {
+        "id": "HERMES",
+        "name": "Hermès"
+    },
+    {
+        "id": "FENDI",
+        "name": "Fendi"
+    }
+]

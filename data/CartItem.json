@@ -1,0 +1,122 @@
+[
+    {
+        "email": "nguyenvananh@gmail.com",
+        "itemId": "SHIRT001",
+        "amount": 15,
+        "metadata": "{\"size\":\"M\",\"color\":\"white\"}"
+    },
+    {
+        "email": "phuongngoclan@gmail.com",
+        "itemId": "SHIRT001",
+        "amount": 5,
+        "metadata": "{\"size\":\"L\",\"color\":\"black\"}"
+    },
+    {
+        "email": "tranthikimanh@gmail.com",
+        "itemId": "SHIRT001",
+        "amount": 10,
+        "metadata": "{\"size\":\"S\",\"color\":\"white\"}"
+    },
+    {
+        "email": "hoangminhnhat@gmail.com",
+        "itemId": "SHIRT001",
+        "amount": 20,
+        "metadata": "{\"size\":\"XL\",\"color\":\"black\"}"
+    },
+    {
+        "email": "nguyenvananh@gmail.com",
+        "itemId": "SHOES002",
+        "amount": 8,
+        "metadata": "{\"size\":\"40\",\"color\":\"black\"}"
+    },
+    {
+        "email": "phuongngoclan@gmail.com",
+        "itemId": "SHOES002",
+        "amount": 10,
+        "metadata": "{\"size\":\"41\",\"color\":\"brown\"}"
+    },
+    {
+        "email": "tranthikimanh@gmail.com",
+        "itemId": "SHOES002",
+        "amount": 15,
+        "metadata": "{\"size\":\"39\",\"color\":\"black\"}"
+    },
+    {
+        "email": "hoangminhnhat@gmail.com",
+        "itemId": "SHOES002",
+        "amount": 2,
+        "metadata": "{\"size\":\"40\",\"color\":\"black\"}"
+    },
+    {
+        "email": "nguyenvananh@gmail.com",
+        "itemId": "PANTS003",
+        "amount": 20,
+        "metadata": "{\"size\":\"L\",\"color\":\"blue\"}"
+    },
+    {
+        "email": "phuongngoclan@gmail.com",
+        "itemId": "PANTS003",
+        "amount": 15,
+        "metadata": "{\"size\":\"M\",\"color\":\"blue\"}"
+    },
+    {
+        "email": "tranthikimanh@gmail.com",
+        "itemId": "PANTS003",
+        "amount": 10,
+        "metadata": "{\"size\":\"L\",\"color\":\"blue\"}"
+    },
+    {
+        "email": "hoangminhnhat@gmail.com",
+        "itemId": "PANTS003",
+        "amount": 5,
+        "metadata": "{\"size\":\"M\",\"color\":\"blue\"}"
+    },
+    {
+        "email": "nguyenvananh@gmail.com",
+        "itemId": "ACCESSORY004",
+        "amount": 8,
+        "metadata": "{\"color\":\"silver\"}"
+    },
+    {
+        "email": "phuongngoclan@gmail.com",
+        "itemId": "ACCESSORY004",
+        "amount": 3,
+        "metadata": "{\"color\":\"black\"}"
+    },
+    {
+        "email": "tranthikimanh@gmail.com",
+        "itemId": "ACCESSORY004",
+        "amount": 5,
+        "metadata": "{\"color\":\"silver\"}"
+    },
+    {
+        "email": "hoangminhnhat@gmail.com",
+        "itemId": "ACCESSORY004",
+        "amount": 10,
+        "metadata": "{\"color\":\"silver\"}"
+    },
+    {
+        "email": "nguyenvananh@gmail.com",
+        "itemId": "FASHION_SET005",
+        "amount": 25,
+        "metadata": "{\"size\":\"M\",\"color\":\"gold\"}"
+    },
+    {
+        "email": "phuongngoclan@gmail.com",
+        "itemId": "FASHION_SET005",
+        "amount": 6,
+        "metadata": "{\"size\":\"S\",\"color\":\"gold\"}"
+    },
+    {
+        "email": "tranthikimanh@gmail.com",
+        "itemId": "FASHION_SET005",
+        "amount": 12,
+        "metadata": "{\"size\":\"M\",\"color\":\"silver\"}"
+    },
+    {
+        "email": "hoangminhnhat@gmail.com",
+        "itemId": "FASHION_SET005",
+        "amount": 8,
+        "metadata": "{\"size\":\"L\",\"color\":\"gold\"}"
+    }
+]

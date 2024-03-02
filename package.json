@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "start": "node ./dist/index.js"
+    "start": "nodemon --watch ./src/**/*.ts --exec ts-node ./src/index.ts",
+    "builddb": "ts-node ./scripts/builddb.ts",
+    "test": "ts-node ./scripts/test.ts"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +22,8 @@
     "express": "^4.18.2",
     "mongodb": "^6.3.0",
     "nodemailer": "^6.9.9",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }

@@ -1,0 +1,202 @@
+[
+    {
+        "email": "nguyenngocbich@helloworld.com",
+        "password": "Abc123456",
+        "fullName": "Nguyễn Ngọc Bích",
+        "gender": false,
+        "phoneNumber": "0931068637",
+        "address": "Q. Gò Vấp",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "tranhoanglong@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Trần Hoàng Long",
+        "gender": true,
+        "phoneNumber": "0931158538",
+        "address": "Q. Bình Tân",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "nguyengochuy@hotmail.vn",
+        "password": "Abc123456",
+        "fullName": "Nguyễn Ngọc Huy",
+        "gender": true,
+        "phoneNumber": "01228853288",
+        "address": "Phú Nhuận",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "lethanhnam@yahoo.com",
+        "password": "Abc123456",
+        "fullName": "Lê Thanh Nam",
+        "gender": true,
+        "phoneNumber": "0987654321",
+        "address": "Q. Tân Bình",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "phamthithu@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Phạm Thị Thu",
+        "gender": false,
+        "phoneNumber": "0912345678",
+        "address": "Q. 1",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "nguyencongminh@outlook.com",
+        "password": "Abc123456",
+        "fullName": "Nguyễn Công Minh",
+        "gender": true,
+        "phoneNumber": "0965432198",
+        "address": "Q. Tân Phú",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "vuthikimanh@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Vũ Thị Kim Anh",
+        "gender": false,
+        "phoneNumber": "0923456789",
+        "address": "Q. 5",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "trantuananh@helloworld.com",
+        "password": "Abc123456",
+        "fullName": "Trần Tuấn Anh",
+        "gender": true,
+        "phoneNumber": "0918765432",
+        "address": "Q. 10",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "doantrang@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Đoàn Trang",
+        "gender": false,
+        "phoneNumber": "0987123456",
+        "address": "Q. 3",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "trinhtuan@outlook.com",
+        "password": "Abc123456",
+        "fullName": "Trịnh Tuấn",
+        "gender": true,
+        "phoneNumber": "0932145678",
+        "address": "Q. 7",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "phamhuong@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Phạm Hương",
+        "gender": false,
+        "phoneNumber": "0978563412",
+        "address": "Q. 8",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "dinhvanthanh@yahoo.com",
+        "password": "Abc123456",
+        "fullName": "Đinh Văn Thành",
+        "gender": true,
+        "phoneNumber": "0967345182",
+        "address": "Q. 2",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "nguyenphuongan@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Nguyễn Phương An",
+        "gender": false,
+        "phoneNumber": "0923456712",
+        "address": "Q. 9",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "truongthihong@helloworld.com",
+        "password": "Abc123456",
+        "fullName": "Trương Thị Hồng",
+        "gender": false,
+        "phoneNumber": "0917234567",
+        "address": "Q. 6",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "hacongminh@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Hà Công Minh",
+        "gender": true,
+        "phoneNumber": "0983214765",
+        "address": "Q. 4",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "leminhtri@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Lê Minh Trí",
+        "gender": true,
+        "phoneNumber": "0918273645",
+        "address": "Q. 11",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "hoangthuha@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Hoàng Thu Hà",
+        "gender": false,
+        "phoneNumber": "0976321487",
+        "address": "Q. 12",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "nguyentruonggiang@hotmail.com",
+        "password": "Abc123456",
+        "fullName": "Nguyễn Trường Giang",
+        "gender": true,
+        "phoneNumber": "0928173645",
+        "address": "Q. Tân Bình",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "vuthithanhthao@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Vũ Thị Thanh Thảo",
+        "gender": false,
+        "phoneNumber": "0938261475",
+        "address": "Q. Tân Phú",
+        "avatar": null,
+        "permission": "Customer"
+    },
+    {
+        "email": "nguyenvananh@gmail.com",
+        "password": "Abc123456",
+        "fullName": "Nguyễn Văn Anh",
+        "gender": false,
+        "phoneNumber": "0972345618",
+        "address": "Q. 10",
+        "avatar": null,
+        "permission": "Customer"
+    }
+]

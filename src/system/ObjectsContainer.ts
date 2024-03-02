@@ -8,7 +8,7 @@ export default class ObjectsContainer {
     }
 
     // Methods:
-    public async declare(
+    public async declareWithPrototype(
         prototype: object | null,
         name: string,
         dependencies?: [ string, string ][]
@@ -18,9 +18,41 @@ export default class ObjectsContainer {
             throw new Error(`Object with name '${name}' already exist!`);
         }
 
-        // Create new object base on given prototype
+        // Taget initialization
         const target = Object.create(prototype);
 
+        // Call declare method
+        return this.declare(target, name, dependencies);
+    }
+
+    public async declareWithProvider(
+        provider: any,
+        name: string,
+        dependencies?: [ string, string ][]
+    ): Promise<void> {
+        // Get params for provider func
+        const params: any[] = [];
+
+        for (const paramName of provider.params) {
+            if (!this.nodes[paramName]) {
+                throw new Error(`Object '${paramName}' doesn't exist in the container!`);
+            }
+
+            params.push(this.nodes[paramName].target);
+        }
+
+        // Calling provider func with given params and receive target
+        const target: any = provider.func(params);
+
+        // Called declare method
+        return this.declare(target, name, dependencies);
+    }
+
+    public async declare(
+        target: any,
+        name: string,
+        dependencies?: [string, string][]
+    ): Promise<void> {
         // Setup dependencies for target
         if (dependencies) {
             for (const dependency of dependencies) {
@@ -47,11 +79,37 @@ export default class ObjectsContainer {
 
     public async load(objectsDeclaration: any): Promise<void> {
         for (const objectDeclaration of objectsDeclaration) {
-            await this.declare(
-                objectDeclaration.prototype,
-                objectDeclaration.name,
-                objectDeclaration.dependencies
-            )
+            if (objectDeclaration.target) {
+                await this.declare(
+                    objectDeclaration.target,
+                    objectDeclaration.name,
+                    objectDeclaration.dependencies
+                );
+
+                continue;
+            }
+
+            if (objectDeclaration.provider) {
+                await this.declareWithProvider(
+                    objectDeclaration.provider,
+                    objectDeclaration.name,
+                    objectDeclaration.dependencies
+                );
+
+                continue;
+            }
+            
+            if (objectDeclaration.prototype) {
+                await this.declareWithPrototype(
+                    objectDeclaration.prototype,
+                    objectDeclaration.name,
+                    objectDeclaration.dependencies
+                );
+
+                continue;
+            }
+
+            throw new Error(`Object declaration must contains target or provider or prototype, object declaraton with name ${objectDeclaration.name} contains none of them!`);
         }
     }
 

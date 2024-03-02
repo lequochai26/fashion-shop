@@ -1,5 +1,5 @@
 export default interface OrderItemPrimaryKey{
     orderId: string;
     itemId: string;
-    metadata?: string;
+    metadata?: string | undefined;
 }
