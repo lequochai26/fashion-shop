@@ -3,12 +3,13 @@ import BrandData from "../persistence/data/BrandData";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import EntityManager from "./EntityManager";
 import PersistenceHandlerHolder from "./PersistenceHandlerHolder";
+import SearchableEntityManager from "./SearchableEntityManager";
 
 import Brand from "./entities/Brand";
 import Item from "./entities/Item";
 
 
-export default class BrandManager extends PersistenceHandlerHolder implements EntityManager<Brand,string>{
+export default class BrandManager extends PersistenceHandlerHolder implements SearchableEntityManager<Brand,string>{
     
     //field
     private brandConverter?: ReversableConverter<BrandData, Brand> | undefined;
@@ -26,13 +27,13 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
         this.brandConverter = brandConverter;
         this.itemManager = itemManager;
     }
-
+    
     // private method   
-
+    
      //check xem cac converter co ton tai hay ko
     private useBrandConverter<T>(
         executable:(brandConverter: ReversableConverter<BrandData,Brand>) => T
-    ): T {
+        ): T {
         if(!this.brandConverter){
             throw new Error("brandConverter field is missing") //ko co thi bao loi
         }
@@ -46,7 +47,7 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
         if (!this.itemManager) {
             throw new Error("itemManager field is missing!");
         }
-
+        
         return executable(this.itemManager);
     }
     //check path
@@ -81,9 +82,9 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
         let entity : Brand | undefined = this.precheckPath(pKey,path);
         //
         //convert r thi ko convert lai nua, lay tu trong path ra luon
-       if(entity){
+        if(entity){
         return entity;
-       }
+    }
        //lay data voi pKey da co 
        const data: BrandData | undefined = await this.usePersistenceHandler(
             async function (persistenceHandler) {
@@ -97,17 +98,17 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
 
        //co data thi chuyen data thanh entity
        entity = this.useBrandConverter(
-         function (brandConverter){
+           function (brandConverter){
             return brandConverter.convert(data);
          }
-       );
-       
-       //day entity vao path sau khi converter
-       path.push(entity);
-
-       //thiet lap cac denpendencies
+         );
+         
+         //day entity vao path sau khi converter
+         path.push(entity);
+         
+         //thiet lap cac denpendencies
        await this.setupDependencies(entity,path);
-
+       
        //return
        return entity;
 
@@ -131,7 +132,7 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
                 result.push(entity);
                 continue;
             }
-
+            
             //cđ data sang entity
             entity = this.useBrandConverter(
                 function(brandConverter){
@@ -152,9 +153,9 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
         return result;
     }
     public async getByFilter(filter: any, path: any[]): Promise<Brand[]> {
-               //nhan tat ca data
-               const dataBrandList : BrandData[] = await this.usePersistenceHandler(
-                async function (persistenceHandler) {
+        //nhan tat ca data
+        const dataBrandList : BrandData[] = await this.usePersistenceHandler(
+            async function (persistenceHandler) {
                     return persistenceHandler.getAllBrands();
                 }
             );
@@ -165,35 +166,35 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
             for(const data of dataBrandList){
                 //check path
                 let entity : Brand | undefined = this.precheckPath(data.id,path);
-    
+                
                 if(entity){
                     result.push(entity);
                     continue;
                 }
-    
+                
                 //cđ data sang entity
                 entity = this.useBrandConverter(
                     function(brandConverter){
                         return brandConverter.convert(data);
                     }
-                )
+                    )
                 // day entity len path
                 path.push(entity);
-
+                
                 //xet phu thuoc
                 await this.setupDependencies(entity,path);
-    
+                
                 // day entity vao result
                 result.push(entity);
-    
+                
             }
             //return result
             return result;
     }
     public async insert(target: Brand): Promise<void> {
-       const self = this;
+        const self = this;
 
-       return this.usePersistenceHandler(
+        return this.usePersistenceHandler(
             async function (persistenceHandler) {
                 return persistenceHandler.insertBrand(
                     self.useBrandConverter(
@@ -212,11 +213,11 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
             async function (persistenceHandler) {
                 return persistenceHandler.updateBrand(
                     self.useBrandConverter(
-
+                        
                         function(brandConverter){
                             return brandConverter.reverse(target);
                         }
-                    )
+                        )
                 );
                 
             }
@@ -232,20 +233,37 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
                     function(brandConverter){
                         return brandConverter.reverse(target);
                     }
-                )
-            );
-         }
+                    )
+                    );
+                }
        )
     }
     public async removeByPrimaryKey(pKey: string): Promise<void> {
        return this.usePersistenceHandler(
-        async function (persistenceHandler) {
+           async function (persistenceHandler) {
             return persistenceHandler.removeBrandByPrimaryKey(pKey);
         }
-       );
+        );
     }
     
-   
+    //nhận một keyword và trả về 
+    //một Promise chứa một mảng các obj Brand.
+    public async getByFilterFunc(filterFunc: (value: Brand) => boolean): Promise<Brand[]> {
+        return (await this.getAll([])).filter(
+            //lay all brand, dung filterfunc loc
+            filterFunc
+        )
+    }
+    //search dua vao getbyfilter de tim kiem 
+    public async search(keyword: string): Promise<Brand[]> {
+        return this.getByFilterFunc( //goi ham getbyfilterfun kt co ko
+            function(brand:Brand){
+                //khac -1 la co
+                return(`${brand.Id} ${brand.Name}`.indexOf(keyword) !==-1);
+            }
+        )
+    }
+    
     //get and  set
     public get BrandConverter(): ReversableConverter<BrandData, Brand> | undefined {
         return this.brandConverter;
