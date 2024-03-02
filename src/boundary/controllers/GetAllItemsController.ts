@@ -1,18 +1,24 @@
 import DomainManager from "../../domain/DomainManager";
 import Item from "../../domain/entities/Item";
-import RestfulController from "./abstracts/RestfulController";
+import Converter from "../../utils/interfaces/Converter";
+import ItemInfo from "../infos/item/ItemInfo";
+import ItemRestfulController from "./abstracts/ItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
-export default class GetAllItemsController extends RestfulController {
+export default class GetAllItemsController extends ItemRestfulController {
     // Constructors:
     public constructor(
+        itemInfoConverter: Converter<Item, ItemInfo>,
         domainManager?: DomainManager | undefined
     ) {
-        super(domainManager);
+        super(itemInfoConverter, domainManager);
     }
 
     // Methods:
     public async execute({ response }: RestfulControllerParam): Promise<void> {
+        // Self definition
+        const self: GetAllItemsController = this;
+
         // Path initization
         const path: any[] = [];
 
@@ -28,11 +34,8 @@ export default class GetAllItemsController extends RestfulController {
             {
                 success: true,
                 result: items.map(
-                    function (item: Item) {
-                        return {
-                            id: item.Id,
-                            name: item.Name
-                        }
+                    function (item: Item): ItemInfo {
+                        return self.itemInfoConverter.convert(item);
                     }
                 )
             }

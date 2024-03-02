@@ -6,10 +6,24 @@ import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import GetAllItemsController from "./controllers/GetAllItemsController";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
+import Converter from "../utils/interfaces/Converter";
+import Item from "../domain/entities/Item";
+import ItemInfo from "./infos/item/ItemInfo";
+import ItemInfoConverter from "./converters/ItemInfoConverter";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
     private static path: string = "/item";
+
+    // Fields:
+    private itemInfoConverter: Converter<Item, ItemInfo>;
+    private getAllItemsController: Controller<RestfulControllerParam, void>;
+    private newItemController: Controller<RestfulControllerParam, void>;
+    private getItemsByFilterController: Controller<RestfulControllerParam, void>;
+    private getItemController: Controller<RestfulControllerParam, void>;
+    private getItemsByKeywordController: Controller<RestfulControllerParam, void>;
+    private updateItemController: Controller<RestfulControllerParam, void>;
+    private removeItemController: Controller<RestfulControllerParam, void>;
 
     // Constructor:
     public constructor(
@@ -19,6 +33,25 @@ export default class ItemRestfulApi extends RestfulApi {
             ItemRestfulApi.path,
             domainManager
         );
+
+        this.itemInfoConverter = new ItemInfoConverter();
+
+        this.getAllItemsController = new GetAllItemsController(
+            this.itemInfoConverter,
+            this.domainManager
+        );
+
+        this.newItemController = this.methodUnimplementedController;
+
+        this.getItemsByFilterController = this.methodUnimplementedController;
+
+        this.getItemController = this.methodUnimplementedController;
+
+        this.getItemsByKeywordController = this.methodUnimplementedController;
+
+        this.updateItemController = this.methodUnimplementedController;
+
+        this.removeItemController = this.methodUnimplementedController;
     }
 
     // Methods:
@@ -32,21 +65,43 @@ export default class ItemRestfulApi extends RestfulApi {
         // Switch method
         switch (method) {
             case 'getAll': {
-                controller = new GetAllItemsController(this.domainManager);
+                controller = this.getAllItemsController;
+                break;
+            }
+
+            case 'new': {
+                controller = this.newItemController;
+                break;
+            }
+
+            case 'getByFilter': {
+                controller = this.getItemsByFilterController;
+                break;
+            }
+
+            case 'get': {
+                controller = this.getItemController;
+                break;
+            }
+
+            case 'getByKeyword': {
+                controller = this.getItemsByKeywordController;
+                break;
+            }
+
+            case 'update': {
+                controller = this.updateItemController;
+                break;
+            }
+
+            case 'remove': {
+                controller = this.removeItemController;
                 break;
             }
 
             default: {
-                controller = {
-                    async execute({ response }: RestfulControllerParam): Promise<void> {
-                        response.json(
-                            {
-                                success: false,
-                                message: "Invalid method name or method not found!"
-                            }
-                        )
-                    },
-                }
+                controller = this.invalidMethodController;
+                break;
             }
         }
 

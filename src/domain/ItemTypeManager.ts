@@ -82,7 +82,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
        //lay data voi pKey da co 
        const data: ItemTypeData | undefined = await this.usePersistenceHandler(
             async function (persistenceHandler) {
-                return persistenceHandler.getBrand(pKey);
+                return persistenceHandler.getItemType(pKey);
             }
        );
        //ko co thi tra ve

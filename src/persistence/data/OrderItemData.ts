@@ -3,5 +3,5 @@ export default interface OrderItemData{
     itemId: string;
     amount: number;
     price: number;
-    metadata?: string;
+    metadata?: string | undefined;
 }

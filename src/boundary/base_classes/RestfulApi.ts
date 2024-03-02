@@ -3,11 +3,21 @@ import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
 import RequestHandler from "../interfaces/RequestHandler";
 import DomainManager from "../../domain/DomainManager";
+import Controller from "../controllers/interfaces/Controller";
+import RestfulControllerParam from "../controllers/interfaces/RestfulControllerParam";
+import InvalidMethodController from "../controllers/InvalidMethodController";
+import MethodUnimplementedController from "../controllers/MethodUnimplementedController";
 
 export default abstract class RestfulApi implements RequestHandler {
+    // Static fields:
+    private static invalidMethodController: Controller<RestfulControllerParam, void> = new InvalidMethodController();
+    private static methodUnimplmentedController: Controller<RestfulControllerParam, void> = new MethodUnimplementedController();
+
     // Fields:
     protected path: string;
     protected domainManager?: DomainManager | undefined;
+    protected invalidMethodController: Controller<RestfulControllerParam, void>;
+    protected methodUnimplementedController: Controller<RestfulControllerParam, void>;
 
     // Constructor:
     public constructor(
@@ -16,6 +26,8 @@ export default abstract class RestfulApi implements RequestHandler {
     ) {
         this.path = path;
         this.domainManager = domainManager;
+        this.invalidMethodController = RestfulApi.invalidMethodController;
+        this.methodUnimplementedController = RestfulApi.methodUnimplmentedController;
     }
 
     // Protected methods:
