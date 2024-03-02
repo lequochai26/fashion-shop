@@ -287,7 +287,7 @@ const objectsDeclaration = [
             [ "userConverter", "userConverter" ],
             [ "orderManager", "orderManager" ],
             [ "cartItemManager", "cartItemManager" ],
-            [ "veriicationCodeManager", "verificationCodeManager" ]
+            [ "verificationCodeManager", "verificationCodeManager" ]
         ]
     },
 
