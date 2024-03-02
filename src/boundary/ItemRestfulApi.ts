@@ -6,12 +6,17 @@ import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import GetAllItemsController from "./controllers/GetAllItemsController";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
+import Converter from "../utils/interfaces/Converter";
+import Item from "../domain/entities/Item";
+import ItemInfo from "./infos/item/ItemInfo";
+import ItemInfoConverter from "./converters/ItemInfoConverter";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
     private static path: string = "/item";
 
     // Fields:
+    private itemInfoConverter: Converter<Item, ItemInfo>;
     private getAllItemsController: Controller<RestfulControllerParam, void>;
     private newItemController: Controller<RestfulControllerParam, void>;
     private getItemsByFilterController: Controller<RestfulControllerParam, void>;
@@ -22,33 +27,31 @@ export default class ItemRestfulApi extends RestfulApi {
 
     // Constructor:
     public constructor(
-        domainManager?: DomainManager | undefined,
-        getAllItemsController?: Controller<RestfulControllerParam, void>,
-        newItemController?: Controller<RestfulControllerParam, void>,
-        getItemsByFilterController?: Controller<RestfulControllerParam, void>,
-        getItemController?: Controller<RestfulControllerParam, void>,
-        getItemsByKeywordController?: Controller<RestfulControllerParam, void>,
-        updateItemController?: Controller<RestfulControllerParam, void>,
-        removeItemController?: Controller<RestfulControllerParam, void>,
+        domainManager?: DomainManager | undefined
     ) {
         super(
             ItemRestfulApi.path,
             domainManager
         );
 
-        this.getAllItemsController = getAllItemsController || new GetAllItemsController(this.domainManager);
+        this.itemInfoConverter = new ItemInfoConverter();
 
-        this.newItemController = newItemController || this.methodUnimplementedController;
+        this.getAllItemsController = new GetAllItemsController(
+            this.itemInfoConverter,
+            this.domainManager
+        );
 
-        this.getItemsByFilterController = getItemsByFilterController || this.methodUnimplementedController;
+        this.newItemController = this.methodUnimplementedController;
 
-        this.getItemController = getItemController || this.methodUnimplementedController;
+        this.getItemsByFilterController = this.methodUnimplementedController;
 
-        this.getItemsByKeywordController = getItemsByKeywordController || this.methodUnimplementedController;
+        this.getItemController = this.methodUnimplementedController;
 
-        this.updateItemController = updateItemController || this.methodUnimplementedController;
+        this.getItemsByKeywordController = this.methodUnimplementedController;
 
-        this.removeItemController = removeItemController || this.methodUnimplementedController;
+        this.updateItemController = this.methodUnimplementedController;
+
+        this.removeItemController = this.methodUnimplementedController;
     }
 
     // Methods:
