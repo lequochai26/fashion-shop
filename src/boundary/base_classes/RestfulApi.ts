@@ -9,6 +9,10 @@ import InvalidMethodController from "../controllers/InvalidMethodController";
 import MethodUnimplementedController from "../controllers/MethodUnimplementedController";
 
 export default abstract class RestfulApi implements RequestHandler {
+    // Static fields:
+    private static invalidMethodController: Controller<RestfulControllerParam, void> = new InvalidMethodController();
+    private static methodUnimplmentedController: Controller<RestfulControllerParam, void> = new MethodUnimplementedController();
+
     // Fields:
     protected path: string;
     protected domainManager?: DomainManager | undefined;
@@ -22,8 +26,8 @@ export default abstract class RestfulApi implements RequestHandler {
     ) {
         this.path = path;
         this.domainManager = domainManager;
-        this.invalidMethodController = new InvalidMethodController();
-        this.methodUnimplementedController = new MethodUnimplementedController();
+        this.invalidMethodController = RestfulApi.invalidMethodController;
+        this.methodUnimplementedController = RestfulApi.methodUnimplmentedController;
     }
 
     // Protected methods:
