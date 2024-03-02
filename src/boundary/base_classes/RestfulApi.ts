@@ -8,7 +8,7 @@ import RestfulControllerParam from "../controllers/interfaces/RestfulControllerP
 import InvalidMethodController from "../controllers/InvalidMethodController";
 import MethodUnimplementedController from "../controllers/MethodUnimplementedController";
 
-export default abstract class RestfulApi implements RequestHandler {
+export default class RestfulApi implements RequestHandler {
     // Static fields:
     private static invalidMethodController: Controller<RestfulControllerParam, void> = new InvalidMethodController();
     private static methodUnimplmentedController: Controller<RestfulControllerParam, void> = new MethodUnimplementedController();
