@@ -3,10 +3,11 @@ import ItemTypeData from "../persistence/data/ItemTypeData";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import EntityManager from "./EntityManager";
 import PersistenceHandlerHolder from "./PersistenceHandlerHolder";
+import SearchableEntityManager from "./SearchableEntityManager";
 import Item from "./entities/Item";
 import ItemType from "./entities/ItemType";
 
-export default class ItemTypeManager extends PersistenceHandlerHolder implements EntityManager<ItemType,string>{
+export default class ItemTypeManager extends PersistenceHandlerHolder implements SearchableEntityManager<ItemType,string>{
     //field
     private itemTypeConverter?: ReversableConverter<ItemTypeData, ItemType> | undefined;
     private itemManager?: EntityManager<Item, string> | undefined;
@@ -22,7 +23,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
         this.itemTypeConverter = itemTypeConverter;
         this.itemManager = itemManager;
     }
-
+    
     
     //check xem cac converter co ton tai hay ko
     //private method
@@ -102,7 +103,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
 
        //thiet lap cac denpendencies
        await this.setupDependencies(entity,path);
-
+       
        //return
        return entity;
 
@@ -135,10 +136,10 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
             )
             // day entity len path
             path.push(entity);
-
+            
             //setup
             await this.setupDependencies(entity,path);
-
+            
             // day entity vao result
             result.push(entity);
 
@@ -231,13 +232,26 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
     }
     public async removeByPrimaryKey(pKey: string): Promise<void> {
        return this.usePersistenceHandler(
-         async function (persistenceHandler) {
-            return persistenceHandler.removeItemTypeByPrimaryKey(pKey);
-         }
+           async function (persistenceHandler) {
+               return persistenceHandler.removeItemTypeByPrimaryKey(pKey);
+            }
        )
     }
     
-   //get va set
+    public async search(keyword: string): Promise<ItemType[]> {
+       return this.getByFilterFunc(
+           function (itemType: ItemType) {
+               return(`${itemType.Id} ${itemType.Name}`).indexOf(keyword) !== -1;
+           }
+       );
+        
+    }
+    public async getByFilterFunc(filterFunc: (value: ItemType) => boolean): Promise<ItemType[]> {
+       return (await this.getAll([])).filter(
+           filterFunc
+       )
+    }
+    //get va set
     public get ItemTypeConverter(): ReversableConverter<ItemTypeData, ItemType> | undefined {
         return this.itemTypeConverter;
     }
@@ -251,4 +265,8 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
         this.itemManager = value;
     }
 
+}
+
+function filterFunc(value: ItemType, index: number, array: ItemType[]): value is ItemType {
+    throw new Error("Function not implemented.");
 }
