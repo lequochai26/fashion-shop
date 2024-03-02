@@ -101,7 +101,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
        path.push(entity);
 
        //thiet lap cac denpendencies
-       this.setupDependencies(entity,path);
+       await this.setupDependencies(entity,path);
 
        //return
        return entity;
@@ -137,7 +137,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
             path.push(entity);
 
             //setup
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
 
             // day entity vao result
             result.push(entity);
@@ -176,7 +176,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
             path.push(entity);
 
              //xet phu thuoc
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
 
             // day entity vao result
             result.push(entity);
