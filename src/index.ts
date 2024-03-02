@@ -68,7 +68,7 @@ async function main() {
         app.delete(
             restfulApi.getPath(),
             async function (request, response) {
-                await restfulApi.del(request, response);
+                await restfulApi.delete(request, response);
             }
         );
     }

@@ -108,7 +108,7 @@ export default class ItemRestfulApi extends RestfulApi {
         );
     }
 
-    public async del(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
+    public async delete(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
         return this.removeItemController.execute(
             { request: request, response: response }
         );

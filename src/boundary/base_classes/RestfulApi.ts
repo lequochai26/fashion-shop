@@ -57,7 +57,7 @@ export default abstract class RestfulApi implements RequestHandler {
         response.end();
     }
 
-    public async del(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
+    public async delete(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
         response.status(405);
         response.end();
     }
