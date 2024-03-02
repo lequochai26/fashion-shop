@@ -113,7 +113,7 @@ export default class OrderItemManager extends PersistenceHandlerHolder implement
         path.push(entity);
 
         //Setup entity's dependencies
-        this.setupDependencies(entity,path);
+        await this.setupDependencies(entity,path);
 
         //Return entity
         return entity;
