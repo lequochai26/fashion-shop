@@ -153,7 +153,7 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
         path.push(entity);
 
         //Setup entity's dependencies
-        this.setupDependencies(entity,path);
+        await this.setupDependencies(entity,path);
 
         //return entity
         return entity;
@@ -191,7 +191,7 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
             path.push(entity);
 
             //Setup entity's dependencies
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
 
             //Push entity to result
             result.push(entity);
@@ -232,7 +232,7 @@ export default class UserManager extends PersistenceHandlerHolder implements Ent
             path.push(entity);
 
             //Setup dependencies for entity
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
 
             //Push entity into result
             result.push(entity);
