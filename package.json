@@ -7,8 +7,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "start": "nodemon --watch ./src/**/*.ts --exec ts-node ./src/index.ts",
-    "builddb": "node ./dist/scripts/builddb.js",
-    "test": "node ./dist/scripts/test.js"
+    "builddb": "ts-node ./scripts/builddb.ts",
+    "test": "ts-node ./scripts/test.ts"
   },
   "author": "",
   "license": "ISC",

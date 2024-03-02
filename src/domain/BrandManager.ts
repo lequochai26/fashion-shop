@@ -1,5 +1,3 @@
-
-import e from "express";
 import PersistenceHandler from "../persistence/PersistenceHandler";
 import BrandData from "../persistence/data/BrandData";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
@@ -108,7 +106,7 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
        path.push(entity);
 
        //thiet lap cac denpendencies
-       this.setupDependencies(entity,path);
+       await this.setupDependencies(entity,path);
 
        //return
        return entity;
@@ -144,7 +142,7 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
             path.push(entity);
             
             //set up
-            this.setupDependencies(entity,path);
+            await this.setupDependencies(entity,path);
 
             // day entity vao result
             result.push(entity);
@@ -183,7 +181,7 @@ export default class BrandManager extends PersistenceHandlerHolder implements En
                 path.push(entity);
 
                 //xet phu thuoc
-                this.setupDependencies(entity,path);
+                await this.setupDependencies(entity,path);
     
                 // day entity vao result
                 result.push(entity);
