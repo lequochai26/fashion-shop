@@ -14,6 +14,9 @@ async function main() {
     // Include cookie parser into app
     app.use(cookieParser());
 
+    // Include json body parser into app
+    app.use(express.json());
+
     // Start listening
     const server = app.listen(settings.port);
 
