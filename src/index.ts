@@ -5,6 +5,7 @@ import ObjectsContainer from './system/ObjectsContainer';
 import RestfulApisLoader from './system/RestfulApisLoader';
 import RestfulApi from './boundary/base_classes/RestfulApi';
 import cookieParser = require('cookie-parser');
+import multer = require('multer');
 
 // Main function
 async function main() {
@@ -16,6 +17,10 @@ async function main() {
 
     // Include json body parser into app
     app.use(express.json());
+
+    // Including multer into app
+    const storage = multer.memoryStorage();
+    const upload = multer({ storage: storage });
 
     // Start listening
     const server = app.listen(settings.port);
@@ -54,6 +59,7 @@ async function main() {
         // POST method
         app.post(
             restfulApi.getPath(),
+            upload.any(),
             async function (request, response) {
                 await restfulApi.post(request, response);
             }
@@ -62,6 +68,7 @@ async function main() {
         // PUT method
         app.put(
             restfulApi.getPath(),
+            upload.any(),
             async function (request, response) {
                 await restfulApi.put(request, response);
             }
