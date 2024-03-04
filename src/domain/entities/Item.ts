@@ -12,7 +12,7 @@ export default class Item {
     private price?: number | undefined;
     private amount?: number | undefined;
     private gender?: Boolean | undefined;
-    private metadata?: string | undefined;
+    private metadata?: any | undefined;
     private type?: ItemType | undefined;
     private brand?: Brand | undefined;
     private images: ItemImage[];
