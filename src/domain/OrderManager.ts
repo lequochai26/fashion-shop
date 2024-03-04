@@ -78,19 +78,23 @@ export default class OrderManager extends PersistenceHandlerHolder implements Se
         )
         
         //CreatedBy dependency
-        entity.CreatedBy = await this.useUserManager(
-            async function (userManager) {
-                return userManager.get(entity.CreatedBy?.Email as string, path)
-            }
-        )
+        if (entity.CreatedBy) {
+            entity.CreatedBy = await this.useUserManager(
+                async function (userManager) {
+                    return userManager.get(entity.CreatedBy?.Email as string, path)
+                }
+            );
+        }
 
         //OrderedBy dependency
-        entity.OrderedBy = await this.useUserManager(
-            async function (userManager) {
-                return userManager.get(entity.OrderedBy?.Email as string, path);
-                
-            }
-        )
+        if (entity.OrderedBy) {
+            entity.OrderedBy = await this.useUserManager(
+                async function (userManager) {
+                    return userManager.get(entity.OrderedBy?.Email as string, path);
+                    
+                }
+            );
+        }
         
     }
 
