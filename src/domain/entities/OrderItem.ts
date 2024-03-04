@@ -7,7 +7,7 @@ export default class OrderItem{
     private item?: Item | undefined;
     private amount?: number | undefined;
     private price?: number | undefined;
-    private metadata?: string | undefined;
+    private metadata?: any | undefined;
 
     //constructor:
     public constructor(
@@ -15,7 +15,7 @@ export default class OrderItem{
         item?: Item | undefined,
         amount?: number | undefined,
         price?: number | undefined,
-        metadata?: string | undefined
+        metadata?: any | undefined
     ){
         this.order = order;
         this.item = item;
@@ -53,10 +53,10 @@ export default class OrderItem{
         this.price = price;
     }
 
-    public get Metadata(): string | undefined {
+    public get Metadata(): any | undefined {
         return this.metadata;
     }
-    public set Metadata(metadata : string | undefined) {
+    public set Metadata(metadata : any | undefined) {
         this.metadata = metadata;
     }
 }
