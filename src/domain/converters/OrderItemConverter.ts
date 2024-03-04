@@ -25,7 +25,7 @@ export default class OrderItemConverter implements ReversableConverter<OrderItem
         orderItem.Item = item;
         orderItem.Amount = from.amount;
         orderItem.Price = from.price;
-        orderItem.Metadata = from.metadata;
+        orderItem.Metadata = (from.metadata ? JSON.parse(from.metadata) : undefined);
 
         return orderItem;
     }
@@ -36,7 +36,7 @@ export default class OrderItemConverter implements ReversableConverter<OrderItem
             itemId: from.Item?.Id as string,
             amount: from.Amount as number,
             price: from.Price as number,
-            metadata: from.Metadata as string
+            metadata: (from.Metadata ? JSON.stringify(from.Metadata) : undefined)
         };
     }
 }
