@@ -6,17 +6,17 @@ import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import GetAllItemsController from "./controllers/GetAllItemsController";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
-import Converter from "../utils/interfaces/Converter";
 import Item from "../domain/entities/Item";
 import ItemInfo from "./infos/item/ItemInfo";
 import ItemInfoConverter from "./converters/ItemInfoConverter";
+import ReversableConverter from "../utils/interfaces/ReversableConverter";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
     private static path: string = "/item";
 
     // Fields:
-    private itemInfoConverter: Converter<Item, ItemInfo>;
+    private itemInfoConverter: ReversableConverter<Item, ItemInfo>;
     private getAllItemsController: Controller<RestfulControllerParam, void>;
     private newItemController: Controller<RestfulControllerParam, void>;
     private getItemsByFilterController: Controller<RestfulControllerParam, void>;
