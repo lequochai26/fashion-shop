@@ -27,7 +27,7 @@ export default class CartItemConverter implements ReversableConverter<CartItemDa
         cartItem.Item = item;
         
         cartItem.Amount = from.amount;
-        cartItem.Metadata = from.metadata;
+        cartItem.Metadata = (from.metadata ? JSON.parse(from.metadata) : undefined);
 
 
 
@@ -38,7 +38,7 @@ export default class CartItemConverter implements ReversableConverter<CartItemDa
             email: from.User?.Email as string,
             itemId: from.Item?.Id as string,
             amount: from.Amount as number,
-            metadata: from.Metadata as string,
+            metadata: (from.Metadata ? JSON.stringify(from.Metadata) : undefined),
 
         }
     }
