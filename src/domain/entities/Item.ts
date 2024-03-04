@@ -29,7 +29,7 @@ export default class Item {
         price?: number | undefined,
         amount?: number | undefined,
         gender?: Boolean | undefined,
-        metadata?: string | undefined,
+        metadata?: any | undefined,
         images?: ItemImage[] | undefined,
         orders?: OrderItem[] | undefined,
     ) {
@@ -104,10 +104,10 @@ export default class Item {
     }
 
     //METADATA  
-    public get MetaData(): string | undefined{
+    public get Metadata(): any | undefined{
         return this.metadata;
     }
-    public set MetaData(metadata: string | undefined){
+    public set Metadata(metadata: any | undefined){
         this.metadata = metadata;
     }
 

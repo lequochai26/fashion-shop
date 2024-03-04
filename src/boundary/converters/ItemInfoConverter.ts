@@ -18,7 +18,7 @@ export default class ItemInfoConverter implements Converter<Item, ItemInfo> {
             price: from.Price as number,
             amount: from.Amount as number,
             gender: from.Gender as boolean,
-            metadata: from.MetaData,
+            metadata: from.Metadata,
             type: (
                 from.Type
                 ? {

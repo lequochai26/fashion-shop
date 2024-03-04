@@ -19,7 +19,7 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
         item.Price = from.price;
         item.Amount = from.amount;
         item.Gender = from.gender;
-        item.MetaData = from.metadata;
+        item.Metadata = from.metadata;
         item.Type = itemType;
         item.Brand = brand;
 
@@ -34,7 +34,7 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
             price: from.Price as number,
             amount: from.Amount as number,
             gender: from.Gender as boolean,
-            metadata: from.MetaData as string,
+            metadata: from.Metadata as string,
             type: from.Type?.Id as string,
             brand: from.Brand?.Id as string,
 
