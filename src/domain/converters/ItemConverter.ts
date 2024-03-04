@@ -19,7 +19,7 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
         item.Price = from.price;
         item.Amount = from.amount;
         item.Gender = from.gender;
-        item.Metadata = from.metadata;
+        item.Metadata = (from.metadata ? JSON.parse(from.metadata) : undefined);
         item.Type = itemType;
         item.Brand = brand;
 
@@ -34,10 +34,9 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
             price: from.Price as number,
             amount: from.Amount as number,
             gender: from.Gender as boolean,
-            metadata: from.Metadata as string,
+            metadata: (from.Metadata ? JSON.stringify(from.Metadata) : undefined),
             type: from.Type?.Id as string,
             brand: from.Brand?.Id as string,
-
         }
     }
 
