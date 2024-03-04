@@ -23,11 +23,25 @@ export default class GetAllItemsController extends ItemRestfulController {
         const path: any[] = [];
 
         // Get all items
-        const items: Item[] = await this.useDomainManager(
-            async function (domainManager) {
-                return domainManager.getAllItems(path);
-            }
-        )
+        try {
+            var items: Item[] = await this.useDomainManager(
+                async function (domainManager) {
+                    return domainManager.getAllItems(path);
+                }
+            )
+        }
+        catch (error: any) {
+            console.error(error);
+
+            response.json(
+                {
+                    success: false,
+                    message: "Failed while handling with DB!"
+                }
+            );
+
+            return;
+        }
 
         // Responding to client
         response.json(
