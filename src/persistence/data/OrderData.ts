@@ -4,6 +4,6 @@ export default interface OrderData{
     date: Date;
     totalPrice: number;
     metadata: string;
-    createdBy: string;
-    orderedBy: string;
+    createdBy?: string | undefined;
+    orderedBy?: string | undefined;
 }

@@ -7,6 +7,6 @@ export default interface ItemData{
     amount: number;    
     gender: boolean;   
     metadata?: string | undefined;
-    type: string;    
-    brand: string;
+    type?: string | undefined;
+    brand?: string | undefined;
 }
