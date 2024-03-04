@@ -9,7 +9,7 @@ export default interface ItemInfo {
     price: number;
     amount: number;
     gender: boolean;
-    metadata?: string | undefined;
+    metadata?: any | undefined;
     type?: ItemInfoItemType | undefined;
     brand?: ItemInfoBrand | undefined;
     images: string[];
