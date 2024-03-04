@@ -7,11 +7,6 @@ import ItemType from "../entities/ItemType";
 export default class ItemConverter implements ReversableConverter<ItemData,Item>{
     convert(from: ItemData): Item {
         const item: Item = new Item();
-        let itemType: ItemType = new ItemType();
-        itemType.Id = from.type;
-        const brand: Brand = new Brand();
-        brand.Id = from.brand;
-
         item.Id = from.id;
         item.Avatar = from.avatar;
         item.Name = from.name;
@@ -20,8 +15,18 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
         item.Amount = from.amount;
         item.Gender = from.gender;
         item.Metadata = (from.metadata ? JSON.parse(from.metadata) : undefined);
-        item.Type = itemType;
-        item.Brand = brand;
+
+        if (from.type) {
+            const type: ItemType = new ItemType();
+            type.Id = from.type;
+            item.Type = type;
+        }
+
+        if (from.brand) {
+            const brand: Brand = new Brand();
+            brand.Id = from.brand;
+            item.Brand = brand;
+        }
 
         return item;
     }
@@ -35,8 +40,8 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
             amount: from.Amount as number,
             gender: from.Gender as boolean,
             metadata: (from.Metadata ? JSON.stringify(from.Metadata) : undefined),
-            type: from.Type?.Id as string,
-            brand: from.Brand?.Id as string,
+            type: from.Type?.Id,
+            brand: from.Brand?.Id,
         }
     }
 
