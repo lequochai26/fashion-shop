@@ -1,8 +1,10 @@
 import Item from "../../domain/entities/Item";
+import ItemType from "../../domain/entities/ItemType";
 import Converter from "../../utils/interfaces/Converter";
+import ReversableConverter from "../../utils/interfaces/ReversableConverter";
 import ItemInfo from "../infos/item/ItemInfo";
 
-export default class ItemInfoConverter implements Converter<Item, ItemInfo> {
+export default class ItemInfoConverter implements ReversableConverter<Item, ItemInfo> {
     // Constructor:
     public constructor() {
 
@@ -46,5 +48,24 @@ export default class ItemInfoConverter implements Converter<Item, ItemInfo> {
                 }
             )
         }
+    }
+
+    public reverse(from: ItemInfo): Item {
+        // New Item
+        const item: Item = new Item(
+            from.id,
+            from.avatar,
+            from.name,
+            from.description,
+            from.price,
+            from.amount,
+            from.gender,
+            from.metadata,
+        );
+
+        // TODO ...
+
+        // Return item
+        return item;
     }
 }
