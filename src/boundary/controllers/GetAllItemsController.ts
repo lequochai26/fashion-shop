@@ -1,6 +1,6 @@
 import DomainManager from "../../domain/DomainManager";
 import Item from "../../domain/entities/Item";
-import Converter from "../../utils/interfaces/Converter";
+import ReversableConverter from "../../utils/interfaces/ReversableConverter";
 import ItemInfo from "../infos/item/ItemInfo";
 import ItemRestfulController from "./abstracts/ItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
@@ -8,7 +8,7 @@ import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 export default class GetAllItemsController extends ItemRestfulController {
     // Constructors:
     public constructor(
-        itemInfoConverter: Converter<Item, ItemInfo>,
+        itemInfoConverter: ReversableConverter<Item, ItemInfo>,
         domainManager?: DomainManager | undefined
     ) {
         super(itemInfoConverter, domainManager);
