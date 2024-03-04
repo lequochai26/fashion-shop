@@ -1,3 +1,4 @@
+import Brand from "../../domain/entities/Brand";
 import Item from "../../domain/entities/Item";
 import ItemType from "../../domain/entities/ItemType";
 import Converter from "../../utils/interfaces/Converter";
@@ -63,7 +64,19 @@ export default class ItemInfoConverter implements ReversableConverter<Item, Item
             from.metadata,
         );
 
-        // TODO ...
+        // ItemType dependency
+        if (from.type) {
+            const type: ItemType = new ItemType();
+            type.Id = from.type.id;
+            item.Type = type;
+        }
+
+        // Brand dependency
+        if (from.brand) {
+            const brand: Brand = new Brand();
+            brand.Id = from.brand.id;
+            item.Brand = brand;
+        }
 
         // Return item
         return item;
