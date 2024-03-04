@@ -102,18 +102,22 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
     //setupDependencies
     private async setupDependencies(entity:Item,path:any[]):Promise<void>{
         //ItemType dependency
-        entity.Type = await this.useItemTypeManager(
-            async function (itemTypeManager) {
-                return itemTypeManager.get(entity.Type?.Id as string, path);
-            }
-        )
+        if (entity.Type) {
+            entity.Type = await this.useItemTypeManager(
+                async function (itemTypeManager) {
+                    return itemTypeManager.get(entity.Type?.Id as string, path);
+                }
+            )
+        }
 
         //Brand dependency
-        entity.Brand = await this.useBrandManager(
-            async function (brandManager) {
-                return brandManager.get(entity.Brand?.Id as string, path); 
-            }
-        )
+        if (entity.Brand) {
+            entity.Brand = await this.useBrandManager(
+                async function (brandManager) {
+                    return brandManager.get(entity.Brand?.Id as string, path); 
+                }
+            )
+        }
 
         //ItemImage dependency
         entity.Images = await this.useItemImageManager(
