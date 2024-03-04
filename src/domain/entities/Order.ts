@@ -69,10 +69,10 @@ export default class Order {
     }
 
     //METADATA  
-    public get MetaData(): string | undefined{
+    public get Metadata(): string | undefined{
         return this.metadata;
     }
-    public set MetaData(metadata: string | undefined){
+    public set Metadata(metadata: string | undefined){
         this.metadata = metadata;
     }
 
