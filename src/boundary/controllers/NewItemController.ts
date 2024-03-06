@@ -1,10 +1,10 @@
 import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
 import ItemType from "../../domain/entities/ItemType";
-import RestfulController from "./abstracts/RestfulController";
+import UpdateItemRestfulController from "./abstracts/UpdateItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
-export default class NewItemController extends RestfulController {
+export default class NewItemController extends UpdateItemRestfulController {
     // Constructor:
     public constructor(domainManager?: DomainManager | undefined) {
         super(domainManager);
@@ -395,6 +395,31 @@ export default class NewItemController extends RestfulController {
 
                 return;
             }
+        }
+
+        // Avatar handling
+        let avatarPath: string;
+        try {
+            avatarPath = await this.writeFileNamingByDateTimeController.execute(
+                {
+                    destination: "./assets",
+                    extension: avatar.mimetype.split("/")[1],
+                    buffer: avatar.buffer
+                }
+            );
+        }
+        catch (error: any) {
+            console.error(error);
+
+            response.json(
+                {
+                    success: false,
+                    message: "Failed while writing avatar!",
+                    code: "WRITING_AVATAR_FAILED"
+                }
+            );
+
+            return;
         }
 
         
