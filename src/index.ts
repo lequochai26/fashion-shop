@@ -2,10 +2,10 @@ import settings from './settings.json';
 import express, { Express } from 'express';
 import objectsDeclaration from './system/ObjectsDeclaration';
 import ObjectsContainer from './system/ObjectsContainer';
-import RestfulApisLoader from './system/RestfulApisLoader';
-import RestfulApi from './boundary/base_classes/RestfulApi';
+import RequestHandlersLoader from './system/RequestHandlersLoader';
 import cookieParser = require('cookie-parser');
 import multer = require('multer');
+import RequestHandler from './boundary/interfaces/RequestHandler';
 
 // Main function
 async function main() {
@@ -42,43 +42,43 @@ async function main() {
         return;
     }
 
-    // Get RestfulApis from objects loadded
-    const restfulApisLoader: RestfulApisLoader = new RestfulApisLoader();
-    const restfulApis: RestfulApi[] = restfulApisLoader.loadRestfulApis(objectsContainer);
+    // Get Request Handlers from objects container
+    const requestHandlersLoader: RequestHandlersLoader = new RequestHandlersLoader();
+    const requestHandlers: RequestHandler[] = requestHandlersLoader.loadRequestHandlers(objectsContainer);
 
     // Registering restfulApis with app
-    for (const restfulApi of restfulApis) {
+    for (const requestHandler of requestHandlers) {
         // GET method
         app.get(
-            restfulApi.getPath(),
+            requestHandler.getPath(),
             async function (request, response) {
-                await restfulApi.get(request, response);
+                await requestHandler.get(request, response);
             }
         )
 
         // POST method
         app.post(
-            restfulApi.getPath(),
+            requestHandler.getPath(),
             upload.any(),
             async function (request, response) {
-                await restfulApi.post(request, response);
+                await requestHandler.post(request, response);
             }
         );
 
         // PUT method
         app.put(
-            restfulApi.getPath(),
+            requestHandler.getPath(),
             upload.any(),
             async function (request, response) {
-                await restfulApi.put(request, response);
+                await requestHandler.put(request, response);
             }
         );
 
         // DELETE method
         app.delete(
-            restfulApi.getPath(),
+            requestHandler.getPath(),
             async function (request, response) {
-                await restfulApi.delete(request, response);
+                await requestHandler.delete(request, response);
             }
         );
     }
