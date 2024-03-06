@@ -1,3 +1,4 @@
+import ImageRequestHandler from "../boundary/ImageRequestHandler";
 import ItemRestfulApi from "../boundary/ItemRestfulApi";
 import RequestHandler from "../boundary/interfaces/RequestHandler";
 import BrandManager from "../domain/BrandManager";
@@ -374,6 +375,12 @@ const objectsDeclaration = [
     },
 
     // BOUNDARY LAYER
+    // imageRequestHandler
+    {
+        target: new ImageRequestHandler(),
+        name: "imageRequestHandler"
+    },
+
     // itemRestfulApi
     {
         provider: {
