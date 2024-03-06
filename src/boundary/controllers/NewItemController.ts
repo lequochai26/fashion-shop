@@ -1,10 +1,15 @@
 import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
+import Item from "../../domain/entities/Item";
+import ItemImage from "../../domain/entities/ItemImage";
 import ItemType from "../../domain/entities/ItemType";
 import UpdateItemRestfulController from "./abstracts/UpdateItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
 export default class NewItemController extends UpdateItemRestfulController {
+    // Static fields:
+    private static itemImageStoragePath: string = "./assets/itemImages"
+
     // Constructor:
     public constructor(domainManager?: DomainManager | undefined) {
         super(domainManager);
@@ -420,7 +425,7 @@ export default class NewItemController extends UpdateItemRestfulController {
         try {
             avatarPath = await this.writeFileNamingByDateTimeController.execute(
                 {
-                    destination: "./assets",
+                    destination: NewItemController.itemImageStoragePath,
                     extension: avatar.mimetype.split("/")[1],
                     buffer: avatar.buffer
                 }
@@ -440,7 +445,121 @@ export default class NewItemController extends UpdateItemRestfulController {
             return;
         }
 
-        // 
+        // Get images
+        const images = files.filter(
+            function (file) {
+                return (
+                    file.fieldname === "images"
+                    &&
+                    file.mimetype.split("/")[0] === "image"
+                );
+            }
+        );
+
+        // Writing images file
+        const imagesPath: string[] = []
+        try {
+            for (const image of images) {
+                imagesPath.push(
+                    await this.writeFileNamingByDateTimeController.execute(
+                        {
+                            destination: NewItemController.itemImageStoragePath,
+                            buffer: image.buffer,
+                            extension: image.mimetype.split("/")[1]
+                        }
+                    )
+                );
+            }
+        }
+        catch (error: any) {
+            // Removing wrote images files
+            await this.deleteFileController.execute(avatarPath);
+            for (const imagePath of imagesPath) {
+                await this.deleteFileController.execute(imagePath);
+            }
+
+            // Responding to client
+            response.json(
+                {
+                    success: false,
+                    message: "Failed while writing images!",
+                    code: "WRITING_IMAGES_FAILED"
+                }
+            );
+
+            console.error(error);
+            return;
+        }
+
+        // Create new item
+        const item: Item = new Item();
+        item.Amount = amount;
+        item.Avatar = avatarPath;
+        item.Brand = brand;
+        item.Description = description;
+        item.Gender = gender;
+        item.Id = id;
+        item.Metadata = metadata;
+        item.Name = name;
+        item.Price = price;
+        item.Type = type;
+
+        // Saving item
+        try {
+            await this.useDomainManager(
+                async function (domainManager) {
+                    return domainManager.insertItem(item);
+                }
+            );
+        }
+        catch (error: any) {
+            // Deleting image files saved
+            for (const imagePath of [ ...imagesPath, avatarPath ]) {
+                await this.deleteFileController.execute(imagePath);
+            }
+
+            // Responding
+            response.json(
+                {
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                }
+            );
+
+            console.error(error);
+            return;
+        }
+
+        // Creating item images
+        const itemImages: ItemImage[] = [];
+        for (const imagePath of imagesPath) {
+            itemImages.push(
+                new ItemImage(imagePath, item)
+            );
+        }
+
+        // Saving item images
+        for (const itemImage of itemImages) {
+            try {
+                await this.useDomainManager(
+                    async function (domainManager) {
+                        return domainManager.insertItemImage(itemImage);
+                    }
+                );
+            }
+            catch (error: any) {
+                // Remove corresponding image
+                await this.deleteFileController.execute(itemImage.Path as string);
+
+                console.error(error);
+            }
+        }
+
+        // Responding
+        response.json(
+            { success: true }
+        );
     }
 
     private getPossibleMappings(

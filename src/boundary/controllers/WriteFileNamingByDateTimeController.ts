@@ -16,7 +16,7 @@ export default class WriteFileNamingByDateTimeController implements Controller<{
         const id: string = new Date().getTime().toString();
 
         // Get file name
-        const fileName: string = id + extension;
+        const fileName: string = id + (extension.charAt(0) !== "." ? "." : "") + extension;
 
         // Get path to write
         const path: string = destination + (destination.charAt(destination.length-1) !== "/" ? "/" : "") + fileName;
