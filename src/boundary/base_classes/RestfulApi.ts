@@ -1,20 +1,16 @@
-import { Request, Response } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
-import RequestHandler from "../interfaces/RequestHandler";
 import DomainManager from "../../domain/DomainManager";
 import Controller from "../controllers/interfaces/Controller";
 import RestfulControllerParam from "../controllers/interfaces/RestfulControllerParam";
 import InvalidMethodController from "../controllers/InvalidMethodController";
 import MethodUnimplementedController from "../controllers/MethodUnimplementedController";
+import DefaultRequestHandler from "./DefaultRequestHandler";
 
-export default class RestfulApi implements RequestHandler {
+export default class RestfulApi extends DefaultRequestHandler {
     // Static fields:
     private static invalidMethodController: Controller<RestfulControllerParam, void> = new InvalidMethodController();
     private static methodUnimplmentedController: Controller<RestfulControllerParam, void> = new MethodUnimplementedController();
 
     // Fields:
-    protected path: string;
     protected domainManager?: DomainManager | undefined;
     protected invalidMethodController: Controller<RestfulControllerParam, void>;
     protected methodUnimplementedController: Controller<RestfulControllerParam, void>;
@@ -24,6 +20,8 @@ export default class RestfulApi implements RequestHandler {
         path: string,
         domainManager?: DomainManager | undefined
     ) {
+        super(path);
+
         this.path = path;
         this.domainManager = domainManager;
         this.invalidMethodController = RestfulApi.invalidMethodController;
@@ -39,31 +37,6 @@ export default class RestfulApi implements RequestHandler {
         }
 
         return executable(this.domainManager);
-    }
-
-    // Methods:
-    public async get(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        response.status(405);
-        response.end();
-    }
-
-    public async post(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        response.status(405);
-        response.end();
-    }
-
-    public async put(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        response.status(405);
-        response.end();
-    }
-
-    public async delete(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        response.status(405);
-        response.end();
-    }
-    
-    public getPath(): string {
-        return this.path;
     }
     
     // Getters / setters:
