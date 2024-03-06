@@ -18,6 +18,11 @@ export default class WriteFileNamingByDateTimeController implements Controller<{
         // Get file name
         const fileName: string = id + (extension.charAt(0) !== "." ? "." : "") + extension;
 
+        // Make sure destination exist
+        if (!this.fs.existsSync(destination)) {
+            this.fs.mkdirSync(destination);
+        }
+
         // Get path to write
         const path: string = destination + (destination.charAt(destination.length-1) !== "/" ? "/" : "") + fileName;
 
