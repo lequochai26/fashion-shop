@@ -25,6 +25,6 @@ export default class WriteFileNamingByDateTimeController implements Controller<{
         this.fs.writeFileSync(path, buffer);
 
         // Return id after wrote
-        return id;
+        return path;
     }
 }
