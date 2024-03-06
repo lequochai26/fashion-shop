@@ -5,7 +5,7 @@ import RequestHandler from "../interfaces/RequestHandler";
 
 export default class DefaultRequestHandler implements RequestHandler {
     // Fields:
-    private path: string;
+    protected path: string;
 
     // Constructor:
     public constructor(path: string) {
