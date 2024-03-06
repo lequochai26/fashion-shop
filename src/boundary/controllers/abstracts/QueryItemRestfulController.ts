@@ -4,7 +4,7 @@ import ReversableConverter from "../../../utils/interfaces/ReversableConverter";
 import ItemInfo from "../../infos/item/ItemInfo";
 import RestfulController from "./RestfulController";
 
-export default abstract class ItemRestfulController extends RestfulController {
+export default abstract class QueryItemRestfulController extends RestfulController {
     // Fields:
     protected itemInfoConverter: ReversableConverter<Item, ItemInfo>;
 

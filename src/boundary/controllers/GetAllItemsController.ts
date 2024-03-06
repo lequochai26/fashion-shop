@@ -2,10 +2,10 @@ import DomainManager from "../../domain/DomainManager";
 import Item from "../../domain/entities/Item";
 import ReversableConverter from "../../utils/interfaces/ReversableConverter";
 import ItemInfo from "../infos/item/ItemInfo";
-import ItemRestfulController from "./abstracts/ItemRestfulController";
+import QueryItemRestfulController from "./abstracts/QueryItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
-export default class GetAllItemsController extends ItemRestfulController {
+export default class GetAllItemsController extends QueryItemRestfulController {
     // Constructors:
     public constructor(
         itemInfoConverter: ReversableConverter<Item, ItemInfo>,
