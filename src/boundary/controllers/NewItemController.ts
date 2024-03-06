@@ -1,4 +1,6 @@
 import DomainManager from "../../domain/DomainManager";
+import Brand from "../../domain/entities/Brand";
+import ItemType from "../../domain/entities/ItemType";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
@@ -18,7 +20,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "id parameter is required!"
+                    message: "id parameter is required!",
+                    code: "ID_REQUIRED"
                 }
             );
             return;
@@ -32,7 +35,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "name parameter is required!"
+                    message: "name parameter is required!",
+                    code: "NAME_REQUIRED"
                 }
             );
             return;
@@ -46,7 +50,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "description parameter is required!"
+                    message: "description parameter is required!",
+                    code: "DESCRIPTION_REQUIRED"
                 }
             );
             return;
@@ -60,7 +65,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "gender parameter is required!"
+                    message: "gender parameter is required!",
+                    code: "GENDER_REQUIRED"
                 }
             );
             return;
@@ -77,7 +83,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "amount parameter is required!"
+                    message: "amount parameter is required!",
+                    code: "AMOUNT_REQUIRED"
                 }
             );
             return;
@@ -93,19 +100,69 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "amount must be a number that greater than or equals to 0."
+                    message: "amount must be a number that greater than or equals to 0.",
+                    code: "AMOUNT_INVALID"
                 }
             );
             return;
         }
 
+        // Amount lower than 0 case
         if (amount < 0) {
             response.json(
                 {
                     success: false,
-                    message: "amount must be a number that greater than or equals to 0."
+                    message: "amount must be a number that greater than or equals to 0.",
+                    code: "AMOUNT_INVALID"
                 }
             );
+            return;
+        }
+
+        // Get price
+        const priceStr: string | undefined = request.body.price;
+
+        // Price not given case
+        if (!priceStr) {
+            response.json(
+                {
+                    success: false,
+                    message: "price parameter is reuqired!",
+                    code: "PRICE_REQUIRED"
+                }
+            );
+            return;
+        }
+
+        // Parsing price into number
+        let price: number;
+        try {
+            price = Number.parseFloat(priceStr);
+        }
+        catch (error: any) {
+            console.error(error);
+
+            response.json(
+                {
+                    success: false,
+                    message: "price must be a number that greater than or equals to 0.",
+                    code: "PRICE_INVALID"
+                }
+            );
+
+            return;
+        }
+
+        // Price lower than 0 case
+        if (price < 0) {
+            response.json(
+                {
+                    success: false,
+                    message: "price must be a number that greater than or equals to 0.",
+                    code: "PRICE_INVALID"
+                }
+            );
+
             return;
         }
 
@@ -117,7 +174,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "Item's avatar is required!"
+                    message: "Item's avatar is required!",
+                    code: "AVATAR_REQUIRED"
                 }
             );
             return;
@@ -127,7 +185,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "Item's avatar is required!"
+                    message: "Item's avatar is required!",
+                    code: "AVATAR_REQUIRED"
                 }
             );
             return;
@@ -145,7 +204,8 @@ export default class NewItemController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "Item's avatar is required!"
+                    message: "Item's avatar is required!",
+                    code: "AVATAR_REQUIRED"
                 }
             );
             return;
@@ -186,7 +246,158 @@ export default class NewItemController extends RestfulController {
             const possibleMappings: any[] = [];
             this.getPossibleMappings(metadata, keys, 0, {}, possibleMappings);
             
+            // Check all possible mappings
+            for (const possibleMapping of possibleMappings) {
+                // Get corresponding mapping from metadata
+                const mapping: any | undefined = metadata.mappings.find(
+                    function (mapping: any) {
+                        for (const key of Object.keys(possibleMapping)) {
+                            if (possibleMapping[key] !== mapping[key]) {
+                                return false;
+                            }
+                        }
+
+                        return true;
+                    }
+                );
+
+                // Mapping doesn't exist case
+                if (!mapping) {
+                    response.json(
+                        {
+                            success: false,
+                            message: "Make sure all options mapping have at least size and amount!",
+                            code: "MAPPING_MISSING"
+                        }
+                    );
+                    return;
+                }
+
+                // Check and make sure mapping's price and amount field
+                if (!mapping.price || !mapping.amount) {
+                    response.json(
+                        {
+                            success: false,
+                            message: "Make sure all options mapping have at least size and amount!",
+                            code: "MAPPING_MISSING"
+                        }
+                    );
+                    return;
+                }
+
+                // Check and make sure mapping's price and mount field valid
+                if (typeof mapping.price !== "number" || typeof mapping.amount !== "number") {
+                    response.json(
+                        {
+                            success: false,
+                            message: "All mappings price and amount must be a number that greater than or equals to 0.",
+                            code: "MAPPING_INVALID"
+                        }
+                    );
+                    return;
+                }
+
+                if (mapping.price < 0 || mapping.amount < 0) {
+                    response.json(
+                        {
+                            success: false,
+                            message: "All mappings price and amount must be a number that greater than or equals to 0.",
+                            code: "MAPPING_INVALID"
+                        }
+                    );
+                    return;
+                }
+            }
         }
+
+        // Path initialization
+        const path: any[] = [];
+
+        // Get type
+        const typeId: string | undefined = request.body.type;
+
+        // Given type case
+        let type: ItemType | undefined;
+        if (typeId) {
+            // Get type from db
+            try {
+                type = await this.useDomainManager(
+                    async function (domainManager) {
+                        return domainManager.getItemType(typeId, path);
+                    }
+                );
+            }
+            catch (error: any) {
+                console.error(error);
+
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+
+            // Type not found case
+            if (!type) {
+                response.json(
+                    {
+                        success: false,
+                        message: "Given item type doesn't exist!",
+                        code: "TYPE_NOT_EXIST"
+                    }
+                );
+
+                return;
+            }
+        }
+
+        // Get brand
+        const brandId: string | undefined = request.body.brand;
+
+        // Brand given case
+        let brand: Brand | undefined;
+        if (brandId) {
+            // Get brand from db
+            try {
+                brand = await this.useDomainManager(
+                    async function (domainManager) {
+                        return domainManager.getBrand(brandId, path);
+                    }
+                );
+            }
+            catch (error: any) {
+                console.error(error);
+
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+
+            // Brand not found case
+            if (!brand) {
+                response.json(
+                    {
+                        success: false,
+                        message: "Given brand doesn't exist!",
+                        code: "BRAND_NOT_FOUND"
+                    }
+                );
+
+                return;
+            }
+        }
+
+        
     }
 
     private getPossibleMappings(
