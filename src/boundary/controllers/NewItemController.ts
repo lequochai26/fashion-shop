@@ -192,6 +192,7 @@ export default class NewItemController extends UpdateItemRestfulController {
             return;
         }
 
+        // Get avatar
         const avatar = files.find(
             function (file) {
                 if (file.fieldname === "avatar") {
@@ -200,6 +201,7 @@ export default class NewItemController extends UpdateItemRestfulController {
             }
         );
 
+        // Avatar not given case
         if (!avatar) {
             response.json(
                 {
@@ -208,6 +210,22 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "AVATAR_REQUIRED"
                 }
             );
+            return;
+        }
+
+        // Get avatar's mime
+        const avatarMimeType: string[] = avatar.mimetype.split("/");
+
+        // Invalid avatar's file type
+        if (avatarMimeType[0] !== "image") {
+            response.json(
+                {
+                    success: false,
+                    message: "Item's avatar must be an image file!",
+                    code: "AVATAR_INVALID"
+                }
+            );
+
             return;
         }
 
@@ -422,7 +440,7 @@ export default class NewItemController extends UpdateItemRestfulController {
             return;
         }
 
-        
+        // 
     }
 
     private getPossibleMappings(
