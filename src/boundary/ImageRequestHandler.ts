@@ -6,7 +6,7 @@ import fs from 'fs';
 
 export default class ImageRequestHandler extends DefaultRequestHandler {
     // Static fields:
-    private static path: string = "/image";
+    public static path: string = "/image";
     
     // Fields:
     private fs;
