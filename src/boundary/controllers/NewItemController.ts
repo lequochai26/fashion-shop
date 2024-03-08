@@ -653,7 +653,7 @@ export default class NewItemController extends UpdateItemRestfulController {
         response: Response,
         avatar: Express.Multer.File,
         onSuccess: (_avatarPath: string) => void,
-        onWritingFailed: (response: Response, error: any) => void = function (resposne, error) {
+        onWritingFailed: (response: Response, error: any) => void = function (response, error) {
             console.error(error);
 
             response.json(
@@ -878,21 +878,10 @@ export default class NewItemController extends UpdateItemRestfulController {
             return;
         }
 
-        // Get images
-        const images = files.filter(
-            function (file) {
-                return (
-                    file.fieldname === "images"
-                    &&
-                    file.mimetype.split("/")[0] === "image"
-                );
-            }
-        );
-
         // Writing images file
         let imagesPath: string[] = null as any;
         if (
-            !this.writeImages(
+            !await this.writeImages(
                 files,
                 function (_imagesPath) {
                     imagesPath = _imagesPath;
