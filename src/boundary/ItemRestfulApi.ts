@@ -10,6 +10,7 @@ import Item from "../domain/entities/Item";
 import ItemInfo from "./infos/item/ItemInfo";
 import ItemInfoConverter from "./converters/ItemInfoConverter";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
+import NewItemController from "./controllers/NewItemController";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
@@ -41,7 +42,9 @@ export default class ItemRestfulApi extends RestfulApi {
             this.domainManager
         );
 
-        this.newItemController = this.methodUnimplementedController;
+        this.newItemController = new NewItemController(
+            this.domainManager
+        )
 
         this.getItemsByFilterController = this.methodUnimplementedController;
 
