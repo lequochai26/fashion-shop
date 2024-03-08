@@ -739,7 +739,7 @@ export default class NewItemController extends UpdateItemRestfulController {
         // Validate metadata
         let metadata: any | undefined;
         if (
-            !this.validateMetadata(
+            !await this.validateMetadata(
                 request, response,
                 function (_metadata) {
                     metadata = _metadata;

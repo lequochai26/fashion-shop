@@ -27,7 +27,7 @@ export default class ItemMetadataHandler implements Validator<ItemMetadataHandle
             return false;
         }
 
-        for (const option of metadata.options) {
+        for (const option of Object.values(metadata.options)) {
             if (!(option instanceof Array)) {
                 return false;
             }
