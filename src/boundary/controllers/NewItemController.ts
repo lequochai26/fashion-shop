@@ -341,7 +341,7 @@ export default class NewItemController extends UpdateItemRestfulController {
         }
     }
 
-    protected validateMetadata(
+    protected async validateMetadata(
         request: Request,
         response: Response,
         onSuccess: (_metadata?: any | undefined) => void,
@@ -392,7 +392,7 @@ export default class NewItemController extends UpdateItemRestfulController {
                 }
             )
         }
-    ): boolean {
+    ): Promise<boolean> {
         // Get metadata string
         const metadataStr: string | undefined = request.body.metadata;
 
@@ -412,119 +412,32 @@ export default class NewItemController extends UpdateItemRestfulController {
             return false;
         }
 
-        // Format checking
-        if (!metadata.mappings || !metadata.options) {
-            onMetadataInvalid(response);
-            return false;
-        }
+        // Validating
+        return this.useDomainManager(
+            async function (domainManager) {
+                return domainManager.validateItemMetadata(
+                    {
+                        metadata: metadata,
+                        onSuccess: function () {
+                            onSuccess(metadata);
+                        },
+                        onWrongFormat: function () {
+                            onMetadataInvalid(response);
+                        },
+                        onMappingMissing: function () {
+                            onMappingMissing(response);
+                        },
+                        onInvalid: function () {
+                            onMappingInvalid(response);
+                        },
 
-        if (!(metadata.mappings instanceof Array)) {
-            onMetadataInvalid(response);
-            return false;
-        }
-
-        for (const mapping of metadata.mappings) {
-            if (typeof mapping !== 'object') {
-                onMetadataInvalid(response);
-                return false;
-            }
-        }
-
-        if (typeof metadata.options !== 'object') {
-            onMetadataInvalid(response);
-            return false;
-        }
-
-        for (let key in metadata.options) {
-            const option = metadata.options[key];
-
-            if (!(option instanceof Array)) {
-                onMetadataInvalid(response);
-                return false;
-            }
-
-            for (const element of option) {
-                if (typeof element !== 'string') {
-                    onMetadataInvalid(response);
-                    return false;
-                }
-            }
-        }
-
-        // Get all keys of metadata;s options
-        const optionKeys: string[] = Object.keys(metadata.options);
-
-        // Get possible mappings
-        const possibleMappings: any[] = [];
-        this.getPossibleMappings(
-            metadata.options,
-            optionKeys,
-            0,
-            {},
-            possibleMappings
-        );
-
-        // Check and make sure client provides all mappings that can be possible for metadata.
-        for (const possibleMapping of possibleMappings) {
-            // Get corresponding mapping from metadata
-            const mapping: any | undefined = metadata.mappings.find(
-                function (mapping: any) {
-                    for (const key of Object.keys(possibleMapping)) {
-                        if (possibleMapping[key] !== mapping[key]) {
-                            return false;
+                        onMappingDuplicated: function () {
+                            onMappingDuplicate(response);
                         }
                     }
-
-                    return true;
-                }
-            );
-
-            // Possible mapping doesn't exist in metadata's mappings
-            if (!mapping) {
-                onMappingMissing(response);
-                return false;
+                )
             }
-
-            // Check and make sure mapping have neccesary informations
-            if (!mapping.amount || !mapping.price) {
-                onMappingMissing(response);
-                return false;
-            }
-
-            // Check and make sure mapping's necessary informations are valid
-            if (typeof mapping.amount !== 'number' || typeof mapping.price !== 'number') {
-                onMappingInvalid(response);
-                return false;
-            }
-
-            if (mapping.amount < 0 || mapping.price < 0) {
-                onMappingInvalid(response);
-                return false;
-            }
-        }
-
-        // Check and make sure no mapping duplicated
-        for (let i = 0;i<metadata.mappings.length;i++) {
-            for (let j = i+1;j<metadata.mappings.length;j++) {
-                let duplicate: boolean = true;
-
-                for (const attr of Object.keys(metadata.options)) {
-                    if (metadata.mappings[i][attr] !== metadata.mappings[j][attr]) {
-                        duplicate = false;
-                        break;
-                    }
-                }
-
-                if (duplicate) {
-                    onMappingDuplicate(response);
-                    return false;
-                }
-            }
-        }
-
-        // Success
-        onSuccess(metadata);
-        return true;
+        )
     }
 
     protected async validateType(
