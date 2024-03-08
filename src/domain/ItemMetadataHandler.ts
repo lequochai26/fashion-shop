@@ -49,12 +49,12 @@ export default class ItemMetadataHandler implements Validator<ItemMetadataHandle
                 return false;
             }
 
-            if (!mapping.price || !mapping.amount) {
+            if (mapping.price === undefined || mapping.amount === undefined) {
                 return false;
             }
 
             // Price or amount not number
-            if (typeof mapping.price !== 'string' || typeof mapping.amount !== 'string') {
+            if (typeof mapping.price !== 'number' || typeof mapping.amount !== 'number') {
                 return false;
             }
         }
