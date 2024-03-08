@@ -5,7 +5,8 @@ export type ItemMetadataHandlerParam = {
     onSuccess(): void,
     onWrongFormat(): void,
     onMappingMissing(): void,
-    onInvalid(): void
+    onInvalid(): void,
+    onMappingDuplicated(): void
 }
 
 export default class ItemMetadataHandler implements Validator<ItemMetadataHandlerParam, boolean> {
@@ -137,7 +138,7 @@ export default class ItemMetadataHandler implements Validator<ItemMetadataHandle
         return true;
     }
 
-    public validate({ metadata, onInvalid, onMappingMissing, onSuccess, onWrongFormat }: ItemMetadataHandlerParam): boolean {
+    public validate({ metadata, onInvalid, onMappingMissing, onSuccess, onWrongFormat, onMappingDuplicated }: ItemMetadataHandlerParam): boolean {
         // Check format
         if (!this.checkFormat(metadata)) {
             onWrongFormat();
@@ -174,7 +175,7 @@ export default class ItemMetadataHandler implements Validator<ItemMetadataHandle
                 
                 // Mapping duplicated
                 if (equals) {
-                    onInvalid();
+                    onMappingDuplicated();
                     return false;
                 }
             }
