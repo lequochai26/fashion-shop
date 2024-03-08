@@ -7,6 +7,7 @@ import DomainManager from "../domain/DomainManager";
 import DomainManagerImpl from "../domain/DomainManagerImpl";
 import ItemImageManager from "../domain/ItemImageManager";
 import ItemManager from "../domain/ItemManager";
+import ItemMetadataHandler from "../domain/ItemMetadataHandler";
 import ItemTypeManager from "../domain/ItemTypeManager";
 import OrderItemManager from "../domain/OrderItemManager";
 import OrderManager from "../domain/OrderManager";
@@ -316,7 +317,8 @@ const objectsDeclaration = [
             [ "orderItemManager", "orderItemManager" ],
             [ "orderManager", "orderManager" ],
             [ "userManager", "userManager" ],
-            [ "verificationCodeManager", "verificationCodeManager" ]
+            [ "verificationCodeManager", "verificationCodeManager" ],
+            [ "itemMetadataHandler", "itemMetadataHandler" ]
         ]
     },
 
@@ -372,6 +374,12 @@ const objectsDeclaration = [
     {
         prototype: VerificationCodeConverter.prototype,
         name: "verificationCodeConverter"
+    },
+
+    // itemMetadataHandler
+    {
+        prototype: ItemMetadataHandler.prototype,
+        name: "itemMetadataHandler"
     },
 
     // BOUNDARY LAYER

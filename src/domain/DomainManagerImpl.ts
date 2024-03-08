@@ -4,6 +4,7 @@ import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey";
 import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePrimaryKey";
 import DomainManager from "./DomainManager";
 import EntityManager from "./EntityManager";
+import ItemMetadataHandler, { ItemMetadataHandlerParam } from "./ItemMetadataHandler";
 import Brand from "./entities/Brand";
 import CartItem from "./entities/CartItem";
 import Item from "./entities/Item";
@@ -25,6 +26,7 @@ export default class DomainManagerImpl implements DomainManager {
     private orderManager?: EntityManager<Order, string> | undefined;
     private userManager?: EntityManager<User, string> | undefined;
     private verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined;
+    private itemMetadataHandler?: ItemMetadataHandler | undefined;
 
     // Constructors:
     public constructor(
@@ -36,7 +38,8 @@ export default class DomainManagerImpl implements DomainManager {
         orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined,
         orderManager?: EntityManager<Order, string> | undefined,
         userManager?: EntityManager<User, string> | undefined,
-        verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined
+        verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined,
+        itemMetadataHandler?: ItemMetadataHandler | undefined
     ) {
         this.brandManager = brandManager;
         this.cartItemManager = cartItemManager;
@@ -47,6 +50,7 @@ export default class DomainManagerImpl implements DomainManager {
         this.orderManager = orderManager;
         this.userManager = userManager;
         this.verificationCodeManager = verificationCodeManager;
+        this.itemMetadataHandler = itemMetadataHandler;
     }
 
     // Private methods:
@@ -138,6 +142,16 @@ export default class DomainManagerImpl implements DomainManager {
         }
 
         return executable(this.verificationCodeManager);
+    }
+
+    private useItemMetadataHandler<T>(
+        executable: (itemMetadataHandler: ItemMetadataHandler) => T
+    ): T {
+        if (!this.itemMetadataHandler) {
+            throw new Error("itemMetadataHandler field is missing!");
+        }
+
+        return executable(this.itemMetadataHandler);
     }
 
     // Methods:
@@ -684,6 +698,14 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
+    public validateItemMetadata(param: ItemMetadataHandlerParam): boolean {
+        return this.useItemMetadataHandler(
+            function (itemMetadataHandler) {
+                return itemMetadataHandler.validate(param);
+            }
+        )
+    }
+
     // Getters / setters:
     public get BrandManager(): EntityManager<Brand, string> | undefined {
         return this.brandManager;
@@ -754,5 +776,12 @@ export default class DomainManagerImpl implements DomainManager {
     
     public set VerificationCodeManager(value: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined) {
         this.verificationCodeManager = value;
+    }
+
+    public get ItemMetadataHandler() {
+        return this.itemMetadataHandler;
+    }
+    public set ItemMetadataHandler(value) {
+        this.itemMetadataHandler = value;
     }
 }
