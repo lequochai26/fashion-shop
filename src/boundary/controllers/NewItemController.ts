@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
 import Item from "../../domain/entities/Item";
@@ -15,13 +16,12 @@ export default class NewItemController extends UpdateItemRestfulController {
         super(domainManager);
     }
 
-    // Methods:
-    public async execute({ request, response }: RestfulControllerParam): Promise<void> {
-        // Get id
-        const id: string | undefined = request.body.id;
-
-        // ID not given case
-        if (!id) {
+    // Protected methods:
+    protected validateId(
+        request: Request,
+        response: Response,
+        onSuccess: (_id: string) => void,
+        onNotFound: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -29,14 +29,27 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "ID_REQUIRED"
                 }
             );
-            return;
+        }
+    ): boolean {
+        // Get id
+        const id: string | undefined = request.body.id;
+
+        // Not found
+        if (!id) {
+            onNotFound(response);
+            return false;
         }
 
-        // Get name
-        const name: string | undefined = request.body.name;
+        // Success
+        onSuccess(id);
+        return true;
+    }
 
-        // Name not given case
-        if (!name) {
+    protected validateName(
+        request: Request,
+        response: Response,
+        onSuccess: (_name: string) => void,
+        onNotFound: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -44,14 +57,27 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "NAME_REQUIRED"
                 }
             );
-            return;
+        }
+    ): boolean {
+        // Get name
+        const name: string | undefined = request.body.name;
+
+        // Not found
+        if (!name) {
+            onNotFound(response);
+            return false;
         }
 
-        // Get description
-        const description: string | undefined = request.body.description;
+        // Success
+        onSuccess(name);
+        return true;
+    }
 
-        // Description not given case
-        if (!description) {
+    protected validateDescription(
+        request: Request,
+        response: Response,
+        onSuccess: (_description: string) => void,
+        onNotFound: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -59,14 +85,27 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "DESCRIPTION_REQUIRED"
                 }
             );
-            return;
+        }
+    ): boolean {
+        // Get description
+        const description: string | undefined = request.body.description;
+
+        // Not found
+        if (!description) {
+            onNotFound(response);
+            return false;
         }
 
-        // Get gender
-        const genderStr: string | undefined = request.body.gender;
+        // Success
+        onSuccess(description);
+        return true;
+    }
 
-        // Gender not given case
-        if (!genderStr) {
+    protected validateGender(
+        request: Request,
+        response: Response,
+        onSuccess: (_gender: boolean) => void,
+        onNotFound: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -74,17 +113,30 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "GENDER_REQUIRED"
                 }
             );
-            return;
+        }
+    ): boolean {
+        // Get gender string
+        const genderStr: string | undefined = request.body.gender;
+
+        // Not found
+        if (!genderStr) {
+            onNotFound(response);
+            return false;
         }
 
-        // Parse gender string to boolean gender
-        const gender: boolean = genderStr === 'true';
+        // Parsing gender string to boolean
+        const gender: boolean = genderStr == 'true';
 
-        // Get amount
-        const amountStr: string | undefined = request.body.amount;
+        // Success
+        onSuccess(gender);
+        return true;
+    }
 
-        // Amount not given case
-        if (!amountStr) {
+    protected validateAmount(
+        request: Request,
+        response: Response,
+        onSuccess: (_amount: number) => void,
+        onNotFound: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -92,43 +144,63 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "AMOUNT_REQUIRED"
                 }
             );
+        },
+        onParsingError: (response: Response, error: any) => void = function (response, error) {
+            console.error(error);
+            response.json(
+                {
+                    success: false,
+                    message: "amount must be a number that greater than or equals to 0.",
+                    code: "AMOUNT_INVALID"
+                }
+            );
             return;
+        },
+        onInvalid: (resposne: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "amount must be a number that greater than or equals to 0.",
+                    code: "AMOUNT_INVALID"
+                }
+            );
+        }
+    ): boolean {
+        // Get amount string
+        const amountStr: string | undefined = request.body.amount;
+
+        // Not found
+        if (!amountStr) {
+            onNotFound(response);
+            return false;
         }
 
-        let amount: number;
+        // Parsing
+        let amount;
         try {
-            amount = Number.parseFloat(amountStr);
+            amount = Number.parseInt(amountStr);
         }
         catch (error: any) {
-            console.error(error);
-
-            response.json(
-                {
-                    success: false,
-                    message: "amount must be a number that greater than or equals to 0.",
-                    code: "AMOUNT_INVALID"
-                }
-            );
-            return;
+            onParsingError(response, error);
+            return false;
         }
 
-        // Amount lower than 0 case
-        if (amount < 0) {
-            response.json(
-                {
-                    success: false,
-                    message: "amount must be a number that greater than or equals to 0.",
-                    code: "AMOUNT_INVALID"
-                }
-            );
-            return;
+        // Invalid
+        if (amount < 1) {
+            onInvalid(response);
+            return false;
         }
 
-        // Get price
-        const priceStr: string | undefined = request.body.price;
+        // Success
+        onSuccess(amount);
+        return true;
+    }
 
-        // Price not given case
-        if (!priceStr) {
+    protected validatePrice(
+        request: Request,
+        response: Response,
+        onSuccess: (_price: number) => void,
+        onNotFound: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -136,7 +208,34 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "PRICE_REQUIRED"
                 }
             );
-            return;
+        },
+        onParsingError: (response: Response, error: any) => void = function (response, error) {
+            console.error(error);
+            response.json(
+                {
+                    success: false,
+                    message: "price must be a number that greater than or equals to 0.",
+                    code: "PRICE_INVALID"
+                }
+            );
+        },
+        onInvalid: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "price must be a number that greater than or equals to 0.",
+                    code: "PRICE_INVALID"
+                }
+            );
+        }
+    ): boolean {
+        // Get price string
+        const priceStr: string | undefined = request.body.price;
+
+        // Not found
+        if (!priceStr) {
+            onNotFound(response);
+            return false;
         }
 
         // Parsing price into number
@@ -145,37 +244,20 @@ export default class NewItemController extends UpdateItemRestfulController {
             price = Number.parseFloat(priceStr);
         }
         catch (error: any) {
-            console.error(error);
-
-            response.json(
-                {
-                    success: false,
-                    message: "price must be a number that greater than or equals to 0.",
-                    code: "PRICE_INVALID"
-                }
-            );
-
-            return;
+            onParsingError(response, error);
+            return false;
         }
 
-        // Price lower than 0 case
-        if (price < 0) {
-            response.json(
-                {
-                    success: false,
-                    message: "price must be a number that greater than or equals to 0.",
-                    code: "PRICE_INVALID"
-                }
-            );
+        // Success
+        onSuccess(price);
+        return true;
+    }
 
-            return;
-        }
-
-        // Get uploaded files from request
-        const files = request.files;
-
-        // No files found case
-        if (!files) {
+    protected validateAvatar(
+        request: Request,
+        response: Response,
+        onSuccess: (_avatar: Express.Multer.File, _files: Express.Multer.File[]) => void,
+        onNotFound: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -183,46 +265,8 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "AVATAR_REQUIRED"
                 }
             );
-            return;
-        }
-
-        if (!(files instanceof Array)) {
-            response.json(
-                {
-                    success: false,
-                    message: "Item's avatar is required!",
-                    code: "AVATAR_REQUIRED"
-                }
-            );
-            return;
-        }
-
-        // Get avatar
-        const avatar = files.find(
-            function (file) {
-                if (file.fieldname === "avatar") {
-                    return true;
-                }
-            }
-        );
-
-        // Avatar not given case
-        if (!avatar) {
-            response.json(
-                {
-                    success: false,
-                    message: "Item's avatar is required!",
-                    code: "AVATAR_REQUIRED"
-                }
-            );
-            return;
-        }
-
-        // Get avatar's mime
-        const avatarMimeType: string[] = avatar.mimetype.split("/");
-
-        // Invalid avatar's file type
-        if (avatarMimeType[0] !== "image") {
+        },
+        onInvalid: (response: Response) => void = function (response) {
             response.json(
                 {
                     success: false,
@@ -230,208 +274,341 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "AVATAR_INVALID"
                 }
             );
+        }
+    ): boolean {
+        // Get uploaded files from request
+        const files = request.files;
 
+        // No files uploaded
+        if (!files) {
+            onNotFound(response);
+            return false;
+        }
+
+        // Files not instance of array
+        if (!(files instanceof Array)) {
+            onNotFound(response);
+            return false;
+        }
+
+        // Get avatar
+        const avatar: Express.Multer.File | undefined = files.find(
+            function (file) {
+                return file.fieldname === 'avatar';
+            }
+        )
+
+        // Not found
+        if (!avatar) {
+            onNotFound(response);
+            return false;
+        }
+
+        // Invalid mimetype
+        if (avatar.mimetype.split("/")[0] !== 'image') {
+            onInvalid(response);
+            return false;
+        }
+
+        // Success
+        onSuccess(avatar, files);
+        return true;
+    }
+
+    protected getPossibleMappings(
+        metadata: any,
+        keys: string[],
+        index: number,
+        curMapping: any,
+        possibleMappings: any[]
+    ): void {
+        if (index < 0 || index >= keys.length) {
             return;
         }
 
-        // Get metadata
+        for (const option of metadata[keys[index]]) {
+            curMapping[keys[index]] = option;
+
+            if (Object.keys(curMapping).length === keys.length) {
+                possibleMappings.push(
+                    { ...curMapping }
+                );
+            }
+
+            this.getPossibleMappings(metadata, keys, index+1, curMapping, possibleMappings);
+
+            delete curMapping[keys[index]];
+        }
+    }
+
+    protected validateMetadata(
+        request: Request,
+        response: Response,
+        onSuccess: (_metadata?: any | undefined) => void,
+        onParsingError: (response: Response, error: any) => void = function (response, error) {
+            console.error(error);
+
+            response.json(
+                {
+                    success: false,
+                    message: "Failed to parse metadata!",
+                    code: "METADATA_PARSING_FAILED"
+                }
+            );
+        },
+        onMappingMissing: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "Make sure all options mapping have at least size and amount!",
+                    code: "MAPPING_MISSING"
+                }
+            );
+        },
+        onMappingInvalid: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "All mappings price and amount must be a number that greater than or equals to 0.",
+                    code: "MAPPING_INVALID"
+                }
+            );
+        },
+        onMappingDuplicate: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "Metadata mappings duplicated!",
+                    code: "MAPPING_DUPLICATED"
+                }
+            )
+        }
+    ): boolean {
+        // Get metadata string
         const metadataStr: string | undefined = request.body.metadata;
 
-        // Have metadata case
-        let metadata: any | undefined = undefined;
-        if (metadataStr) {
-            // Parsing metadata
-            try {
-                metadata = JSON.parse(metadataStr);
-            }
-            catch (error: any) {
-                console.error(error);
+        // Not found
+        if (!metadataStr) {
+            onSuccess(undefined);
+            return true;
+        }
 
-                response.json(
-                    {
-                        success: false,
-                        message: "Failed to parse metadata!"
+        // Parsing
+        let metadata: any;
+        try {
+            metadata = JSON.parse(metadataStr);
+        }
+        catch (error: any) {
+            onParsingError(response, error);
+            return false;
+        }
+
+        // Get all keys of metadata but 'mappings'
+        const keys: string[] = Object.keys(metadata)
+        .filter(
+            function (key) {
+                return key !== 'mappings';
+            }
+        );
+
+        // Get possible mappings
+        const possibleMappings: any[] = [];
+        this.getPossibleMappings(metadata, keys, 0, {}, possibleMappings);
+
+        // Check and make sure client provides all mappings that can be possible for metadata.
+        for (const possibleMapping of possibleMappings) {
+            // Get corresponding mapping from metadata
+            const mapping: any | undefined = metadata.mappings.find(
+                function (mapping: any) {
+                    for (const key of Object.keys(possibleMapping)) {
+                        if (possibleMapping[key] !== mapping[key]) {
+                            return false;
+                        }
                     }
-                );
 
-                return;
-            }
-
-            // Get keys of metadata and remove 'mappings' key
-            const keys: string[] = Object.keys(metadata)
-            .filter(
-                function (key) {
-                    return key !== "mappings";
+                    return true;
                 }
             );
 
-            // Get possible mappings
-            const possibleMappings: any[] = [];
-            this.getPossibleMappings(metadata, keys, 0, {}, possibleMappings);
-            
-            // Check all possible mappings
-            for (const possibleMapping of possibleMappings) {
-                // Get corresponding mapping from metadata
-                const mapping: any | undefined = metadata.mappings.find(
-                    function (mapping: any) {
-                        for (const key of Object.keys(possibleMapping)) {
-                            if (possibleMapping[key] !== mapping[key]) {
-                                return false;
-                            }
-                        }
+            // Possible mapping doesn't exist in metadata's mappings
+            if (!mapping) {
+                onMappingMissing(response);
+                return false;
+            }
 
-                        return true;
+            // Check and make sure mapping have neccesary informations
+            if (!mapping.amount || !mapping.price) {
+                onMappingMissing(response);
+                return false;
+            }
+
+            // Check and make sure mapping's necessary informations are valid
+            if (typeof mapping.amount !== 'number' || typeof mapping.price !== 'number') {
+                onMappingInvalid(response);
+                return false;
+            }
+
+            if (mapping.amount < 0 || mapping.price < 0) {
+                onMappingInvalid(response);
+                return false;
+            }
+        }
+
+        // Check and make sure no mapping duplicated
+        for (let i = 0;i<metadata.mappings.length;i++) {
+            for (let j = i+1;j<metadata.mappings.length;j++) {
+                let duplicate: boolean = true;
+
+                for (const attr of Object.keys(metadata).filter(
+                    function (attr) {
+                        return attr !== 'mappings'
                     }
-                );
-
-                // Mapping doesn't exist case
-                if (!mapping) {
-                    response.json(
-                        {
-                            success: false,
-                            message: "Make sure all options mapping have at least size and amount!",
-                            code: "MAPPING_MISSING"
-                        }
-                    );
-                    return;
+                )) {
+                    if (metadata.mappings[i][attr] !== metadata.mappings[j][attr]) {
+                        duplicate = false;
+                        break;
+                    }
                 }
 
-                // Check and make sure mapping's price and amount field
-                if (!mapping.price || !mapping.amount) {
-                    response.json(
-                        {
-                            success: false,
-                            message: "Make sure all options mapping have at least size and amount!",
-                            code: "MAPPING_MISSING"
-                        }
-                    );
-                    return;
-                }
-
-                // Check and make sure mapping's price and mount field valid
-                if (typeof mapping.price !== "number" || typeof mapping.amount !== "number") {
-                    response.json(
-                        {
-                            success: false,
-                            message: "All mappings price and amount must be a number that greater than or equals to 0.",
-                            code: "MAPPING_INVALID"
-                        }
-                    );
-                    return;
-                }
-
-                if (mapping.price < 0 || mapping.amount < 0) {
-                    response.json(
-                        {
-                            success: false,
-                            message: "All mappings price and amount must be a number that greater than or equals to 0.",
-                            code: "MAPPING_INVALID"
-                        }
-                    );
-                    return;
+                if (duplicate) {
+                    onMappingDuplicate(response);
+                    return false;
                 }
             }
         }
 
-        // Path initialization
-        const path: any[] = [];
+        // Success
+        onSuccess(metadata);
+        return true;
+    }
 
-        // Get type
+    protected async validateType(
+        request: Request,
+        response: Response,
+        path: any[],
+        onSuccess: (_type?: ItemType | undefined) => void,
+        onHandlingDBFailed: (response: Response, error: any) => void = function (response, error) {
+            console.error(error);
+
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+        },
+        onNotExist: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "Given item type doesn't exist!",
+                    code: "TYPE_NOT_EXIST"
+                }
+            );
+        }
+    ): Promise<boolean> {
+        // Get type id from request
         const typeId: string | undefined = request.body.type;
 
-        // Given type case
+        // Not given case
+        if (!typeId) {
+            onSuccess();
+            return true;
+        }
+
+        // Given case
+        // Get type from db
         let type: ItemType | undefined;
-        if (typeId) {
-            // Get type from db
-            try {
-                type = await this.useDomainManager(
-                    async function (domainManager) {
-                        return domainManager.getItemType(typeId, path);
-                    }
-                );
-            }
-            catch (error: any) {
-                console.error(error);
-
-                response.json(
-                    {
-                        success: false,
-                        message: "Failed while handling with DB!",
-                        code: "HANDLING_DB_FAILED"
-                    }
-                );
-
-                return;
-            }
-
-            // Type not found case
-            if (!type) {
-                response.json(
-                    {
-                        success: false,
-                        message: "Given item type doesn't exist!",
-                        code: "TYPE_NOT_EXIST"
-                    }
-                );
-
-                return;
-            }
-        }
-
-        // Get brand
-        const brandId: string | undefined = request.body.brand;
-
-        // Brand given case
-        let brand: Brand | undefined;
-        if (brandId) {
-            // Get brand from db
-            try {
-                brand = await this.useDomainManager(
-                    async function (domainManager) {
-                        return domainManager.getBrand(brandId, path);
-                    }
-                );
-            }
-            catch (error: any) {
-                console.error(error);
-
-                response.json(
-                    {
-                        success: false,
-                        message: "Failed while handling with DB!",
-                        code: "HANDLING_DB_FAILED"
-                    }
-                );
-
-                return;
-            }
-
-            // Brand not found case
-            if (!brand) {
-                response.json(
-                    {
-                        success: false,
-                        message: "Given brand doesn't exist!",
-                        code: "BRAND_NOT_FOUND"
-                    }
-                );
-
-                return;
-            }
-        }
-
-        // Avatar handling
-        let avatarPath: string;
         try {
-            avatarPath = await this.writeFileNamingByDateTimeController.execute(
-                {
-                    destination: NewItemController.itemImageStoragePath,
-                    extension: avatar.mimetype.split("/")[1],
-                    buffer: avatar.buffer
+            type = await this.useDomainManager(
+                async function (domainManager) {
+                    return domainManager.getItemType(typeId, path);
                 }
             );
         }
         catch (error: any) {
+            // Failed while handling with DB
+            onHandlingDBFailed(response, error);
+            return false;
+        }
+
+        // Not exist
+        if (!type) {
+            onNotExist(response);
+            return false;
+        }
+
+        // Success
+        onSuccess(type);
+        return true;
+    }
+
+    protected async validateBrand(
+        request: Request,
+        response: Response,
+        path: any[],
+        onSuccess: (_brand?: Brand | undefined) => void,
+        onHandlingDBFailed: (response: Response, error: any) => void = function (response, error) {
+            console.error(error);
+
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+        },
+        onNotFound: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "Given brand doesn't exist!",
+                    code: "BRAND_NOT_FOUND"
+                }
+            );
+        }
+    ): Promise<boolean> {
+        // Get brand id
+        const brandId: string | undefined = request.body.brand;
+
+        // Not given case
+        if (!brandId) {
+            onSuccess();
+            return true;
+        }
+
+        // Get brand from db
+        let brand: Brand | undefined;
+        try {
+            brand = await this.useDomainManager(
+                async function (domainManager) {
+                    return domainManager.getBrand(brandId, path);
+                }
+            );
+        }
+        catch (error: any) {
+            onHandlingDBFailed(response, error);
+            return false;
+        }
+
+        // Not found
+        if (!brand) {
+            onNotFound(response);
+            return false;
+        }
+
+        // Success
+        onSuccess(brand);
+        return true;
+    }
+
+    protected async writeAvatar(
+        response: Response,
+        avatar: Express.Multer.File,
+        onSuccess: (_avatarPath: string) => void,
+        onWritingFailed: (response: Response, error: any) => void = function (resposne, error) {
             console.error(error);
 
             response.json(
@@ -441,7 +618,218 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "WRITING_AVATAR_FAILED"
                 }
             );
+        }
+    ): Promise<boolean> {
+        // Writing
+        let avatarPath: string;
+        try {
+            avatarPath = await this.writeFileNamingByDateTimeController.execute(
+                {
+                    buffer: avatar.buffer,
+                    destination: NewItemController.itemImageStoragePath,
+                    extension: avatar.mimetype.split("/")[1]
+                }
+            );
+        }
+        catch (error: any) {
+            // Writing failed
+            onWritingFailed(response, error);
+            return false;
+        }
 
+        // Success
+        onSuccess(avatarPath);
+        return true;
+    }
+
+    protected async writeImages(
+        files: Express.Multer.File[],
+        onSuccess: (_imagesPath: string[]) => void,
+        onWritingFailed: (error: any) => void = function (error) {
+            console.error(error);
+        }
+    ): Promise<boolean> {
+        // Get image files
+        const images: Express.Multer.File[] = files.filter(
+            function (file) {
+                return file.fieldname === 'images'
+            }
+        );
+
+        // Images path initialization
+        const imagesPath: string[] = [];
+
+        // Writing images
+        for (const image of images) {
+            try {
+                imagesPath.push(
+                    await this.writeFileNamingByDateTimeController.execute(
+                        {
+                            destination: NewItemController.itemImageStoragePath,
+                            extension: image.mimetype.split("/")[1],
+                            buffer: image.buffer
+                        }
+                    )
+                );
+            }
+            catch (error: any) {
+                onWritingFailed(error);
+            }
+        }
+
+        // Success
+        onSuccess(imagesPath);
+        return true;
+    }
+
+    // Methods:
+    public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        // Validate id
+        let id: string = null as any;
+        if (
+            !this.validateId(
+                request,
+                response,
+                function (_id) {
+                    id = _id;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Validate name
+        let name: string = null as any;
+        if (
+            !this.validateName(
+                request, response,
+                function (_name: string) {
+                    name = _name;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Validate description
+        let description: string = null as any;
+        if (
+            !this.validateDescription(
+                request, response,
+                function (_description) {
+                    description = _description;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Validate gender
+        let gender: boolean = null as any;
+        if (
+            !this.validateGender(
+                request, response,
+                function (_gender) {
+                    gender = _gender;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Validate amount
+        let amount: number = null as any;
+        if (
+            !this.validateAmount(
+                request, response,
+                function (_amount) {
+                    amount = _amount;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Validate price
+        let price: number = null as any;
+        if (
+            !this.validatePrice(
+                request, response,
+                function (_price) {
+                    price = _price;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Validate avatar
+        let files: Express.Multer.File[] = null as any;
+        let avatar: Express.Multer.File = null as any;
+        if (
+            !this.validateAvatar(
+                request, response,
+                function (_avatar, _files) {
+                    avatar = _avatar;
+                    files = _files;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Validate metadata
+        let metadata: any | undefined;
+        if (
+            !this.validateMetadata(
+                request, response,
+                function (_metadata) {
+                    metadata = _metadata;
+                }
+            )
+        ) {
+            return;
+        }
+
+        // Path initialization
+        const path: any[] = [];
+
+        // Validate type
+        let type: ItemType | undefined;
+        if (
+            !await this.validateType(
+                request, response, path,
+                function (_type)  {
+                    type = _type;
+                }
+            )
+        ) { 
+            return;
+        }
+
+        // Validate brand
+        let brand: Brand | undefined;
+        if (
+            !await this.validateBrand(
+                request, response, path,
+                function (_brand) {
+                    brand = _brand;
+                }
+            )
+        ){ 
+            return;
+        }
+
+        // Avatar handling
+        let avatarPath: string = null as any;
+        if (
+            !await this.writeAvatar(
+                response, avatar,
+                function (_avatarPath) {
+                    avatarPath = _avatarPath;
+                }
+            )
+        ) {
             return;
         }
 
@@ -457,37 +845,15 @@ export default class NewItemController extends UpdateItemRestfulController {
         );
 
         // Writing images file
-        const imagesPath: string[] = []
-        try {
-            for (const image of images) {
-                imagesPath.push(
-                    await this.writeFileNamingByDateTimeController.execute(
-                        {
-                            destination: NewItemController.itemImageStoragePath,
-                            buffer: image.buffer,
-                            extension: image.mimetype.split("/")[1]
-                        }
-                    )
-                );
-            }
-        }
-        catch (error: any) {
-            // Removing wrote images files
-            await this.deleteFileController.execute(avatarPath);
-            for (const imagePath of imagesPath) {
-                await this.deleteFileController.execute(imagePath);
-            }
-
-            // Responding to client
-            response.json(
-                {
-                    success: false,
-                    message: "Failed while writing images!",
-                    code: "WRITING_IMAGES_FAILED"
+        let imagesPath: string[] = null as any;
+        if (
+            !this.writeImages(
+                files,
+                function (_imagesPath) {
+                    imagesPath = _imagesPath;
                 }
-            );
-
-            console.error(error);
+            )
+        ) {
             return;
         }
 
@@ -560,31 +926,5 @@ export default class NewItemController extends UpdateItemRestfulController {
         response.json(
             { success: true }
         );
-    }
-
-    private getPossibleMappings(
-        metadata: any,
-        keys: string[],
-        index: number,
-        curMapping: any,
-        possibleMappings: any[]
-    ): void {
-        if (index < 0 || index >= keys.length) {
-            return;
-        }
-
-        for (const option of metadata[keys[index]]) {
-            curMapping[keys[index]] = option;
-
-            if (Object.keys(curMapping).length === keys.length) {
-                possibleMappings.push(
-                    { ...curMapping }
-                );
-            }
-
-            this.getPossibleMappings(metadata, keys, index+1, curMapping, possibleMappings);
-
-            delete curMapping[keys[index]];
-        }
     }
 }
