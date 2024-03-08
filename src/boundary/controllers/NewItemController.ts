@@ -186,7 +186,7 @@ export default class NewItemController extends UpdateItemRestfulController {
         }
 
         // Invalid
-        if (amount < 1) {
+        if (amount < 0) {
             onInvalid(response);
             return false;
         }
@@ -316,7 +316,7 @@ export default class NewItemController extends UpdateItemRestfulController {
     }
 
     protected getPossibleMappings(
-        metadata: any,
+        options: any,
         keys: string[],
         index: number,
         curMapping: any,
@@ -326,7 +326,7 @@ export default class NewItemController extends UpdateItemRestfulController {
             return;
         }
 
-        for (const option of metadata[keys[index]]) {
+        for (const option of options[keys[index]]) {
             curMapping[keys[index]] = option;
 
             if (Object.keys(curMapping).length === keys.length) {
@@ -335,7 +335,7 @@ export default class NewItemController extends UpdateItemRestfulController {
                 );
             }
 
-            this.getPossibleMappings(metadata, keys, index+1, curMapping, possibleMappings);
+            this.getPossibleMappings(options, keys, index+1, curMapping, possibleMappings);
 
             delete curMapping[keys[index]];
         }
@@ -345,6 +345,15 @@ export default class NewItemController extends UpdateItemRestfulController {
         request: Request,
         response: Response,
         onSuccess: (_metadata?: any | undefined) => void,
+        onMetadataInvalid: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "Invalid metadata!",
+                    code: "METADATA_INVALID"
+                }
+            );
+        },
         onParsingError: (response: Response, error: any) => void = function (response, error) {
             console.error(error);
 
@@ -403,17 +412,57 @@ export default class NewItemController extends UpdateItemRestfulController {
             return false;
         }
 
-        // Get all keys of metadata but 'mappings'
-        const keys: string[] = Object.keys(metadata)
-        .filter(
-            function (key) {
-                return key !== 'mappings';
+        // Format checking
+        if (!metadata.mappings || !metadata.options) {
+            onMetadataInvalid(response);
+            return false;
+        }
+
+        if (!(metadata.mappings instanceof Array)) {
+            onMetadataInvalid(response);
+            return false;
+        }
+
+        for (const mapping of metadata.mappings) {
+            if (typeof mapping !== 'object') {
+                onMetadataInvalid(response);
+                return false;
             }
-        );
+        }
+
+        if (typeof metadata.options !== 'object') {
+            onMetadataInvalid(response);
+            return false;
+        }
+
+        for (let key in metadata.options) {
+            const option = metadata.options[key];
+
+            if (!(option instanceof Array)) {
+                onMetadataInvalid(response);
+                return false;
+            }
+
+            for (const element of option) {
+                if (typeof element !== 'string') {
+                    onMetadataInvalid(response);
+                    return false;
+                }
+            }
+        }
+
+        // Get all keys of metadata;s options
+        const optionKeys: string[] = Object.keys(metadata.options);
 
         // Get possible mappings
         const possibleMappings: any[] = [];
-        this.getPossibleMappings(metadata, keys, 0, {}, possibleMappings);
+        this.getPossibleMappings(
+            metadata.options,
+            optionKeys,
+            0,
+            {},
+            possibleMappings
+        );
 
         // Check and make sure client provides all mappings that can be possible for metadata.
         for (const possibleMapping of possibleMappings) {
@@ -459,11 +508,7 @@ export default class NewItemController extends UpdateItemRestfulController {
             for (let j = i+1;j<metadata.mappings.length;j++) {
                 let duplicate: boolean = true;
 
-                for (const attr of Object.keys(metadata).filter(
-                    function (attr) {
-                        return attr !== 'mappings'
-                    }
-                )) {
+                for (const attr of Object.keys(metadata.options)) {
                     if (metadata.mappings[i][attr] !== metadata.mappings[j][attr]) {
                         duplicate = false;
                         break;
