@@ -315,37 +315,15 @@ export default class NewItemController extends UpdateItemRestfulController {
         return true;
     }
 
-    protected getPossibleMappings(
-        options: any,
-        keys: string[],
-        index: number,
-        curMapping: any,
-        possibleMappings: any[]
-    ): void {
-        if (index < 0 || index >= keys.length) {
-            return;
-        }
-
-        for (const option of options[keys[index]]) {
-            curMapping[keys[index]] = option;
-
-            if (Object.keys(curMapping).length === keys.length) {
-                possibleMappings.push(
-                    { ...curMapping }
-                );
-            }
-
-            this.getPossibleMappings(options, keys, index+1, curMapping, possibleMappings);
-
-            delete curMapping[keys[index]];
-        }
-    }
-
     protected async validateMetadata(
         request: Request,
         response: Response,
         onSuccess: (_metadata?: any | undefined) => void,
-        onMetadataInvalid: (response: Response) => void = function (response) {
+        onMetadataInvalid: (response: Response, error?: any | undefined) => void = function (response, error) {
+            if (error) {
+                console.error(error);
+            }
+            
             response.json(
                 {
                     success: false,
@@ -353,44 +331,6 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "METADATA_INVALID"
                 }
             );
-        },
-        onParsingError: (response: Response, error: any) => void = function (response, error) {
-            console.error(error);
-
-            response.json(
-                {
-                    success: false,
-                    message: "Failed to parse metadata!",
-                    code: "METADATA_PARSING_FAILED"
-                }
-            );
-        },
-        onMappingMissing: (response: Response) => void = function (response) {
-            response.json(
-                {
-                    success: false,
-                    message: "Make sure all options mapping have at least size and amount!",
-                    code: "MAPPING_MISSING"
-                }
-            );
-        },
-        onMappingInvalid: (response: Response) => void = function (response) {
-            response.json(
-                {
-                    success: false,
-                    message: "All mappings price and amount must be a number that greater than or equals to 0.",
-                    code: "MAPPING_INVALID"
-                }
-            );
-        },
-        onMappingDuplicate: (response: Response) => void = function (response) {
-            response.json(
-                {
-                    success: false,
-                    message: "Metadata mappings duplicated!",
-                    code: "MAPPING_DUPLICATED"
-                }
-            )
         }
     ): Promise<boolean> {
         // Get metadata string
@@ -408,36 +348,24 @@ export default class NewItemController extends UpdateItemRestfulController {
             metadata = JSON.parse(metadataStr);
         }
         catch (error: any) {
-            onParsingError(response, error);
+            onMetadataInvalid(response);
             return false;
         }
 
         // Validating
-        return this.useDomainManager(
+        const valid: boolean = await this.useDomainManager(
             async function (domainManager) {
-                return domainManager.validateItemMetadata(
-                    {
-                        metadata: metadata,
-                        onSuccess: function () {
-                            onSuccess(metadata);
-                        },
-                        onWrongFormat: function () {
-                            onMetadataInvalid(response);
-                        },
-                        onMappingMissing: function () {
-                            onMappingMissing(response);
-                        },
-                        onInvalid: function () {
-                            onMappingInvalid(response);
-                        },
-
-                        onMappingDuplicated: function () {
-                            onMappingDuplicate(response);
-                        }
-                    }
-                )
+                return domainManager.validateItemMetadata(metadata);
             }
-        )
+        );
+
+        // Invalid
+        if (!valid) {
+            onMetadataInvalid(response);
+        }
+
+        // Return valid
+        return valid;
     }
 
     protected async validateType(
