@@ -11,7 +11,6 @@ import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey"
 import OrderItem from "./entities/OrderItem"
 import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePrimaryKey"
 import VerificationCode from "./entities/VerificationCode"
-import { ItemMetadataHandlerParam } from "./ItemMetadataHandler"
 
 export default interface DomainManager {
     getCartItem(pKey: CartItemPrimaryKey, path: any[]): Promise<CartItem | undefined>
@@ -97,5 +96,5 @@ export default interface DomainManager {
     removeVerificationCode(target: VerificationCode): Promise<void>
     removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void>
 
-    validateItemMetadata(param: ItemMetadataHandlerParam): boolean;
+    validateItemMetadata(metadata: any): boolean;
 }

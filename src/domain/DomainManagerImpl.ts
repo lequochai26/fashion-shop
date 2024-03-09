@@ -4,7 +4,7 @@ import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey";
 import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePrimaryKey";
 import DomainManager from "./DomainManager";
 import EntityManager from "./EntityManager";
-import ItemMetadataHandler, { ItemMetadataHandlerParam } from "./ItemMetadataHandler";
+import ItemMetadataHandler from "./ItemMetadataHandler";
 import Brand from "./entities/Brand";
 import CartItem from "./entities/CartItem";
 import Item from "./entities/Item";
@@ -698,10 +698,10 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    public validateItemMetadata(param: ItemMetadataHandlerParam): boolean {
+    public validateItemMetadata(metadata: any): boolean {
         return this.useItemMetadataHandler(
             function (itemMetadataHandler) {
-                return itemMetadataHandler.validate(param);
+                return itemMetadataHandler.validate(metadata);
             }
         )
     }
