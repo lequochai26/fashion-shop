@@ -17,7 +17,7 @@ export default class NewItemController extends UpdateItemRestfulController {
     }
 
     // Protected methods:
-    protected validateId(
+    protected async validateId(
         request: Request,
         response: Response,
         onSuccess: (_id: string) => void,
@@ -29,14 +29,33 @@ export default class NewItemController extends UpdateItemRestfulController {
                     code: "ID_REQUIRED"
                 }
             );
+        },
+        onAlreadyExist: (response: Response) => void = function (response) {
+            response.json(
+                {
+                    success: false,
+                    message: "Already exist an item with given id!",
+                    code: "ITEM_ALREADY_EXIST"
+                }
+            )
         }
-    ): boolean {
+    ): Promise<boolean> {
         // Get id
         const id: string | undefined = request.body.id;
 
         // Not found
         if (!id) {
             onNotFound(response);
+            return false;
+        }
+
+        // Already exist
+        if (await this.useDomainManager(
+            async function (domainManager) {
+                return domainManager.getItem(id, []);
+            }
+        )) {
+            onAlreadyExist(response);
             return false;
         }
 
@@ -245,6 +264,12 @@ export default class NewItemController extends UpdateItemRestfulController {
         }
         catch (error: any) {
             onParsingError(response, error);
+            return false;
+        }
+
+        // Not valid
+        if (price < 0) {
+            onInvalid(response);
             return false;
         }
 
@@ -573,7 +598,7 @@ export default class NewItemController extends UpdateItemRestfulController {
         // Validate id
         let id: string = null as any;
         if (
-            !this.validateId(
+            !await this.validateId(
                 request,
                 response,
                 function (_id) {
