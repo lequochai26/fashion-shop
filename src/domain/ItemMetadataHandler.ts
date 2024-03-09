@@ -1,15 +1,6 @@
 import Validator from "./interfaces/Validator";
 
-export type ItemMetadataHandlerParam = {
-    metadata: any,
-    onSuccess(): void,
-    onWrongFormat(): void,
-    onMappingMissing(): void,
-    onInvalid(): void,
-    onMappingDuplicated(): void
-}
-
-export default class ItemMetadataHandler implements Validator<ItemMetadataHandlerParam, boolean> {
+export default class ItemMetadataHandler implements Validator<any, boolean> {
     // Constructor:
     public constructor() {
 
@@ -138,16 +129,14 @@ export default class ItemMetadataHandler implements Validator<ItemMetadataHandle
         return true;
     }
 
-    public validate({ metadata, onInvalid, onMappingMissing, onSuccess, onWrongFormat, onMappingDuplicated }: ItemMetadataHandlerParam): boolean {
+    public validate(metadata: any): boolean {
         // Check format
         if (!this.checkFormat(metadata)) {
-            onWrongFormat();
             return false;
         }
 
         // Check no mapping missing
         if (!this.checkNoMappingMissing(metadata)) {
-            onMappingMissing();
             return false;
         }
 
@@ -158,7 +147,6 @@ export default class ItemMetadataHandler implements Validator<ItemMetadataHandle
 
             // Check and make sure mapping's price and amount are valid
             if (mapping.price < 0 || mapping.amount < 0) {
-                onInvalid();
                 return false;
             }
 
@@ -175,14 +163,12 @@ export default class ItemMetadataHandler implements Validator<ItemMetadataHandle
                 
                 // Mapping duplicated
                 if (equals) {
-                    onMappingDuplicated();
                     return false;
                 }
             }
         }
 
         // Valid
-        onSuccess();
         return true;
     }
 }
