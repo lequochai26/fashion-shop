@@ -1,13 +1,9 @@
-import Controller from "./interfaces/Controller";
-import fs from 'fs';
+import FileHandleController from "./abstracts/FileHandleController";
 
-export default class DeleteFileController implements Controller<string, void> {
-    // Fields:
-    private fs;
-
+export default class DeleteFileController extends FileHandleController<string, void> {
     // Constructor:
     public constructor() {
-        this.fs = fs;
+        super();
     }
 
     // Methods:

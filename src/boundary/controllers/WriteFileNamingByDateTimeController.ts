@@ -1,13 +1,9 @@
-import Controller from "./interfaces/Controller";
-import fs from 'fs';
+import FileHandleController from "./abstracts/FileHandleController";
 
-export default class WriteFileNamingByDateTimeController implements Controller<{ destination: string, extension: string, buffer: Buffer }, string> {
-    // Fields:
-    private fs;
-
+export default class WriteFileNamingByDateTimeController extends FileHandleController<{ destination: string, extension: string, buffer: Buffer }, string> {
     // Constructor:
     public constructor() {
-        this.fs = fs;
+        super();
     }
 
     // Methods:
