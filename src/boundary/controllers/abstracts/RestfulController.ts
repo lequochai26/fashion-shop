@@ -1,3 +1,4 @@
+import { Request } from "express";
 import DomainManager from "../../../domain/DomainManager";
 import Controller from "../interfaces/Controller";
 import RestfulControllerParam from "../interfaces/RestfulControllerParam";
@@ -20,6 +21,31 @@ export default abstract class RestfulController implements Controller<RestfulCon
         }
 
         return executable(this.domainManager);
+    }
+
+    protected getFiles(request: Request, fieldName: string): Express.Multer.File[] {
+        // Result initialization
+        const result: Express.Multer.File[] = [];
+
+        // Getting
+        if (!request.files) {
+            return result;
+        }
+
+        if (!(request.files instanceof Array)) {
+            return result;
+        }
+
+        for (const file of request.files) {
+            if (file.fieldname !== fieldName) {
+                continue;
+            }
+
+            result.push(file);
+        }
+
+        // Return result
+        return result;
     }
 
     // Methods:

@@ -425,22 +425,4 @@ export default class UpdateItemController extends UpdateItemRestfulController {
         // Responding to client
         response.json({ success: true });
     }
-
-    // Private methods:
-    private getFiles(request: Request, fieldName: string): Express.Multer.File[] {
-        // Get files from request
-        const files = request.files;
-
-        // Check if files not instance of Array
-        if (!(files instanceof Array)) {
-            return [];
-        }
-
-        // Files finding
-        return files.filter(
-            function (file) {
-                return file.fieldname === fieldName;
-            }
-        );
-    }
 }
