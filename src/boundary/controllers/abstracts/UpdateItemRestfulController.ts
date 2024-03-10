@@ -5,6 +5,10 @@ import Controller from "../interfaces/Controller";
 import RestfulController from "./RestfulController";
 
 export default abstract class UpdateItemRestfulController extends RestfulController {
+    // Static fields:
+    private static writeFileNamingByDateTimeController: Controller<{ destination: string, extension: string, buffer: Buffer }, string> = new WriteFileNamingByDateTimeController();
+    private static deleteFileController: Controller<string, void> = new DeleteFileController();
+
     // Fields:
     protected writeFileNamingByDateTimeController: Controller<{ destination: string, extension: string, buffer: Buffer }, string>;
     protected deleteFileController: Controller<string, void>;
@@ -13,8 +17,8 @@ export default abstract class UpdateItemRestfulController extends RestfulControl
     public constructor(domainManager?: DomainManager | undefined) {
         super(domainManager);
 
-        this.writeFileNamingByDateTimeController = new WriteFileNamingByDateTimeController();
+        this.writeFileNamingByDateTimeController = UpdateItemRestfulController.writeFileNamingByDateTimeController;
 
-        this.deleteFileController = new DeleteFileController();
+        this.deleteFileController = UpdateItemRestfulController.deleteFileController;
     }
 }
