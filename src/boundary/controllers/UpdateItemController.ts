@@ -1,4 +1,3 @@
-import { Request } from "express";
 import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
 import Item from "../../domain/entities/Item";
