@@ -298,7 +298,7 @@ export default class UpdateItemController extends UpdateItemRestfulController {
         try {
             await this.useDomainManager(
                 async function (domainManager) {
-                    domainManager.updateItem(item);
+                    domainManager.updateItem(item as Item);
                 }
             );
         }
@@ -421,6 +421,9 @@ export default class UpdateItemController extends UpdateItemRestfulController {
                 }
             }
         }
+
+        // Responding to client
+        response.json({ success: true });
     }
 
     // Private methods:

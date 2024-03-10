@@ -11,6 +11,7 @@ import ItemInfo from "./infos/item/ItemInfo";
 import ItemInfoConverter from "./converters/ItemInfoConverter";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import NewItemController from "./controllers/NewItemController";
+import UpdateItemController from "./controllers/UpdateItemController";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
@@ -52,7 +53,7 @@ export default class ItemRestfulApi extends RestfulApi {
 
         this.getItemsByKeywordController = this.methodUnimplementedController;
 
-        this.updateItemController = this.methodUnimplementedController;
+        this.updateItemController = new UpdateItemController(this.domainManager);
 
         this.removeItemController = this.methodUnimplementedController;
     }
