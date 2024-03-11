@@ -8,6 +8,7 @@ export default abstract class UpdateItemRestfulController extends RestfulControl
     // Static fields:
     private static writeFileNamingByDateTimeController: Controller<{ destination: string, extension: string, buffer: Buffer }, string> = new WriteFileNamingByDateTimeController();
     private static deleteFileController: Controller<string, void> = new DeleteFileController();
+    protected static itemImagesStoragePath: string = "./assets/itemImages";
 
     // Fields:
     protected writeFileNamingByDateTimeController: Controller<{ destination: string, extension: string, buffer: Buffer }, string>;

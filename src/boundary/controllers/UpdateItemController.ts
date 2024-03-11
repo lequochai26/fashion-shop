@@ -283,7 +283,7 @@ export default class UpdateItemController extends UpdateItemRestfulController {
                 item.Avatar = await this.writeFileNamingByDateTimeController.execute(
                     {
                         buffer: avatar.buffer,
-                        destination: "./assets/itemImages/",
+                        destination: UpdateItemRestfulController.itemImagesStoragePath,
                         extension: avatarFileExtension
                     }
                 );
@@ -341,7 +341,7 @@ export default class UpdateItemController extends UpdateItemRestfulController {
                     wroteImagesPath.push(
                         await this.writeFileNamingByDateTimeController.execute(
                             {
-                                destination: "./assets/itemImages/",
+                                destination: UpdateItemRestfulController.itemImagesStoragePath,
                                 buffer: image.buffer,
                                 extension: image.mimetype.split("/")[1]
                             }
