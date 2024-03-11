@@ -1,6 +1,6 @@
 export default class ObjectsContainer {
     // Fields:
-    private nodes: { [index: string]: { target: any, dependencies: [ string, string ][] } };
+    protected nodes: { [index: string]: { target: any, dependencies: [ string, string ][] } };
 
     // Constructor:
     public constructor() {

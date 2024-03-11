@@ -6,6 +6,7 @@ import RequestHandlersLoader from './system/RequestHandlersLoader';
 import cookieParser = require('cookie-parser');
 import multer = require('multer');
 import RequestHandler from './boundary/interfaces/RequestHandler';
+import AdvancedObjectsContainer from './system/AdvancedObjectsContainer';
 
 // Main function
 async function main() {
@@ -37,7 +38,7 @@ async function main() {
     const server = app.listen(settings.port);
 
     // Load objects from objects declaration
-    const objectsContainer: ObjectsContainer = new ObjectsContainer();
+    const objectsContainer: ObjectsContainer = new AdvancedObjectsContainer();
     try {
         await objectsContainer.load(objectsDeclaration);
     }
