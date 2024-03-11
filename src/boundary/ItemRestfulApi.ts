@@ -14,6 +14,7 @@ import NewItemController from "./controllers/NewItemController";
 import UpdateItemController from "./controllers/UpdateItemController";
 import RemoveItemController from "./controllers/RemoveItemController";
 import GetItemController from "./controllers/GetItemController";
+import UpgradedNewItemController from "./controllers/UpgradedNewItemController";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
@@ -45,9 +46,9 @@ export default class ItemRestfulApi extends RestfulApi {
             this.domainManager
         );
 
-        this.newItemController = new NewItemController(
+        this.newItemController = new UpgradedNewItemController(
             this.domainManager
-        )
+        );
 
         this.getItemsByFilterController = this.methodUnimplementedController;
 
