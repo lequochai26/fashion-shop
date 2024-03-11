@@ -84,16 +84,12 @@ export default class UpdateItemController extends UpdateItemRestfulController {
         const priceStr: string | undefined = request.body.price;
 
         if (priceStr) {
-            let price: number;
+            let price: number = Number.parseFloat(priceStr);
 
-            try {
-                price = Number.parseFloat(priceStr);
-
-                if (price < 0) {
-                    throw new Error();
-                }
-            }
-            catch (error: any) {
+            if (
+                Number.isNaN(price) ||
+                price < 0
+            ) {
                 response.json(
                     {
                         success: false,
@@ -112,16 +108,12 @@ export default class UpdateItemController extends UpdateItemRestfulController {
         const amountStr: string | undefined = request.body.amount;
 
         if (amountStr) {
-            let amount: number;
-            
-            try {
-                amount = Number.parseInt(amountStr);
+            let amount: number = Number.parseInt(amountStr);
 
-                if (amount < 0) {
-                    throw new Error();
-                }
-            }
-            catch (error: any) {
+            if (
+                Number.isNaN(amount) ||
+                amount < 0
+            ) {
                 response.json(
                     {
                         success: false,

@@ -131,15 +131,12 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
             return;
         }
 
-        let amount: number;
-        try {
-            amount = Number.parseInt(amountStr);
+        let amount: number = Number.parseInt(amountStr);
 
-            if (amount < 0) {
-                throw new Error();
-            }
-        }
-        catch (error: any) {
+        if (
+            Number.isNaN(amount) ||
+            amount < 0
+        ) {
             response.json(
                 {
                     success: false,
@@ -166,15 +163,11 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
             return;
         }
 
-        let price: number;
-        try {
-            price = Number.parseFloat(priceStr);
-
-            if (price < 0) {
-                throw new Error();
-            }
-        }
-        catch (error: any) {
+        let price: number = Number.parseFloat(priceStr);
+        if (
+            Number.isNaN(price) ||
+            price < 0
+        ) {
             response.json(
                 {
                     success: false,
