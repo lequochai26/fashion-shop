@@ -63,6 +63,7 @@ async function main() {
         // GET method
         app.get(
             requestHandler.getPath(),
+            upload.any(),
             async function (request, response) {
                 await requestHandler.get(request, response);
             }
@@ -89,6 +90,7 @@ async function main() {
         // DELETE method
         app.delete(
             requestHandler.getPath(),
+            upload.any(),
             async function (request, response) {
                 await requestHandler.delete(request, response);
             }
