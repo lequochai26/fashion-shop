@@ -18,6 +18,17 @@ async function main() {
     // Include json body parser into app
     app.use(express.json());
 
+    // Add log request handler for app
+    app.use(
+        function (request, response, next) {
+            console.log(
+                `${request.method}: ${request.path}`
+            )
+
+            next();
+        }
+    );
+
     // Including multer into app
     const storage = multer.memoryStorage();
     const upload = multer({ storage: storage });
