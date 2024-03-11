@@ -9,10 +9,10 @@ export default class GetItemController extends QueryItemRestfulController {
 
     //Constructor
     public constructor(
-        itemInforConverter: ReversableConverter<Item, ItemInfo>,
+        itemInfoConverter: ReversableConverter<Item, ItemInfo>,
         domainManager?: DomainManager | undefined
     ) {
-        super(itemInforConverter, domainManager)
+        super(itemInfoConverter, domainManager)
     }
 
     //Methods
