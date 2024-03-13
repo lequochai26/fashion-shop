@@ -4,6 +4,111 @@ import ItemType from "./ItemType";
 import OrderItem from "./OrderItem";
 
 export default class Item {
+    // Static methods:
+    public static createFilterFunc(filter: any, allRequired: boolean): (target: Item) => boolean {
+        return function (target: Item): boolean {
+            // Gender
+            if (filter.gender !== undefined) {
+                if (target.Gender !== filter.gender) {
+                    if (allRequired) {
+                        return false
+                    }
+                }
+                else {
+                    if (!allRequired) {
+                        return true;
+                    }
+                }
+            }
+
+            // Price
+            if (filter.price && typeof filter.price == 'object') {
+                if (target.Price as number < filter.price.min && target.Price as number > filter.price.max) {
+                    if (allRequired) {
+                        return false;
+                    }
+                }
+                else {
+                    if (!allRequired) {
+                        return true;
+                    }
+                }
+            }
+
+            // Metadata
+            if (filter.metadata) {
+                if (target.Metadata) {
+                    const filterMetadataKeys: string[] = Object.keys(filter.metadata);
+                    const targetMetadataOptionKeys: string[] = Object.keys(target.Metadata.options);
+
+                    for (const filterMetadataKey of filterMetadataKeys) {
+                        if (!targetMetadataOptionKeys.indexOf(filterMetadataKey)) {
+                            if (allRequired) {
+                                return false;
+                            }
+                        }
+                        else {
+                            let found: boolean = false;
+
+                            for (const element of target.Metadata.options[filterMetadataKey]) {
+                                if (element === filter.Metadata[filterMetadataKey]) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                if (allRequired) {
+                                    return false;
+                                }
+                            }
+                            else {
+                                if (!allRequired) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (allRequired) {
+                        return false;
+                    }
+                }
+            }
+
+            // Type
+            if (filter.type) {
+                if (target.Type?.Id !== filter.type) {
+                    if (allRequired) {
+                        return false;
+                    }
+                }
+                else {
+                    if (!allRequired) {
+                        return true;
+                    }
+                }
+            }
+
+            // Brand
+            if (filter.brand) {
+                if (!target.Brand?.Id !== filter.brand) {
+                    if (allRequired) {
+                        return false;
+                    }
+                }
+                else {
+                    if (!allRequired) {
+                        return true;
+                    }
+                }
+            }
+
+            return allRequired;
+        };
+    }
+
     // Fields:
     private id?: string | undefined;
     private avatar?: string | undefined;
