@@ -5,6 +5,7 @@ import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePri
 import DomainManager from "./DomainManager";
 import EntityManager from "./EntityManager";
 import ItemMetadataHandler from "./ItemMetadataHandler";
+import SearchableEntityManager from "./SearchableEntityManager";
 import Brand from "./entities/Brand";
 import CartItem from "./entities/CartItem";
 import Item from "./entities/Item";
@@ -20,7 +21,7 @@ export default class DomainManagerImpl implements DomainManager {
     private brandManager?: EntityManager<Brand, string> | undefined;
     private cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined;
     private itemImageManager?: EntityManager<ItemImage, ItemImagePrimaryKey> | undefined;
-    private itemManager?: EntityManager<Item, string> | undefined;
+    private itemManager?: SearchableEntityManager<Item, string> | undefined;
     private itemTypeManager?: EntityManager<ItemType, string> | undefined;
     private orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined;
     private orderManager?: EntityManager<Order, string> | undefined;
@@ -33,7 +34,7 @@ export default class DomainManagerImpl implements DomainManager {
         brandManager?: EntityManager<Brand, string> | undefined,
         cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined,
         itemImageManager?: EntityManager<ItemImage, ItemImagePrimaryKey> | undefined,
-        itemManager?: EntityManager<Item, string> | undefined,
+        itemManager?: SearchableEntityManager<Item, string> | undefined,
         itemTypeManager?: EntityManager<ItemType, string> | undefined,
         orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined,
         orderManager?: EntityManager<Order, string> | undefined,
@@ -85,7 +86,7 @@ export default class DomainManagerImpl implements DomainManager {
     }
 
     private async useItemManager<T>(
-        executable: (itemManager: EntityManager<Item, string>) => Promise<T>
+        executable: (itemManager: SearchableEntityManager<Item, string>) => Promise<T>
     ): Promise<T> {
         if (!this.itemManager) {
             throw new Error("itemManager field is missing!");
@@ -516,11 +517,20 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    getItemsByFilterFunc(filterFunc: (target: Item) => boolean): Promise<Item[]> {
-        throw new Error("Method not implemented.");
+    public async getItemsByFilterFunc(filterFunc: (target: Item) => boolean): Promise<Item[]> {
+        return this.useItemManager(
+            async function (itemManager) {
+                return itemManager.getByFilterFunc(filterFunc);
+            }
+        );
     }
-    searchItems(pKey: string): Promise<Item[]> {
-        throw new Error("Method not implemented.");
+
+    public async searchItems(keyword: string): Promise<Item[]> {
+        return this.useItemManager(
+            async function (itemManager) {
+                return itemManager.search(keyword);
+            }
+        );
     }
 
     public async getOrder(pKey: string, path: any[]): Promise<Order | undefined> {
@@ -731,11 +741,11 @@ export default class DomainManagerImpl implements DomainManager {
         this.itemImageManager = value;
     }
 
-    public get ItemManager(): EntityManager<Item, string> | undefined {
+    public get ItemManager(): SearchableEntityManager<Item, string> | undefined {
         return this.itemManager;
     }
 
-    public set ItemManager(value: EntityManager<Item, string> | undefined) {
+    public set ItemManager(value: SearchableEntityManager<Item, string> | undefined) {
         this.itemManager = value;
     }
 

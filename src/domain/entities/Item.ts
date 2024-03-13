@@ -93,7 +93,7 @@ export default class Item {
 
             // Brand
             if (filter.brand) {
-                if (!target.Brand?.Id !== filter.brand) {
+                if (target.Brand?.Id !== filter.brand) {
                     if (allRequired) {
                         return false;
                     }
