@@ -15,6 +15,7 @@ import UpdateItemController from "./controllers/UpdateItemController";
 import RemoveItemController from "./controllers/RemoveItemController";
 import GetItemController from "./controllers/GetItemController";
 import UpgradedNewItemController from "./controllers/UpgradedNewItemController";
+import GetItemsByKeywordController from "./controllers/GetItemsByKeywordController";
 
 export default class ItemRestfulApi extends RestfulApi {
     // Static fields:
@@ -56,7 +57,7 @@ export default class ItemRestfulApi extends RestfulApi {
             this.itemInfoConverter, this.domainManager
         );
 
-        this.getItemsByKeywordController = this.methodUnimplementedController;
+        this.getItemsByKeywordController = new GetItemsByKeywordController(this.itemInfoConverter,this.domainManager);
 
         this.updateItemController = new UpdateItemController(this.domainManager);
 
