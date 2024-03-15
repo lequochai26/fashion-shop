@@ -17,8 +17,8 @@ export default class GetItemsByFilterController extends QueryItemRestfulControll
     //Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
         //Get filter from request
-        const filter : any = request.body.filter;
-        let allRequired : boolean = request.body.allRequired;
+        const filter: string | undefined = request.body.filter as string;
+        let allRequired: boolean  = request.body.allRequired;
 
         if(!filter) {
             response.json(
@@ -45,7 +45,7 @@ export default class GetItemsByFilterController extends QueryItemRestfulControll
             )
         }
 
-        if(!allRequired) {
+        if(allRequired === undefined) {
             allRequired = false;
         }
 

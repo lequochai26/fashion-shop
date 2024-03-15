@@ -18,7 +18,7 @@ export default class GetItemsByKeywordController extends QueryItemRestfulControl
     //Methods
     public async execute({ request, response}: RestfulControllerParam): Promise<void> {
         //Get keyword 
-        const keyword: any = request.body.keyword;
+        const keyword: string | undefined = request.body.keyword as string;
 
         if(!keyword) {
             response.json (
