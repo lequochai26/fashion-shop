@@ -42,7 +42,7 @@ export default class GetItemsByKeywordController extends QueryItemRestfulControl
                 }
             )
         } catch (error: any) {
-            console.log(error);
+            console.error(error);
 
             response.json(
                 {
