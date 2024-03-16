@@ -1,5 +1,6 @@
 import ImageRequestHandler from "../boundary/ImageRequestHandler";
 import ItemRestfulApi from "../boundary/ItemRestfulApi";
+import ItemTypeRestfulApi from "../boundary/ItemTypeRestfulApi";
 import RequestHandler from "../boundary/interfaces/RequestHandler";
 import BrandManager from "../domain/BrandManager";
 import CartItemManager from "../domain/CartItemManager";
@@ -398,6 +399,17 @@ const objectsDeclaration = [
             params: [ 'domainManager' ]
         },
         name: "itemRestfulApi"
+    },
+
+    // itemTypeRestfulApi
+    {
+        provider: {
+            func: function ([ domainManager ]: [ DomainManager ] ): RequestHandler {
+                return new ItemTypeRestfulApi(domainManager);
+            },
+            params: [ 'domainManager' ]
+        },
+        name: 'itemTypeRestfulApi'
     }
 ];
 
