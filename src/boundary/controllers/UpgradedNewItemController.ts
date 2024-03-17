@@ -195,7 +195,7 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
         }
 
         // Check Avatar's file type
-        const [ avatarFileType, avatarFileExtension ]: string[] = avatar.mimetype.split("/");
+        const [ avatarFileType ]: string[] = avatar.mimetype.split("/");
 
         if (avatarFileType !== 'image') {
             response.json(
@@ -324,8 +324,7 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
             avatarPath = await this.writeFileNamingByDateTimeController.execute(
                 {
                     destination: UpdateItemRestfulController.itemImagesStoragePath,
-                    buffer: avatar.buffer,
-                    extension: avatarFileExtension
+                    file: avatar
                 }
             );
         }
@@ -389,7 +388,7 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
 
         if (imagesFiles.length > 0) {
             for (const imageFile of imagesFiles) {
-                const [ imageFileType, imageFileExtension ] = imageFile.mimetype.split("/");
+                const [ imageFileType ] = imageFile.mimetype.split("/");
 
                 if (imageFileType !== 'image') {
                     continue;
@@ -401,9 +400,8 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
                     wroteImagesPath.push(
                         await this.writeFileNamingByDateTimeController.execute(
                             {
-                                buffer: imageFile.buffer,
                                 destination: UpdateItemRestfulController.itemImagesStoragePath,
-                                extension: imageFileExtension
+                                file: imageFile
                             }
                         )
                     );

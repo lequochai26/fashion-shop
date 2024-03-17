@@ -6,12 +6,12 @@ import RestfulController from "./RestfulController";
 
 export default abstract class UpdateItemRestfulController extends RestfulController {
     // Static fields:
-    private static writeFileNamingByDateTimeController: Controller<{ destination: string, extension: string, buffer: Buffer }, string> = new WriteFileNamingByDateTimeController();
+    private static writeFileNamingByDateTimeController: Controller<{ destination: string, file: Express.Multer.File }, string> = new WriteFileNamingByDateTimeController();
     private static deleteFileController: Controller<string, void> = new DeleteFileController();
     protected static itemImagesStoragePath: string = "./assets/itemImages";
 
     // Fields:
-    protected writeFileNamingByDateTimeController: Controller<{ destination: string, extension: string, buffer: Buffer }, string>;
+    protected writeFileNamingByDateTimeController: Controller<{ destination: string, file: Express.Multer.File }, string>;
     protected deleteFileController: Controller<string, void>;
 
     // Constructor:
