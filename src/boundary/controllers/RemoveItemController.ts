@@ -14,7 +14,7 @@ export default class RemoveItemController extends UpdateItemRestfulController {
     // Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
         // Id
-        const id: string | undefined = request.body.id;
+        const id: string | undefined = request.query.id as string | undefined;
 
         if (!id) {
             response.json(
