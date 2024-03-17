@@ -13,7 +13,7 @@ export default class WriteFileNamingByDateTimeController extends FileHandleContr
 
         // Get file extension
         let extension: string = "";
-        const nameInfo: string[] = file.filename.split(".");
+        const nameInfo: string[] = file.originalname.split(".");
         if (nameInfo.length > 1) {
             extension = nameInfo[nameInfo.length-1];
         }
