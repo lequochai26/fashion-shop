@@ -10,7 +10,6 @@ import Item from "../domain/entities/Item";
 import ItemInfo from "./infos/item/ItemInfo";
 import ItemInfoConverter from "./converters/ItemInfoConverter";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
-import NewItemController from "./controllers/NewItemController";
 import UpdateItemController from "./controllers/UpdateItemController";
 import RemoveItemController from "./controllers/RemoveItemController";
 import GetItemController from "./controllers/GetItemController";
