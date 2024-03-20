@@ -1,3 +1,4 @@
+import BrandRestfulApi from "../boundary/BrandRestfulApi";
 import ImageRequestHandler from "../boundary/ImageRequestHandler";
 import ItemRestfulApi from "../boundary/ItemRestfulApi";
 import ItemTypeRestfulApi from "../boundary/ItemTypeRestfulApi";
@@ -410,6 +411,17 @@ const objectsDeclaration = [
             params: [ 'domainManager' ]
         },
         name: 'itemTypeRestfulApi'
+    },
+
+    // brandRestfulApi
+    {
+        provider: {
+            func: function ([ domainManager ]: [ DomainManager ]): RequestHandler {
+                return new BrandRestfulApi(domainManager);
+            },
+            params: [ 'domainManager' ]
+        },
+        name: 'brandRestfulApi'
     }
 ];
 
