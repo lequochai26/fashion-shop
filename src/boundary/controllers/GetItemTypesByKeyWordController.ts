@@ -20,7 +20,7 @@ export default class GetItemTypeByKeywordController extends QueryItemTypeRestful
     //External App gửi yêu cầu truy vấn danh sách sản phẩm theo từ khóa đến hệ thống.
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
         //Hệ thống kiểm tra và xác nhận External App có cung cấp từ khóa truy vấn.
-        const keyword: string | undefined = request.query.keyword as string | undefined;
+        const keyword: string | undefined = request.query.keyword as string;
 
         if (!keyword) { // Hệ thống kiểm tra và nhận thấy External App không cung cấp từ khóa truy vấn.
             response.json(
