@@ -5,12 +5,22 @@ import DomainManager from "../domain/DomainManager";
 import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
+import UpdateItemTypeController from "./controllers/UpdateItemTypeController";
+import GetAllItemTypesController from "./controllers/GetAllItemTypesController";
+import ItemTypeInfo from "./infos/itemtype/ItemTypeInfo";
+import ItemType from "../domain/entities/ItemType";
+import ItemTypeInfoConverter from "./converters/ItemTypeInfoConverter";
+import Converter from "../utils/interfaces/Converter";
+import NewItemTypeController from "./controllers/NewItemTypeController";
+import GetItemTypeByKeyWordController from "./controllers/GetItemTypesByKeyWordController";
+import GetItemTypeController from "./controllers/GetItemTypeController";
 
 export default class ItemTypeRestfulApi extends RestfulApi {
     // Static fields:
     private static path: string = "/itemType";
 
     // Fields:
+    private itemTypeInfoConverter: Converter<ItemType,ItemTypeInfo>;
     private newItemTypeController: Controller<RestfulControllerParam, void>;
     private updateItemTypeController: Controller<RestfulControllerParam, void>;
     private removeItemTypeController: Controller<RestfulControllerParam, void>;
@@ -22,12 +32,13 @@ export default class ItemTypeRestfulApi extends RestfulApi {
     public constructor(domainManager?: DomainManager | undefined) {
         super(ItemTypeRestfulApi.path, domainManager);
 
-        this.newItemTypeController = this.methodUnimplementedController;
-        this.updateItemTypeController = this.methodUnimplementedController;
+        this.itemTypeInfoConverter = new ItemTypeInfoConverter();
+        this.newItemTypeController = new NewItemTypeController(this.domainManager); 
+        this.updateItemTypeController = new UpdateItemTypeController(this.domainManager);
         this.removeItemTypeController = this.methodUnimplementedController;
-        this.getAllItemTypesController = this.methodUnimplementedController;
-        this.getItemTypeController = this.methodUnimplementedController;
-        this.getItemTypesByKeywordController = this.methodUnimplementedController;
+        this.getAllItemTypesController = new GetAllItemTypesController(this.itemTypeInfoConverter, this.domainManager)
+        this.getItemTypeController = new GetItemTypeController(this.itemTypeInfoConverter, this.domainManager);
+        this.getItemTypesByKeywordController = new GetItemTypeByKeyWordController(this.itemTypeInfoConverter, this.domainManager);
     }
 
     // Methods:
