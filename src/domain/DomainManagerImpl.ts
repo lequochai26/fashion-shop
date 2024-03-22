@@ -18,7 +18,7 @@ import VerificationCode from "./entities/VerificationCode";
 
 export default class DomainManagerImpl implements DomainManager {
     // Fields:
-    private brandManager?: EntityManager<Brand, string> | undefined;
+    private brandManager?: SearchableEntityManager<Brand, string> | undefined;
     private cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined;
     private itemImageManager?: EntityManager<ItemImage, ItemImagePrimaryKey> | undefined;
     private itemManager?: SearchableEntityManager<Item, string> | undefined;
@@ -31,7 +31,7 @@ export default class DomainManagerImpl implements DomainManager {
 
     // Constructors:
     public constructor(
-        brandManager?: EntityManager<Brand, string> | undefined,
+        brandManager?: SearchableEntityManager<Brand, string> | undefined,
         cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined,
         itemImageManager?: EntityManager<ItemImage, ItemImagePrimaryKey> | undefined,
         itemManager?: SearchableEntityManager<Item, string> | undefined,
@@ -56,7 +56,7 @@ export default class DomainManagerImpl implements DomainManager {
 
     // Private methods:
     private async useBrandManager<T>(
-        executable: (brandManager: EntityManager<Brand, string>) => Promise<T>
+        executable: (brandManager: SearchableEntityManager<Brand, string>) => Promise<T>
     ): Promise<T> {
         if (!this.brandManager) {
             throw new Error("brandManager field is missing!");
@@ -400,11 +400,19 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    getBrandsByFilterFunc(filterFunc: (target: Brand) => boolean): Promise<Brand[]> {
-        throw new Error("Method not implemented.");
+    public async getBrandsByFilterFunc(filterFunc: (target: Brand) => boolean): Promise<Brand[]> {
+       return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.getByFilterFunc(filterFunc);
+            }
+       );
     }
-    searchBrands(pKey: string): Promise<Brand[]> {
-        throw new Error("Method not implemented.");
+    public async searchBrands(keyword: string): Promise<Brand[]> {
+        return this.useBrandManager(
+            async function (brandManager) {
+                return brandManager.search(keyword);
+            }
+        );
     }
 
     public async getUser(pKey: string, path: any[]): Promise<User | undefined> {
@@ -726,11 +734,11 @@ export default class DomainManagerImpl implements DomainManager {
     }
 
     // Getters / setters:
-    public get BrandManager(): EntityManager<Brand, string> | undefined {
+    public get BrandManager(): SearchableEntityManager<Brand, string> | undefined {
         return this.brandManager;
     }
 
-    public set BrandManager(value: EntityManager<Brand, string> | undefined) {
+    public set BrandManager(value: SearchableEntityManager<Brand, string> | undefined) {
         this.brandManager = value;
     }
 
