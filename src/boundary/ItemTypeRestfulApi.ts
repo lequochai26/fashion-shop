@@ -7,7 +7,6 @@ import Controller from "./controllers/interfaces/Controller";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
 import UpdateItemTypeController from "./controllers/UpdateItemTypeController";
 import GetAllItemTypesController from "./controllers/GetAllItemTypesController";
-import ReversableConverter from "../utils/interfaces/ReversableConverter";
 import ItemTypeInfo from "./infos/itemtype/ItemTypeInfo";
 import ItemType from "../domain/entities/ItemType";
 import ItemTypeInfoConverter from "./converters/ItemTypeInfoConverter";
