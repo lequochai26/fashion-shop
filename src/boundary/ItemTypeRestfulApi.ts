@@ -5,6 +5,7 @@ import DomainManager from "../domain/DomainManager";
 import RestfulApi from "./base_classes/RestfulApi";
 import Controller from "./controllers/interfaces/Controller";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
+import UpdateItemTypeController from "./controllers/UpdateItemTypeController";
 
 export default class ItemTypeRestfulApi extends RestfulApi {
     // Static fields:
@@ -23,7 +24,7 @@ export default class ItemTypeRestfulApi extends RestfulApi {
         super(ItemTypeRestfulApi.path, domainManager);
 
         this.newItemTypeController = this.methodUnimplementedController;
-        this.updateItemTypeController = this.methodUnimplementedController;
+        this.updateItemTypeController = new UpdateItemTypeController(this.domainManager);
         this.removeItemTypeController = this.methodUnimplementedController;
         this.getAllItemTypesController = this.methodUnimplementedController;
         this.getItemTypeController = this.methodUnimplementedController;
