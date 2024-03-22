@@ -1,6 +1,6 @@
 import DomainManager from "../../domain/DomainManager";
 import ItemType from "../../domain/entities/ItemType";
-import ReversableConverter from "../../utils/interfaces/ReversableConverter";
+import Converter from "../../utils/interfaces/Converter";
 import ItemTypeInfo from "../infos/itemtype/ItemTypeInfo";
 import QueryItemTypeRestfulController from "./abstracts/QueryItemTypeRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
@@ -8,7 +8,7 @@ import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 export default class GetItemTypeByKeywordController extends QueryItemTypeRestfulController {
     //Constructor
     public constructor(
-        itemTypeInfoConverter: ReversableConverter<ItemType, ItemTypeInfo>,
+        itemTypeInfoConverter: Converter<ItemType, ItemTypeInfo>,
         domainManager?: DomainManager | undefined
     ) {
         super(itemTypeInfoConverter, domainManager);
