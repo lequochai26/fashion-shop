@@ -22,7 +22,7 @@ export default class DomainManagerImpl implements DomainManager {
     private cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined;
     private itemImageManager?: EntityManager<ItemImage, ItemImagePrimaryKey> | undefined;
     private itemManager?: SearchableEntityManager<Item, string> | undefined;
-    private itemTypeManager?: EntityManager<ItemType, string> | undefined;
+    private itemTypeManager?: SearchableEntityManager<ItemType, string> | undefined;
     private orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined;
     private orderManager?: EntityManager<Order, string> | undefined;
     private userManager?: EntityManager<User, string> | undefined;
@@ -35,7 +35,7 @@ export default class DomainManagerImpl implements DomainManager {
         cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined,
         itemImageManager?: EntityManager<ItemImage, ItemImagePrimaryKey> | undefined,
         itemManager?: SearchableEntityManager<Item, string> | undefined,
-        itemTypeManager?: EntityManager<ItemType, string> | undefined,
+        itemTypeManager?: SearchableEntityManager<ItemType, string> | undefined,
         orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined,
         orderManager?: EntityManager<Order, string> | undefined,
         userManager?: EntityManager<User, string> | undefined,
@@ -96,7 +96,7 @@ export default class DomainManagerImpl implements DomainManager {
     }
 
     private async useItemTypeManager<T>(
-        executable: (itemTypeManager: EntityManager<ItemType, string>) => Promise<T>
+        executable: (itemTypeManager: SearchableEntityManager<ItemType, string>) => Promise<T>
     ): Promise<T> {
         if (!this.itemTypeManager) {
             throw new Error("itemTypeManager field is missing!");
@@ -327,12 +327,21 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    getItemTypesByFilterFunc(filterFunc: (target: ItemType) => boolean): Promise<ItemType[]> {
-        throw new Error("Method not implemented.");
+    public async getItemTypesByFilterFunc(filterFunc: (target: ItemType) => boolean): Promise<ItemType[]> {
+        return this.useItemTypeManager(
+            async function (itemtypeManager) {
+                return itemtypeManager.getByFilterFunc(filterFunc);
+            }
+        );
     }
 
-    searchItemTypes(pKey: string): Promise<ItemType[]> {
-        throw new Error("Method not implemented.");
+    public async searchItemTypes(keyword: string): Promise<ItemType[]> {
+        return this.useItemTypeManager(
+            async function (itemTypeManager) {
+                return itemTypeManager.search(keyword);
+            }
+        );
+        
     }
 
     public async getBrand(pKey: string, path: any[]): Promise<Brand | undefined> {
@@ -749,11 +758,11 @@ export default class DomainManagerImpl implements DomainManager {
         this.itemManager = value;
     }
 
-    public get ItemTypeManager(): EntityManager<ItemType, string> | undefined {
+    public get ItemTypeManager(): SearchableEntityManager<ItemType, string> | undefined {
         return this.itemTypeManager;
     }
 
-    public set ItemTypeManager(value: EntityManager<ItemType, string> | undefined) {
+    public set ItemTypeManager(value: SearchableEntityManager<ItemType, string> | undefined) {
         this.itemTypeManager = value;
     }
 
