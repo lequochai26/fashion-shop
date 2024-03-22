@@ -12,6 +12,7 @@ import ItemType from "../domain/entities/ItemType";
 import ItemTypeInfoConverter from "./converters/ItemTypeInfoConverter";
 import Converter from "../utils/interfaces/Converter";
 import NewItemTypeController from "./controllers/NewItemTypeController";
+import GetItemTypeByKeyWordController from "./controllers/GetItemTypesByKeyWordController";
 
 export default class ItemTypeRestfulApi extends RestfulApi {
     // Static fields:
@@ -36,7 +37,7 @@ export default class ItemTypeRestfulApi extends RestfulApi {
         this.removeItemTypeController = this.methodUnimplementedController;
         this.getAllItemTypesController = new GetAllItemTypesController(this.itemTypeInfoConverter, this.domainManager)
         this.getItemTypeController = this.methodUnimplementedController;
-        this.getItemTypesByKeywordController = this.methodUnimplementedController;
+        this.getItemTypesByKeywordController = new GetItemTypeByKeyWordController(this.itemTypeInfoConverter, this.domainManager);
     }
 
     // Methods:
