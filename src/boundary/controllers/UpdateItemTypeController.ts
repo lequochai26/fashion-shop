@@ -5,7 +5,7 @@ import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
 
 export default class UpdateItemTypeController extends RestfulController{
-    //Cóntructor
+    //Constructor
     public constructor(domainManager?: DomainManager | undefined){
         super(domainManager);
     }
@@ -14,6 +14,7 @@ export default class UpdateItemTypeController extends RestfulController{
     public async execute({request, response}: RestfulControllerParam): Promise<void> {
         const id: string | undefined = request.body.id;
 
+        //id
         if(!id){
             response.json({
                 success: false,
@@ -25,7 +26,7 @@ export default class UpdateItemTypeController extends RestfulController{
 
         const path: any[] = [];
 
-        let itemType:ItemType | undefined;
+        let itemType: ItemType | undefined;
         try{
             itemType = await this.useDomainManager(
                 async function (domainManager) {
@@ -49,8 +50,17 @@ export default class UpdateItemTypeController extends RestfulController{
                 success: false,
                 message: "Item type not exist!",
                 code: "ITEMTYPE_NOT_EXIST"
-            })
+            });
+            return;
         }
+
+        //name
+        const name: string | undefined = request.body.name;
+
+        if(name){
+            itemType.Name=name;
+        }
+
 
         //Update data in db
         try{
