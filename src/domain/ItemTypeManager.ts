@@ -68,7 +68,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
             //bat dong bo,xu li ko bi chan
             async function(itemManager){
                 return itemManager.getByFilter(
-                    { itemType: entity.Id }, path);
+                    { type: entity.Id }, path);
             }
         )
     }
