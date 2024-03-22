@@ -9,9 +9,9 @@ export default class GetAllItemTypesController extends QueryItemTypeRestfulContr
     //Constructor
     public constructor(
         itemTypeInfoConverter: Converter<ItemType,ItemTypeInfo>,
-        domainManager : DomainManager | undefined
+        domainManager?: DomainManager | undefined
     ) {
-        super(itemTypeInfoConverter,domainManager);
+        super(itemTypeInfoConverter, domainManager);
     }
 
     public async execute( { response }: RestfulControllerParam): Promise<void> {
@@ -34,7 +34,8 @@ export default class GetAllItemTypesController extends QueryItemTypeRestfulContr
             response.json(
                 {
                     success: false,
-                    message:"Failed while handling with DB!"
+                    message:"Failed while handling with DB!",
+                    code:"HANDLING_DB_FAILED"
                 }
             );
 
