@@ -51,7 +51,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
     private precheckPath(pKey: string,path: any[]) : ItemType | undefined{
         //kt trong path
         for(const obj of path){
-            //neu obj la doi tuong thuoc kieu Brand
+            //neu obj la doi tuong thuoc kieu item
             if(obj instanceof ItemType){
                 if(obj.Id === pKey){
                     return obj; // thoa đk thi tra obj ko thi la undefined
@@ -110,16 +110,16 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
     }
     public async getAll(path: any[]): Promise<ItemType[]> {
          //nhan tat ca data
-         const dataBrandList : ItemTypeData[] = await this.usePersistenceHandler(
+         const dataItemTypeList : ItemTypeData[] = await this.usePersistenceHandler(
             async function (persistenceHandler) {
-                return persistenceHandler.getAllBrands();
+                return persistenceHandler.getAllItemTypes();
             }
         );
         //khoi tao 1 mang rong
         const result : ItemType[] = [];
 
         //cd data tu data list sang entities
-        for(const data of dataBrandList){
+        for(const data of dataItemTypeList){
             //check path
             let entity : ItemType | undefined = this.precheckPath(data.id,path);
 
@@ -149,16 +149,16 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
     }
     public async getByFilter(filter: any, path: any[]): Promise<ItemType[]> {
          //nhan tat ca data
-         const dataBrandList : ItemTypeData[] = await this.usePersistenceHandler(
+         const dataItemTypeList : ItemTypeData[] = await this.usePersistenceHandler(
             async function (persistenceHandler) {
-                return persistenceHandler.getAllBrands();
+                return persistenceHandler.getAllItemTypes();
             }
         );
         //khoi tao 1 mang rong
         const result : ItemType[] = [];
 
         //cd data tu data list sang entities
-        for(const data of dataBrandList){
+        for(const data of dataItemTypeList){
             //check path
             let entity : ItemType | undefined = this.precheckPath(data.id,path);
 
