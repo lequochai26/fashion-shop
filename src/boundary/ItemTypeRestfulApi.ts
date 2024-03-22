@@ -11,6 +11,7 @@ import ItemTypeInfo from "./infos/itemtype/ItemTypeInfo";
 import ItemType from "../domain/entities/ItemType";
 import ItemTypeInfoConverter from "./converters/ItemTypeInfoConverter";
 import Converter from "../utils/interfaces/Converter";
+import NewItemTypeController from "./controllers/NewItemTypeController";
 
 export default class ItemTypeRestfulApi extends RestfulApi {
     // Static fields:
@@ -30,7 +31,7 @@ export default class ItemTypeRestfulApi extends RestfulApi {
         super(ItemTypeRestfulApi.path, domainManager);
 
         this.itemTypeInfoConverter = new ItemTypeInfoConverter();
-        this.newItemTypeController = this.methodUnimplementedController;
+        this.newItemTypeController = new NewItemTypeController(this.domainManager); 
         this.updateItemTypeController = new UpdateItemTypeController(this.domainManager);
         this.removeItemTypeController = this.methodUnimplementedController;
         this.getAllItemTypesController = new GetAllItemTypesController(this.itemTypeInfoConverter, this.domainManager)
