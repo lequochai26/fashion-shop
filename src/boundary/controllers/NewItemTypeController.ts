@@ -7,9 +7,6 @@ import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
 export default class NewItemTypeController extends RestfulController {
 
-    //Fieds
-    protected domainManager?: DomainManager | undefined;
-
     //Constructor:
     public constructor(
         domainManager?: DomainManager | undefined
