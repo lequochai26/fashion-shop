@@ -241,7 +241,7 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
     public async search(keyword: string): Promise<ItemType[]> {
        return this.getByFilterFunc(
            function (itemType: ItemType) {
-               return(`${itemType.Id} ${itemType.Name}`).indexOf(keyword) !== -1;
+               return(`${itemType.Id} ${itemType.Name}`.indexOf(keyword) !== -1)
            }
        );
         
