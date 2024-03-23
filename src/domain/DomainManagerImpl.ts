@@ -24,7 +24,7 @@ export default class DomainManagerImpl implements DomainManager {
     private itemManager?: SearchableEntityManager<Item, string> | undefined;
     private itemTypeManager?: SearchableEntityManager<ItemType, string> | undefined;
     private orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined;
-    private orderManager?: EntityManager<Order, string> | undefined;
+    private orderManager?: SearchableEntityManager<Order, string> | undefined;
     private userManager?: EntityManager<User, string> | undefined;
     private verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined;
     private itemMetadataHandler?: ItemMetadataHandler | undefined;
@@ -37,7 +37,7 @@ export default class DomainManagerImpl implements DomainManager {
         itemManager?: SearchableEntityManager<Item, string> | undefined,
         itemTypeManager?: SearchableEntityManager<ItemType, string> | undefined,
         orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined,
-        orderManager?: EntityManager<Order, string> | undefined,
+        orderManager?: SearchableEntityManager<Order, string> | undefined,
         userManager?: EntityManager<User, string> | undefined,
         verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined,
         itemMetadataHandler?: ItemMetadataHandler | undefined
@@ -116,7 +116,7 @@ export default class DomainManagerImpl implements DomainManager {
     }
 
     private async useOrderManager<T>(
-        executable: (orderManager: EntityManager<Order, string>) => Promise<T>
+        executable: (orderManager: SearchableEntityManager<Order, string>) => Promise<T>
     ): Promise<T> {
         if (!this.orderManager) {
             throw new Error("orderManager field is missing!");
@@ -609,8 +609,12 @@ export default class DomainManagerImpl implements DomainManager {
     getOrdersByFilterFunc(filterFunc: (target: Order) => boolean): Promise<Order[]> {
         throw new Error("Method not implemented.");
     }
-    searchOrders(pKey: string): Promise<Order[]> {
-        throw new Error("Method not implemented.");
+    public async searchOrders(keyword: string): Promise<Order[]> {
+        return this.useOrderManager(
+            async function (orderManager) {
+                return orderManager.search(keyword); 
+            }
+        )
     }
 
     public async getOrderItem(pKey: OrderItemPrimaryKey, path: any[]): Promise<OrderItem | undefined> {
@@ -785,7 +789,7 @@ export default class DomainManagerImpl implements DomainManager {
     public get OrderManager(): EntityManager<Order, string> | undefined {
         return this.orderManager;
     }
-    public set OrderManager(value: EntityManager<Order, string> | undefined) {
+    public set OrderManager(value: SearchableEntityManager<Order, string> | undefined) {
         this.orderManager = value;
     }
 
