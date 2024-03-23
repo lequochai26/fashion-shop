@@ -13,10 +13,14 @@ export default class RemoveItemTypeController extends RestfulController{
   }
 
   //method
+  //External App gửi yêu cầu xóa loại sản phẩm đến hệ thống.
   public async execute({ request, response }: RestfulControllerParam): Promise<void> {
       //id 
+      //Hệ thống kiểm tra và xác nhận External App đã cung cấp mã loại sản phẩm cần được xóa khỏi cơ sở dữ liệu hệ thống.
       const id: string | undefined = request.query.id as string | undefined;
-        if(!id){
+      //Hệ thống kiểm tra và nhận thấy External App chưa cung cấp mã loại sản phẩm cần được xóa khỏi cơ sở dữ liệu hệ thống. 
+      if(!id){
+        //Hệ thống phản hồi về External App với trạng thái thất bại  và mã phản hồi
             response.json(
                 {
                     success : false,
@@ -27,16 +31,18 @@ export default class RemoveItemTypeController extends RestfulController{
             );
             return;
         }
-
+        //Hệ thống kiểm tra và xác nhận mã loại sản phẩm được cung cấp bởi External App thuộc về một loại sản phẩm đã tồn tại trong cơ sở dữ liệu hệ thống.
         const path : any[] =[];
         let itemType : ItemType | undefined;
         try {
+        //Hệ thống kiểm tra và nhận thấy mã loại sản phẩm được cung cấp bởi External App không thuộc bất cứ loại sản phẩm nào đã tồn tại trong cơ sở dữ liệu hệ thống. 
             itemType = await this.useDomainManager(
                 async function (domainManager) {
                     return domainManager.getItemType(id,path);
                 }
             );
         } catch (error: any) {
+        //Hệ thống phản hồi về External App với trạng thái thất bại kèm theo dòng thông điệp và mã phản hồi
             response.json(
                 {
                     success:false,
@@ -47,8 +53,9 @@ export default class RemoveItemTypeController extends RestfulController{
             return;
             
         }
-
+        //Hệ thống kiểm tra và xác nhận không có sản phẩm nào được liên kết với loại sản phẩm này.
         if(!itemType){
+        //Hệ thống phản hồi về External App với trạng thái thất bại kèm theo dòng thông điệp và mã phản hồi
             response.json(
                 {
                     success:false,
@@ -58,7 +65,7 @@ export default class RemoveItemTypeController extends RestfulController{
             )
             return;
         }
-
+        //Hệ thống kiểm tra và xác nhận không có sản phẩm nào được liên kết với loại sản phẩm này.
         if(itemType.Items.length >0){
             response.json(
                 {
