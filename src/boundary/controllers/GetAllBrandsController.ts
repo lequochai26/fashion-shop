@@ -46,13 +46,13 @@ export default class GetAllBrandsController extends BrandQueryRestfulController{
         // trả danh sách về cho người dùng khách hàng
         response.json({
             success: true,
-            /*Một trường chứa dữ liệu kết quả của yêu cầu. Trong trường này, chúng ta có thể thấy một cuộc gọi map() 
-            để chuyển đổi mỗi phần tử trong mảng items thành một đối tượng mới, sử dụng itemInfoConverter.convert(item).*/
+            /*Một trường chứa dữ liệu kết quả của yêu cầu. Trong trường này, map() lặp 
+            mỗi phần tử trong mảng brands,sử dụng brandInfoConverter.convert() chuyển đổi brand thành một đối tượng mới.*/
             result: brands.map(function(brand: Brand): BrandInfo{
                 return self.brandInfoConverter.convert(brand);
             })
         })
-    }
+    } 
     
 }
 

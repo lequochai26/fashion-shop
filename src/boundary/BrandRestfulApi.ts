@@ -11,6 +11,7 @@ import BrandInfoConverter from "./converters/BrandInfoConverter";
 import BrandInfo from "./infos/brand/BrandInfo";
 import GetBrandController from "./controllers/GetBrandController";
 import GetBrandsByKeyWordController from "./controllers/GetBrandsByKeyWordController";
+import GetAllBrandsController from "./controllers/GetAllBrandsController";
 
 export default class BrandRestfulApi extends RestfulApi {
     // Static fields:
@@ -37,7 +38,7 @@ export default class BrandRestfulApi extends RestfulApi {
 
         this.removeBrandController = this.methodUnimplementedController;
 
-        this.getAllBrandsController = this.methodUnimplementedController;
+        this.getAllBrandsController = new GetAllBrandsController(this.brandInfoConverter, this.domainManager);
 
         this.getBrandController = new GetBrandController(this.brandInfoConverter, this.domainManager);
         
