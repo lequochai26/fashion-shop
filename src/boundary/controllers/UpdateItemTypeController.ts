@@ -55,7 +55,7 @@ export default class UpdateItemTypeController extends RestfulController{
         }
 
         //name
-        const name: string | undefined = request.body.name;
+        const name: string | undefined = request.body.name as string;
 
         if(name){
             itemType.Name=name;
