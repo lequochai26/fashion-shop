@@ -789,7 +789,7 @@ export default class DomainManagerImpl implements DomainManager {
     public get OrderManager(): EntityManager<Order, string> | undefined {
         return this.orderManager;
     }
-    public set OrderManager(value: EntityManager<Order, string> | undefined) {
+    public set OrderManager(value: SearchableEntityManager<Order, string> | undefined) {
         this.orderManager = value;
     }
 
