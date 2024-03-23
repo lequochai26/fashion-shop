@@ -18,7 +18,7 @@ export default class GetAllBrandsController extends BrandQueryRestfulController{
     
     
     //Methods
-    public async execute(param: RestfulControllerParam): Promise<void> {
+    public async execute({ response }: RestfulControllerParam): Promise<void> {
         //khai báo biến self tham chiếu GetAllItemController 
         const self: GetAllBrandsController = this;
 
@@ -53,7 +53,7 @@ export default class GetAllBrandsController extends BrandQueryRestfulController{
             })
         })
     } 
-    
+
 }
 
 
