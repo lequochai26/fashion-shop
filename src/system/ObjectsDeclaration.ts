@@ -9,6 +9,7 @@ import BrandManager from "../domain/BrandManager";
 import CartItemManager from "../domain/CartItemManager";
 import DomainManager from "../domain/DomainManager";
 import DomainManagerImpl from "../domain/DomainManagerImpl";
+import FileHandler from "../domain/FileHandler";
 import ItemImageManager from "../domain/ItemImageManager";
 import ItemManager from "../domain/ItemManager";
 import ItemMetadataHandler from "../domain/ItemMetadataHandler";
@@ -322,7 +323,8 @@ const objectsDeclaration = [
             [ "orderManager", "orderManager" ],
             [ "userManager", "userManager" ],
             [ "verificationCodeManager", "verificationCodeManager" ],
-            [ "itemMetadataHandler", "itemMetadataHandler" ]
+            [ "itemMetadataHandler", "itemMetadataHandler" ],
+            [ "fileHandler", "fileHandler" ]
         ]
     },
 
@@ -384,6 +386,12 @@ const objectsDeclaration = [
     {
         prototype: ItemMetadataHandler.prototype,
         name: "itemMetadataHandler"
+    },
+
+    // fileHandler
+    {
+        prototype: FileHandler.prototype,
+        name: "fileHandler"
     },
 
     // BOUNDARY LAYER
