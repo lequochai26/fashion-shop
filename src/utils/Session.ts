@@ -71,6 +71,14 @@ export default class Session {
 
         delete(this.values[key]);
     }
+
+    /**
+     * Chuyển đổi tất cả giá trị được lưu trong phiên làm việc này thành JSON.
+     * @returns JSON
+     */
+    public toJSON() {
+        return this.values;
+    }
 }
 
 type SessionValues = { [ index: string]: SessionValue };
