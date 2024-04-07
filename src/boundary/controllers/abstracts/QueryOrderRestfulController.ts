@@ -1,19 +1,19 @@
 import DomainManager from "../../../domain/DomainManager";
-import User from "../../../domain/entities/User";
+import Order from "../../../domain/entities/Order";
 import Converter from "../../../utils/interfaces/Converter";
-import UserInfo from "../../infos/user/UserInfo";
+import OrderInfo from "../../infos/order/OrderInfo";
 import RestfulController from "./RestfulController";
 
 export default abstract class QueryOrderRestfulController extends RestfulController {
     // Fields 
-    protected userInfoConverter: Converter<User, UserInfo>;
+    protected orderInfoConverter: Converter<Order, OrderInfo>;
 
     // Constructors:
     public constructor(
-        userInfoConverter: Converter<User, UserInfo>,
+        orderInfoConverter: Converter<Order, OrderInfo>,
         domainManager?: DomainManager | undefined
     ) {
         super(domainManager);
-        this.userInfoConverter = userInfoConverter;
+        this.orderInfoConverter = orderInfoConverter;
     }
 }
