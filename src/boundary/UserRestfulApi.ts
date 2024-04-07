@@ -20,6 +20,8 @@ export default class UserRestfulApi extends RestfulApi {
     private getAllUsersController: Controller<RestfulControllerParam, void>;
     private getUserController: Controller<RestfulControllerParam, void>;
     private newUserController: Controller<RestfulControllerParam, void>;
+    private loginController: Controller<RestfulControllerParam, void>;
+    private logoutController: Controller<RestfulControllerParam, void>;
     private updateUserController: Controller<RestfulControllerParam, void>;
     private removeUserController: Controller<RestfulControllerParam, void>;
 
@@ -35,6 +37,8 @@ export default class UserRestfulApi extends RestfulApi {
         this.getAllUsersController = this.methodUnimplementedController;
         this.getUserController = this.methodUnimplementedController;
         this.newUserController = this.methodUnimplementedController;
+        this.loginController = this.methodUnimplementedController;
+        this.logoutController = this.methodUnimplementedController;
         this.updateUserController = this.methodUnimplementedController;
         this.removeUserController = this.methodUnimplementedController;
     }
@@ -73,7 +77,35 @@ export default class UserRestfulApi extends RestfulApi {
     }
 
     public async post(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        return this.newUserController.execute({ request, response });
+        // Get method
+        const method: string | undefined = request.query.method as string | undefined;
+
+        // Get controller
+        let controller: Controller<RestfulControllerParam, void>;
+
+        switch (method) {
+            case 'new': {
+                controller = this.newUserController;
+                break;
+            }
+
+            case 'login': {
+                controller = this.loginController;
+                break;
+            }
+
+            case 'logout': {
+                controller = this.logoutController;
+                break;
+            }
+
+            default: {
+                controller = this.invalidMethodController;
+            }
+        }
+
+        // Execute controller
+        return controller.execute({ request, response });
     }
 
     public async put(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
