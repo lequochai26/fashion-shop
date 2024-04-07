@@ -40,7 +40,7 @@ async function main() {
     const server = app.listen(settings.port);
 
     // Static content
-    app.use(express.static("./assets"));
+    app.use('/assets', express.static("./assets"));
 
     // Load objects from objects declaration
     const objectsContainer: ObjectsContainer = new AdvancedObjectsContainer();
