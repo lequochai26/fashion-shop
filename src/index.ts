@@ -7,6 +7,8 @@ import cookieParser = require('cookie-parser');
 import multer = require('multer');
 import RequestHandler from './boundary/interfaces/RequestHandler';
 import AdvancedObjectsContainer from './system/AdvancedObjectsContainer';
+import SessionFactory from './utils/interfaces/SessionFactory';
+import SimpleSessionFactory from './utils/SimpleSessionFactory';
 
 // Main function
 async function main() {
@@ -53,6 +55,10 @@ async function main() {
         // Exit main function
         return;
     }
+
+    // Session factory
+    const sessionFactory: SessionFactory = new SimpleSessionFactory();
+    sessionFactory.apply(app);
 
     // Get Request Handlers from objects container
     const requestHandlersLoader: RequestHandlersLoader = new RequestHandlersLoader();

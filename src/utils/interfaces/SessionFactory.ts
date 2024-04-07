@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Session from "../Session";
+import { Express } from "express";
 
 /**
  * Bộ quản lý phiên làm việc của người dùng
@@ -30,4 +31,10 @@ export default interface SessionFactory {
      * @param sessionId Mã phiên làm việc (được lấy từ cookie máy khách)
      */
     clear(sessionId: string): void;
+
+    /**
+     * Áp dụng bộ quản lý phiên làm việc cho Express App.
+     * @param app Express App
+     */
+    apply(app: Express): void
 }

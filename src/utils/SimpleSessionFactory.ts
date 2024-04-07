@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Express, Request, Response } from "express";
 import Session from "./Session";
 import SessionFactory from "./interfaces/SessionFactory";
 
@@ -81,6 +81,21 @@ export default class SimpleSessionFactory implements SessionFactory {
 
         // Clear session with given session id
         this.sessionStorage[sessionId] = undefined as any;
+    }
+
+    public apply(app: Express): void {
+        // Self definition
+        const self = this;
+
+        // Applying
+        app.use(
+            "/",
+            async function (request, response, next) {
+                const session: Session = self.retrieve(request, response);
+                (request as any).session = session;
+                next();
+            }
+        )
     }
 }
 
