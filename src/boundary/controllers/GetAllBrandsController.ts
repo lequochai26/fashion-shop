@@ -3,11 +3,11 @@ import Brand from "../../domain/entities/Brand";
 import Converter from "../../utils/interfaces/Converter";
 import ReversableConverter from "../../utils/interfaces/ReversableConverter";
 import BrandInfo from "../infos/brand/BrandInfo";
-import BrandQueryRestfulController from "./abstracts/BrandQueryRestfulController";
+import QueryBrandRestfulController from "./abstracts/QueryBrandRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
 
-export default class GetAllBrandsController extends BrandQueryRestfulController{
+export default class GetAllBrandsController extends QueryBrandRestfulController{
     //Constructor
     public constructor(
         brandInfoConverter: Converter<Brand, BrandInfo>,

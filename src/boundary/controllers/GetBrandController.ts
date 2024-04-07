@@ -2,10 +2,10 @@ import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
 import Converter from "../../utils/interfaces/Converter";
 import BrandInfo from "../infos/brand/BrandInfo";
-import BrandQueryRestfulController from "./abstracts/BrandQueryRestfulController";
+import QueryBrandRestfulController from "./abstracts/QueryBrandRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
-export default class GetBrandController extends BrandQueryRestfulController {
+export default class GetBrandController extends QueryBrandRestfulController {
 
     //Constructor
     public constructor(

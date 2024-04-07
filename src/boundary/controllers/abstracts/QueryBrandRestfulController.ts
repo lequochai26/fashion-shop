@@ -4,7 +4,7 @@ import Converter from "../../../utils/interfaces/Converter";
 import BrandInfo from "../../infos/brand/BrandInfo";
 import RestfulController from "./RestfulController";
 
-export default abstract class BrandQueryRestfulController extends RestfulController {
+export default abstract class QueryBrandRestfulController extends RestfulController {
     // Fields:
     protected brandInfoConverter: Converter<Brand, BrandInfo>;
 
