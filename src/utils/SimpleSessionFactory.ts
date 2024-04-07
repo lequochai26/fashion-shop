@@ -1,6 +1,7 @@
 import { Express, Request, Response } from "express";
 import Session from "./Session";
 import SessionFactory from "./interfaces/SessionFactory";
+import crypto from 'crypto';
 
 /**
  * Bản triển khai đơn giản, dễ sử dụng của SessionFactory (bộ quản lý phiên làm việc người dùng)
@@ -12,9 +13,11 @@ export default class SimpleSessionFactory implements SessionFactory {
      * @returns Mã phiên mới được cấp
      */
     public static generateId(): string {
-        return new Date()
-        .getTime()
-        .toString();
+        return crypto.createHash('sha256')
+            .update(
+                new Date().getTime().toString()
+            )
+            .digest('hex');
     }
 
     // Fields:
