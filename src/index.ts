@@ -39,6 +39,9 @@ async function main() {
     // Start listening
     const server = app.listen(settings.port);
 
+    // Static content
+    app.use(express.static("./assets"));
+
     // Load objects from objects declaration
     const objectsContainer: ObjectsContainer = new AdvancedObjectsContainer();
     try {
