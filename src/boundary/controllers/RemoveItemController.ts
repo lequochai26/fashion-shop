@@ -1,9 +1,9 @@
 import DomainManager from "../../domain/DomainManager";
 import Item from "../../domain/entities/Item";
-import UpdateItemRestfulController from "./abstracts/UpdateItemRestfulController";
+import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
-export default class RemoveItemController extends UpdateItemRestfulController {
+export default class RemoveItemController extends RestfulController {
     // Constructors:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -103,8 +103,8 @@ export default class RemoveItemController extends UpdateItemRestfulController {
 
         // Delete item's avatar
         try {
-            await this.deleteFileController.execute(
-                item.Avatar as string
+            await this.useDomainManager(
+                async domainManager => domainManager.deleteFile(`.${item?.Avatar}`)
             );
         }
         catch (error: any) {
@@ -132,7 +132,9 @@ export default class RemoveItemController extends UpdateItemRestfulController {
             if (deletedImagesPath.length > 0) {
                 for (const deletedImagePath of deletedImagesPath) {
                     try {
-                        await this.deleteFileController.execute(deletedImagePath);
+                        await this.useDomainManager(
+                            async domainManager => domainManager.deleteFile(`.${deletedImagePath}`)
+                        );
                     }
                     catch (error: any) {
                         console.error(error);

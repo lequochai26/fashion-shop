@@ -2,12 +2,12 @@ import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
 import Item from "../../domain/entities/Item";
 import ItemType from "../../domain/entities/ItemType";
-import UpdateItemRestfulController from "./abstracts/UpdateItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import ItemImage from "../../domain/entities/ItemImage";
 import ItemMetadata from "../../domain/entities/ItemMetadata";
+import RestfulController from "./abstracts/RestfulController";
 
-export default class UpdateItemController extends UpdateItemRestfulController {
+export default class UpdateItemController extends RestfulController {
     // Constructors:
     public constructor(domainManager?: DomainManager | undefined) {
         super(domainManager);
@@ -265,12 +265,7 @@ export default class UpdateItemController extends UpdateItemRestfulController {
             }
 
             try {
-                item.Avatar = await this.writeFileNamingByDateTimeController.execute(
-                    {
-                        file: avatar,
-                        destination: UpdateItemRestfulController.itemImagesStoragePath
-                    }
-                );
+                item.Avatar = `/assets/itemImages/${await this.useDomainManager(async domainManager => domainManager.writeFileAutoName("./assets/itemImages", avatar))}`
             }
             catch (error: any) {
                 console.error(error);
@@ -302,7 +297,9 @@ export default class UpdateItemController extends UpdateItemRestfulController {
         // Item updated avatar
         if (item.Avatar !== oldAvatarPath) {
             try {
-                await this.deleteFileController.execute(oldAvatarPath);
+                await this.useDomainManager(
+                    async domainManager => domainManager.deleteFile(`.${oldAvatarPath}`)
+                );
             }
             catch (error: any) {
                 console.error(error);
@@ -323,12 +320,7 @@ export default class UpdateItemController extends UpdateItemRestfulController {
             for (const image of images) {
                 try {
                     wroteImagesPath.push(
-                        await this.writeFileNamingByDateTimeController.execute(
-                            {
-                                destination: UpdateItemRestfulController.itemImagesStoragePath,
-                                file: image
-                            }
-                        )
+                        `/assets/itemImages/${await this.useDomainManager(async domainManager => domainManager.writeFileAutoName("./assets/itemImages/", image))}`
                     );
                 }
                 catch (error: any) {
@@ -362,7 +354,10 @@ export default class UpdateItemController extends UpdateItemRestfulController {
                         console.error(error);
 
                         try {
-                            await this.deleteFileController.execute(itemImage.Path as string);
+                            
+                            await this.useDomainManager(
+                                async domainManager => domainManager.deleteFile(`.${itemImage.Path}`)
+                            );
                         }
                         catch (error: any) {
                             console.error(error);
@@ -393,7 +388,9 @@ export default class UpdateItemController extends UpdateItemRestfulController {
                     if (deletedItemImagesPath.length > 0) {
                         for (const deleteItemImagePath of deletedItemImagesPath) {
                             try {
-                                await this.deleteFileController.execute(deleteItemImagePath);
+                                await this.useDomainManager(
+                                    async domainManager => domainManager.deleteFile(`.${deleteItemImagePath}`)
+                                );
                             }
                             catch (error: any) {
                                 console.error(error);

@@ -4,10 +4,10 @@ import Item from "../../domain/entities/Item";
 import ItemImage from "../../domain/entities/ItemImage";
 import ItemMetadata from "../../domain/entities/ItemMetadata";
 import ItemType from "../../domain/entities/ItemType";
-import UpdateItemRestfulController from "./abstracts/UpdateItemRestfulController";
+import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
-export default class UpgradedNewItemController extends UpdateItemRestfulController {
+export default class UpgradedNewItemController extends RestfulController {
     // Constructors:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -196,9 +196,13 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
         }
 
         // Check Avatar's file type
-        const [ avatarFileType ]: string[] = avatar.mimetype.split("/");
-
-        if (avatarFileType !== 'image') {
+        if (
+            !await this.useDomainManager(
+                async function (domainManager) {
+                    return domainManager.isImageFile(avatar)
+                }
+            )
+        ) {
             response.json(
                 {
                     success: false,
@@ -312,12 +316,13 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
         // Write avatar
         let avatarPath: string;
         try {
-            avatarPath = await this.writeFileNamingByDateTimeController.execute(
-                {
-                    destination: UpdateItemRestfulController.itemImagesStoragePath,
-                    file: avatar
+            const avatarFileName = await this.useDomainManager(
+                async function (domainManager) {
+                    return domainManager.writeFileAutoName("./assets/itemImages", avatar);
                 }
             );
+
+            avatarPath = `/assets/itemImages/${avatarFileName}`
         }
         catch (error: any) {
             console.error(error);
@@ -357,7 +362,9 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
             console.error(error);
 
             try {
-                await this.deleteFileController.execute(avatarPath);
+                await this.useDomainManager(
+                    async domainManager => domainManager.deleteFile(avatarPath)
+                );
             }
             catch (error: any) {
                 console.error(error);
@@ -378,56 +385,55 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
         const imagesFiles: Express.Multer.File[] = this.getFiles(request, "images");
 
         if (imagesFiles.length > 0) {
-            for (const imageFile of imagesFiles) {
-                const [ imageFileType ] = imageFile.mimetype.split("/");
+            const wroteImagesPath: string[] = [];
 
-                if (imageFileType !== 'image') {
+            for (const imageFile of imagesFiles) {
+                if (
+                    !await this.useDomainManager(
+                        async domainManager => domainManager.isImageFile(imageFile)
+                    )
+                ) {
                     continue;
                 }
 
-                const wroteImagesPath: string[] = [];
-
                 try {
                     wroteImagesPath.push(
-                        await this.writeFileNamingByDateTimeController.execute(
-                            {
-                                destination: UpdateItemRestfulController.itemImagesStoragePath,
-                                file: imageFile
-                            }
-                        )
+                        `/assets/itemImages/${await this.useDomainManager(async domainManager => domainManager.writeFileAutoName("./assets/itemImages", imageFile))}`
                     );
                 }
                 catch (error: any) {
                     console.error(error);
                 }
+            }
 
-                // At least 1 item image file wrote successful
-                if (wroteImagesPath.length > 0) {
-                    const itemImages: ItemImage[] = [];
+            // At least 1 item image file wrote successful
+            if (wroteImagesPath.length > 0) {
+                const itemImages: ItemImage[] = [];
 
-                    for (const wroteImagePath of wroteImagesPath) {
-                        itemImages.push(
-                            new ItemImage(wroteImagePath, item)
+                for (const wroteImagePath of wroteImagesPath) {
+                    itemImages.push(
+                        new ItemImage(wroteImagePath, item)
+                    );
+                }
+
+                for (const itemImage of itemImages) {
+                    try {
+                        await this.useDomainManager(
+                            async function (domainManager) {
+                                return domainManager.insertItemImage(itemImage);
+                            }
                         );
                     }
+                    catch (error: any) {
+                        console.error(error);
 
-                    for (const itemImage of itemImages) {
                         try {
                             await this.useDomainManager(
-                                async function (domainManager) {
-                                    return domainManager.insertItemImage(itemImage);
-                                }
+                                async domainManager => domainManager.removeItemImage(itemImage)
                             );
                         }
                         catch (error: any) {
                             console.error(error);
-
-                            try {
-                                await this.deleteFileController.execute(itemImage.Path as string);
-                            }
-                            catch (error: any) {
-                                console.error(error);
-                            }
                         }
                     }
                 }
