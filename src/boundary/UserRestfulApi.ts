@@ -10,6 +10,7 @@ import RestfulControllerParam from "./controllers/interfaces/RestfulControllerPa
 import UserInfoConverter from "./converters/UserInfoConverter";
 import UserInfo from "./infos/user/UserInfo";
 import GetUserController from "./controllers/GetUserController";
+import GetAllUsersController from "./controllers/GetAllUsersController";
 
 export default class UserRestfulApi extends RestfulApi {
     // Static fields:
@@ -35,7 +36,7 @@ export default class UserRestfulApi extends RestfulApi {
         this.userInfoConverter = new UserInfoConverter();
 
         this.getUsersByKeywordController = this.methodUnimplementedController;
-        this.getAllUsersController = this.methodUnimplementedController;
+        this.getAllUsersController = new GetAllUsersController(this.userInfoConverter, this.domainManager);
         this.getUserController = new GetUserController(this.userInfoConverter, this.domainManager);
         this.newUserController = this.methodUnimplementedController;
         this.loginController = this.methodUnimplementedController;
