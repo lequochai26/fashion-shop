@@ -42,7 +42,7 @@ export default class GetUserController extends QueryUserRestfulController {
                     )
             } catch (error: any) {
                 console.log(error);
-    
+
                 //Trong luong catch
                 response.json(
                     {
@@ -52,6 +52,19 @@ export default class GetUserController extends QueryUserRestfulController {
                 )
                 return;
             }
+
+
+            if (!user) {
+                response.json(
+                    {
+                        success: false,
+                        message: "not found this user",
+                        code: "user required"
+                    }
+                )
+                return;
+            }
+
             response.json(
                 {
                     success: true,
