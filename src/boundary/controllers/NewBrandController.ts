@@ -20,10 +20,11 @@ export default class NewBrandController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "id parameter is requied!",
-                    code: "ID_REQUIED"
+                    message: "id parameter is required!",
+                    code: "ID_REQUIRED"
                 }
             );
+            return;
         }
 
         //Get name from body
@@ -33,8 +34,8 @@ export default class NewBrandController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message: "name parameter is requied!",
-                    code: "NAME_REQUIED"
+                    message: "name parameter is required!",
+                    code: "NAME_REQUIRED"
                 }
             );
 
@@ -107,6 +108,6 @@ export default class NewBrandController extends RestfulController {
         //Successful responding
         response.json(
             { success: true }
-        )
+        );
     }
 }
