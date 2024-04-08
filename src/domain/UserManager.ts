@@ -314,7 +314,7 @@ export default class UserManager extends PersistenceHandlerHolder implements Sea
     public async search(keyword: string): Promise<User[]> {
         return this.getByFilterFunc(
             function (user : User) {
-                return (`${user.Email} ${user.FullName} ${user.Gender} ${user.Permission} ${user.PhoneNumber} ${user.Permission}`.indexOf(keyword) !== -1)
+                return (`${user.Email} ${user.FullName} ${user.Gender} ${user.Permission} ${user.PhoneNumber}`.indexOf(keyword) !== -1)
             }
         )
     }

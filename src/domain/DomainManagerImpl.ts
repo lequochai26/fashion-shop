@@ -26,7 +26,7 @@ export default class DomainManagerImpl implements DomainManager {
     private itemTypeManager?: SearchableEntityManager<ItemType, string> | undefined;
     private orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined;
     private orderManager?: SearchableEntityManager<Order, string> | undefined;
-    private userManager?: EntityManager<User, string> | undefined;
+    private userManager?: SearchableEntityManager<User, string> | undefined;
     private verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined;
     private itemMetadataHandler?: ItemMetadataHandler | undefined;
     private fileHandler?: FileHandler | undefined;
@@ -40,7 +40,7 @@ export default class DomainManagerImpl implements DomainManager {
         itemTypeManager?: SearchableEntityManager<ItemType, string> | undefined,
         orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined,
         orderManager?: SearchableEntityManager<Order, string> | undefined,
-        userManager?: EntityManager<User, string> | undefined,
+        userManager?: SearchableEntityManager<User, string> | undefined,
         verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined,
         itemMetadataHandler?: ItemMetadataHandler | undefined,
         fileHandler?: FileHandler | undefined
@@ -130,7 +130,7 @@ export default class DomainManagerImpl implements DomainManager {
     }
 
     private async useUserManager<T>(
-        executable: (userManager: EntityManager<User, string>) => Promise<T>
+        executable: (userManager: SearchableEntityManager<User, string>) => Promise<T>
     ): Promise<T> {
         if (!this.userManager) {
             throw new Error("userManager field is missing!");
@@ -485,11 +485,19 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    getUsersByFilterFunc(filterFunc: (target: User) => boolean): Promise<User[]> {
-        throw new Error("Method not implemented.");
+    public async getUsersByFilterFunc(filterFunc: (target: User) => boolean): Promise<User[]> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.getByFilterFunc(filterFunc);
+            }
+        )
     }
-    searchUsers(pKey: string): Promise<User[]> {
-        throw new Error("Method not implemented.");
+    public async searchUsers(keyword: string): Promise<User[]> {
+        return this.useUserManager(
+            async function (userManager) {
+                return userManager.search(keyword);
+            }
+        )
     }
 
     public async getItem(pKey: string, path: any[]): Promise<Item | undefined> {
@@ -829,7 +837,7 @@ export default class DomainManagerImpl implements DomainManager {
         return this.userManager;
     }
 
-    public set UserManager(value: EntityManager<User, string> | undefined) {
+    public set UserManager(value: SearchableEntityManager<User, string> | undefined) {
         this.userManager = value;
     }
 
