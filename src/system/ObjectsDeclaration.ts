@@ -12,7 +12,6 @@ import DomainManagerImpl from "../domain/DomainManagerImpl";
 import FileHandler from "../domain/FileHandler";
 import ItemImageManager from "../domain/ItemImageManager";
 import ItemManager from "../domain/ItemManager";
-import ItemMetadataHandler from "../domain/ItemMetadataHandler";
 import ItemTypeManager from "../domain/ItemTypeManager";
 import OrderItemManager from "../domain/OrderItemManager";
 import OrderManager from "../domain/OrderManager";
@@ -380,12 +379,6 @@ const objectsDeclaration = [
     {
         prototype: VerificationCodeConverter.prototype,
         name: "verificationCodeConverter"
-    },
-
-    // itemMetadataHandler
-    {
-        prototype: ItemMetadataHandler.prototype,
-        name: "itemMetadataHandler"
     },
 
     // fileHandler

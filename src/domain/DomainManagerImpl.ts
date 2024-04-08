@@ -5,7 +5,6 @@ import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePri
 import DomainManager from "./DomainManager";
 import EntityManager from "./EntityManager";
 import FileHandler from "./FileHandler";
-import ItemMetadataHandler from "./ItemMetadataHandler";
 import SearchableEntityManager from "./SearchableEntityManager";
 import Brand from "./entities/Brand";
 import CartItem from "./entities/CartItem";
@@ -28,7 +27,6 @@ export default class DomainManagerImpl implements DomainManager {
     private orderManager?: SearchableEntityManager<Order, string> | undefined;
     private userManager?: SearchableEntityManager<User, string> | undefined;
     private verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined;
-    private itemMetadataHandler?: ItemMetadataHandler | undefined;
     private fileHandler?: FileHandler | undefined;
 
     // Constructors:
@@ -42,7 +40,6 @@ export default class DomainManagerImpl implements DomainManager {
         orderManager?: SearchableEntityManager<Order, string> | undefined,
         userManager?: SearchableEntityManager<User, string> | undefined,
         verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined,
-        itemMetadataHandler?: ItemMetadataHandler | undefined,
         fileHandler?: FileHandler | undefined
     ) {
         this.brandManager = brandManager;
@@ -54,7 +51,6 @@ export default class DomainManagerImpl implements DomainManager {
         this.orderManager = orderManager;
         this.userManager = userManager;
         this.verificationCodeManager = verificationCodeManager;
-        this.itemMetadataHandler = itemMetadataHandler;
         this.fileHandler = fileHandler;
     }
 
@@ -147,16 +143,6 @@ export default class DomainManagerImpl implements DomainManager {
         }
 
         return executable(this.verificationCodeManager);
-    }
-
-    private useItemMetadataHandler<T>(
-        executable: (itemMetadataHandler: ItemMetadataHandler) => T
-    ): T {
-        if (!this.itemMetadataHandler) {
-            throw new Error("itemMetadataHandler field is missing!");
-        }
-
-        return executable(this.itemMetadataHandler);
     }
 
     private useFileHandler<T>(
@@ -751,14 +737,6 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    public validateItemMetadata(metadata: any): boolean {
-        return this.useItemMetadataHandler(
-            function (itemMetadataHandler) {
-                return itemMetadataHandler.validate(metadata);
-            }
-        )
-    }
-
     public writeFileAutoName(path: string, file: Express.Multer.File): string {
         return this.useFileHandler(
             fileHandler => fileHandler.writeAutoName(path, file)
@@ -847,12 +825,5 @@ export default class DomainManagerImpl implements DomainManager {
     
     public set VerificationCodeManager(value: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined) {
         this.verificationCodeManager = value;
-    }
-
-    public get ItemMetadataHandler() {
-        return this.itemMetadataHandler;
-    }
-    public set ItemMetadataHandler(value) {
-        this.itemMetadataHandler = value;
     }
 }

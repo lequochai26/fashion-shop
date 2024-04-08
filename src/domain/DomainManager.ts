@@ -94,9 +94,7 @@ export default interface DomainManager {
     insertVerificationCode(target: VerificationCode): Promise<void>
     updateVerificationCode(target: VerificationCode): Promise<void>
     removeVerificationCode(target: VerificationCode): Promise<void>
-    removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void>
-
-    validateItemMetadata(metadata: any): boolean;
+    removeVerificationCodeByPrimaryKey(pKey: VerificationCodePrimaryKey): Promise<void>;
 
     writeFileAutoName(path: string, file: Express.Multer.File): string;
     deleteFile(path: string): void;
