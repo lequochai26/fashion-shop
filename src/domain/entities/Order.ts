@@ -35,6 +35,23 @@ export default class Order {
     }
 
     // Methods:
+    public autoId(): string {
+        this.id = new Date()
+            .getTime()
+            .toString();
+
+        return this.id;
+    }
+
+    public calcTotalPrice(): number {
+        this.totalPrice = 0;
+        for (const item of this.items) {
+            this.totalPrice += item.totalPrice();
+        }
+        return this.totalPrice;
+    }
+
+    // Getters / setters:
     //ID
     public get Id(): string | undefined {
         return this.id;
