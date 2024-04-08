@@ -4,7 +4,7 @@ export type Mapping = { [ index: string ]: any, size: number, amount: number };
 
 export default class ItemMetadata {
     // Fields:
-    private options: Option[];
+    private options: { [ index: string ]: Option };
     private mappings: Mapping[];
 
     // Constructors:
@@ -45,11 +45,11 @@ export default class ItemMetadata {
     }
 
     // Getters / setters:
-    public get Options(): Option[] {
+    public get Options() {
         return this.options;
     }
 
-    public set Options(value: Option[]) {
+    public set Options(value) {
         this.options = value;
     }
 
