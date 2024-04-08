@@ -11,6 +11,7 @@ import UserInfoConverter from "./converters/UserInfoConverter";
 import UserInfo from "./infos/user/UserInfo";
 import GetUserController from "./controllers/GetUserController";
 import GetAllUsersController from "./controllers/GetAllUsersController";
+import GetUsersByKeyWordController from "./controllers/GetUsersByKeyWordController";
 
 export default class UserRestfulApi extends RestfulApi {
     // Static fields:
@@ -36,7 +37,7 @@ export default class UserRestfulApi extends RestfulApi {
 
         this.userInfoConverter = new UserInfoConverter();
 
-        this.getUsersByKeywordController = this.methodUnimplementedController;
+        this.getUsersByKeywordController = new GetUsersByKeyWordController(this.userInfoConverter, this.domainManager);
         this.getAllUsersController = new GetAllUsersController(this.userInfoConverter, this.domainManager);
         this.getUserController = new GetUserController(this.userInfoConverter, this.domainManager);
         this.newUserController = this.methodUnimplementedController;
