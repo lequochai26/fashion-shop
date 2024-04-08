@@ -22,7 +22,7 @@ export default class FileHandler {
         fs.writeFileSync(writePath, file.buffer);
 
         // Return write path
-        return writePath;
+        return name;
     }
 
     public delete(path: string): void {
