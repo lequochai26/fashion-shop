@@ -1,0 +1,63 @@
+// Types:
+export type Option = string[];
+export type Mapping = { [ index: string ]: any, size: number, amount: number };
+
+export default class ItemMetadata {
+    // Fields:
+    private options: Option[];
+    private mappings: Mapping[];
+
+    // Constructors:
+    public constructor(metadata: any) {
+        this.options = metadata.options;
+        this.mappings = metadata.mappings;
+    }
+
+    // Methods:
+    public getMapping(filter: any): Mapping | undefined {
+        // Get keys
+        const keys = Object.keys(filter);
+
+        // Getting
+        let target: Mapping | undefined = undefined;
+
+        for (const mapping of this.mappings) {
+            for (const key of keys) {
+                if (mapping[key] !== filter[key]) {
+                    continue;
+                }
+            }
+
+            target = mapping;
+        }
+
+        // Return
+        return target;
+    }
+
+    public toJSON() {
+        const self = this;
+
+        return {
+            options: self.options,
+            mappings: self.mappings
+        };
+    }
+
+    // Getters / setters:
+    public get Options(): Option[] {
+        return this.options;
+    }
+
+    public set Options(value: Option[]) {
+        this.options = value;
+    }
+
+    public get Mappings() {
+        return this.mappings;
+    }
+
+    public set Mappings(value) {
+        this.mappings = value;
+    }
+}
