@@ -25,6 +25,7 @@ export default class UserRestfulApi extends RestfulApi {
     private loginController: Controller<RestfulControllerParam, void>;
     private logoutController: Controller<RestfulControllerParam, void>;
     private updateUserController: Controller<RestfulControllerParam, void>;
+    private changePasswordController: Controller<RestfulControllerParam, void>;
     private removeUserController: Controller<RestfulControllerParam, void>;
 
     // Constructors:
@@ -42,6 +43,7 @@ export default class UserRestfulApi extends RestfulApi {
         this.loginController = this.methodUnimplementedController;
         this.logoutController = this.methodUnimplementedController;
         this.updateUserController = this.methodUnimplementedController;
+        this.changePasswordController = this.methodUnimplementedController;
         this.removeUserController = this.methodUnimplementedController;
     }
 
@@ -111,7 +113,30 @@ export default class UserRestfulApi extends RestfulApi {
     }
 
     public async put(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        return this.updateUserController.execute({ request, response });
+        // Get method
+        const method: string | undefined = request.query.method as string | undefined;
+
+        // Get controller
+        let controller: Controller<RestfulControllerParam, void>;
+
+        switch (method) {
+            case 'update': {
+                controller = this.updateUserController;
+                break;
+            }
+
+            case 'changePassword': {
+                controller = this.changePasswordController;
+                break;
+            }
+
+            default: {
+                controller = this.invalidMethodController;
+            }
+        }
+
+        // Execute controller
+        return controller.execute({ request, response });
     }
 
     public async delete(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
