@@ -2,6 +2,7 @@ import ItemData from "../../persistence/data/ItemData";
 import ReversableConverter from "../../utils/interfaces/ReversableConverter";
 import Brand from "../entities/Brand";
 import Item from "../entities/Item";
+import ItemMetadata from "../entities/ItemMetadata";
 import ItemType from "../entities/ItemType";
 
 export default class ItemConverter implements ReversableConverter<ItemData,Item>{
@@ -14,7 +15,7 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
         item.Price = from.price;
         item.Amount = from.amount;
         item.Gender = from.gender;
-        item.Metadata = (from.metadata ? JSON.parse(from.metadata) : undefined);
+        item.Metadata = (from.metadata ? new ItemMetadata(JSON.parse(from.metadata)) : undefined);
 
         if (from.type) {
             const type: ItemType = new ItemType();
@@ -39,7 +40,7 @@ export default class ItemConverter implements ReversableConverter<ItemData,Item>
             price: from.Price as number,
             amount: from.Amount as number,
             gender: from.Gender as boolean,
-            metadata: (from.Metadata ? JSON.stringify(from.Metadata) : undefined),
+            metadata: (from.Metadata ? JSON.stringify(from.Metadata.toJSON()) : undefined),
             type: from.Type?.Id,
             brand: from.Brand?.Id,
         }

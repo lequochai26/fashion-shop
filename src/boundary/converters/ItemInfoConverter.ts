@@ -1,7 +1,7 @@
 import Brand from "../../domain/entities/Brand";
 import Item from "../../domain/entities/Item";
+import ItemMetadata from "../../domain/entities/ItemMetadata";
 import ItemType from "../../domain/entities/ItemType";
-import Converter from "../../utils/interfaces/Converter";
 import ReversableConverter from "../../utils/interfaces/ReversableConverter";
 import ItemInfo from "../infos/item/ItemInfo";
 
@@ -21,7 +21,7 @@ export default class ItemInfoConverter implements ReversableConverter<Item, Item
             price: from.Price as number,
             amount: from.Amount as number,
             gender: from.Gender as boolean,
-            metadata: from.Metadata,
+            metadata: from.Metadata?.toJSON(),
             type: (
                 from.Type
                 ? {
@@ -61,7 +61,7 @@ export default class ItemInfoConverter implements ReversableConverter<Item, Item
             from.price,
             from.amount,
             from.gender,
-            from.metadata,
+            from.metadata && new ItemMetadata(from.metadata)
         );
 
         // ItemType dependency

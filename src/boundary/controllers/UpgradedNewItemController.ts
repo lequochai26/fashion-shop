@@ -2,6 +2,7 @@ import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
 import Item from "../../domain/entities/Item";
 import ItemImage from "../../domain/entities/ItemImage";
+import ItemMetadata from "../../domain/entities/ItemMetadata";
 import ItemType from "../../domain/entities/ItemType";
 import UpdateItemRestfulController from "./abstracts/UpdateItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
@@ -212,20 +213,10 @@ export default class UpgradedNewItemController extends UpdateItemRestfulControll
         // Get metadata
         const metadataStr: string | undefined = request.body.metadata;
 
-        let metadata: any;
+        let metadata: ItemMetadata | undefined = undefined;
         if (metadataStr) {
             try {
-                metadata = JSON.parse(metadataStr);
-
-                if (
-                    !await this.useDomainManager(
-                        async function (domainManager) {
-                            return domainManager.validateItemMetadata(metadata);
-                        }
-                    )
-                ) {
-                    throw new Error();
-                }
+                metadata = new ItemMetadata(JSON.parse(metadataStr));
             }
             catch (error: any) {
                 response.json(

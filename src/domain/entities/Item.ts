@@ -1,5 +1,6 @@
 import Brand from "./Brand";
 import ItemImage from "./ItemImage";
+import ItemMetadata from "./ItemMetadata";
 import ItemType from "./ItemType";
 import OrderItem from "./OrderItem";
 
@@ -31,48 +32,6 @@ export default class Item {
                 else {
                     if (!allRequired) {
                         return true;
-                    }
-                }
-            }
-
-            // Metadata
-            if (filter.metadata) {
-                if (target.Metadata) {
-                    const filterMetadataKeys: string[] = Object.keys(filter.metadata);
-                    const targetMetadataOptionKeys: string[] = Object.keys(target.Metadata.options);
-
-                    for (const filterMetadataKey of filterMetadataKeys) {
-                        if (!targetMetadataOptionKeys.indexOf(filterMetadataKey)) {
-                            if (allRequired) {
-                                return false;
-                            }
-                        }
-                        else {
-                            let found: boolean = false;
-
-                            for (const element of target.Metadata.options[filterMetadataKey]) {
-                                if (element === filter.Metadata[filterMetadataKey]) {
-                                    found = true;
-                                    break;
-                                }
-                            }
-
-                            if (!found) {
-                                if (allRequired) {
-                                    return false;
-                                }
-                            }
-                            else {
-                                if (!allRequired) {
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-                else {
-                    if (allRequired) {
-                        return false;
                     }
                 }
             }
@@ -117,7 +76,7 @@ export default class Item {
     private price?: number | undefined;
     private amount?: number | undefined;
     private gender?: Boolean | undefined;
-    private metadata?: any | undefined;
+    private metadata?: ItemMetadata | undefined;
     private type?: ItemType | undefined;
     private brand?: Brand | undefined;
     private images: ItemImage[];
@@ -134,7 +93,7 @@ export default class Item {
         price?: number | undefined,
         amount?: number | undefined,
         gender?: Boolean | undefined,
-        metadata?: any | undefined,
+        metadata?: ItemMetadata | undefined,
         images?: ItemImage[] | undefined,
         orders?: OrderItem[] | undefined,
     ) {
@@ -209,10 +168,10 @@ export default class Item {
     }
 
     //METADATA  
-    public get Metadata(): any | undefined{
+    public get Metadata(): ItemMetadata | undefined{
         return this.metadata;
     }
-    public set Metadata(metadata: any | undefined){
+    public set Metadata(metadata: ItemMetadata | undefined){
         this.metadata = metadata;
     }
 

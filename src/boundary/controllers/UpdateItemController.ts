@@ -5,6 +5,7 @@ import ItemType from "../../domain/entities/ItemType";
 import UpdateItemRestfulController from "./abstracts/UpdateItemRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import ItemImage from "../../domain/entities/ItemImage";
+import ItemMetadata from "../../domain/entities/ItemMetadata";
 
 export default class UpdateItemController extends UpdateItemRestfulController {
     // Constructors:
@@ -141,18 +142,10 @@ export default class UpdateItemController extends UpdateItemRestfulController {
         const metadataStr: string | undefined = request.body.metadata;
 
         if (metadataStr) {
-            let metadata: any;
+            let metadata: ItemMetadata | undefined = undefined;
 
             try {
-                metadata = JSON.parse(metadataStr);
-
-                if (!await this.useDomainManager(
-                    async function (domainManager) {
-                        return domainManager.validateItemMetadata(metadata);
-                    }
-                )) {
-                    throw new Error();
-                }
+                metadata = new ItemMetadata(JSON.parse(metadataStr));
             }
             catch (error: any) {
                 response.json(
