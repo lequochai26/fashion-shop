@@ -1,4 +1,5 @@
 import Item from "./Item";
+import ItemMetadata, { Mapping } from "./ItemMetadata";
 import Order from "./Order";
 
 export default class OrderItem{
@@ -24,7 +25,41 @@ export default class OrderItem{
         this.metadata = metadata;
     }
 
-    //methods:
+    // Methods:
+    public totalPrice(): number {
+        // Get item
+        const item = this.item;
+
+        // Check item
+        if (!item) {
+            throw new Error("item field is missing!");
+        }
+
+        // Calculate price
+        if (!this.metadata) {
+            this.price = (item.Price as number) * (this.Amount as number);
+        }
+        else {
+            const itemMetadata: ItemMetadata | undefined = item.Metadata;
+
+            if (!itemMetadata) {
+                throw new Error(`Item with id ${item.Id} doesn't have metadata!`);
+            }
+
+            const mapping: Mapping | undefined = itemMetadata.getMapping(this.metadata);
+
+            if (!mapping) {
+                throw new Error(`Metadata invalid!`);
+            }
+
+            this.price = mapping.price * (this.amount as number);
+        }
+
+        // Return this's price
+        return this.price;
+    }
+
+    // Getters / setters:
     public get Order(): Order | undefined {
         return this.order;
     }
