@@ -6,7 +6,7 @@ export default class OrderDataConverter implements Converter<WithId<Document>,Or
     public constructor(){}
 
     public convert(document: WithId<Document>): OrderData {
-        return{
+        return {
             id: document.id, 
             type: document.type,  
             date: document.date, 
@@ -14,6 +14,7 @@ export default class OrderDataConverter implements Converter<WithId<Document>,Or
             metadata: document.metadata,
             createdBy: document.createdBy,
             orderedBy: document.orderedBy,
-        }
+            status: document.status
+        };
     }
 }

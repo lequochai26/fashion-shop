@@ -9,4 +9,5 @@ export default interface OrderInfo {
     createdBy?: OrderInfoUser;
     orderedBy?: OrderInfoUser;
     items: OrderInfoItem[];
+    status: string;
 }

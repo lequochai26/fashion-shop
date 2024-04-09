@@ -11,7 +11,7 @@ export default class Order {
     private createdBy?:User | undefined;
     private orderedBy?:User | undefined;
     private items: OrderItem[];
-    
+    private status?: string | undefined;
 
     // Constructor:
     public constructor(
@@ -23,6 +23,7 @@ export default class Order {
         items?: OrderItem[] | undefined,
         createdBy?:User | undefined,
         orderedBy?:User | undefined,
+        status?: string | undefined
     ) {
         this.id = id;
         this.type = type;
@@ -32,6 +33,7 @@ export default class Order {
         this.items = items || [];
         this.createdBy=createdBy;
         this.orderedBy=orderedBy;
+        this.status = status;
     }
 
     // Methods:
@@ -115,5 +117,12 @@ export default class Order {
     }
     public set Items(items: OrderItem[]){
         this.items = items;
+    }
+
+    public get Status() {
+        return this.status;
+    }
+    public set Status(value) {
+        this.status = value;
     }
 }

@@ -13,6 +13,7 @@ export default class OrderConverter implements ReversableConverter<OrderData,Ord
         order.Date = from.date;
         order.TotalPrice = from.totalPrice;
         order.Metadata = from.metadata;
+        order.Status = from.status;
 
         if (from.createdBy) {
             const createdBy: User = new User();
@@ -29,7 +30,7 @@ export default class OrderConverter implements ReversableConverter<OrderData,Ord
         return order;
     }
     reverse(from: Order): OrderData {
-        return{
+        return {
             id: from.Id as string,
             type: from.Type as string,
             date: from.Date as Date,
@@ -37,7 +38,8 @@ export default class OrderConverter implements ReversableConverter<OrderData,Ord
             metadata: from.Metadata as string,
             createdBy: from.CreatedBy?.Email,
             orderedBy: from.OrderedBy?.Email,
-        }
+            status: from.Status as string
+        };
     }
     
 }

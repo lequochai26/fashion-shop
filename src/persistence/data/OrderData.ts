@@ -6,4 +6,5 @@ export default interface OrderData{
     metadata: string;
     createdBy?: string | undefined;
     orderedBy?: string | undefined;
+    status: string;
 }

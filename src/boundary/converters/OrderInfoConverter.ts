@@ -31,7 +31,8 @@ export default class OrderInfoConverter implements Converter<Order, OrderInfo> {
                     metadata: item.Item?.Metadata
                 })
             ),
-            totalPrice: from.TotalPrice as number
+            totalPrice: from.TotalPrice as number,
+            status: from.Status as string
         };
     }
 }
