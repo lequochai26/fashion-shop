@@ -27,7 +27,8 @@ export default class OrderHandler {
         type: string,
         items: { id: string, amount: number, metadata: any }[],
         createdBy?: string | undefined,
-        orderedBy?: string | undefined
+        orderedBy?: string | undefined,
+        status?: string | undefined
     ): Promise<void> {
         
     }
@@ -36,7 +37,8 @@ export default class OrderHandler {
         type: string,
         items: { id: string, amount: number, metadata: any }[],
         createdBy?: string | undefined,
-        orderedBy?: string | undefined
+        orderedBy?: string | undefined,
+        status?: string | undefined
     ): Promise<void> {
 
     }
@@ -46,15 +48,16 @@ export default class OrderHandler {
         type: string,
         items: { id: string, amount: number, metadata: any }[],
         createdBy?: string | undefined,
-        orderedBy?: string | undefined
+        orderedBy?: string | undefined,
+        status?: string | undefined
     ): Promise<void> {
         // Type sell
         if ((type as OrderType) === OrderType.SELL) {
-            return this.newSellOrder(type, items, createdBy, orderedBy);
+            return this.newSellOrder(type, items, createdBy, orderedBy, status);
         }
         // Type buy
         else {
-            return this.newBuyOrder(type, items, createdBy, orderedBy);
+            return this.newBuyOrder(type, items, createdBy, orderedBy, status);
         }
     }
 }
