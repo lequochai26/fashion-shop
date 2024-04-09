@@ -5,6 +5,7 @@ import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePri
 import DomainManager from "./DomainManager";
 import EntityManager from "./EntityManager";
 import FileHandler from "./FileHandler";
+import OrderHandler from "./OrderHandler";
 import SearchableEntityManager from "./SearchableEntityManager";
 import Brand from "./entities/Brand";
 import CartItem from "./entities/CartItem";
@@ -28,6 +29,7 @@ export default class DomainManagerImpl implements DomainManager {
     private userManager?: SearchableEntityManager<User, string> | undefined;
     private verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined;
     private fileHandler?: FileHandler | undefined;
+    private orderHandler?: OrderHandler | undefined;
 
     // Constructors:
     public constructor(
@@ -40,7 +42,8 @@ export default class DomainManagerImpl implements DomainManager {
         orderManager?: SearchableEntityManager<Order, string> | undefined,
         userManager?: SearchableEntityManager<User, string> | undefined,
         verificationCodeManager?: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined,
-        fileHandler?: FileHandler | undefined
+        fileHandler?: FileHandler | undefined,
+        orderHandler?: OrderHandler | undefined
     ) {
         this.brandManager = brandManager;
         this.cartItemManager = cartItemManager;
@@ -52,6 +55,7 @@ export default class DomainManagerImpl implements DomainManager {
         this.userManager = userManager;
         this.verificationCodeManager = verificationCodeManager;
         this.fileHandler = fileHandler;
+        this.orderHandler = orderHandler;
     }
 
     // Private methods:
@@ -153,6 +157,16 @@ export default class DomainManagerImpl implements DomainManager {
         }
 
         return executable(this.fileHandler);
+    }
+
+    private useOrderHandler<T>(
+        executable: (orderHandler: OrderHandler) => Promise<T>
+    ): Promise<T> {
+        if (!this.orderHandler) {
+            throw new Error("orderHandler field is missing!");
+        }
+
+        return executable(this.orderHandler);
     }
 
     // Methods:
@@ -755,6 +769,12 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
+    public async newOrder(type: string, items: { id: string; amount: number; metadata: any; }[], path: any[], createdBy?: string | undefined, orderedBy?: string | undefined, status?: string | undefined): Promise<void> {
+        return this.useOrderHandler(
+            async orderHandler => orderHandler.newOrder(type, items, path, createdBy, orderedBy, status)
+        );
+    }
+
     // Getters / setters:
     public get BrandManager(): SearchableEntityManager<Brand, string> | undefined {
         return this.brandManager;
@@ -825,5 +845,13 @@ export default class DomainManagerImpl implements DomainManager {
     
     public set VerificationCodeManager(value: EntityManager<VerificationCode, VerificationCodePrimaryKey> | undefined) {
         this.verificationCodeManager = value;
+    }
+
+    public get  OrderHandler() {
+        return this.orderHandler;
+    }
+
+    public set OrderHandler(value) {
+        this.orderHandler = value;
     }
 }

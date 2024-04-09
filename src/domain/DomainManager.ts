@@ -99,4 +99,13 @@ export default interface DomainManager {
     writeFileAutoName(path: string, file: Express.Multer.File): string;
     deleteFile(path: string): void;
     isImageFile(file: Express.Multer.File): boolean;
+
+    newOrder(
+        type: string,
+        items: { id: string, amount: number, metadata: any }[],
+        path: any[],
+        createdBy?: string | undefined,
+        orderedBy?: string | undefined,
+        status?: string | undefined
+    ): Promise<void>
 }
