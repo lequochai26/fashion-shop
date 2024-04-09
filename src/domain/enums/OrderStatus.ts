@@ -4,3 +4,4 @@ enum OrderStatus {
     SUCCESS = "SUCCESS",
     PAYMENT_AWAITING = "PAYMENT_AWAITING"
 }
+export default OrderStatus;
