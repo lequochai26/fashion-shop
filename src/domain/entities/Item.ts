@@ -74,6 +74,7 @@ export default class Item {
     private name?: string | undefined;
     private description?: string | undefined;
     private price?: number | undefined;
+    private buyPrice?: number | undefined;
     private amount?: number | undefined;
     private gender?: Boolean | undefined;
     private metadata?: ItemMetadata | undefined;
@@ -91,6 +92,7 @@ export default class Item {
         name?: string | undefined,
         description?: string | undefined,
         price?: number | undefined,
+        buyPrice?: number | undefined,
         amount?: number | undefined,
         gender?: Boolean | undefined,
         metadata?: ItemMetadata | undefined,
@@ -205,6 +207,14 @@ export default class Item {
     }
     public set Orders(orders: OrderItem[]){
         this.orders = orders;
+    }
+
+    public get BuyPrice() {
+        return this.buyPrice;
+    }
+    
+    public set BuyPrice(value) {
+        this.buyPrice = value;
     }
      
 }

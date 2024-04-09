@@ -19,6 +19,7 @@ export default class ItemInfoConverter implements ReversableConverter<Item, Item
             name: from.Name as string,
             description: from.Description as string,
             price: from.Price as number,
+            buyPrice: from.BuyPrice as number,
             amount: from.Amount as number,
             gender: from.Gender as boolean,
             metadata: from.Metadata?.toJSON(),
@@ -59,6 +60,7 @@ export default class ItemInfoConverter implements ReversableConverter<Item, Item
             from.name,
             from.description,
             from.price,
+            from.buyPrice,
             from.amount,
             from.gender,
             from.metadata && new ItemMetadata(from.metadata)

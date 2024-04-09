@@ -7,6 +7,7 @@ export default interface ItemInfo {
     name: string;
     description: string;
     price: number;
+    buyPrice: number;
     amount: number;
     gender: boolean;
     metadata?: any | undefined;

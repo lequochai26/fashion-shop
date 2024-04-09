@@ -180,6 +180,30 @@ export default class UpgradedNewItemController extends RestfulController {
             return;
         }
 
+        // BuyPrice
+        const buyPriceStr: string | undefined = request.body.buyPrice;
+
+        if (!buyPriceStr) {
+            response.json({
+                success: false,
+                message: "buyPrice parameter is required!",
+                code: "BUYPRICE_REQUIRED"
+            });
+            return;
+        }
+
+        let buyPrice: number = Number.parseFloat(buyPriceStr);
+        if (
+            Number.isNaN(buyPrice) || buyPrice < 0
+        ) {
+            response.json({
+                success: false,
+                message: "buyPrice must be a number that greater than or equals to 0.",
+                code: "BUYPRICE_INVALID"
+            });
+            return;
+        }
+
         // Avatar
         const [ avatar ]: Express.Multer.File[] = this.getFiles(request, "avatar");
 
@@ -349,6 +373,7 @@ export default class UpgradedNewItemController extends RestfulController {
         item.Metadata = metadata;
         item.Name = name;
         item.Price = price;
+        item.BuyPrice = buyPrice;
         item.Type = type;
 
         try {

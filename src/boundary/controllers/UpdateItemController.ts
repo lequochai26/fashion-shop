@@ -105,6 +105,24 @@ export default class UpdateItemController extends RestfulController {
             item.Price = price;
         }
 
+        // BuyPrice
+        const buyPriceStr: string | undefined = request.body.buyPrice;
+
+        if (buyPriceStr) {
+            const buyPrice: number = Number.parseFloat(buyPriceStr);
+
+            if (buyPrice < 0)  {
+                response.json({
+                    success: false,
+                    message: "buyPrice must be a number that greater than or equals to 0.",
+                    code: "BUYPRICE_INVALID"
+                });
+                return;
+            }
+
+            item.BuyPrice = buyPrice;
+        }
+
         // Amount
         const amountStr: string | undefined = request.body.amount;
 

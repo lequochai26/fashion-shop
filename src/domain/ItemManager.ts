@@ -308,7 +308,7 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
         return this.getByFilterFunc(
             function (item: Item) {
                 return (
-                    `${item.Id}  ${item.Name} ${item.Description} ${item.Price} ${item.Type?.Id} ${item.Type?.Name} ${(item.Gender as boolean ? "Nam" : "Nữ")} ${item.Brand?.Id} ${item.Brand?.Name}`
+                    `${item.Id}  ${item.Name} ${item.Description} ${item.Price} ${item.BuyPrice} ${item.Type?.Id} ${item.Type?.Name} ${(item.Gender as boolean ? "Nam" : "Nữ")} ${item.Brand?.Id} ${item.Brand?.Name}`
                     .toLowerCase()
                     .indexOf(
                         keyword.toLowerCase()
