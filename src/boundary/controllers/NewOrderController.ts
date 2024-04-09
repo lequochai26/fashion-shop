@@ -4,6 +4,7 @@ import ItemMetadata, { Mapping } from "../../domain/entities/ItemMetadata";
 import Order from "../../domain/entities/Order";
 import OrderItem from "../../domain/entities/OrderItem";
 import User from "../../domain/entities/User";
+import OrderStatus from "../../domain/enums/OrderStatus";
 import OrderType from "../../domain/enums/OrderType";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
@@ -225,6 +226,9 @@ export default class NewOrderController extends RestfulController {
         // Type
         order.Type = request.body.type;
 
+        // Status
+        order.Status = OrderStatus.SUCCESS;
+
         // Insert order
         try {
             await this.useDomainManager(
@@ -389,6 +393,9 @@ export default class NewOrderController extends RestfulController {
 
         // Type
         order.Type = request.body.type;
+
+        // Status
+        order.Status = OrderStatus.SUCCESS;
 
         // Date
         order.Date = new Date();
