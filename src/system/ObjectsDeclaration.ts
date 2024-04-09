@@ -13,6 +13,7 @@ import FileHandler from "../domain/FileHandler";
 import ItemImageManager from "../domain/ItemImageManager";
 import ItemManager from "../domain/ItemManager";
 import ItemTypeManager from "../domain/ItemTypeManager";
+import OrderHandler from "../domain/OrderHandler";
 import OrderItemManager from "../domain/OrderItemManager";
 import OrderManager from "../domain/OrderManager";
 import UserManager from "../domain/UserManager";
@@ -323,7 +324,8 @@ const objectsDeclaration = [
             [ "userManager", "userManager" ],
             [ "verificationCodeManager", "verificationCodeManager" ],
             [ "itemMetadataHandler", "itemMetadataHandler" ],
-            [ "fileHandler", "fileHandler" ]
+            [ "fileHandler", "fileHandler" ],
+            [ "orderHandler", "orderHandler" ]
         ]
     },
 
@@ -385,6 +387,15 @@ const objectsDeclaration = [
     {
         prototype: FileHandler.prototype,
         name: "fileHandler"
+    },
+
+    // orderHandler
+    {
+        prototype: OrderHandler.prototype,
+        name: "orderHandler",
+        dependencies: [
+            [ 'domainManager', 'domainManager' ]
+        ]
     },
 
     // BOUNDARY LAYER
