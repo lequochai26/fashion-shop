@@ -7,4 +7,5 @@ export default interface UserData{
     address: string;
     avatar: string;
     permission: string;
+    wallet?: string | undefined;
 }

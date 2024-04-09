@@ -8,4 +8,5 @@ export default interface UserInfo {
     permission: string;
     orderedOrders: string[];
     createdOrders: string[];
+    wallet?: string | undefined;
 }

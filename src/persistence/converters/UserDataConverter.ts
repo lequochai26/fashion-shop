@@ -10,7 +10,7 @@ export default class UserDataConverter implements Converter<WithId<Document>,Use
 
     //methods:
     public convert(from: WithId<Document>): UserData{
-        return{
+        return {
             email: from.email,
             password : from.password,
             fullName: from.fullName,
@@ -18,7 +18,8 @@ export default class UserDataConverter implements Converter<WithId<Document>,Use
             phoneNumber: from.phoneNumber,
             address: from.address,
             avatar: from.avater,
-            permission: from.permission
-        }
+            permission: from.permission,
+            wallet: from.wallet
+        };
     }
 }

@@ -21,6 +21,7 @@ export default class UserConverter implements ReversableConverter<UserData,User>
         user.Adress = from.address;
         user.Avatar = from.avatar;
         user.Permission = from.permission;
+        user.Wallet = from.wallet;
 
         return user;
     } 
@@ -34,7 +35,8 @@ export default class UserConverter implements ReversableConverter<UserData,User>
             phoneNumber: from.PhoneNumber as string,
             address: from.Adress as string,
             avatar: from.Avatar as string,
-            permission: from.Permission as string
+            permission: from.Permission as string,
+            wallet: from.Wallet
         }
     }
 }

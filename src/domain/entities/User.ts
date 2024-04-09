@@ -12,6 +12,7 @@ export default class User {
     private address?: string | undefined;
     private avatar? : string | undefined;
     private permission?: string | undefined;
+    private wallet?: string | undefined;
 
     //dependency:
     private orderedOrders: Order[];
@@ -32,7 +33,8 @@ export default class User {
         orderedOrders?: Order[] | undefined,
         createdOrders?: Order[] | undefined,
         cart?: CartItem[] | undefined,
-        verificationCode? : VerificationCode[] | undefined
+        verificationCode? : VerificationCode[] | undefined,
+        wallet?: string | undefined
     ) {
         this.email = email;
         this.password = password;
@@ -46,6 +48,7 @@ export default class User {
         this.createdOrders = createdOrders || [];
         this.cart = cart || [];
         this.verificationCode = verificationCode || [];
+        this.wallet = wallet;
     }
 
     //methods:
@@ -131,5 +134,12 @@ export default class User {
     }
     public set VerificationCode(verificationCode : VerificationCode[] ) {
         this.verificationCode = verificationCode;
+    }
+
+    public get Wallet() {
+        return this.wallet;
+    }
+    public set Wallet(value) {
+        this.wallet = value;
     }
 }

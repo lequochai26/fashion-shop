@@ -23,7 +23,8 @@ export default class UserInfoConverter implements Converter<User, UserInfo> {
                 order => order.Id as string
             ),
             permission: from.Permission as string,
-            phoneNumber: from.PhoneNumber as string
+            phoneNumber: from.PhoneNumber as string,
+            wallet: from.Wallet
         };
     }
 }
