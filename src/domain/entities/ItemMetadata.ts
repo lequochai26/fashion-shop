@@ -22,13 +22,20 @@ export default class ItemMetadata {
         let target: Mapping | undefined = undefined;
 
         for (const mapping of this.mappings) {
+            let match: boolean = true;
+
             for (const key of keys) {
-                if (mapping[key] !== filter[key]) {
+                if (mapping[key] === filter[key]) {
                     continue;
                 }
+                match = false;
+                break;
             }
 
-            target = mapping;
+            if (match) {
+                target = mapping;
+                break;
+            }
         }
 
         // Return
