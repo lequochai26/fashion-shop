@@ -81,6 +81,7 @@ export default class OrderHandler {
 
         // Insert orderItems
         for (const orderItem of orderItems) {
+            orderItem.Order = order;
             await this.useDomainManager(
                 async domainManager => domainManager.insertOrderItem(orderItem)
             );
@@ -154,6 +155,7 @@ export default class OrderHandler {
 
         // Insert orderItems
         for (const orderItem of orderItems) {
+            orderItem.Order = order;
             await this.useDomainManager(
                 async domainManager => domainManager.insertOrderItem(orderItem)
             );
@@ -163,7 +165,7 @@ export default class OrderHandler {
         for (const orderItem of orderItems) {
             const item: Item = orderItem.Item as Item;
 
-            if (orderItem.Metadata) {
+            if (!orderItem.Metadata) {
                 item.Amount = (item.Amount as number) + (orderItem.Amount as number);
             }
             else {
