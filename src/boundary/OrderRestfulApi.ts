@@ -9,7 +9,7 @@ import Controller from "./controllers/interfaces/Controller";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
 import OrderInfoConverter from "./converters/OrderInfoConverter";
 import OrderInfo from "./infos/order/OrderInfo";
-import NewOrderController from "./controllers/NewOrderController";
+import UpgradedNewOrderController from "./controllers/UpgradedNewOrderController";
 
 export default class OrderRestfulApi extends RestfulApi {
     // Static fields:
@@ -38,7 +38,8 @@ export default class OrderRestfulApi extends RestfulApi {
 
         this.orderInfoConverter = new OrderInfoConverter();
 
-        this.newOrderController = new NewOrderController(this.domainManager);
+        // this.newOrderController = new NewOrderController(this.domainManager);
+        this.newOrderController = new UpgradedNewOrderController(this.domainManager);
         this.createOrderController = this.methodUnimplementedController;
         this.updateOrderStatusController = this.methodUnimplementedController;
         this.removeOrderController = this.methodUnimplementedController;
