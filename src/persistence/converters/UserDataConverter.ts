@@ -17,7 +17,7 @@ export default class UserDataConverter implements Converter<WithId<Document>,Use
             gender: from.gender,
             phoneNumber: from.phoneNumber,
             address: from.address,
-            avatar: from.avater,
+            avatar: from.avatar,
             permission: from.permission,
             wallet: from.wallet
         };
