@@ -24,6 +24,7 @@ export default class UserRestfulApi extends RestfulApi {
     private getUsersByKeywordController: Controller<RestfulControllerParam, void>;
     private getAllUsersController: Controller<RestfulControllerParam, void>;
     private getUserController: Controller<RestfulControllerParam, void>;
+    private getLoggedInUserController: Controller<RestfulControllerParam, void>;
     private newUserController: Controller<RestfulControllerParam, void>;
     private loginController: Controller<RestfulControllerParam, void>;
     private logoutController: Controller<RestfulControllerParam, void>;
@@ -42,6 +43,7 @@ export default class UserRestfulApi extends RestfulApi {
         this.getUsersByKeywordController = new GetUsersByKeyWordController(this.userInfoConverter, this.domainManager);
         this.getAllUsersController = new GetAllUsersController(this.userInfoConverter, this.domainManager);
         this.getUserController = new GetUserController(this.userInfoConverter, this.domainManager);
+        this.getLoggedInUserController = this.methodUnimplementedController;
         this.newUserController = new NewUserController(this.domainManager);
         this.loginController = new LoginController(this.domainManager);
         this.logoutController = this.methodUnimplementedController;
@@ -71,6 +73,11 @@ export default class UserRestfulApi extends RestfulApi {
 
             case 'get': {
                 controller = this.getUserController;
+                break;
+            }
+
+            case 'getLoggedIn': {
+                controller = this.getLoggedInUserController;
                 break;
             }
 
