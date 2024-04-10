@@ -15,6 +15,7 @@ import GetUsersByKeyWordController from "./controllers/GetUsersByKeyWordControll
 import { NewUserController } from "./controllers/NewUserController";
 import LoginController from "./controllers/LoginController";
 import GetLoggedInUserController from "./controllers/GetLoggedInUserController";
+import ChangePasswordController from "./controllers/ChangePasswordController";
 
 export default class UserRestfulApi extends RestfulApi {
     // Static fields:
@@ -49,7 +50,7 @@ export default class UserRestfulApi extends RestfulApi {
         this.loginController = new LoginController(this.domainManager);
         this.logoutController = this.methodUnimplementedController;
         this.updateUserController = this.methodUnimplementedController;
-        this.changePasswordController = this.methodUnimplementedController;
+        this.changePasswordController = new ChangePasswordController(this.domainManager);
         this.removeUserController = this.methodUnimplementedController;
     }
 
