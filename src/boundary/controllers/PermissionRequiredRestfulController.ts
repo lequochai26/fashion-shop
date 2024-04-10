@@ -5,7 +5,7 @@ import EmployeeValidateController from "./EmployeeValidateController";
 import Controller from "./interfaces/Controller";
 import LoginValidateController, { LoginValidateParam, LoginValidatePath } from "./LoginValidateController";
 
-export default abstract class PermissionRequiredController extends RestfulController {
+export default abstract class PermissionRequiredRestfulController extends RestfulController {
     // Fields:
     protected loginValidateController: Controller<LoginValidateParam, LoginValidatePath>;
     protected employeeValidateController: Controller<LoginValidateParam, UserPermissionValidatePath>;
