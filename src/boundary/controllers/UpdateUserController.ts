@@ -2,7 +2,7 @@ import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
 import UserPermission from "../../domain/enums/UserPermission";
 import Session from "../../utils/Session";
-import Path from "../enums/Path";
+import Path from "../../domain/enums/Path";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
