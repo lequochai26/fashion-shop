@@ -32,7 +32,8 @@ export default class OrderInfoConverter implements Converter<Order, OrderInfo> {
                 })
             ),
             totalPrice: from.TotalPrice as number,
-            status: from.Status as string
+            status: from.Status as string,
+            paymentMethod: from.PaymentMethod as string
         };
     }
 }

@@ -10,4 +10,5 @@ export default interface OrderInfo {
     orderedBy?: OrderInfoUser;
     items: OrderInfoItem[];
     status: string;
+    paymentMethod: string;
 }

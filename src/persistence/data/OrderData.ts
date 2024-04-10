@@ -7,4 +7,5 @@ export default interface OrderData{
     createdBy?: string | undefined;
     orderedBy?: string | undefined;
     status: string;
+    paymentMethod: string;
 }
