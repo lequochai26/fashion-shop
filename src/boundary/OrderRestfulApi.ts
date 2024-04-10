@@ -13,6 +13,7 @@ import OptimizedNewOrderController from "./controllers/OptimizedNewOrderControll
 import CancelOrderController from "./controllers/CancelOrderController";
 import GetOrderController from "./controllers/GetOrderController";
 import GetAllOrdersController from "./controllers/GetAllOrdersController";
+import GetOrderedOrdersController from "./controllers/GetOrderedOrdersController";
 
 export default class OrderRestfulApi extends RestfulApi {
     // Static fields:
@@ -29,6 +30,7 @@ export default class OrderRestfulApi extends RestfulApi {
     private getAllOrdersController: Controller<RestfulControllerParam, void>;
     private getOrdersByKeywordController: Controller<RestfulControllerParam, void>;
     private getOrderController: Controller<RestfulControllerParam, void>;
+    private getOrderedOrdersController: Controller<RestfulControllerParam, void>;
 
     // Constructors:
     public constructor(
@@ -51,6 +53,8 @@ export default class OrderRestfulApi extends RestfulApi {
         this.getAllOrdersController = new GetAllOrdersController(this.orderInfoConverter,this.DomainManager)
         this.getOrdersByKeywordController = this.methodUnimplementedController;
         this.getOrderController = new GetOrderController(this.orderInfoConverter, this.domainManager);
+        this.getOrderedOrdersController
+         = new GetOrderedOrdersController(this.orderInfoConverter, this.domainManager);
     }
 
     // Methods:
@@ -79,6 +83,12 @@ export default class OrderRestfulApi extends RestfulApi {
 
             case 'statistical': {
                 controller = this.statisticalController;
+                break;
+            }
+
+            case 'getOrdered' : {
+                controller = this.getOrderedOrdersController
+                ;
                 break;
             }
 
