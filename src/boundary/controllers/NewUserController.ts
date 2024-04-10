@@ -170,16 +170,6 @@ export class NewUserController extends RestfulController {
 
         const gender: boolean = genderStr === "true";
 
-        //Permission
-        let permission: any = request.body.permission;
-
-        if (!permission) {
-            permission = UserPermission.CUSTOMER;
-        }
-
-        if (!Object.values(UserPermission).includes(permission)) {
-            permission = UserPermission.CUSTOMER;
-        }
 
         //Avatar
         const [avatar]: Express.Multer.File[] = this.getFiles(request, "avatar");
@@ -223,7 +213,7 @@ export class NewUserController extends RestfulController {
         user.PhoneNumber = phoneNumber;
         user.Adress = address;
         user.Avatar = avatarPath;
-        user.Permission = permission;
+        user.Permission = UserPermission.CUSTOMER;
 
         try {
             await this.useDomainManager(
