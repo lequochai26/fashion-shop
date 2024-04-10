@@ -2,9 +2,9 @@ import DomainManager from "../../../domain/DomainManager";
 import Order from "../../../domain/entities/Order";
 import Converter from "../../../utils/interfaces/Converter";
 import OrderInfo from "../../infos/order/OrderInfo";
-import RestfulController from "./RestfulController";
+import PermissionRequiredRestfulController from "../PermissionRequiredRestfulController";
 
-export default abstract class QueryOrderRestfulController extends RestfulController {
+export default abstract class QueryOrderRestfulController extends PermissionRequiredRestfulController {
     // Fields 
     protected orderInfoConverter: Converter<Order, OrderInfo>;
 
