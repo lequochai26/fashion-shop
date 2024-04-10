@@ -11,7 +11,7 @@ import OrderInfoConverter from "./converters/OrderInfoConverter";
 import OrderInfo from "./infos/order/OrderInfo";
 import OptimizedNewOrderController from "./controllers/OptimizedNewOrderController";
 import CancelOrderController from "./controllers/CancelOrderController";
-import GetOrderController from "./controllers/GetOderController";
+import GetOrderController from "./controllers/GetOrderController";
 import GetAllOrdersController from "./controllers/GetAllOrdersController";
 
 export default class OrderRestfulApi extends RestfulApi {
