@@ -1,11 +1,15 @@
 import DomainManager from "../../domain/DomainManager";
 import Order from "../../domain/entities/Order";
 import Converter from "../../utils/interfaces/Converter";
+import RestfulError from "../errors/RestfulError";
 import OrderInfo from "../infos/order/OrderInfo";
+import EmployeeValidateController from "./EmployeeValidateController";
 import QueryOrderRestfulController from "./abstracts/QueryOrderRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
 export default class GetOrderController extends QueryOrderRestfulController {
+    //Fields
+    //Constructor
     public constructor(
         orderInfoConverter: Converter<Order, OrderInfo>,
         domainManager?: DomainManager | undefined
@@ -17,7 +21,30 @@ export default class GetOrderController extends QueryOrderRestfulController {
     //Methods
 
     public async execute({ response, request }: RestfulControllerParam): Promise<void> {
-        //
+        const path: any[] = [];
+        //validate
+        try {
+            await  this.employeeValidateController.execute({request, path});
+
+        } catch (error: any) {
+            if (error instanceof RestfulError)
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
+            else{
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB",
+                    code: "HANDLING_DB_FAILED"
+                });
+            }
+
+
+        }
         const id: string | undefined = request.query.id as string;
 
         if (!id) {
@@ -31,7 +58,6 @@ export default class GetOrderController extends QueryOrderRestfulController {
         }
 
 
-        const path: any[] = []
 
 
         try {
