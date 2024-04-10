@@ -96,6 +96,7 @@ export default class SimpleSessionFactory implements SessionFactory {
             async function (request, response, next) {
                 const session: Session = self.retrieve(request, response);
                 (request as any).session = session;
+                (request as any).sessionFactory = self;
                 next();
             }
         )
