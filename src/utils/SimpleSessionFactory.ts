@@ -65,6 +65,10 @@ export default class SimpleSessionFactory implements SessionFactory {
         return this.sessionStorage[sessionId];
     }
 
+    public getAll(): Session[] {
+        return Object.values(this.sessionStorage);
+    }
+
     public create(): [string, Session] {
         // Generate new id
         const id: string = SimpleSessionFactory.generateId();

@@ -21,6 +21,12 @@ export default interface SessionFactory {
     get(sessionId: string): Session | undefined;
 
     /**
+     * Truy vấn tất cả phiên làm việc có trong hệ thống
+     * @returns Danh sách phiên làm việc có trong hệ thống
+     */
+    getAll(): Session[]
+
+    /**
      * Tạo phiên làm việc mới
      * @returns Mã phiên làm việc mới và phiên làm việc mới
      */
