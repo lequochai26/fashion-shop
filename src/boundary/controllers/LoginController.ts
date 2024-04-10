@@ -14,6 +14,19 @@ export default class LoginController extends RestfulController {
 
     //Method:
     public async execute( { request, response }: RestfulControllerParam): Promise<void> {
+        // Get session
+        const session: Session = (request as any).session;
+
+        // Check already logged-in
+        if (session.get("user")) {
+            response.json({
+                success: false,
+                message: "Already logged in!",
+                code: "ALREADY_LOGGED_IN"
+            });
+            return;
+        }
+
         //Get email and password
         const email: string | undefined = request.body.email;
 
@@ -88,8 +101,7 @@ export default class LoginController extends RestfulController {
             
             return;
         }
-
-        const session: Session = (request as any).session;
+        
         session.put("user", user.Email);
 
         response.json(
