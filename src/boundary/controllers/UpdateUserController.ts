@@ -76,49 +76,36 @@ export default class UpdateUserController extends RestfulController {
         //check name
         const fullName: string | undefined = request.body.fullName;
 
-        if (!fullName) {
-            response.json(
-                {
-                    success: false,
-                    message: "FullName parameter is required !",
-                    code: "FULLNAME_REQUIRED"
-                }
-            );
-            return;
+        if (fullName) {
+           
+            user.FullName = fullName;
         }
 
-        user.FullName = fullName;
         
         //phone
 
         const phoneNumber: string | undefined = request.body.phoneNumber;
 
-        if (!phoneNumber) {
+        if (phoneNumber) {
+           
+          
+           const phoneCheck: RegExp = /^(0|\+84)(\d{9,10})$/;
+   
+           if (!phoneCheck.test(phoneNumber)) {
             response.json(
                 {
                     success: false,
-                    message: "PhoneNumber parameter is required !",
-                    code: "PHONENUMBER_REQUIRED"
+                    message: "phonenumber invalid",
+                    code: "PHONENUMBER_INVALID"
                 }
             );
             return;
         }
+            user.PhoneNumber = phoneNumber;
+        }
 
-        user.PhoneNumber = phoneNumber;
         
 
-        const phoneCheck: RegExp = /^(0|\+84)(\d{9,10})$/;
-
-        if (!phoneCheck.test(phoneNumber)) {
-            response.json(
-                {
-                    success: false,
-                    message: "PhoneNumber invalid !",
-                    code: "PHONENUMBER_INVALID!"
-                }
-            );
-            return;
-        }
 
         //gender
 
@@ -135,32 +122,20 @@ export default class UpdateUserController extends RestfulController {
         //check address
         const address: string | undefined = request.body.address;
 
-        if (!address) {
-            response.json(
-                {
-                    success: false,
-                    message: "Address parameter is required !",
-                    code: "ADDRESS_REQUIRED"
-                }
-            );
-            return;
+        if (address) {
+           
+            user.Adress = address;
         }
 
-        user.Adress = address;
 
         //check permission
-        let permission: any = request.body.permission;
+        let permission: string|undefined = request.body.permission;
 
-        if (!permission) {
-            permission = UserPermission.CUSTOMER;
+        if(permission){
+
+            user.Permission = permission;
         }
 
-        if (permission !== UserPermission.CUSTOMER && permission !== UserPermission.EMPLOYEE && permission !== UserPermission.MANAGER) {
-            // Kiểm tra nếu permission không thuộc các giá trị hợp lệ của UserPermission
-            permission = UserPermission.CUSTOMER;
-        }
-
-        user.Permission = permission;
 
 
         //check avatar
