@@ -3,7 +3,7 @@ import DomainManagerHolder from "../base_classes/DomainManagerHolder";
 import Controller from "../interfaces/Controller";
 import LoginValidateController, { LoginValidateParam, LoginValidatePath } from "../LoginValidateController";
 
-export default abstract class UserPermissionValidateController<R> extends DomainManagerHolder implements Controller<LoginValidateParam, R> {
+export default abstract class UserPermissionValidateController extends DomainManagerHolder implements Controller<LoginValidateParam, UserPermissionValidatePath> {
     // Fields:
     protected loginValidateController: Controller<LoginValidateParam, LoginValidatePath>;
 
@@ -17,5 +17,9 @@ export default abstract class UserPermissionValidateController<R> extends Domain
     }
 
     // Methods:
-    public abstract execute(param: LoginValidateParam): Promise<R>;
+    public abstract execute(param: LoginValidateParam): Promise<UserPermissionValidatePath>;
+}
+
+export interface UserPermissionValidatePath extends LoginValidatePath {
+    permission: string;
 }

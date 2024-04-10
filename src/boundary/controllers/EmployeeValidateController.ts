@@ -1,12 +1,10 @@
 import DomainManager from "../../domain/DomainManager";
 import UserPermission from "../../domain/enums/UserPermission";
 import RestfulError from "../errors/RestfulError";
-import UserPermissionValidateController from "./abstracts/UserPermissionValidateController";
-import DomainManagerHolder from "./base_classes/DomainManagerHolder";
-import Controller from "./interfaces/Controller";
+import UserPermissionValidateController, { UserPermissionValidatePath } from "./abstracts/UserPermissionValidateController";
 import { LoginValidateParam, LoginValidatePath } from "./LoginValidateController";
 
-export default class EmployeeValidateController extends UserPermissionValidateController<EmployeeValidatePath> {
+export default class EmployeeValidateController extends UserPermissionValidateController {
     // Constructors:
     public constructor(
         domainManager: DomainManager | undefined
@@ -15,7 +13,7 @@ export default class EmployeeValidateController extends UserPermissionValidateCo
     }
 
     // Methods:
-    public async execute(param: LoginValidateParam): Promise<EmployeeValidatePath> {
+    public async execute(param: LoginValidateParam): Promise<UserPermissionValidatePath> {
         // Validate login
         const loginValidatePath: LoginValidatePath = await this.loginValidateController.execute(param);
 
@@ -36,8 +34,4 @@ export default class EmployeeValidateController extends UserPermissionValidateCo
         // Return
         return { ...loginValidatePath, permission };
     }
-}
-
-export interface EmployeeValidatePath extends LoginValidatePath {
-    permission: string;
 }
