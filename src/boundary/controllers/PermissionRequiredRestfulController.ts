@@ -4,6 +4,7 @@ import { UserPermissionValidatePath } from "./abstracts/UserPermissionValidateCo
 import EmployeeValidateController from "./EmployeeValidateController";
 import Controller from "./interfaces/Controller";
 import LoginValidateController, { LoginValidateParam, LoginValidatePath } from "./LoginValidateController";
+import ManagerValidateController from "./ManagerValidateController";
 
 export default abstract class PermissionRequiredRestfulController extends RestfulController {
     // Fields:
@@ -21,6 +22,6 @@ export default abstract class PermissionRequiredRestfulController extends Restfu
 
         this.employeeValidateController = new EmployeeValidateController(domainManager);
 
-        this.managerValidateController = new EmployeeValidateController(domainManager);
+        this.managerValidateController = new ManagerValidateController(domainManager);
     }
 }
