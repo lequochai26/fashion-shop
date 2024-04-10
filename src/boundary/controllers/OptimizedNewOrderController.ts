@@ -18,7 +18,12 @@ export default class OptimizedNewOrderController extends NewOrderRestfulControll
         const path: any[] = [];
 
         try {
-            var { items, paymentMethod, type }: NewOrderValidateControllerReturn = await this.validateController.execute({ items: request.body.items, path, paymentMethod: request.body.paymentMethod, type: request.body.type });
+            var { items, paymentMethod, type, totalPrice }: NewOrderValidateControllerReturn = await this.validateController.execute({
+                items: request.body.items,
+                path, paymentMethod: request.body.paymentMethod,
+                type: request.body.type,
+                totalPrice: request.body.totalPrice
+            });
         }
         catch (error: any)  {
             console.error(error);
@@ -44,7 +49,7 @@ export default class OptimizedNewOrderController extends NewOrderRestfulControll
         // Create new order
         try {
             await this.useDomainManager(
-                async domainManager => domainManager.newOrder({ type, items, path, paymentMethod })
+                async domainManager => domainManager.newOrder({ type, items, path, paymentMethod, totalPrice })
             );
         }
         catch (error: any) {

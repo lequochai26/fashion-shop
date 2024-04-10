@@ -34,7 +34,7 @@ export default class OrderHandler {
         this.defaultValue(param);
 
         // Dustruct param
-        const { items, path, type, createdBy, orderedBy, paymentMethod, status }: OrderHandlerParam = param;
+        const { items, path, type, createdBy, orderedBy, paymentMethod, status, totalPrice }: OrderHandlerParam = param;
 
         // Create OrderItems
         const orderItems: OrderItem[] = [];
@@ -71,8 +71,9 @@ export default class OrderHandler {
             );
         }
         order.Status = status;
-        order.calcTotalPrice();
+        order.TotalPrice = totalPrice || order.calcTotalPrice();
         order.Type = type;
+        order.PaymentMethod = paymentMethod;
 
         // Insert order
         await this.useDomainManager(
@@ -111,7 +112,7 @@ export default class OrderHandler {
         this.defaultValue(param);
 
         // Destruct param
-        const { items, path, type, createdBy, orderedBy, paymentMethod, status }: OrderHandlerParam = param;
+        const { items, path, type, createdBy, orderedBy, paymentMethod, status, totalPrice }: OrderHandlerParam = param;
 
         // Create OrderItems
         const orderItems: OrderItem[] = [];
@@ -144,8 +145,9 @@ export default class OrderHandler {
             async domainManager => domainManager.getUser(orderedBy, path)
         ) : undefined;
         order.Status = status;
-        order.calcTotalPrice();
+        order.TotalPrice = totalPrice || order.calcTotalPrice();
         order.Type = type;
+        order.PaymentMethod = paymentMethod;
 
         // Insert order
         await this.useDomainManager(
@@ -217,6 +219,7 @@ export type OrderHandlerParam = {
     path: any[],
     status?: string | undefined,
     paymentMethod?: string | undefined,
+    totalPrice?: number | undefined,
     createdBy?: string | undefined,
     orderedBy?: string | undefined
 }

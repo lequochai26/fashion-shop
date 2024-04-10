@@ -29,7 +29,7 @@ export default class NewOrderValidateController implements Controller<NewOrderVa
     }
 
     // Methods:
-    public async execute({ items, paymentMethod, type, path }: NewOrderValidateControllerParam): Promise<NewOrderValidateControllerReturn> {
+    public async execute({ items, paymentMethod, type, totalPrice, path }: NewOrderValidateControllerParam): Promise<NewOrderValidateControllerReturn> {
         // Check type
         if (!type) {
             throw new RestfulError(
@@ -43,6 +43,27 @@ export default class NewOrderValidateController implements Controller<NewOrderVa
                 "type can only be BUY or SELL",
                 "TYPE_INVALID"
             );
+        }
+
+        // Check paymentMethod
+        if (paymentMethod) {
+            if (paymentMethod !== OrderPaymentMethod.ETH &&
+                paymentMethod !== OrderPaymentMethod.ON_RECEIVING &&
+                paymentMethod !== OrderPaymentMethod.VND) { 
+                throw new RestfulError(
+                    "paymentMethod can only be ETH or VND or ON_RECEIVING"
+                );
+            }
+        }
+
+        // Check totalPrice
+        if (totalPrice) {
+            if (totalPrice < 0) {
+                throw new RestfulError(
+                    `totalPrice must be a number that greater than or equals to 0.`,
+                    "TOTALPRICE_INVALID"
+                );
+            }
         }
 
         // Check items
@@ -114,17 +135,8 @@ export default class NewOrderValidateController implements Controller<NewOrderVa
             }
         }
 
-        // Check paymentMethod
-        if (paymentMethod) {
-            if (paymentMethod !== OrderPaymentMethod.ETH && paymentMethod !== OrderPaymentMethod.ON_RECEIVING && paymentMethod !== OrderPaymentMethod.VND) { 
-                throw new RestfulError(
-                    "paymentMethod can only be ETH or VND or ON_RECEIVING"
-                );
-            }
-        }
-
         // Return
-        return { items, paymentMethod, type };
+        return { items, paymentMethod, type, totalPrice };
     }
 }
 
@@ -132,11 +144,13 @@ export interface NewOrderValidateControllerParam {
     type: string | undefined;
     items: { id: string, amount: number, metadata: any }[] | undefined;
     paymentMethod: string | undefined;
-    path: any[]
+    totalPrice: number | undefined;
+    path: any[];
 }
 
 export interface NewOrderValidateControllerReturn {
     type: string;
     items: { id: string, amount: number, metadata: any }[];
     paymentMethod: string | undefined;
+    totalPrice: number | undefined;
 }
