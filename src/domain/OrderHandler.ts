@@ -203,15 +203,3 @@ export default class OrderHandler {
         }
     }
 }
-
-class OrderHandlerError extends Error {
-    // Fields:
-    public code: string;
-
-    // Constructors:
-    public constructor(message: string, code: string) {
-        super(message);
-
-        this.code = code;
-    }
-}
