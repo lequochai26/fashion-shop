@@ -1,6 +1,6 @@
 // Types:
 export type Option = string[];
-export type Mapping = { [ index: string ]: any, price: number, amount: number };
+export type Mapping = { [ index: string ]: any, price: number, buyPrice: number, amount: number };
 
 export default class ItemMetadata {
     // Fields:

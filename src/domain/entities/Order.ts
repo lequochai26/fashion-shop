@@ -1,3 +1,4 @@
+import OrderType from "../enums/OrderType";
 import OrderItem from "./OrderItem";
 import User from "./User";
 
@@ -48,10 +49,10 @@ export default class Order {
         return this.id;
     }
 
-    public calcTotalPrice(): number {
+    public calcTotalPrice(orderType: OrderType): number {
         this.totalPrice = 0;
         for (const item of this.items) {
-            this.totalPrice += item.totalPrice();
+            this.totalPrice += item.totalPrice(orderType);
         }
         return this.totalPrice;
     }

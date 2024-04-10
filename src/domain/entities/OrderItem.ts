@@ -1,3 +1,4 @@
+import OrderType from "../enums/OrderType";
 import Item from "./Item";
 import ItemMetadata, { Mapping } from "./ItemMetadata";
 import Order from "./Order";
@@ -26,7 +27,7 @@ export default class OrderItem{
     }
 
     // Methods:
-    public totalPrice(): number {
+    public totalPrice(orderType: OrderType): number {
         // Get item
         const item = this.item;
 
@@ -37,7 +38,12 @@ export default class OrderItem{
 
         // Calculate price
         if (!this.metadata) {
-            this.price = (item.Price as number) * (this.Amount as number);
+            if (orderType === OrderType.BUY) {
+                this.price = (item.BuyPrice as number) * (this.Amount as number);
+            }
+            else {
+                this.price = (item.Price as number) * (this.Amount as number);
+            }
         }
         else {
             const itemMetadata: ItemMetadata | undefined = item.Metadata;
@@ -52,7 +58,12 @@ export default class OrderItem{
                 throw new Error(`Metadata invalid!`);
             }
 
-            this.price = mapping.price * (this.amount as number);
+            if (orderType == OrderType.BUY) {
+                this.price = mapping.buyPrice * (this.Amount as number);
+            }
+            else {
+                this.price = mapping.price * (this.Amount as number);
+            }
         }
 
         // Return this's price

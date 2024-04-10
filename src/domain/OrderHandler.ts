@@ -71,7 +71,7 @@ export default class OrderHandler {
             );
         }
         order.Status = status;
-        order.TotalPrice = totalPrice || order.calcTotalPrice();
+        order.TotalPrice = totalPrice || order.calcTotalPrice(type as OrderType);
         order.Type = type;
         order.PaymentMethod = paymentMethod;
 
@@ -145,7 +145,7 @@ export default class OrderHandler {
             async domainManager => domainManager.getUser(orderedBy, path)
         ) : undefined;
         order.Status = status;
-        order.TotalPrice = totalPrice || order.calcTotalPrice();
+        order.TotalPrice = totalPrice || order.calcTotalPrice(type as OrderType);
         order.Type = type;
         order.PaymentMethod = paymentMethod;
 
