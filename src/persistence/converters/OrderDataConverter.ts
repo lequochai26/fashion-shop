@@ -14,7 +14,8 @@ export default class OrderDataConverter implements Converter<WithId<Document>,Or
             metadata: document.metadata,
             createdBy: document.createdBy,
             orderedBy: document.orderedBy,
-            status: document.status
+            status: document.status,
+            paymentMethod: document.paymentMethod
         };
     }
 }

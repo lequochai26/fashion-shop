@@ -27,6 +27,8 @@ export default class OrderConverter implements ReversableConverter<OrderData,Ord
             order.OrderedBy = orderedBy;
         }
 
+        order.PaymentMethod = from.paymentMethod;
+
         return order;
     }
     reverse(from: Order): OrderData {
@@ -38,7 +40,8 @@ export default class OrderConverter implements ReversableConverter<OrderData,Ord
             metadata: from.Metadata as string,
             createdBy: from.CreatedBy?.Email,
             orderedBy: from.OrderedBy?.Email,
-            status: from.Status as string
+            status: from.Status as string,
+            paymentMethod: from.PaymentMethod as string
         };
     }
     
