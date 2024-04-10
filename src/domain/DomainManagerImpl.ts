@@ -5,7 +5,7 @@ import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePri
 import DomainManager from "./DomainManager";
 import EntityManager from "./EntityManager";
 import FileHandler from "./FileHandler";
-import OrderHandler from "./OrderHandler";
+import OrderHandler, { OrderHandlerParam } from "./OrderHandler";
 import SearchableEntityManager from "./SearchableEntityManager";
 import Brand from "./entities/Brand";
 import CartItem from "./entities/CartItem";
@@ -775,9 +775,9 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    public async newOrder(type: string, items: { id: string; amount: number; metadata: any; }[], path: any[], createdBy?: string | undefined, orderedBy?: string | undefined, status?: string | undefined): Promise<void> {
+    public async newOrder(param: OrderHandlerParam): Promise<void> {
         return this.useOrderHandler(
-            async orderHandler => orderHandler.newOrder(type, items, path, createdBy, orderedBy, status)
+            async orderHandler => orderHandler.newOrder(param)
         );
     }
 

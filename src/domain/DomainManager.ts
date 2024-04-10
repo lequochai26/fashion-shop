@@ -11,6 +11,7 @@ import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey"
 import OrderItem from "./entities/OrderItem"
 import VerificationCodePrimaryKey from "../persistence/pkeys/VerificationCodePrimaryKey"
 import VerificationCode from "./entities/VerificationCode"
+import { OrderHandlerParam } from "./OrderHandler"
 
 export default interface DomainManager {
     getCartItem(pKey: CartItemPrimaryKey, path: any[]): Promise<CartItem | undefined>
@@ -101,12 +102,5 @@ export default interface DomainManager {
     isImageFile(file: Express.Multer.File): boolean;
     getFileNameFromPath(path: string): string;
 
-    newOrder(
-        type: string,
-        items: { id: string, amount: number, metadata: any }[],
-        path: any[],
-        createdBy?: string | undefined,
-        orderedBy?: string | undefined,
-        status?: string | undefined
-    ): Promise<void>
+    newOrder(param: OrderHandlerParam): Promise<void>
 }

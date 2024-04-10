@@ -148,7 +148,7 @@ export default class UpgradedNewOrderController extends RestfulController {
             }
 
             await this.useDomainManager(
-                async domainManager => domainManager.newOrder(type, items, path, undefined, )
+                async domainManager => domainManager.newOrder({ items, path, type })
             );
         }
         catch (error: any) {
