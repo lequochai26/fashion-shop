@@ -99,6 +99,7 @@ export default interface DomainManager {
     writeFileAutoName(path: string, file: Express.Multer.File): string;
     deleteFile(path: string): void;
     isImageFile(file: Express.Multer.File): boolean;
+    getFileNameFromPath(path: string): string;
 
     newOrder(
         type: string,

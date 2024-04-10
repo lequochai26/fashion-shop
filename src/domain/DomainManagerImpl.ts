@@ -769,6 +769,12 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
+    public getFileNameFromPath(path: string): string {
+        return this.useFileHandler(
+            fileHandler => fileHandler.getFileNameFromPath(path)
+        );
+    }
+
     public async newOrder(type: string, items: { id: string; amount: number; metadata: any; }[], path: any[], createdBy?: string | undefined, orderedBy?: string | undefined, status?: string | undefined): Promise<void> {
         return this.useOrderHandler(
             async orderHandler => orderHandler.newOrder(type, items, path, createdBy, orderedBy, status)

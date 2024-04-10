@@ -33,6 +33,11 @@ export default class FileHandler {
     public isImageFile(file: Express.Multer.File): boolean {
         return this.getType(file) === 'image';
     }
+
+    public getFileNameFromPath(path: string): string {
+        const pathSplitted: string[] = path.split("/");
+        return pathSplitted[pathSplitted.length-1];
+    }
     
     // Private methods:
     private generateName(): string {
