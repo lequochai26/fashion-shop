@@ -102,5 +102,6 @@ export default interface DomainManager {
     isImageFile(file: Express.Multer.File): boolean;
     getFileNameFromPath(path: string): string;
 
-    newOrder(param: OrderHandlerParam): Promise<void>
+    newOrder(param: OrderHandlerParam): Promise<void>;
+    cancelOrder(order: Order): Promise<void>;
 }

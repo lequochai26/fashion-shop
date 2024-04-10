@@ -781,6 +781,12 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
+    public async cancelOrder(order: Order): Promise<void> {
+        return this.useOrderHandler(
+            async orderHandler => orderHandler.cancelOrder(order)
+        );
+    }
+
     // Getters / setters:
     public get BrandManager(): SearchableEntityManager<Brand, string> | undefined {
         return this.brandManager;

@@ -211,6 +211,36 @@ export default class OrderHandler {
             throw new Error(`Type ${type} is invalid!`);
         }
     }
+
+    public async cancelOrder(order: Order): Promise<void> {
+        // Update status for order
+        order.Status = OrderStatus.CANCELLED;
+
+        await this.useDomainManager(
+            async domainManager => domainManager.updateOrder(order)
+        );
+
+        // Recovery items amount
+        for (const orderItem of order.Items) {
+            const item: Item | undefined = orderItem.Item;
+
+            if (!item) {
+                continue;
+            }
+
+            if (!orderItem.Metadata) {
+                item.Amount = (item.Amount as number) + (orderItem.Amount as number);
+            }
+            else {
+                const mapping: Mapping = item.Metadata?.getMapping(orderItem.Metadata) as Mapping;
+                mapping.amount += orderItem.Amount as number;
+            }
+
+            await this.useDomainManager(
+                async domainManager => domainManager.updateItem(item)
+            );
+        }
+    }
 }
 
 export type OrderHandlerParam = {
