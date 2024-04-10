@@ -30,7 +30,7 @@ export class NewUserController extends RestfulController {
 
         const regexEmail = /^(?![-._]|.*@[-._]|.*[-._]+@)[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/
 
-        if(!regexEmail.test(email)) {
+        if (!regexEmail.test(email)) {
             response.json(
                 {
                     success: false,
@@ -45,12 +45,12 @@ export class NewUserController extends RestfulController {
         //Path initialaztion
         const path: any[] = [];
 
-        let user: User |undefined;
+        let user: User | undefined;
 
         try {
             user = await this.useDomainManager(
                 async function (domainManager) {
-                    return  domainManager.getUser(email,path);
+                    return domainManager.getUser(email, path);
                 }
             )
         } catch (error: any) {
@@ -58,7 +58,7 @@ export class NewUserController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message:"Failed while handling with DB!",
+                    message: "Failed while handling with DB!",
                     code: "HANDLING_DB_FAILED"
                 }
             );
@@ -66,7 +66,7 @@ export class NewUserController extends RestfulController {
             return;
         }
 
-        if(user) {
+        if (user) {
             response.json(
                 {
                     success: false,
@@ -80,8 +80,8 @@ export class NewUserController extends RestfulController {
 
         //Fullname
         const fullName: string | undefined = request.body.fullName;
-        
-        if(!fullName) {
+
+        if (!fullName) {
             response.json(
                 {
                     success: false,
@@ -96,7 +96,7 @@ export class NewUserController extends RestfulController {
         //Password
         const password: string | undefined = request.body.password;
 
-        if(!password) {
+        if (!password) {
             response.json(
                 {
                     success: false,
@@ -111,12 +111,12 @@ export class NewUserController extends RestfulController {
         //Phone number
         const phoneNumber: string | undefined = request.body.phoneNumber;
 
-        if(!phoneNumber) {
+        if (!phoneNumber) {
             response.json(
                 {
                     success: false,
                     message: "PhoneNumber parameter is required!",
-                    code: "PASSWORD_REQUIRED"
+                    code: "PHONENUMBER_REQUIRED"
                 }
             );
 
@@ -125,8 +125,8 @@ export class NewUserController extends RestfulController {
 
         //Check phone number
         const regexPhoneNumber = /^(\+84\d{9,10})|0\d{9,10}$/;
-        
-        if(!regexPhoneNumber.test(phoneNumber)) {
+
+        if (!regexPhoneNumber.test(phoneNumber)) {
             response.json(
                 {
                     success: false,
@@ -141,7 +141,7 @@ export class NewUserController extends RestfulController {
         //Address
         const address: string | undefined = request.body.address;
 
-        if(!address) {
+        if (!address) {
             response.json(
                 {
                     success: false,
@@ -156,7 +156,7 @@ export class NewUserController extends RestfulController {
         //Gender
         const genderStr: string | undefined = request.body.gender;
 
-        if(!genderStr) {
+        if (!genderStr) {
             response.json(
                 {
                     success: false,
@@ -173,46 +173,45 @@ export class NewUserController extends RestfulController {
         //Permission
         let permission: any = request.body.permission;
 
-        if(!permission) {
+        if (!permission) {
             permission = UserPermission.CUSTOMER;
         }
 
-        if(!Object.values(UserPermission).includes(permission)) {
+        if (!Object.values(UserPermission).includes(permission)) {
             permission = UserPermission.CUSTOMER;
         }
 
         //Avatar
-        const [ avatar ]: Express.Multer.File[] = this.getFiles(request, "avatar");
+        const [avatar]: Express.Multer.File[] = this.getFiles(request, "avatar");
 
-        let avatarPath:  string;
+        let avatarPath: string;
 
-        if(!avatar) {
+        if (!avatar) {
             avatarPath = "/assets/avatar/default.png";
-        }
-
-        //Check avatar file type
-        if(
-            !await this.useDomainManager(
-                async function (domainManager) {
-                    return domainManager.isImageFile(avatar);
+        } else {
+            //Check avatar file type
+            if (
+                !await this.useDomainManager(
+                    async function (domainManager) {
+                        return domainManager.isImageFile(avatar);
+                    }
+                )
+            ) {
+                avatarPath = "/assets/avatar/default.png";
+            } else {
+                //Write avatar
+                try {
+                    const avatarFileName = await this.useDomainManager(
+                        async function (domainManager) {
+                            return domainManager.writeFileAutoName("./assets/avatar/", avatar);
+                        }
+                    );
+                    avatarPath = `/assets/avatar/${avatarFileName}`;
+                } catch (error: any) {
+                    console.error(error);
+                    avatarPath = "/assets/avatar/default.png";
                 }
-            )
-        ) {
-            avatarPath = "/assets/avatar/default.png";
-        }
-
-        //Write avatar
-        try {
-            const avatarFileName =  await this.useDomainManager(
-                async function(domainManager) {
-                    return domainManager.writeFileAutoName("./assets/avatar/", avatar);
-                }
-            );
-
-            avatarPath = `/assets/avatar/${avatarFileName}`;
-        } catch (error: any) {
-            console.error(error);
-            avatarPath = "/assets/avatar/default.png";
+            }
         }
 
         //Insert user
@@ -221,11 +220,11 @@ export class NewUserController extends RestfulController {
         user.Password = password;
         user.FullName = fullName;
         user.Gender = gender;
-        user.PhoneNumber =phoneNumber;
+        user.PhoneNumber = phoneNumber;
         user.Adress = address;
         user.Avatar = avatarPath;
         user.Permission = permission;
-        
+
         try {
             await this.useDomainManager(
                 async function (domainManager) {
@@ -235,9 +234,9 @@ export class NewUserController extends RestfulController {
         } catch (error: any) {
             console.error(error);
 
-            try {   
+            try {
                 await this.useDomainManager(
-                    async function(domainManager) {
+                    async function (domainManager) {
                         domainManager.deleteFile(avatarPath);
                     }
                 )
@@ -257,7 +256,7 @@ export class NewUserController extends RestfulController {
         }
 
         response.json(
-            { success: true}
+            { success: true }
         );
     }
 }
