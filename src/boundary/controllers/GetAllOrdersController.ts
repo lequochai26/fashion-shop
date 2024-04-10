@@ -1,10 +1,11 @@
-import { response } from "express";
 import DomainManager from "../../domain/DomainManager";
 import Order from "../../domain/entities/Order";
 import Converter from "../../utils/interfaces/Converter";
 import OrderInfo from "../infos/order/OrderInfo";
 import QueryOrderRestfulController from "./abstracts/QueryOrderRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import RestfulError from "../errors/RestfulError";
+
 
 export default class GetAllOrdersController extends QueryOrderRestfulController{
     //constructor
@@ -15,12 +16,31 @@ export default class GetAllOrdersController extends QueryOrderRestfulController{
         super(orderInfoConverter,domainManager)
     }
     
-    public async execute({response}: RestfulControllerParam): Promise<void> {
+    public async execute({response, request}: RestfulControllerParam): Promise<void> {
         const self : GetAllOrdersController = this;
 
         //path
         const path: any[] = [];
-
+        
+        //validate
+        try{
+            await this.employeeValidateController.execute({request, path});
+        }catch(error: any){
+            if(error instanceof RestfulError)
+                response.json({
+                    success: false,
+                    message: error.message,
+                    code: error.Code
+                });
+            
+            else{
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB",
+                    code: "HANDLING_DB_FAILED"
+                });
+            }
+        }
         //get all orders
         try{
             var orders: Order[] = await this.useDomainManager(
