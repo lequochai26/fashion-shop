@@ -1,5 +1,6 @@
 import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
+import Session from "../../utils/Session";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
@@ -11,7 +12,7 @@ export default class RemoveUserController extends RestfulController{
     
     public async execute({request,response}: RestfulControllerParam): Promise<void> {
        //email
-       const email : string | undefined = request.body.email;
+       const email : string | undefined = request.query.email as string;
 
        if(!email){
         response.json(
@@ -109,8 +110,16 @@ export default class RemoveUserController extends RestfulController{
        }
 
        //session
-       
-       
+       const session : Session = (request as any).session;
+       if(session.get("user") === email && session.get("user")> 0) {
+            session.remove("user");
+        }
+
+        response.json(
+            {
+                success : true
+            }
+        )
 
        //
 
