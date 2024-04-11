@@ -1,10 +1,13 @@
 import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
 import UserPermission from "../../domain/enums/UserPermission";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
+import RegisterController from "../RegisterController";
+import Controller from "./interfaces/Controller";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export class NewUserController extends RestfulController {
+export class NewUserController extends PermissionRequiredRestfulController {
     //Constructor
     public constructor(
         domainManager?: DomainManager | undefined
@@ -13,6 +16,35 @@ export class NewUserController extends RestfulController {
     }
 
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        // Pre-condition validation
+        const dispatchedFrom: Controller<RestfulControllerParam, void> = (request as any).dispatchedFrom;
+
+        const path: any[] = [];
+
+        if (!(dispatchedFrom instanceof RegisterController)) {
+            try {
+                await this.managerValidateController.execute({ request, path });
+            }
+            catch (error: any) {
+                if (error instanceof RestfulError) {
+                    response.json({
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    });
+                }
+                else {
+                    console.error(error);
+                    response.json({
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    });
+                }
+                return;
+            }
+        }
+
         const email: string | undefined = request.body.email;
 
         //Check email
@@ -41,9 +73,6 @@ export class NewUserController extends RestfulController {
 
             return;
         }
-
-        //Path initialaztion
-        const path: any[] = [];
 
         let user: User | undefined;
 
