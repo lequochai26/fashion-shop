@@ -66,7 +66,9 @@ export default class UpdateUserController extends PermissionRequiredRestfulContr
 
             try {
                 target = await this.useDomainManager(
-                    async domainManager => domainManager.getUser(email, path)
+                    async function (domainManager) {
+                        return domainManager.getUser(email,path);
+                    }
                 );
             }
             catch (error: any) {
