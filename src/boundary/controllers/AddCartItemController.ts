@@ -51,7 +51,10 @@ export default class AddCartItemController extends PermissionRequiredRestfulCont
             amount = 1;
         }
 
-        // Add cart item
+        // Metadata
+        const metadata: any | undefined = request.body.metadata;
+
+        // Login validate
         let user: User | undefined = undefined;
 
         try {
@@ -70,33 +73,17 @@ export default class AddCartItemController extends PermissionRequiredRestfulCont
             }
         }
 
-        // Logged in case
+        // Get cart
+        let cart: Cart | undefined = undefined;
+
         if (user) {
-            const cart: Cart = await this.useDomainManager(
+            cart = await this.useDomainManager(
                 async domainManager => new Cart(domainManager, user)
             );
-
-            try {
-                await cart.addItem(id, amount, path, request.body.metadata);
-            }
-            catch (error: any) {
-                response.json({
-                    success: false,
-                    message: "Failed while handling with DB!",
-                    code: "HANDLING_DB_FAILED"
-                });
-                return;
-            }
         }
-        // Not logged in case
         else {
-            // Get session
             const session: Session = (request as any).session;
-
-            // Get cart from session
-            let cart: Cart | undefined = session.get("cart");
-
-            // If not cart
+            cart = session.get("cart");
             if (!cart) {
                 cart = await this.useDomainManager(
                     async domainManager => new Cart(domainManager)
@@ -104,9 +91,19 @@ export default class AddCartItemController extends PermissionRequiredRestfulCont
 
                 session.put("cart", cart);
             }
+        }
 
-            // Add cart item
-            await cart.addItem(id, amount, path, request.body.metadata);
+        // Add cartItem
+        try {
+            await cart.addItem(id, amount, path, metadata);
+        }
+        catch (error: any) {
+            response.json({
+                success: false,
+                message: "Failed while handling with DB!",
+                code: "HANDLING_DB_FAILED"
+            });
+            return;
         }
 
         // Response
