@@ -91,8 +91,13 @@ export default class Cart {
             if (item.id === id) {
                 let match = true;
 
-                if (metadata) {
-                    for (const key of Object.keys(metadata)) {
+                if (item.metadata) {
+                    if (!metadata) {
+                        match = false;
+                        break;
+                    }
+
+                    for (const key of Object.keys(item.metadata)) {
                         if (item.metadata[key] !== metadata[key]) {
                             match = false;
                             break;
@@ -136,8 +141,13 @@ export default class Cart {
             if (item.Item?.Id === id) {
                 let match: boolean = true;
 
-                if (metadata) {
-                    for (const key of Object.keys(metadata)) {
+                if (item.Metadata) {
+                    if (!metadata) {
+                        match = false;
+                        break;
+                    }
+
+                    for (const key of Object.keys(item.Metadata)) {
                         if (item.Metadata[key] !== metadata[key]) {
                             match = false;
                             break;
