@@ -1,11 +1,12 @@
 import DomainManager from "../../domain/DomainManager";
 import Order from "../../domain/entities/Order";
+import User from "../../domain/entities/User";
 import OrderStatus from "../../domain/enums/OrderStatus";
-import OrderType from "../../domain/enums/OrderType";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class CancelOrderController extends RestfulController {
+export default class CancelOrderController extends PermissionRequiredRestfulController {
     // Constructors:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -15,6 +16,35 @@ export default class CancelOrderController extends RestfulController {
 
     // Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        // Pre-condition check
+        const path: any[] = [];
+
+        let user: User;
+
+        try {
+            const loginValidatePath = await this.loginValidateController.execute({request, path});
+
+            user = loginValidatePath.user;
+        }
+        catch (error: any) {
+            if (error instanceof RestfulError) {
+                response.json({
+                    success: false,
+                    message: error.message,
+                    code: error.Code
+                });
+            }
+            else {
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                });
+            }
+
+            return;
+        }
+        
         // Get id
         const id: string | undefined = request.query.id as string | undefined;
 
@@ -28,13 +58,8 @@ export default class CancelOrderController extends RestfulController {
             return;
         }
 
-        // Path intialize
-        const path: any[] = [];
-
-        // Get order
-        const order: Order | undefined = await this.useDomainManager(
-            async domainManager => domainManager.getOrder(id, path)
-        );
+        // Get order from user
+        const order: Order | undefined = user.getOrderedOrder(id);
 
         // Check order's exist
         if (!order) {
@@ -42,16 +67,6 @@ export default class CancelOrderController extends RestfulController {
                 success: false,
                 message: "Order not exist!",
                 code: "ORDER_NOT_EXIST"
-            });
-            return;
-        }
-
-        // Check order's type
-        if ((order.Type as string) !== OrderType.SELL) {
-            response.json({
-                success: false,
-                message: "Cannot cancel a buy order!",
-                code: "CANNOT_CANCEL_BUY_ORDER"
             });
             return;
         }

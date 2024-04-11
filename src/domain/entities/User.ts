@@ -52,6 +52,13 @@ export default class User {
     }
 
     //methods:
+    public getOrderedOrder(id: string): Order | undefined {
+        return this.orderedOrders.filter(
+            order => order.Id === id
+        )[0];
+    }
+
+    // Getters / setters:
     public get Email(): string | undefined {
         return this.email;
     }
