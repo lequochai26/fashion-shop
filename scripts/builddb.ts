@@ -74,10 +74,10 @@ async function main(): Promise<void> {
     // CartItem collection setup
     const cartItemCollection: Collection = await db.createCollection("CartItem");
     await cartItemCollection.createIndex(
-        { email: 1, itemId: 1 },
+        { email: 1, itemId: 1, metadata: 1 },
         {
             unique: true,
-            name: "pk_CartItem_email_itemId"
+            name: "pk_CartItem_email_itemId_metadata"
         }
     );
 
@@ -104,10 +104,10 @@ async function main(): Promise<void> {
     // OrderItem collection setup
     const orderItemCollection: Collection = await db.createCollection("OrderItem");
     await orderItemCollection.createIndex(
-        { orderId: 1, itemId: 1 },
+        { orderId: 1, itemId: 1, metadata: 1 },
         {
             unique: true,
-            name: "pk_OrderItem_orderItem_itemId"
+            name: "pk_OrderItem_orderItem_itemId_metadata"
         }
     );
 
