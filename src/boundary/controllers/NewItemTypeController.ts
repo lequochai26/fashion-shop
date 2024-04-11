@@ -3,9 +3,10 @@ import DomainManager from "../../domain/DomainManager";
 import ItemType from "../../domain/entities/ItemType";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import RestfulError from "../errors/RestfulError";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-
-export default class NewItemTypeController extends RestfulController {
+export default class NewItemTypeController extends PermissionRequiredRestfulController {
 
     //Constructor:
     public constructor(
@@ -21,6 +22,33 @@ export default class NewItemTypeController extends RestfulController {
         //Khởi tạo đường dẫn 
         const path: any[] = [];
 
+        //Validate
+        try {
+            await this.managerValidateController.execute({ request, path});
+        } catch (error: any) {
+            if(error instanceof RestfulError) {
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
+
+                return;
+            } else {
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+        }
+        
         //2. Khởi tạo id 
         const id: string | undefined = request.body.id;
 
