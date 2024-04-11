@@ -1,10 +1,9 @@
 import DomainManager from "../../domain/DomainManager";
-import User from "../../domain/entities/User";
-import Session from "../../utils/Session";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class GetLoggedInUserController extends RestfulController {
+export default class GetLoggedInUserController extends PermissionRequiredRestfulController {
     //constructor:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -14,53 +13,32 @@ export default class GetLoggedInUserController extends RestfulController {
 
     //method:
     public async execute( { request, response }: RestfulControllerParam): Promise<void> {
-        const session: Session = (request as any).session;
-        const email = session.get("user");
-
-        if(!email) {
-            response.json(
-                {
-                    success: false,
-                    message: "Not logged in",
-                    code: "NOT_LOGGED_IN"
-                }
-            );
-
-            return;
-        }
-        
-        let user : User | undefined;
+        //Path initialazation
         const path: any[] = [];
         try {
-            user = await this.useDomainManager(
-                async function (domainManager) {
-                    return domainManager.getUser(email,path);
-                }
-            );
+            var { user } = await this.loginValidateController.execute({ request, path});
         } catch (error: any) {
-            console.error(error);
+            if(error instanceof RestfulError) {
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
 
-            response.json(
-                {
-                    success: false,
-                    message: "Failed while handling with DB!",
-                    code: "HANDLING_DB_FAILED"
-                }
-            );
+                return;
+            } else {
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
 
-            return;
-        }
-
-        if(!user) {
-            response.json(
-                {
-                    success: false,
-                    message: "User not exist",
-                    code: "USER_NOT_EXIST"
-                }
-            );
-
-            return;
+                return;
+            }
         }
 
         response.json(
