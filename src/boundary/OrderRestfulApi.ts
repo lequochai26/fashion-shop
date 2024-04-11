@@ -15,6 +15,7 @@ import GetOrderController from "./controllers/GetOrderController";
 import GetAllOrdersController from "./controllers/GetAllOrdersController";
 import GetOrderedOrdersController from "./controllers/GetOrderedOrdersController";
 import RemoveOrderController from "./controllers/RemoveOrderController";
+import UpdateOrderStatusController from "./controllers/UpdateOrderStatusController";
 
 export default class OrderRestfulApi extends RestfulApi {
     // Static fields:
@@ -47,7 +48,7 @@ export default class OrderRestfulApi extends RestfulApi {
         // this.newOrderController = new NewOrderController(this.domainManager);
         this.newOrderController = new OptimizedNewOrderController(this.domainManager);
         this.createOrderController = this.methodUnimplementedController;
-        this.updateOrderStatusController = this.methodUnimplementedController;
+        this.updateOrderStatusController = new UpdateOrderStatusController(this.domainManager);
         this.removeOrderController = new RemoveOrderController(this.domainManager);
         this.cancelOrderController = new CancelOrderController(this.domainManager);
         this.statisticalController = this.methodUnimplementedController;
