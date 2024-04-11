@@ -9,6 +9,7 @@ import Controller from "./controllers/interfaces/Controller";
 import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
 import CartItemInfoConverter from "./converters/CartItemInfoConverter";
 import CartItemInfo from "./infos/cartitem/CartItemInfo";
+import AddCartItemController from "./controllers/AddCartItemController";
 
 export default class CartRestfulApi extends RestfulApi {
     // Static fields:
@@ -31,7 +32,7 @@ export default class CartRestfulApi extends RestfulApi {
 
         this.cartItemInfoConverter = new CartItemInfoConverter();
 
-        this.addCartItemController = this.methodUnimplementedController;
+        this.addCartItemController = new AddCartItemController(this.domainManager);
         this.removeCartItemController = this.methodUnimplementedController;
         this.getCartController = this.methodUnimplementedController;
     }
