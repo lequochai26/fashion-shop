@@ -2,10 +2,12 @@ import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
 import SessionFactory from "../../utils/interfaces/SessionFactory";
 import Session from "../../utils/Session";
+import RestfulError from "../errors/RestfulError";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class ChangePasswordController extends RestfulController {
+export default class ChangePasswordController extends PermissionRequiredRestfulController {
     //Constructor:  
     public constructor(
         domainManager?: DomainManager | undefined
@@ -14,6 +16,35 @@ export default class ChangePasswordController extends RestfulController {
     }
 
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        //Path initialazation
+        const path: any[] = [];
+
+        //Validate
+        try {
+            var { user } = await this.loginValidateController.execute({ request, path});
+        } catch (error: any) {
+            if(error instanceof RestfulError) {
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
+
+                return;
+            } else {
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+        }
         //password
         const password: string | undefined = request.body.password;
 
@@ -44,57 +75,7 @@ export default class ChangePasswordController extends RestfulController {
             return;
         }
 
-        //Check user in session
-        const session: Session = (request as any).session;
-        const email: string = session.get("user");
-
-        if(!email) {
-            response.json(
-                {
-                    success: false,
-                    message: "Not logged in!",
-                    code: "NOT_LOGGED_IN"
-                }
-            );
-
-            return;
-        }
-
-        let user: User|undefined;
-        const path: any[] = [];
-
-        try {
-            user = await this.useDomainManager(
-                async function (domainManager) {
-                    return domainManager.getUser(email, path);
-                }
-            );
-        } catch (error: any) {
-            console.error(error);
-
-            response.json(
-                {
-                    success: false,
-                    message: "Failed while handling with DB!",
-                    code: "HANDLING_DB_FAILED"
-                }
-            );
-
-            return;
-        }
-
-        if(!user) {
-            response.json(
-                {
-                    success: false,
-                    message: "User not exist",
-                    code: "USER_NOT_EXIST"
-                }
-            );
-
-            return;
-        }
-
+        
         //Check password
         if(user.Password !== password) {
             response.json(
@@ -136,7 +117,7 @@ export default class ChangePasswordController extends RestfulController {
         const allSession : Session[] = sessionFactory.getAll();
 
         for(const session of allSession) {
-            if(session.get("user") === email) {
+            if(session.get("user") === user.Email) {
                 session.remove("user");
             }
         }
