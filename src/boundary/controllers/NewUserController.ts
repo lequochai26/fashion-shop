@@ -2,7 +2,7 @@ import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
 import UserPermission from "../../domain/enums/UserPermission";
 import RestfulError from "../errors/RestfulError";
-import RegisterController from "../RegisterController";
+import RegisterController from "./RegisterController";
 import Controller from "./interfaces/Controller";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";

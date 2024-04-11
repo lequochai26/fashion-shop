@@ -1,9 +1,9 @@
-import DomainManager from "../domain/DomainManager";
-import Session from "../utils/Session";
-import RestfulController from "./controllers/abstracts/RestfulController";
-import Controller from "./controllers/interfaces/Controller";
-import RestfulControllerParam from "./controllers/interfaces/RestfulControllerParam";
-import RestfulControllerRequestDispatcher from "./RestfulControllerRequestDispatcher";
+import DomainManager from "../../domain/DomainManager";
+import Session from "../../utils/Session";
+import RestfulController from "./abstracts/RestfulController";
+import Controller from "./interfaces/Controller";
+import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import RestfulControllerRequestDispatcher from "../RestfulControllerRequestDispatcher";
 
 export default class RegisterController extends RestfulController {
     // Fields:

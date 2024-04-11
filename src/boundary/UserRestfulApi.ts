@@ -20,7 +20,7 @@ import UpdateUserController from "./controllers/UpdateUserController";
 import LogoutController from "./controllers/LogoutController";
 import UpgradedChangePasswordController from "./controllers/UpgradedChangePasswordController";
 import RemoveUserController from "./controllers/RemoveUserController";
-import RegisterController from "./RegisterController";
+import RegisterController from "./controllers/RegisterController";
 import UpdatePersonalInfoController from "./controllers/UpdatePersonalInfoController";
 
 export default class UserRestfulApi extends RestfulApi {
