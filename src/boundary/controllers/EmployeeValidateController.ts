@@ -24,7 +24,7 @@ export default class EmployeeValidateController extends UserPermissionValidateCo
         const permission: string = user.Permission as string;
 
         // Check user's permission
-        if (permission !== UserPermission.EMPLOYEE) {
+        if (permission !== UserPermission.EMPLOYEE && permission !== UserPermission.MANAGER) {
             throw new RestfulError(
                 "Employee permission required!",
                 "EMPLOYEE_PERMISSION_REQUIRED"
