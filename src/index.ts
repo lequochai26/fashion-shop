@@ -9,6 +9,8 @@ import RequestHandler from './boundary/interfaces/RequestHandler';
 import AdvancedObjectsContainer from './system/AdvancedObjectsContainer';
 import SessionFactory from './utils/interfaces/SessionFactory';
 import SimpleSessionFactory from './utils/SimpleSessionFactory';
+import RestfulControllerRequestDispatcher from './boundary/RestfulControllerRequestDispatcher';
+import RestfulControllerRequestDispatcherImpl from './boundary/RestfulControllerRequestDispatcherImpl';
 
 // Main function
 async function main() {
@@ -62,6 +64,11 @@ async function main() {
     // Session factory
     const sessionFactory: SessionFactory = new SimpleSessionFactory();
     sessionFactory.apply(app);
+
+    // RESTful Controller request dispatcher
+    const restfulControllerRequestDispatcher: RestfulControllerRequestDispatcher = new RestfulControllerRequestDispatcherImpl();
+
+    restfulControllerRequestDispatcher.apply(app);
 
     // Get Request Handlers from objects container
     const requestHandlersLoader: RequestHandlersLoader = new RequestHandlersLoader();
