@@ -21,6 +21,7 @@ import LogoutController from "./controllers/LogoutController";
 import UpgradedChangePasswordController from "./controllers/UpgradedChangePasswordController";
 import RemoveUserController from "./controllers/RemoveUserController";
 import RegisterController from "./RegisterController";
+import UpdatePersonalInfoController from "./controllers/UpdatePersonalInfoController";
 
 export default class UserRestfulApi extends RestfulApi {
     // Static fields:
@@ -38,6 +39,7 @@ export default class UserRestfulApi extends RestfulApi {
     private registerController: Controller<RestfulControllerParam, void>;
     private updateUserController: Controller<RestfulControllerParam, void>;
     private changePasswordController: Controller<RestfulControllerParam, void>;
+    private updatePersonalInfoController: Controller<RestfulControllerParam, void>;
     private removeUserController: Controller<RestfulControllerParam, void>;
 
     // Constructors:
@@ -58,6 +60,7 @@ export default class UserRestfulApi extends RestfulApi {
         this.registerController = new RegisterController(this.newUserController);
         this.updateUserController = new UpdateUserController(this.domainManager);
         this.changePasswordController = new UpgradedChangePasswordController(this.domainManager);
+        this.updatePersonalInfoController = new UpdatePersonalInfoController(this.updateUserController, domainManager);
         this.removeUserController = new RemoveUserController(this.domainManager);
     }
 
@@ -151,6 +154,11 @@ export default class UserRestfulApi extends RestfulApi {
 
             case 'changePassword': {
                 controller = this.changePasswordController;
+                break;
+            }
+
+            case 'updatePersonalInfo': {
+                controller = this.updatePersonalInfoController;
                 break;
             }
 
