@@ -5,7 +5,6 @@ import User from "./entities/User";
 export default class Cart {
     // Static fields:
     public static CARTITEM_NOT_FOUND: number = 1;
-    public static ITEM_NOT_EXIST: number = 2;
 
     // Fields:
     private user?: User | undefined;
