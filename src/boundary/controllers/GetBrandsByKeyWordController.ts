@@ -30,7 +30,7 @@ export default class GetBrandsByKeyWordController extends QueryBrandRestfulContr
             return;
         }
         
-        const seft : GetBrandsByKeyWordController = this;
+        const self : GetBrandsByKeyWordController = this;
         //Cơ sở dữ liệu truy vấn danh sách thương hiệu theo yêu cầu và phản hồi kết quả truy vấn cho hệ thống.
         try {
             var brand : Brand[] = await this.useDomainManager(
@@ -57,7 +57,7 @@ export default class GetBrandsByKeyWordController extends QueryBrandRestfulContr
                 success : true,
                 result : brand.map(
                     function(brand: Brand):BrandInfo{
-                        return seft.brandInfoConverter.convert(brand);
+                        return self.brandInfoConverter.convert(brand);
                     }
                 )
             }
