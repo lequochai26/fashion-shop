@@ -122,6 +122,11 @@ export default class UserRestfulApi extends RestfulApi {
                 break;
             }
 
+            case 'register': {
+                controller = this.registerController;
+                break;
+            }
+
             default: {
                 controller = this.invalidMethodController;
             }
