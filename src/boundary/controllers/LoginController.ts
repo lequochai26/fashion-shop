@@ -107,7 +107,6 @@ export default class LoginController extends RestfulController {
         response.json(
             {
                 success: true,
-                result: user
             }
         );
     }
