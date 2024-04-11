@@ -1,9 +1,10 @@
 import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class NewBrandController extends RestfulController {
+export default class NewBrandController extends PermissionRequiredRestfulController {
     //Constructor
     public constructor(
         domainManager?: DomainManager | undefined
@@ -13,6 +14,36 @@ export default class NewBrandController extends RestfulController {
 
     //Method:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        //Path initialazation
+        const path: any[] = [];
+        
+        //Validate
+        try {
+            await this.managerValidateController.execute({ request, path});
+        } catch (error: any) {
+            if(error instanceof RestfulError) {
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
+
+                return;
+            } else {
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+        }
+        
         //Get id from body 
         const id: string | undefined = request.body.id as string;
 
@@ -41,9 +72,6 @@ export default class NewBrandController extends RestfulController {
 
             return;
         }
-
-        //Path initialazation
-        const path: any[] = []
 
         //Check id
         let brand: Brand | undefined;

@@ -1,9 +1,10 @@
 import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class RemoveBrandController extends RestfulController {
+export default class RemoveBrandController extends PermissionRequiredRestfulController {
     //Constructor:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -12,11 +13,41 @@ export default class RemoveBrandController extends RestfulController {
     }
 
     //method:
-    public async execute( { request, response }: RestfulControllerParam): Promise<void> {
-        //Get id
-        const id : string | undefined = request.query.id as string;
+    public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        //Path initialazation
+        const path: any[] = [];
 
-        if(!id) {
+        //Validate
+        try {
+            await this.managerValidateController.execute({ request, path });
+        } catch (error: any) {
+            if (error instanceof RestfulError) {
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
+
+                return;
+            } else {
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+        }
+
+        //Get id
+        const id: string | undefined = request.query.id as string;
+
+        if (!id) {
             response.json(
                 {
                     success: false,
@@ -24,12 +55,9 @@ export default class RemoveBrandController extends RestfulController {
                     code: "ID_REQUIED"
                 }
             );
-            
+
             return;
         }
-
-        //Path initialazation
-        const path: any[] = [];
 
         //Get brand
         let brand: Brand | undefined;
@@ -51,7 +79,7 @@ export default class RemoveBrandController extends RestfulController {
             return;
         }
 
-        if(!brand){
+        if (!brand) {
             response.json(
                 {
                     success: false,
@@ -64,7 +92,7 @@ export default class RemoveBrandController extends RestfulController {
         }
 
         //Item dependency
-        if(brand.Items.length > 0) {
+        if (brand.Items.length > 0) {
             response.json(
                 {
                     success: false,
@@ -89,7 +117,7 @@ export default class RemoveBrandController extends RestfulController {
             response.json(
                 {
                     success: false,
-                    message:"Failed while handling with DB!",
+                    message: "Failed while handling with DB!",
                     code: "FAILED_HANDING_DB"
                 }
             );

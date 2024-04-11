@@ -1,9 +1,10 @@
 import DomainManager from "../../domain/DomainManager";
 import Brand from "../../domain/entities/Brand";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class UpdateBrandController extends RestfulController {
+export default class UpdateBrandController extends PermissionRequiredRestfulController {
     //Constructor:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -12,11 +13,41 @@ export default class UpdateBrandController extends RestfulController {
     }
 
     //Method:
-    public async execute( { request, response }: RestfulControllerParam): Promise<void> {
+    public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        //Path initialazation
+        const path: any[] = [];
+
+        //Validate
+        try {
+            await this.managerValidateController.execute({ request, path });
+        } catch (error: any) {
+            if (error instanceof RestfulError) {
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
+
+                return;
+            } else {
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+        }
+
         //Get id
         const id: string | undefined = request.body.id as string;
 
-        if(!id) {
+        if (!id) {
             response.json(
                 {
                     success: false,
@@ -28,14 +59,12 @@ export default class UpdateBrandController extends RestfulController {
             return;
         }
 
-        //Path initialazation
-        const path: any[] = [];
 
         //Check id
         let brand: Brand | undefined;
         try {
             brand = await this.useDomainManager(
-                async function(domainManager) {
+                async function (domainManager) {
                     return domainManager.getBrand(id, path);
                 }
             )
@@ -68,7 +97,7 @@ export default class UpdateBrandController extends RestfulController {
         //Get name 
         const name: string | undefined = request.body.name;
 
-        if(name) {
+        if (name) {
             brand.Name = name;
         }
 
@@ -81,7 +110,7 @@ export default class UpdateBrandController extends RestfulController {
             )
         } catch (error: any) {
             console.error(error);
-            
+
             response.json(
                 {
                     success: false,
