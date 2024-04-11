@@ -233,6 +233,17 @@ export class NewUserController extends PermissionRequiredRestfulController {
             }
         }
 
+        //Permission
+        let permission = request.body.permission;
+        if (!permission) {
+            permission = UserPermission.CUSTOMER;
+        }
+
+        if (!Object.values(UserPermission).includes(permission)) {
+            permission = UserPermission.CUSTOMER;
+        }
+
+
         //Insert user
         user = new User();
         user.Email = email;
@@ -242,7 +253,7 @@ export class NewUserController extends PermissionRequiredRestfulController {
         user.PhoneNumber = phoneNumber;
         user.Adress = address;
         user.Avatar = avatarPath;
-        user.Permission = UserPermission.CUSTOMER;
+        user.Permission = permission;
 
         try {
             await this.useDomainManager(
