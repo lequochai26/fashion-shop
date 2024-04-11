@@ -1,12 +1,14 @@
 import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
-import UserPermission from "../../domain/enums/UserPermission";
 import Session from "../../utils/Session";
 import Path from "../../domain/enums/Path";
-import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import Controller from "./interfaces/Controller";
+import UpdatePersonalInfoController from "./UpdatePersonalInfoController";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import RestfulError from "../errors/RestfulError";
 
-export default class UpdateUserController extends RestfulController {
+export default class UpdateUserController extends PermissionRequiredRestfulController {
 
     //construstor
     public constructor(domainManager?: DomainManager | undefined) {
@@ -15,62 +17,77 @@ export default class UpdateUserController extends RestfulController {
 
     //method
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
-        //nhung session vao request
+        // Pre-condition check
+        const dispatchedFrom: Controller<RestfulControllerParam, void> = (request as any).dispatchedFrom;
 
-        const session: Session = (request as any).session;
+        let target: User | undefined = undefined;
 
-        let email: string | undefined = request.body.email as string;
+        const path: any[] = response.locals.path || [];
 
-        if (!email) {
-            email = session.get("user");
-            if (!email) {
-                response.json(
-                    {
+        if (dispatchedFrom instanceof UpdatePersonalInfoController) {
+            target = response.locals.user;
+        }
+        else {
+            try {
+                await this.managerValidateController.execute({ request, path });
+            }
+            catch (error: any) {
+                if (error instanceof RestfulError) {
+                    response.json({
                         success: false,
-                        message: "email parameter is required!",
-                        code: "EMAIL_REQUIRED"
-                    }
-                );
+                        message: error.message,
+                        code: error.Code
+                    });
+                }
+                else {
+                    console.error(error);
+                    response.json({
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    });
+                }
                 return;
             }
         }
 
-        //path
-        const path: any[] = [];
+        // Check user
+        if (!target) {
+            const email: string | undefined = request.body.email;
 
-        //check user
-        let user: User | undefined;
-        try {
-            user = await this.useDomainManager(
-                async function (domainManager) {
-                    return domainManager.getUser(email as string, path);
-                }
-            );
-        }
-        catch (error: any) {
-            console.error(error);
+            if (!email) {
+                response.json({
+                    success: false,
+                    message: "email parameter is required!",
+                    code: "EMAIL_REQUIRED"
+                });
+                return;
+            }
 
-            response.json(
-                {
+            try {
+                target = await this.useDomainManager(
+                    async domainManager => domainManager.getUser(email, path)
+                );
+            }
+            catch (error: any) {
+                response.json({
                     success: false,
                     message: "Failed while handling with DB!",
                     code: "HANDLING_DB_FAILED"
-                }
-            );
+                });
+                return;
+            }
 
-            return;
-        }
-
-        if (!user) {
-            response.json(
-                {
-                    success: false,
-                    message: "User not exist!",
-                    code: "USER_NOT_EXIST"
-                }
-            );
-
-            return;
+            if (!target) {
+                response.json(
+                    {
+                        success: false,
+                        message: "User not exist!",
+                        code: "USER_NOT_EXIST"
+                    }
+                );
+                return;
+            }
         }
 
         //check name
@@ -78,7 +95,7 @@ export default class UpdateUserController extends RestfulController {
 
         if (fullName) {
            
-            user.FullName = fullName;
+            target.FullName = fullName;
         }
 
         
@@ -101,7 +118,7 @@ export default class UpdateUserController extends RestfulController {
             );
             return;
         }
-            user.PhoneNumber = phoneNumber;
+            target.PhoneNumber = phoneNumber;
         }
 
         
@@ -115,7 +132,7 @@ export default class UpdateUserController extends RestfulController {
         if (genderUser) {
             const gender: boolean = genderUser === 'true';
 
-            user.Gender = gender;
+            target.Gender = gender;
         }
 
 
@@ -124,7 +141,7 @@ export default class UpdateUserController extends RestfulController {
 
         if (address) {
            
-            user.Adress = address;
+            target.Adress = address;
         }
 
 
@@ -133,13 +150,13 @@ export default class UpdateUserController extends RestfulController {
 
         if(permission){
 
-            user.Permission = permission;
+            target.Permission = permission;
         }
 
 
 
         //check avatar
-        let avatarUser: string = user.Avatar as string;
+        let avatarUser: string = target.Avatar as string;
 
         let avatarFileName: string;
 
@@ -163,7 +180,7 @@ export default class UpdateUserController extends RestfulController {
 
                     avatarPath = `${Path.USER_AVATAR_HTTP_PATH}/${avatarFileName}`
 
-                    user.Avatar = avatarPath;
+                    target.Avatar = avatarPath;
                     avatarUpdate = true;
                 } catch (error) {
                     console.error(error);
@@ -180,7 +197,7 @@ export default class UpdateUserController extends RestfulController {
         try {
             await this.useDomainManager(
                 async function (domainManager) {
-                    return domainManager.updateUser(user as User);
+                    return domainManager.updateUser(target as User);
                 }
             )
         } catch (error) {
