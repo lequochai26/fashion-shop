@@ -1,4 +1,5 @@
 import DomainManager from "../../domain/DomainManager";
+import User from "../../domain/entities/User";
 import RestfulError from "../errors/RestfulError";
 import NewOrderRestfulController from "./abstracts/NewOrderRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
@@ -14,9 +15,32 @@ export default class OptimizedNewOrderController extends NewOrderRestfulControll
 
     // Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
-        // Path initialize
+        // Pre-condition check
         const path: any[] = [];
 
+        try {
+            var { user } = await this.employeeValidateController.execute({ request, path });
+        }
+        catch (error: any) {
+            if (error instanceof RestfulError) {
+                response.json({
+                    success: false,
+                    message: error.message,
+                    code: error.Code
+                });
+            }
+            else {
+                console.error(error);
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                });
+            }
+            return;
+        }
+
+        // Validate new order informations
         try {
             var { items, paymentMethod, type, totalPrice }: NewOrderValidateControllerReturn = await this.validateController.execute({
                 items: request.body.items,
@@ -36,10 +60,11 @@ export default class OptimizedNewOrderController extends NewOrderRestfulControll
                 });
             }
             else {
+                console.error(error);
                 response.json({
                     success: false,
-                    message: "Error occurred!",
-                    code: "ERROR_OCCURRED"
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
                 });
             }
 
@@ -49,7 +74,7 @@ export default class OptimizedNewOrderController extends NewOrderRestfulControll
         // Create new order
         try {
             await this.useDomainManager(
-                async domainManager => domainManager.newOrder({ type, items, path, paymentMethod, totalPrice })
+                async domainManager => domainManager.newOrder({ type, items, path, paymentMethod, totalPrice, createdBy: user.Email, orderedBy: request.body.orderedBy })
             );
         }
         catch (error: any) {
