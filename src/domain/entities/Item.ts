@@ -104,6 +104,7 @@ export default class Item {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.buyPrice = buyPrice;
         this.amount = amount;
         this.gender = gender;
         this.metadata = metadata;
