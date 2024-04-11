@@ -1,5 +1,7 @@
 import Cart from "../../domain/Cart";
 import DomainManager from "../../domain/DomainManager";
+import Item from "../../domain/entities/Item";
+import { Mapping } from "../../domain/entities/ItemMetadata";
 import User from "../../domain/entities/User";
 import Session from "../../utils/Session";
 import RestfulError from "../errors/RestfulError";
@@ -31,11 +33,23 @@ export default class AddCartItemController extends PermissionRequiredRestfulCont
         // Path initialize
         const path: any[] = [];
 
-        if (
-            !await this.useDomainManager(
+        let item: Item | undefined;
+        try {
+            item = await this.useDomainManager(
                 async domainManager => domainManager.getItem(id, path)
-            )
-        ) {
+            );
+        }
+        catch (error: any) {
+            console.error(error);
+            response.json({
+                success: false,
+                message: "Failed while handling with DB!",
+                code: "HANDLING_DB_FAILED"
+            });
+            return;
+        }
+
+        if (!item) {
             response.json({
                 success: false,
                 message: "Item not exist!",
@@ -53,6 +67,30 @@ export default class AddCartItemController extends PermissionRequiredRestfulCont
 
         // Metadata
         const metadata: any | undefined = request.body.metadata;
+
+        if (metadata) {
+            // Item no metadata case
+            if (!item.Metadata) {
+                response.json({
+                    success: false,
+                    message: "Item has no metadata!",
+                    code: "ITEM_NO_METADATA"
+                });
+                return;
+            }
+
+            // Mapping not found check
+            const mapping: Mapping | undefined = item.Metadata.getMapping(metadata);
+
+            if (!mapping) {
+                response.json({
+                    success: false,
+                    message: "metadata invalid!",
+                    code: "METADATA_INVALID"
+                });
+                return;
+            }
+        }
 
         // Login validate
         let user: User | undefined = undefined;
