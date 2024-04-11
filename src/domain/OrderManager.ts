@@ -285,7 +285,7 @@ export default class OrderManager extends PersistenceHandlerHolder implements Se
     public async search(keyword: string): Promise<Order[]> {
         return this.getByFilterFunc(
             function (order: Order) {
-                return (`${order.Id} ${order.Date} ${order.CreatedBy?.Email} ${order.OrderedBy?.Email} ${order.Type}`.indexOf(keyword) !== -1);
+                return (`${order.Id} ${order.Type} ${order.CreatedBy?.FullName} ${order.OrderedBy?.FullName} ${order.Status} ${order.PaymentMethod}`.indexOf(keyword) !== -1);
             }
         )
     }
