@@ -53,6 +53,7 @@ export default class Cart {
                 cartItem.Item = await this.domainManager.getItem(id, path);
                 cartItem.Amount = amount;
                 cartItem.Metadata = metadata;
+                cartItems.push(cartItem);
             }
 
             return cartItems;
