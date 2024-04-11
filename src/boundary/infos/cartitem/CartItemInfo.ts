@@ -1,8 +1,7 @@
+import CartItemInfoItem from "./CartItemInfoItem";
+
 export default interface CartItemInfo {
-    id: string;
-    name: string;
-    avatar: string;
-    price: number;
+    item?: CartItemInfoItem | undefined;
     amount: number;
     metadata: any
 }

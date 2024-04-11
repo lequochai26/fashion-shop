@@ -11,12 +11,16 @@ export default class CartItemInfoConverter implements Converter<CartItem, CartIt
     // Methods:
     public convert(from: CartItem): CartItemInfo {
         return {
+            item: (from.Item && 
+                {
+                    avatar: from.Item.Avatar as string,
+                    id: from.Item.Id as string,
+                    name: from.Item.Name as string,
+                    price: from.Item.Price as number
+                }
+            ),
             amount: from.Amount as number,
-            avatar: from.Item?.Avatar as string,
-            id: from.Item?.Id as string,
-            metadata: from.Metadata,
-            name: from.Item?.Name as string,
-            price: from.Item?.Price as number
+            metadata: from.Metadata
         };
     }
 }
