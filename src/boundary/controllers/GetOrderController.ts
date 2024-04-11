@@ -99,7 +99,7 @@ export default class GetOrderController extends QueryOrderRestfulController {
             response.json(
                 {
                     success: true,
-                    result: order
+                    result: this.orderInfoConverter.convert(order)
                 }
             )
         }
@@ -124,7 +124,7 @@ export default class GetOrderController extends QueryOrderRestfulController {
         response.json(
             {
                 success: true,
-                order: ordered
+                order: this.orderInfoConverter.convert(ordered)
             }
         )
 
