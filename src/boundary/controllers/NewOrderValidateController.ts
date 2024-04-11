@@ -4,28 +4,15 @@ import ItemMetadata, { Mapping } from "../../domain/entities/ItemMetadata";
 import OrderPaymentMethod from "../../domain/enums/OrderPaymentMethod";
 import OrderType from "../../domain/enums/OrderType";
 import RestfulError from "../errors/RestfulError";
+import DomainManagerHolder from "./base_classes/DomainManagerHolder";
 import Controller from "./interfaces/Controller";
 
-export default class NewOrderValidateController implements Controller<NewOrderValidateControllerParam, NewOrderValidateControllerReturn> {
-    // Fields:
-    private domainManager?: DomainManager | undefined;
-
+export default class NewOrderValidateController extends DomainManagerHolder implements Controller<NewOrderValidateControllerParam, NewOrderValidateControllerReturn> {
     // Constructors:
     public constructor(
         domainManager?: DomainManager | undefined
     ) {
-        this.domainManager = domainManager;
-    }
-
-    // Private methods:
-    private async useDomainManager<T>(
-        executable: (domainManager: DomainManager) => Promise<T>
-    ): Promise<T> {
-        if (!this.domainManager) {
-            throw new Error("domainManager field is missing!");
-        }
-
-        return executable(this.domainManager);
+        super(domainManager);
     }
 
     // Methods:
