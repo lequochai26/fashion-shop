@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Express, Request, Response } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
 import RestfulControllerRequestDispatcher from "./RestfulControllerRequestDispatcher";
@@ -18,5 +18,17 @@ export default class RestfulControllerRequestDispatcherImpl implements RestfulCo
 
         // Call to to execute
         return to.execute({ request, response });
+    }
+
+    public apply(app: Express): void {
+        const self = this;
+
+        app.use(
+            "/",
+            function (request, response, next) {
+                (request as any).restfulControllerRequestDispatcher = self;
+                next();
+            }
+        );
     }
 }
