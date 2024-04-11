@@ -1,5 +1,6 @@
 import DomainManager from "../../domain/DomainManager";
 import Order from "../../domain/entities/Order";
+import OrderItem from "../../domain/entities/OrderItem";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
@@ -89,19 +90,16 @@ export default class RemoveOrderController extends PermissionRequiredRestfulCont
             return;
         }
 
-        if(order.Items.length > 0) {
-            response.json(
-                {
-                    success:false,
-                    message :"Please make sure no orderItem linked to this order before performing this action!",
-                    code:"ORDER_ITEM_LINKED"
-                }
-            );
-            return;
-        }
-
         //Remove order
         try {
+            for(const orderItem of order.Items) {
+                await this.useDomainManager(
+                    async function(domainManager){
+                        return domainManager.removeOrderItem(orderItem as OrderItem);
+                    }
+                )
+            }
+
             await this.useDomainManager(
                 async function(domainManager) {
                     return domainManager.removeOrder(order as Order);
