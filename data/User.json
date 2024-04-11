@@ -198,5 +198,16 @@
         "address": "Q. 10",
         "avatar": null,
         "permission": "Customer"
+    },
+    {
+        "email": "chutan302@gmail.com",
+        "password": "ChuT@n3012",
+        "fullName": "Vong Chu Tan",
+        "gender": false,
+        "phoneNumber": "0397468261",
+        "address": "Binh Tan",
+        "avatar": null,
+        "permission": "Employee"
     }
+    
 ]
