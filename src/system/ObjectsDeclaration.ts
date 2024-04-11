@@ -1,4 +1,5 @@
 import BrandRestfulApi from "../boundary/BrandRestfulApi";
+import CartRestfulApi from "../boundary/CartRestfulApi";
 import ImageRequestHandler from "../boundary/ImageRequestHandler";
 import ItemRestfulApi from "../boundary/ItemRestfulApi";
 import ItemTypeRestfulApi from "../boundary/ItemTypeRestfulApi";
@@ -458,6 +459,17 @@ const objectsDeclaration = [
             params: [ 'domainManager' ]
         },
         name: 'userRestfulApi'
+    },
+
+    // cartRestfulApi
+    {
+        provider: {
+            func: function ([ domainManager ]: [ DomainManager ]): RequestHandler {
+                return new CartRestfulApi(domainManager);
+            },
+            params: [ 'domainManager' ]
+        },
+        name: 'cartRestfulApi'
     }
 ];
 
