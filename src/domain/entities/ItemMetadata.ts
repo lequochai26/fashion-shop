@@ -15,16 +15,15 @@ export default class ItemMetadata {
 
     // Methods:
     public getMapping(filter: any): Mapping | undefined {
-        // Get keys
-        const keys = Object.keys(filter);
-
         // Getting
         let target: Mapping | undefined = undefined;
 
         for (const mapping of this.mappings) {
             let match: boolean = true;
 
-            for (const key of keys) {
+            for (const key of Object.keys(mapping).filter(
+                k => ((k !== 'price') && (k !== 'amount') && (k !== 'buyPrice'))
+            )) {
                 if (mapping[key] === filter[key]) {
                     continue;
                 }
