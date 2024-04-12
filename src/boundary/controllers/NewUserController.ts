@@ -6,6 +6,8 @@ import RegisterController from "./RegisterController";
 import Controller from "./interfaces/Controller";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import Session from "../../utils/Session";
+import Cart from "../../domain/Cart";
 
 export class NewUserController extends PermissionRequiredRestfulController {
     //Constructor
@@ -283,6 +285,29 @@ export class NewUserController extends PermissionRequiredRestfulController {
             );
 
             return;
+        }
+
+        // Cart handling
+        if (dispatchedFrom instanceof RegisterController) {
+            // Get session
+            const session: Session = (request as any).session;
+
+            // Get cart
+            const cart: Cart | undefined = session.get("cart");
+
+            // Cart exist case
+            if (cart) {
+                // Attach cart to given user
+                try {
+                    await cart.attach(user, path);
+                }
+                catch (error: any) {
+                    console.error(error);
+                }
+
+                // Remove cart from session
+                session.remove("cart");
+            }
         }
 
         response.json(
