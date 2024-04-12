@@ -1,12 +1,14 @@
 import DomainManager from "../../domain/DomainManager";
 import ItemType from "../../domain/entities/ItemType";
+import RestfulError from "../errors/RestfulError";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 
 
 
 
-export default class RemoveItemTypeController extends RestfulController{
+export default class RemoveItemTypeController extends PermissionRequiredRestfulController{
   //constructor:
   public constructor(domainManager?: DomainManager |undefined){
     super(domainManager);
@@ -15,7 +17,38 @@ export default class RemoveItemTypeController extends RestfulController{
   //method
   //External App gửi yêu cầu xóa loại sản phẩm đến hệ thống.
   public async execute({ request, response }: RestfulControllerParam): Promise<void> {
-      //id 
+    //path
+    const path : any[] =[];
+
+    try {
+        await this.managerValidateController.execute({request,path});
+
+    } catch (error) {
+        if(error instanceof RestfulError){
+            response.json(
+                {
+                    success : false,
+                    message : error.message,
+                    code : error.Code
+                }
+            );
+            return
+        }else{
+            response.json(
+                {
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                }
+            );
+
+            return;
+        }
+    }
+      
+    
+    
+    //id 
       //Hệ thống kiểm tra và xác nhận External App đã cung cấp mã loại sản phẩm cần được xóa khỏi cơ sở dữ liệu hệ thống.
       const id: string | undefined = request.query.id as string | undefined;
       //Hệ thống kiểm tra và nhận thấy External App chưa cung cấp mã loại sản phẩm cần được xóa khỏi cơ sở dữ liệu hệ thống. 
@@ -32,7 +65,6 @@ export default class RemoveItemTypeController extends RestfulController{
             return;
         }
         //Hệ thống kiểm tra và xác nhận mã loại sản phẩm được cung cấp bởi External App thuộc về một loại sản phẩm đã tồn tại trong cơ sở dữ liệu hệ thống.
-        const path : any[] =[];
         let itemType : ItemType | undefined;
         try {
         //Hệ thống kiểm tra và nhận thấy mã loại sản phẩm được cung cấp bởi External App không thuộc bất cứ loại sản phẩm nào đã tồn tại trong cơ sở dữ liệu hệ thống. 

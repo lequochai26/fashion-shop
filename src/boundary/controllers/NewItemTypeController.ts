@@ -12,7 +12,7 @@ export default class NewItemTypeController extends PermissionRequiredRestfulCont
     public constructor(
         domainManager?: DomainManager | undefined
     ) {
-        super(domainManager)
+        super(domainManager);
     }
 
     //Methods
