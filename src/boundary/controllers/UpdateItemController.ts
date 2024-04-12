@@ -6,8 +6,10 @@ import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import ItemImage from "../../domain/entities/ItemImage";
 import ItemMetadata from "../../domain/entities/ItemMetadata";
 import RestfulController from "./abstracts/RestfulController";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import RestfulError from "../errors/RestfulError";
 
-export default class UpdateItemController extends RestfulController {
+export default class UpdateItemController extends PermissionRequiredRestfulController {
     // Constructors:
     public constructor(domainManager?: DomainManager | undefined) {
         super(domainManager);
@@ -15,6 +17,30 @@ export default class UpdateItemController extends RestfulController {
 
     // Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        // Path intialize
+        const path: any[] = [];
+
+        try {
+            await this.managerValidateController.execute({ request, path });
+        }
+        catch (error: any) {
+            if (error instanceof RestfulError) {
+                response.json({
+                    success: false,
+                    message: error.message,
+                    code: error.Code
+                });
+            }
+            else {
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                });
+            }
+            return;
+        }
+
         // ID
         const id: string | undefined = request.body.id;
 
@@ -28,9 +54,6 @@ export default class UpdateItemController extends RestfulController {
             );
             return;
         }
-
-        // Path initialization
-        const path: any[] = [];
 
         // Item
         let item: Item | undefined;
