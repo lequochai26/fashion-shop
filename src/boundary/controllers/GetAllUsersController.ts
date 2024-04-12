@@ -1,9 +1,10 @@
 import UserInfo from "../infos/user/UserInfo";
 import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
-import QueryUserRestfulController from "./abstracts/QueryUserRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import Converter from "../../utils/interfaces/Converter";
+import RestfulError from "../errors/RestfulError";
+import QueryUserRestfulController from "./abstracts/QueryUserRestfulController";
 
 export default class GetAllUsersController extends QueryUserRestfulController{
     //Constructor
@@ -14,12 +15,39 @@ export default class GetAllUsersController extends QueryUserRestfulController{
     }
     
     
-    public async execute({ response }: RestfulControllerParam): Promise<void> {
+    public async execute({ request,response }: RestfulControllerParam): Promise<void> {
         //self tham chiếu GetAllUsersController
         const self: GetAllUsersController = this;
 
         //path
         const path: any[] = [];
+
+        //validate
+        try {
+            await this.managerValidateController.execute({ request, path});
+        } catch (error: any) {
+            if(error instanceof RestfulError) {
+                response.json(
+                    {
+                        success: false,
+                        message: error.message,
+                        code: error.Code
+                    }
+                );
+
+                return;
+            } else {
+                response.json(
+                    {
+                        success: false,
+                        message: "Failed while handling with DB!",
+                        code: "HANDLING_DB_FAILED"
+                    }
+                );
+
+                return;
+            }
+        }
 
         //lấy danh sách người dùng 
         try{
