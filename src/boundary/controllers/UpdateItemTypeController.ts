@@ -100,6 +100,7 @@ export default class UpdateItemTypeController extends PermissionRequiredRestfulC
                 message: "Failed while handling with DB!",
                 code: "HANDLING_DB_FAILED"
             })
+            return;
         }
 
         response.json({
