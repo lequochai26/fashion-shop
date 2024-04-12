@@ -128,16 +128,16 @@ export default class NewOrderValidateController extends DomainManagerHolder impl
 }
 
 export interface NewOrderValidateControllerParam {
-    type: string | undefined;
-    items: { id: string, amount: number, metadata: any }[] | undefined;
-    paymentMethod: string | undefined;
-    totalPrice: number | undefined;
+    type?: string | undefined;
+    items?: { id: string, amount: number, metadata: any }[] | undefined;
+    paymentMethod?: string | undefined;
+    totalPrice?: number | undefined;
     path: any[];
 }
 
 export interface NewOrderValidateControllerReturn {
     type: string;
     items: { id: string, amount: number, metadata: any }[];
-    paymentMethod: string | undefined;
-    totalPrice: number | undefined;
+    paymentMethod?: string | undefined;
+    totalPrice?: number | undefined;
 }
