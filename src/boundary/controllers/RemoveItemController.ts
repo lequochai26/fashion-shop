@@ -1,9 +1,10 @@
 import DomainManager from "../../domain/DomainManager";
 import Item from "../../domain/entities/Item";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class RemoveItemController extends RestfulController {
+export default class RemoveItemController extends PermissionRequiredRestfulController {
     // Constructors:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -13,6 +14,32 @@ export default class RemoveItemController extends RestfulController {
 
     // Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        // Path initialize
+        const path: any[] = [];
+
+        // MANAGER permission validate
+        try {
+            await this.managerValidateController.execute({ request, path });
+        }
+        catch (error: any) {
+            if (error instanceof RestfulError) {
+                response.json({
+                    success: false,
+                    message: error.message,
+                    code: error.Code
+                });
+            }
+            else {
+                console.error(error);
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                });
+            }
+            return;
+        }
+
         // Id
         const id: string | undefined = request.query.id as string | undefined;
 
@@ -27,9 +54,6 @@ export default class RemoveItemController extends RestfulController {
 
             return;
         }
-
-        // Path initialization
-        const path: any[] = [];
 
         // Get item
         let item: Item | undefined;

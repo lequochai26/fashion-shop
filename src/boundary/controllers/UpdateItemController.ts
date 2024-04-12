@@ -32,6 +32,7 @@ export default class UpdateItemController extends PermissionRequiredRestfulContr
                 });
             }
             else {
+                console.error(error);
                 response.json({
                     success: false,
                     message: "Failed while handling with DB!",
