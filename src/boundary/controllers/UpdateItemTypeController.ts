@@ -1,10 +1,10 @@
 import DomainManager from "../../domain/DomainManager";
 import ItemType from "../../domain/entities/ItemType";
-import RestfulController from "./abstracts/RestfulController"
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-
-export default class UpdateItemTypeController extends RestfulController{
+export default class UpdateItemTypeController extends PermissionRequiredRestfulController{
     //Constructor
     public constructor(domainManager?: DomainManager | undefined){
         super(domainManager);
@@ -12,6 +12,30 @@ export default class UpdateItemTypeController extends RestfulController{
     
     //Methods
     public async execute({request, response}: RestfulControllerParam): Promise<void> {
+        const path: any[] = [];
+        
+        //validate
+        try{
+            await this.managerValidateController.execute({request,path});     
+        }catch(error: any){
+            if(error instanceof RestfulError){
+                response.json({
+                    success: false,
+                    message: error.message,
+                    code: error.Code
+                });
+                return;
+            }else{
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                });
+                return;
+            }
+        }
+        
+        
         const id: string | undefined = request.body.id;
 
         //id
@@ -24,7 +48,6 @@ export default class UpdateItemTypeController extends RestfulController{
             return;
         }
 
-        const path: any[] = [];
 
         let itemType: ItemType | undefined;
         try{
