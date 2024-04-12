@@ -103,6 +103,16 @@ export default class RemoveItemController extends PermissionRequiredRestfulContr
             return;
         }
 
+        // User dependency
+        if (item.Users.length > 0) {
+            response.json({
+                success: false,
+                message: "Make sure there's no user linked to this item before performing this action!",
+                code: "USER_LINKED"
+            });
+            return;
+        }
+
         // Delete item
         try {
             await this.useDomainManager(
