@@ -1,4 +1,5 @@
 import Brand from "./Brand";
+import CartItem from "./CartItem";
 import ItemImage from "./ItemImage";
 import ItemMetadata from "./ItemMetadata";
 import ItemType from "./ItemType";
@@ -78,12 +79,13 @@ export default class Item {
     private amount?: number | undefined;
     private gender?: Boolean | undefined;
     private metadata?: ItemMetadata | undefined;
+
+    //dependency
     private type?: ItemType | undefined;
     private brand?: Brand | undefined;
     private images: ItemImage[];
     private orders: OrderItem[];
-    
-    
+    private users: CartItem[];
 
     // Constructor:
     public constructor(
@@ -98,6 +100,7 @@ export default class Item {
         metadata?: ItemMetadata | undefined,
         images?: ItemImage[] | undefined,
         orders?: OrderItem[] | undefined,
+        users?: CartItem[] | undefined
     ) {
         this.id = id;
         this.avatar = avatar;
@@ -110,6 +113,7 @@ export default class Item {
         this.metadata = metadata;
         this.images = images||[];
         this.orders = orders||[];
+        this.users = users || [];
     }
 
     // Methods:
@@ -216,6 +220,14 @@ export default class Item {
     
     public set BuyPrice(value) {
         this.buyPrice = value;
+    }
+
+    //User cart item
+    public get Users(): CartItem[] {
+        return this.users;
+    }
+    public set Users(value: CartItem[]) {
+        this.users = value;
     }
      
 }
