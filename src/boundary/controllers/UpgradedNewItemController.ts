@@ -4,10 +4,11 @@ import Item from "../../domain/entities/Item";
 import ItemImage from "../../domain/entities/ItemImage";
 import ItemMetadata from "../../domain/entities/ItemMetadata";
 import ItemType from "../../domain/entities/ItemType";
-import RestfulController from "./abstracts/RestfulController";
+import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class UpgradedNewItemController extends RestfulController {
+export default class UpgradedNewItemController extends PermissionRequiredRestfulController {
     // Constructors:
     public constructor(
         domainManager?: DomainManager | undefined
@@ -17,6 +18,32 @@ export default class UpgradedNewItemController extends RestfulController {
 
     // Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
+        // Path intialize
+        const path: any[] = [];
+
+        // MANAGER permission validation
+        try {
+            await this.managerValidateController.execute({ request, path });
+        }
+        catch (error: any) {
+            if (error instanceof RestfulError) {
+                response.json({
+                    success: false,
+                    message: error.message,
+                    code: error.Code
+                });
+            }
+            else {
+                console.error(error);
+                response.json({
+                    success: false,
+                    message: "Failed while handling with DB!",
+                    code: "HANDLING_DB_FAILED"
+                });
+            }
+            return;
+        }
+
         // Id
         const id: string | undefined = request.body.id;
 
@@ -31,9 +58,6 @@ export default class UpgradedNewItemController extends RestfulController {
 
             return;
         }
-
-        // Path initialization
-        const path: any[] = [];
 
         // Check Id
         let item: Item | undefined;
