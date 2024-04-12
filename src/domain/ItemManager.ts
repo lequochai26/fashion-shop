@@ -1,5 +1,6 @@
 import PersistenceHandler from "../persistence/PersistenceHandler";
 import ItemData from "../persistence/data/ItemData";
+import CartItemPrimaryKey from "../persistence/pkeys/CartItemPrimaryKey";
 import ItemImagePrimaryKey from "../persistence/pkeys/ItemImagePrimaryKey";
 import OrderItemPrimaryKey from "../persistence/pkeys/OrderItemPrimaryKey";
 import ReversableConverter from "../utils/interfaces/ReversableConverter";
@@ -7,6 +8,7 @@ import EntityManager from "./EntityManager";
 import PersistenceHandlerHolder from "./PersistenceHandlerHolder";
 import SearchableEntityManager from "./SearchableEntityManager";
 import Brand from "./entities/Brand";
+import CartItem from "./entities/CartItem";
 import Item from "./entities/Item";
 import ItemImage from "./entities/ItemImage";
 import ItemType from "./entities/ItemType";
@@ -20,6 +22,9 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
     private brandManager?: EntityManager<Brand, string> | undefined;
     private itemImageManager?: EntityManager<ItemImage, ItemImagePrimaryKey> | undefined;
     private orderItemManager?: EntityManager<OrderItem, OrderItemPrimaryKey> | undefined;
+    private cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined;
+
+
     //CONSTRUCTOR
     public constructor(
         persistenceHandler?: PersistenceHandler,
@@ -27,7 +32,8 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
         itemTypeManager?:EntityManager<ItemType, string> | undefined,
         brandManager?:EntityManager<Brand, string> | undefined,
         itemImageManager?:EntityManager<ItemImage, ItemImagePrimaryKey> | undefined,
-        orderItemManager?:EntityManager<OrderItem, OrderItemPrimaryKey> | undefined
+        orderItemManager?:EntityManager<OrderItem, OrderItemPrimaryKey> | undefined,
+        cartItemManager?: EntityManager<CartItem, CartItemPrimaryKey> | undefined
     ){
         super(persistenceHandler);
 
@@ -36,6 +42,7 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
         this.brandManager = brandManager;
         this.itemImageManager = itemImageManager;
         this.orderItemManager = orderItemManager;
+        this.cartItemManager = cartItemManager;
     }
 
     //PRIVATE METHODS
@@ -73,7 +80,7 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
         executable:(itemImageManager:EntityManager<ItemImage, ItemImagePrimaryKey>) => Promise<T>
     ):Promise<T>{
         if(!this.itemImageManager){
-            throw new Error("useItemImageManager field is missing!")
+            throw new Error("useItemImageManager field is missing!");
         }
         return executable(this.itemImageManager)
     }
@@ -83,9 +90,19 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
         executable:(orderItemManager:EntityManager<OrderItem, OrderItemPrimaryKey>) => Promise<T>
     ):Promise<T>{
         if(!this.orderItemManager){
-            throw new Error("useOrderManager feild is missing!")
+            throw new Error("useOrderManager field is missing!");
         }
         return executable(this.orderItemManager);
+    }
+
+    //useCartItemManager
+    private async useCartItemManager<T>(
+        executable:(cartItemManager:EntityManager<CartItem, CartItemPrimaryKey>) => Promise<T>
+    ):Promise<T> {
+        if(!this.cartItemManager) {
+            throw new Error("useCartItemManager field is missing!");
+        }
+        return executable(this.cartItemManager);
     }
 
     //preCheckPath
@@ -132,9 +149,14 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
                 return orderItemManager.getByFilter({itemId:entity.Id as string}, path);
             }
         )
-    }
 
-
+        //User cartItem dependency
+        entity.Users = await this.useCartItemManager(
+            async function (cartItemManager) {
+                return cartItemManager.getByFilter({itemId: entity.Id as string}, path);
+            }
+        )
+    }   
 
     public async get(pKey: string, path: any[]): Promise<Item | undefined> {
         //khoi tao entity
@@ -350,5 +372,11 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
         this.OrderManager = value;
     }
 
+    public get CartItemManager(): EntityManager<CartItem, CartItemPrimaryKey> | undefined {
+        return this.cartItemManager;
+    }
+    public set CartItemManager(value: EntityManager<CartItem, CartItemPrimaryKey> | undefined) {
+        this.cartItemManager = value;
+    }
 }
     

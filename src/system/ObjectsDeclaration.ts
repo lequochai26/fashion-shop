@@ -247,7 +247,8 @@ const objectsDeclaration = [
             [ "itemTypeManager", "itemTypeManager" ],
             [ "brandManager", "brandManager" ],
             [ "itemImageManager", "itemImageManager" ],
-            [ "orderItemManager", "orderItemManager" ]
+            [ "orderItemManager", "orderItemManager" ],
+            [ "cartItemManager", "cartItemManager"]
         ]
     },
 
