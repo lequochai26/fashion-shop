@@ -48,7 +48,7 @@ export default class CartRestfulApi extends RestfulApi {
         return this.addCartItemController.execute({ request, response });
     }
 
-    public async delete(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
+    public async put(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
         return this.removeCartItemController.execute({ request, response });
     }
 }
