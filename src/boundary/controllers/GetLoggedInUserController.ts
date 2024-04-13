@@ -1,14 +1,19 @@
 import DomainManager from "../../domain/DomainManager";
+import User from "../../domain/entities/User";
+import Converter from "../../utils/interfaces/Converter";
 import RestfulError from "../errors/RestfulError";
+import UserInfo from "../infos/user/UserInfo";
+import QueryUserRestfulController from "./abstracts/QueryUserRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
-export default class GetLoggedInUserController extends PermissionRequiredRestfulController {
+export default class GetLoggedInUserController extends QueryUserRestfulController {
     //constructor:
     public constructor(
+        userInfoConverter: Converter<User, UserInfo>,
         domainManager?: DomainManager | undefined
     ){
-        super(domainManager)
+        super(userInfoConverter, domainManager);
     }
 
     //method:
@@ -44,7 +49,7 @@ export default class GetLoggedInUserController extends PermissionRequiredRestful
         response.json(
             {
                 success: true,
-                result: user
+                result: this.userInfoConverter.convert(user)
             }
         );
     }

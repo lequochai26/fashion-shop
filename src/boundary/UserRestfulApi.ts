@@ -53,7 +53,7 @@ export default class UserRestfulApi extends RestfulApi {
         this.getUsersByKeywordController = new GetUsersByKeyWordController(this.userInfoConverter, this.domainManager);
         this.getAllUsersController = new GetAllUsersController(this.userInfoConverter, this.domainManager);
         this.getUserController = new GetUserController(this.userInfoConverter, this.domainManager);
-        this.getLoggedInUserController = new GetLoggedInUserController(this.domainManager);
+        this.getLoggedInUserController = new GetLoggedInUserController(this.userInfoConverter, this.domainManager);
         this.newUserController = new NewUserController(this.domainManager);
         this.loginController = new LoginController(this.domainManager);
         this.logoutController = new LogoutController(this.domainManager);
