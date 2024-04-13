@@ -16,21 +16,29 @@ export default class RemoveCartItemController extends PermissionRequiredRestfulC
 
     // Methods:
     public async execute({ request, response }: RestfulControllerParam): Promise<void> {
-        // Id
-        const id: string | undefined = request.body.id;
+        // Items
+        const items: { id: string, amount: number, metadata?: any | undefined }[] | undefined = request.body.items;
 
-        if (!id) {
+        if (!items) {
             response.json({
                 success: false,
-                message: "id parameter is required!",
-                code: "ID_REQUIRED"
+                message: "items parameter is required!",
+                code: "ITEMS_REQUIRED"
             });
             return;
         }
 
-        // Neccessary information retrieve from request
-        const amount: number | undefined = request.body.amount;
-        const metadata: any | undefined = request.body.metadata;
+        // Validate items
+        for (const item of items) {
+            if (!item.id) {
+                response.json({
+                    success: false,
+                    message: "items invalid!",
+                    code: "ITEMS_INVALID"
+                });
+                return;
+            }
+        }
 
         // Path initialize
         const path: any[] = [];
@@ -77,7 +85,9 @@ export default class RemoveCartItemController extends PermissionRequiredRestfulC
 
         // Remove cart item operation
         try {
-            await cart.removeItem(id, path, amount, metadata);
+            for (const { id, amount, metadata } of items) {
+                await cart.removeItem(id, path, amount, metadata);
+            }
         }
         catch (error: any) {
             switch (error) {
