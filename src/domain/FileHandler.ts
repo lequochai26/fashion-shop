@@ -9,6 +9,11 @@ export default class FileHandler {
 
     // Methods:
     public writeAutoName(path: string, file: Express.Multer.File): string {
+        // Make directory if path is not exists
+        if (!fs.existsSync(path)) {
+            fs.mkdirSync(path);
+        }
+
         // Get extension from file
         const extension = this.getExtension(file);
 
