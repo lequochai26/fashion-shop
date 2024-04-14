@@ -27,7 +27,7 @@ export default class OrderInfoConverter implements Converter<Order, OrderInfo> {
                     id: item.Item?.Id as string,
                     amount: item.Amount as number,
                     name: item.Item?.Name as string,
-                    price: item.Item?.Price as number,
+                    price: item.Price as number,
                     metadata: item.Metadata,
                     avatar: item.Item?.Avatar as string
                 })
