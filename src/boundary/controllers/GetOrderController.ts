@@ -126,7 +126,7 @@ export default class GetOrderController extends QueryOrderRestfulController {
         response.json(
             {
                 success: true,
-                order: this.orderInfoConverter.convert(ordered)
+                result: this.orderInfoConverter.convert(ordered)
             }
         )
 
