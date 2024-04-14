@@ -56,8 +56,10 @@ export default class GetOrderedOrdersController extends QueryOrderRestfulControl
                     (order: Order): OrderInfo => {
                         return this.orderInfoConverter.convert(order);
                     }
+                ).sort(
+                    (a, b) => b.date.getTime() - a.date.getTime()
                 )
             }
-        )
+        );
     }
 }
