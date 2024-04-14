@@ -40,6 +40,8 @@ export default class GetAllOrdersController extends QueryOrderRestfulController{
                     code: "HANDLING_DB_FAILED"
                 });
             }
+
+            return;
         }
         //get all orders
         try{
