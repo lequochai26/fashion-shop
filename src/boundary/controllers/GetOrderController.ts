@@ -101,7 +101,9 @@ export default class GetOrderController extends QueryOrderRestfulController {
                     success: true,
                     result: this.orderInfoConverter.convert(order)
                 }
-            )
+            );
+
+            return;
         }
 
         const ordered: Order | undefined = user.OrderedOrders.find((ordered) => {
