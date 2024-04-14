@@ -1,6 +1,7 @@
 import Cart from "../../domain/Cart";
 import DomainManager from "../../domain/DomainManager";
 import OrderItem from "../../domain/entities/OrderItem";
+import OrderStatus from "../../domain/enums/OrderStatus";
 import OrderType from "../../domain/enums/OrderType";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
@@ -54,6 +55,7 @@ export default class UpgradedCreateOrderController extends PermissionRequiredRes
 
         // Get neccessary informations for create order
         const type: string = OrderType.SELL;
+        const status: string = OrderStatus.APPROVEMENT_AWAITING;
         const orderedBy: string = user.Email as string;
         const orderItems: { id: string, amount: number, metadata: any }[] = user.Cart.map(
             cartItem => ({ id: cartItem.Item?.Id as string, amount: cartItem.Amount as number, metadata: cartItem.Metadata })
@@ -61,7 +63,7 @@ export default class UpgradedCreateOrderController extends PermissionRequiredRes
 
         try {
             await this.useDomainManager(
-                async domainManager => domainManager.newOrder({ items: orderItems, path, type, orderedBy })
+                async domainManager => domainManager.newOrder({ items: orderItems, path, type, orderedBy, status })
             );
         }
         catch(error: any) {
