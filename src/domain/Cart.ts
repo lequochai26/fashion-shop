@@ -70,7 +70,33 @@ export default class Cart {
         }
     }
 
+    public async clear(): Promise<void> {
+        // Has user case
+        if (this.user) {
+            return this.clearUserCart();
+        }
+        // No user case
+        else {
+            return this.clearLocalCart();
+        }
+    }
+
     // Private methods:
+    private async clearUserCart() {
+        // Get user
+        const user: User = this.user as User;
+
+        // Clear user's cart
+        for (const cartItem of user.Cart) {
+            await this.domainManager.removeCartItem(cartItem);
+        }
+    }
+
+    private async clearLocalCart() {
+        // Clear cart
+        this.items = [];
+    }
+
     private addLocalItem(id: string, amount: number, metadata?: any | undefined): void {
         // Get local item with given info
         const item = this.getLocalItem(id, metadata);
