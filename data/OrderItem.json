@@ -1,247 +1,40 @@
-[
-    {
-        "orderId": "020320240001",
-        "itemId": "SHIRT001",
-        "amount": 3,
-        "price": 8257665,
-        "metadata": "{\"size\":\"M\",\"color\":\"white\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "SHOES002",
-        "amount": 5,
-        "price": 27600000,
-        "metadata": "{\"size\":\"39\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "PANTS003",
-        "amount": 2,
-        "price": 15400000,
-        "metadata": "{\"size\":\"M\",\"color\":\"blue\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "ACCESSORY004",
-        "amount": 1,
-        "price": 7000000,
-        "metadata": "{\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "FASHION_SET005",
-        "amount": 4,
-        "price": 50000000,
-        "metadata": "{\"size\":\"M\",\"color\":\"gold\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "SHIRT006",
-        "amount": 2,
-        "price": 5600000,
-        "metadata": "{\"size\":\"L\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "SHOES007",
-        "amount": 3,
-        "price": 14400000,
-        "metadata": "{\"size\":\"41\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "SHIRT008",
-        "amount": 1,
-        "price": 5400000,
-        "metadata": "{\"size\":\"S\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "PANTS009",
-        "amount": 5,
-        "price": 23500000,
-        "metadata": "{\"size\":\"S\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240001",
-        "itemId": "ACCESSORY010",
-        "amount": 2,
-        "price": 13900000,
-        "metadata": "{\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "SHIRT001",
-        "amount": 3,
-        "price": 8257665,
-        "metadata": "{\"size\":\"M\",\"color\":\"white\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "SHOES002",
-        "amount": 4,
-        "price": 18400000,
-        "metadata": "{\"size\":\"40\",\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "PANTS003",
-        "amount": 2,
-        "price": 15400000,
-        "metadata": "{\"size\":\"M\",\"color\":\"blue\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "ACCESSORY004",
-        "amount": 1,
-        "price": 6800000,
-        "metadata": "{\"color\":\"black\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "FASHION_SET005",
-        "amount": 3,
-        "price": 37500000,
-        "metadata": "{\"size\":\"M\",\"color\":\"gold\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "SHIRT006",
-        "amount": 2,
-        "price": 5600000,
-        "metadata": "{\"size\":\"L\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "SHOES007",
-        "amount": 3,
-        "price": 14400000,
-        "metadata": "{\"size\":\"42\",\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "SHIRT008",
-        "amount": 1,
-        "price": 5400000,
-        "metadata": "{\"size\":\"S\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "PANTS009",
-        "amount": 4,
-        "price": 18800000,
-        "metadata": "{\"size\":\"S\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "010320240002",
-        "itemId": "ACCESSORY010",
-        "amount": 2,
-        "price": 13900000,
-        "metadata": "{\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "SHIRT001",
-        "amount": 2,
-        "price": 5505110,
-        "metadata": "{\"size\":\"S\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "SHOES002",
-        "amount": 5,
-        "price": 20750000,
-        "metadata": "{\"size\":\"41\",\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "PANTS003",
-        "amount": 3,
-        "price": 23100000,
-        "metadata": "{\"size\":\"L\",\"color\":\"blue\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "ACCESSORY004",
-        "amount": 1,
-        "price": 7000000,
-        "metadata": "{\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "FASHION_SET005",
-        "amount": 4,
-        "price": 50000000,
-        "metadata": "{\"size\":\"M\",\"color\":\"gold\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "SHIRT006",
-        "amount": 2,
-        "price": 5600000,
-        "metadata": "{\"size\":\"L\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "SHOES007",
-        "amount": 4,
-        "price": 19200000,
-        "metadata": "{\"size\":\"40\",\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "SHIRT008",
-        "amount": 1,
-        "price": 5400000,
-        "metadata": "{\"size\":\"S\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "PANTS009",
-        "amount": 5,
-        "price": 23500000,
-        "metadata": "{\"size\":\"S\",\"color\":\"black\"}"
-    },
-    {
-        "orderId": "020320240003",
-        "itemId": "ACCESSORY010",
-        "amount": 2,
-        "price": 13900000,
-        "metadata": "{\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "030320240004",
-        "itemId": "SHIRT001",
-        "amount": 3,
-        "price": 8257665,
-        "metadata": "{\"size\":\"M\",\"color\":\"white\"}"
-    },
-    {
-        "orderId": "030320240004",
-        "itemId": "SHOES002",
-        "amount": 4,
-        "price": 18400000,
-        "metadata": "{\"size\":\"40\",\"color\":\"brown\"}"
-    },
-    {
-        "orderId": "030320240004",
-        "itemId": "PANTS003",
-        "amount": 2,
-        "price": 15400000,
-        "metadata": "{\"size\":\"M\",\"color\":\"blue\"}"
-    },
-    {
-        "orderId": "030320240004",
-        "itemId": "ACCESSORY004",
-        "amount": 1,
-        "price": 6800000,
-        "metadata": "{\"color\":\"black\"}"
-    },
-    {
-        "orderId": "030320240004",
-        "itemId": "FASHION_SET005",
-        "amount": 3,
-        "price": 37500000,
-        "metadata": "{\"size\":\"M\",\"color\":\"gold\"}"
-    }
-]
+[{
+  "_id": {
+    "$oid": "661c3aade87a69c7d83afc40"
+  },
+  "orderId": "1713126061093",
+  "itemId": "SHIRT001",
+  "amount": 10,
+  "price": 22990,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c3aade87a69c7d83afc41"
+  },
+  "orderId": "1713126061093",
+  "itemId": "SHOES001",
+  "amount": 10,
+  "price": 10000,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c94deb54f2e84f89973d2"
+  },
+  "orderId": "1713149150909",
+  "itemId": "SHOES002",
+  "amount": 2,
+  "price": 6000,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c94deb54f2e84f89973d3"
+  },
+  "orderId": "1713149150909",
+  "itemId": "SHIRT001",
+  "amount": 1,
+  "price": 400,
+  "metadata": null
+}]

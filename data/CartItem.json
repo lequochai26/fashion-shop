@@ -1,122 +1,54 @@
-[
-    {
-        "email": "nguyenvananh@gmail.com",
-        "itemId": "SHIRT001",
-        "amount": 15,
-        "metadata": "{\"size\":\"M\",\"color\":\"white\"}"
-    },
-    {
-        "email": "phuongngoclan@gmail.com",
-        "itemId": "SHIRT001",
-        "amount": 5,
-        "metadata": "{\"size\":\"L\",\"color\":\"black\"}"
-    },
-    {
-        "email": "tranthikimanh@gmail.com",
-        "itemId": "SHIRT001",
-        "amount": 10,
-        "metadata": "{\"size\":\"S\",\"color\":\"white\"}"
-    },
-    {
-        "email": "hoangminhnhat@gmail.com",
-        "itemId": "SHIRT001",
-        "amount": 20,
-        "metadata": "{\"size\":\"XL\",\"color\":\"black\"}"
-    },
-    {
-        "email": "nguyenvananh@gmail.com",
-        "itemId": "SHOES002",
-        "amount": 8,
-        "metadata": "{\"size\":\"40\",\"color\":\"black\"}"
-    },
-    {
-        "email": "phuongngoclan@gmail.com",
-        "itemId": "SHOES002",
-        "amount": 10,
-        "metadata": "{\"size\":\"41\",\"color\":\"brown\"}"
-    },
-    {
-        "email": "tranthikimanh@gmail.com",
-        "itemId": "SHOES002",
-        "amount": 15,
-        "metadata": "{\"size\":\"39\",\"color\":\"black\"}"
-    },
-    {
-        "email": "hoangminhnhat@gmail.com",
-        "itemId": "SHOES002",
-        "amount": 2,
-        "metadata": "{\"size\":\"40\",\"color\":\"black\"}"
-    },
-    {
-        "email": "nguyenvananh@gmail.com",
-        "itemId": "PANTS003",
-        "amount": 20,
-        "metadata": "{\"size\":\"L\",\"color\":\"blue\"}"
-    },
-    {
-        "email": "phuongngoclan@gmail.com",
-        "itemId": "PANTS003",
-        "amount": 15,
-        "metadata": "{\"size\":\"M\",\"color\":\"blue\"}"
-    },
-    {
-        "email": "tranthikimanh@gmail.com",
-        "itemId": "PANTS003",
-        "amount": 10,
-        "metadata": "{\"size\":\"L\",\"color\":\"blue\"}"
-    },
-    {
-        "email": "hoangminhnhat@gmail.com",
-        "itemId": "PANTS003",
-        "amount": 5,
-        "metadata": "{\"size\":\"M\",\"color\":\"blue\"}"
-    },
-    {
-        "email": "nguyenvananh@gmail.com",
-        "itemId": "ACCESSORY004",
-        "amount": 8,
-        "metadata": "{\"color\":\"silver\"}"
-    },
-    {
-        "email": "phuongngoclan@gmail.com",
-        "itemId": "ACCESSORY004",
-        "amount": 3,
-        "metadata": "{\"color\":\"black\"}"
-    },
-    {
-        "email": "tranthikimanh@gmail.com",
-        "itemId": "ACCESSORY004",
-        "amount": 5,
-        "metadata": "{\"color\":\"silver\"}"
-    },
-    {
-        "email": "hoangminhnhat@gmail.com",
-        "itemId": "ACCESSORY004",
-        "amount": 10,
-        "metadata": "{\"color\":\"silver\"}"
-    },
-    {
-        "email": "nguyenvananh@gmail.com",
-        "itemId": "FASHION_SET005",
-        "amount": 25,
-        "metadata": "{\"size\":\"M\",\"color\":\"gold\"}"
-    },
-    {
-        "email": "phuongngoclan@gmail.com",
-        "itemId": "FASHION_SET005",
-        "amount": 6,
-        "metadata": "{\"size\":\"S\",\"color\":\"gold\"}"
-    },
-    {
-        "email": "tranthikimanh@gmail.com",
-        "itemId": "FASHION_SET005",
-        "amount": 12,
-        "metadata": "{\"size\":\"M\",\"color\":\"silver\"}"
-    },
-    {
-        "email": "hoangminhnhat@gmail.com",
-        "itemId": "FASHION_SET005",
-        "amount": 8,
-        "metadata": "{\"size\":\"L\",\"color\":\"gold\"}"
-    }
-]
+[{
+  "_id": {
+    "$oid": "661c3fc7e87a69c7d83afc43"
+  },
+  "email": "hieuntt889@gmail.com",
+  "itemId": "SHIRT001",
+  "amount": 1,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c873c6189c48bc0801f80"
+  },
+  "email": "mina@gmail.com",
+  "itemId": "SHOES001",
+  "amount": 2,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c89386189c48bc0801f82"
+  },
+  "email": "mina@gmail.com",
+  "itemId": "ACCESSORY001",
+  "amount": 3,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c9528b54f2e84f89973d4"
+  },
+  "email": "hieuntt889@gmail.com",
+  "itemId": "SHIRT002",
+  "amount": 3,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c9587b54f2e84f89973d5"
+  },
+  "email": "minhcool@gmail.com",
+  "itemId": "SHIRT002",
+  "amount": 3,
+  "metadata": null
+},
+{
+  "_id": {
+    "$oid": "661c9595b54f2e84f89973d6"
+  },
+  "email": "minhcool@gmail.com",
+  "itemId": "SHIRT001",
+  "amount": 4,
+  "metadata": null
+}]

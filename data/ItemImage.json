@@ -1,202 +1,140 @@
-[
-    {
-        "itemId": "SHIRT001",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT002",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT003",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT004",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT005",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT006",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT007",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT008",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT009",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHIRT010",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES001",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES002",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES003",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES004",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES005",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES006",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES007",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES008",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES009",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "SHOES010",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS001",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS002",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS003",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS004",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS005",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS006",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS007",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS008",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS009",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "PANTS010",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY001",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY002",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY003",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY004",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY005",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY006",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY007",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY008",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY009",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "ACCESSORY010",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET001",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET002",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET003",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET004",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET005",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET006",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET007",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET008",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET009",
-        "path": "/items/item1.png"
-    },
-    {
-        "itemId": "FASHION_SET010",
-        "path": "/items/item1.png"
-    }
-]
+[{
+  "_id": {
+    "$oid": "661c1c9d008ada6d0498d201"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/bf54c3b5ffaa6c93d2f34d8d5af653f16646d5d6b4b0ebb20b9ca7760f27b506.webp"
+},
+{
+  "_id": {
+    "$oid": "661c1f6fd84e1e341490ab82"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/0dee7cd1df6cf13f4ee971d32a057fa3117488674c1a0314560e648cbeecb6cc.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c3469e87a69c7d83afc25"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/724d4ca47c0ee612136cd503f86b8ab3b037ef1428f285af6a5c397064f459fb.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c3469e87a69c7d83afc26"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/9a38be4c78e7543a4f3dc1376c540b80b3d2dc8fb0f423ed2dd31bb8075ca9f1.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c349fe87a69c7d83afc28"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/3128d878883a35f10a6c3affa7303ca213e945bc7e01535f96840187513ec96e.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c349fe87a69c7d83afc29"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/163085f92982fd95da6ed1decd3d4394fc4fde4b62ce47fb1127e8a845dc8ca7.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c358ee87a69c7d83afc2b"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/918f201c122d16900c9881ae29363a62c7fbbacbf09f73c880e07a60d3fb1511.webp"
+},
+{
+  "_id": {
+    "$oid": "661c3633e87a69c7d83afc2d"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/316d783dd8429caa4ec3af189100a03824ce1855c71640052860755a825071ac.webp"
+},
+{
+  "_id": {
+    "$oid": "661c371ce87a69c7d83afc2f"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/506f17efdc7e37121e5e311cff8372ca5bc6ad62c32a90af334add4632182705.webp"
+},
+{
+  "_id": {
+    "$oid": "661c386be87a69c7d83afc34"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/ed82e6f870da7d66ee3f517f432dd62397ee4dd873bc1cfd87eb95581847398f.webp"
+},
+{
+  "_id": {
+    "$oid": "661c38a4e87a69c7d83afc36"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/38910e157264ce8fe86706eb4ed803b08f3e69c0deefb0251975df703f607435.webp"
+},
+{
+  "_id": {
+    "$oid": "661c3986e87a69c7d83afc38"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/4eb3b33c8b5efe6d8aad5a7d3c852cffb4a13eace1c88ff1a9574a3be02e5710.webp"
+},
+{
+  "_id": {
+    "$oid": "661c398be87a69c7d83afc3a"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/4cc6c13d6192dbf5de68e2ed7107629be7a43ff6da3af9fed80ed7f14a3a6a6d.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c398be87a69c7d83afc3b"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/92bafd984359a737ed0d161509178add1880837883fe45047f87fbce5202aad7.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c86cc6189c48bc0801f7f"
+  },
+  "itemId": "ACCESSORY001",
+  "path": "/assets/itemImages/91e0f4d256f3eeb1e91c66ec555c450614b9052db6991a02b08c8a19704001e3.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c92a7b54f2e84f89973c7"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/fb11a9784d598e529096db10bdc8d8bbaa57f10e3f3e67c0138ec511b3563e06.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c92a7b54f2e84f89973c8"
+  },
+  "itemId": "SHOES001",
+  "path": "/assets/itemImages/4235da2c7ca7abcc9c77ea82fb3ee5cd376273e696c46299d2a9059e5662c7ef.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c9302b54f2e84f89973ca"
+  },
+  "itemId": "SHIRT001",
+  "path": "/assets/itemImages/48eac8ce4b7082f7b1c1c0271f38489537973aad26d4483d55e3648ee2916614.jpg"
+},
+{
+  "_id": {
+    "$oid": "661c9341b54f2e84f89973cc"
+  },
+  "itemId": "SHIRT002",
+  "path": "/assets/itemImages/46ab575d6849bc78dfc6359993ba69f63ea02b272095d0f0bcf160414bc3e0c5.webp"
+},
+{
+  "_id": {
+    "$oid": "661c93a9b54f2e84f89973ce"
+  },
+  "itemId": "SHOES002",
+  "path": "/assets/itemImages/d77e7ee70ebb9ee2c389e4f43051312afd6f39e20ddabc8e6ba482b051554354.jpg"
+}]

@@ -1,26 +1,35 @@
-[
-    {
-        "id": "FASHION_SET",
-        "name": "Set thời trang"
-    },
-
-    {
-        "id": "SHOES",
-        "name": "Giày"
-    },
-
-    {
-        "id": "SHIRT",
-        "name": "Áo"
-    },
-
-    {
-        "id": "PANTHS",
-        "name": "Quần"
-    },
-
-    {
-        "id": "ACCESSORY",
-        "name": "Phụ kiện"
-    }
-]
+[{
+  "_id": {
+    "$oid": "661c0782f64bc6e6c4810cbb"
+  },
+  "id": "FASHION_SET",
+  "name": "Set quần áo"
+},
+{
+  "_id": {
+    "$oid": "661c078df64bc6e6c4810cbc"
+  },
+  "id": "SHIRT",
+  "name": "Áo"
+},
+{
+  "_id": {
+    "$oid": "661c0799f64bc6e6c4810cbd"
+  },
+  "id": "PANTS",
+  "name": "Quần"
+},
+{
+  "_id": {
+    "$oid": "661c07a4f64bc6e6c4810cbe"
+  },
+  "id": "SHOES",
+  "name": "Giày"
+},
+{
+  "_id": {
+    "$oid": "661c07b6f64bc6e6c4810cbf"
+  },
+  "id": "ACCESSORY",
+  "name": "Phụ Kiện"
+}]

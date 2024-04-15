@@ -1,34 +1,70 @@
-[
-    {
-        "id": "DIOR",
-        "name": "Dior"
-    },
-    {
-        "id": "GUCCI",
-        "name": "Gucci"
-    },
-    {
-        "id": "VERSACE",
-        "name": "Versace"
-    },
-    {
-        "id": "PRADA",
-        "name": "Prada"
-    },
-    {
-        "id": "LOUIS_VUITTON",
-        "name": "Louis Vuitton"
-    },
-    {
-        "id": "BURBERRY",
-        "name": "Burberry"
-    },
-    {
-        "id": "HERMES",
-        "name": "Hermès"
-    },
-    {
-        "id": "FENDI",
-        "name": "Fendi"
-    }
-]
+[{
+  "_id": {
+    "$oid": "661c0609f64bc6e6c4810cb0"
+  },
+  "id": "NIKE",
+  "name": "Nike"
+},
+{
+  "_id": {
+    "$oid": "661c062af64bc6e6c4810cb1"
+  },
+  "id": "ADIDAS",
+  "name": "Adidas"
+},
+{
+  "_id": {
+    "$oid": "661c0639f64bc6e6c4810cb2"
+  },
+  "id": "VANS",
+  "name": "Vans"
+},
+{
+  "_id": {
+    "$oid": "661c0645f64bc6e6c4810cb3"
+  },
+  "id": "DIOR",
+  "name": "Dior"
+},
+{
+  "_id": {
+    "$oid": "661c0657f64bc6e6c4810cb4"
+  },
+  "id": "CONVERSE",
+  "name": "Converse"
+},
+{
+  "_id": {
+    "$oid": "661c0664f64bc6e6c4810cb5"
+  },
+  "id": "GUCCI",
+  "name": "Gucci"
+},
+{
+  "_id": {
+    "$oid": "661c0678f64bc6e6c4810cb6"
+  },
+  "id": "CALVIN KLEIN",
+  "name": "Calvin Klein"
+},
+{
+  "_id": {
+    "$oid": "661c0688f64bc6e6c4810cb7"
+  },
+  "id": "LEVI",
+  "name": "Levi"
+},
+{
+  "_id": {
+    "$oid": "661c06b5f64bc6e6c4810cb8"
+  },
+  "id": "PRADA",
+  "name": "Prade"
+},
+{
+  "_id": {
+    "$oid": "661c06c1f64bc6e6c4810cb9"
+  },
+  "id": "CHANEL",
+  "name": "Chanel"
+}]
