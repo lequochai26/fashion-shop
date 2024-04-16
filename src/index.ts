@@ -11,17 +11,12 @@ import SessionFactory from './utils/interfaces/SessionFactory';
 import SimpleSessionFactory from './utils/SimpleSessionFactory';
 import RestfulControllerRequestDispatcher from './boundary/RestfulControllerRequestDispatcher';
 import RestfulControllerRequestDispatcherImpl from './boundary/RestfulControllerRequestDispatcherImpl';
+import cors from 'cors';
 
 // Main function
 async function main() {
     // App initialization
     const app: Express = express();
-
-    // Include cookie parser into app
-    app.use(cookieParser());
-
-    // Include json body parser into app
-    app.use(express.json());
 
     // Add log request handler for app
     app.use(
@@ -33,6 +28,17 @@ async function main() {
             next();
         }
     );
+
+    // CORS
+    app.use(cors({ credentials: true, origin(requestOrigin, callback) {
+        callback(null, requestOrigin);
+    }, }));
+
+    // Include cookie parser into app
+    app.use(cookieParser());
+
+    // Include json body parser into app
+    app.use(express.json());
 
     // Including multer into app
     const storage = multer.memoryStorage();
