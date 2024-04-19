@@ -15,13 +15,16 @@ import GetUsersByKeyWordController from "./controllers/GetUsersByKeyWordControll
 import { NewUserController } from "./controllers/NewUserController";
 import LoginController from "./controllers/LoginController";
 import GetLoggedInUserController from "./controllers/GetLoggedInUserController";
-import ChangePasswordController from "./controllers/ChangePasswordController";
 import UpdateUserController from "./controllers/UpdateUserController";
 import LogoutController from "./controllers/LogoutController";
 import UpgradedChangePasswordController from "./controllers/UpgradedChangePasswordController";
 import RemoveUserController from "./controllers/RemoveUserController";
 import RegisterController from "./controllers/RegisterController";
 import UpdatePersonalInfoController from "./controllers/UpdatePersonalInfoController";
+import LoginWithFacebookController from "./controllers/LoginWithFacebookController";
+import ThirdPartyAccountRegistrationFinishController from "./controllers/ThirdPartyAccountRegistrationFinishController";
+import GetThirdPartyAccountController from "./controllers/GetThirdPartyAccountController";
+import CancelThirdPartyAccountRegistrationController from "./controllers/CancelThirdPartyAccountRegistrationController";
 
 export default class UserRestfulApi extends RestfulApi {
     // Static fields:
@@ -33,14 +36,18 @@ export default class UserRestfulApi extends RestfulApi {
     private getAllUsersController: Controller<RestfulControllerParam, void>;
     private getUserController: Controller<RestfulControllerParam, void>;
     private getLoggedInUserController: Controller<RestfulControllerParam, void>;
+    private getThirdPartyAccounntController: Controller<RestfulControllerParam, void>;
     private newUserController: Controller<RestfulControllerParam, void>;
     private loginController: Controller<RestfulControllerParam, void>;
     private logoutController: Controller<RestfulControllerParam, void>;
     private registerController: Controller<RestfulControllerParam, void>;
+    private loginWithFacebookController: Controller<RestfulControllerParam, void>;
+    private thirdPartyAccountRegistrationFinishController: Controller<RestfulControllerParam, void>;
     private updateUserController: Controller<RestfulControllerParam, void>;
     private changePasswordController: Controller<RestfulControllerParam, void>;
     private updatePersonalInfoController: Controller<RestfulControllerParam, void>;
     private removeUserController: Controller<RestfulControllerParam, void>;
+    private cancelThirdPartyAccountRegistrationController: Controller<RestfulControllerParam, void>;
 
     // Constructors:
     public constructor(
@@ -54,14 +61,18 @@ export default class UserRestfulApi extends RestfulApi {
         this.getAllUsersController = new GetAllUsersController(this.userInfoConverter, this.domainManager);
         this.getUserController = new GetUserController(this.userInfoConverter, this.domainManager);
         this.getLoggedInUserController = new GetLoggedInUserController(this.userInfoConverter, this.domainManager);
+        this.getThirdPartyAccounntController = new GetThirdPartyAccountController(this.userInfoConverter, this.domainManager);
         this.newUserController = new NewUserController(this.domainManager);
         this.loginController = new LoginController(this.domainManager);
         this.logoutController = new LogoutController(this.domainManager);
         this.registerController = new RegisterController(this.newUserController);
+        this.loginWithFacebookController = new LoginWithFacebookController(this.domainManager);
+        this.thirdPartyAccountRegistrationFinishController = new ThirdPartyAccountRegistrationFinishController(this.domainManager);
         this.updateUserController = new UpdateUserController(this.domainManager);
         this.changePasswordController = new UpgradedChangePasswordController(this.domainManager);
         this.updatePersonalInfoController = new UpdatePersonalInfoController(this.updateUserController, domainManager);
         this.removeUserController = new RemoveUserController(this.domainManager);
+        this.cancelThirdPartyAccountRegistrationController = new CancelThirdPartyAccountRegistrationController(this.domainManager);
     }
 
     // Methods:
@@ -90,6 +101,11 @@ export default class UserRestfulApi extends RestfulApi {
 
             case 'getLoggedIn': {
                 controller = this.getLoggedInUserController;
+                break;
+            }
+
+            case 'getThirdPartyAccount': {
+                controller = this.getThirdPartyAccounntController;
                 break;
             }
 
@@ -127,6 +143,16 @@ export default class UserRestfulApi extends RestfulApi {
 
             case 'register': {
                 controller = this.registerController;
+                break;
+            }
+
+            case 'loginWithFacebook': {
+                controller = this.loginWithFacebookController;
+                break;
+            }
+
+            case 'thirdPartyAccountRegistrationFinish': {
+                controller = this.thirdPartyAccountRegistrationFinishController;
                 break;
             }
 
@@ -172,6 +198,27 @@ export default class UserRestfulApi extends RestfulApi {
     }
 
     public async delete(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        return this.removeUserController.execute({ request, response });
+        const method: string | undefined = request.query.method as string | undefined;
+
+        let controller: Controller<RestfulControllerParam, void>;
+
+        switch(method) {
+            case 'remove': {
+                controller = this.removeUserController;
+                break;
+            }
+
+            case 'cancelThirdPartyAccountRegistration': {
+                controller = this.cancelThirdPartyAccountRegistrationController;
+                break;
+            }
+
+            default: {
+                controller = this.invalidMethodController;
+            }
+        }
+
+        // Execute controller
+        return controller.execute({ request, response });
     }
 }
