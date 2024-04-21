@@ -7,8 +7,8 @@ export default class CartItem {
     private item?: Item | undefined;
     private amount?: number | undefined;
     private metadata?: any | undefined;
-    private getUserCallback?: () => Promise<User | undefined>;
-    private getItemCallback?: () => Promise<Item | undefined>;
+    public getUserCallback?: () => Promise<User | undefined>;
+    public getItemCallback?: () => Promise<Item | undefined>;
 
     //Constructor
     public constructor(
