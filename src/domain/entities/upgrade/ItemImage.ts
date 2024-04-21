@@ -5,7 +5,7 @@ export default class ItemImage {
     //Fields
     private item?: Item | undefined;
     private path?: string | undefined;
-    private getItemCallback?: () => Promise<Item | undefined>;
+    public getItemCallback?: () => Promise<Item | undefined>;
 
     //Constructor
     public constructor(
