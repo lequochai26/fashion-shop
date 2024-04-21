@@ -5,7 +5,7 @@ export default class Brand{
     private id? : string | undefined;
     private name? : string | undefined;
     private items: Item[];
-    private getItemsCallback?: () => Promise<Item[]>;
+    public getItemsCallback?: () => Promise<Item[]>;
     
     //constructor
     public constructor(
