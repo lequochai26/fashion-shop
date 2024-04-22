@@ -11,8 +11,16 @@ async function insertOrder() {
     );
 }
 
+async function selectAllOrders() {
+    console.log(
+        await Order.select(
+            (doc: any) => doc.type === 'SELL'
+        )
+    );
+}
+
 async function main() {
-    await insertOrder();
+    await selectAllOrders();
 }
 
 main()
