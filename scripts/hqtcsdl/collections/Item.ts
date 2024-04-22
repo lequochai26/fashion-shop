@@ -143,7 +143,7 @@ export default class Item {
         }
     }
 
-    public async get(where?: any | Where): Promise<any[]> {
+    public async select(where?: any | Where): Promise<any[]> {
         // Connect to db
         const { connection, collection } = await connect(Item.collectionName);
 
