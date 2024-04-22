@@ -8,6 +8,7 @@
     "watch": "tsc -w",
     "start": "nodemon --watch ./src/**/*.ts --exec ts-node ./src/index.ts",
     "builddb": "ts-node ./scripts/builddb.ts",
+    "hqtcsdl": "ts-node ./scripts/hqtcsdl/index.ts",
     "test": "ts-node ./scripts/test.ts"
   },
   "author": "",
