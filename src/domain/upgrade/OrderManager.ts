@@ -278,16 +278,22 @@ export default class OrderManager extends PersistenceHandlerHolder implements Se
 
     }
 
-    public async getByFilterFunc(filterFunc: (value: Order) => boolean): Promise<Order[]> {
-        return (await this.getAll([])).filter(
-            filterFunc
-        )
+    public async getByFilterFunc(filterFunc: (value: Order) => boolean | Promise<boolean>): Promise<Order[]> {
+        const result: Order[] = [];
+
+        for (const order of await this.getAll([])) {
+            if (await filterFunc(order)) {
+                result.push(order);
+            }
+        }
+
+        return result;
     }
 
     public async search(keyword: string): Promise<Order[]> {
         return this.getByFilterFunc(
-            function (order: Order) {
-                return (`${order.Id} ${order.Type} ${order.CreatedBy?.FullName} ${order.OrderedBy?.FullName} ${order.Status} ${order.PaymentMethod}`.indexOf(keyword) !== -1);
+            async function (order: Order) {
+                return (`${order.Id} ${order.Type} ${order.CreatedBy?.FullName} ${(await order.getOrderedBy())?.FullName} ${order.Status} ${order.PaymentMethod}`.indexOf(keyword) !== -1);
             }
         )
     }
