@@ -1,5 +1,5 @@
 import connect from "../Connector";
-import triggerForDeleteBrand from "../triggers/Brand/triggerforDeleteBrand";
+import triggerForDeleteBrand from "../triggers/Brand/triggerForDeleteBrand";
 import triggerInsteadOfDeleteBrand from "../triggers/Brand/triggerInsteadOfDeleteBrand";
 import triggerInsteadOfInsertBrand from "../triggers/Brand/triggerInsteadOfInsertBrand";
 import triggerInsteadOfUpdateBrand from "../triggers/Brand/triggerInsteadOfUpdateBrand";
