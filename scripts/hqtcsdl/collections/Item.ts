@@ -108,7 +108,7 @@ export default class Item {
         }
     }
 
-    public async delete(id: string): Promise<void> {
+    public static async delete(id: string): Promise<void> {
         // Connect to db
         const { connection, collection } = await connect(Item.collectionName);
 
@@ -131,6 +131,7 @@ export default class Item {
 
         // Deleting
         await collection.deleteOne({ id });
+        await connection.close();
 
         // Firing for delete trigger
         if (Item.forDelete) {
@@ -143,7 +144,7 @@ export default class Item {
         }
     }
 
-    public async select(where?: any | Where): Promise<any[]> {
+    public static async select(where?: any | Where): Promise<any[]> {
         // Connect to db
         const { connection, collection } = await connect(Item.collectionName);
 
