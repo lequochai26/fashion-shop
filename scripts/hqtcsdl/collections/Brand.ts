@@ -1,5 +1,6 @@
 import connect from "../Connector";
 import triggerInsteadOfInsertBrand from "../triggers/Brand/triggerInsteadOfInsertBrand";
+import triggerInsteadOfUpdateBrand from "../triggers/Brand/triggerInsteadOfUpdateBrand";
 import Trigger from "../types/Trigger";
 import Where from "../types/Where";
 
@@ -8,7 +9,7 @@ export default class Brand {
     public static collectionName: string = "Brand";
 
     public static insteadOfInsert?: Trigger = triggerInsteadOfInsertBrand;
-    public static insteadOfUpdate?: Trigger;
+    public static insteadOfUpdate?: Trigger = triggerInsteadOfUpdateBrand;
     public static insteadOfDelete?: Trigger;
     public static forInsert?: Trigger;
     public static forUpdate?: Trigger;
