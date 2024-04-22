@@ -1,4 +1,5 @@
 import connect from "../Connector";
+import triggerInsteadOfInsertBrand from "../triggers/Brand/triggerInsteadOfInsertBrand";
 import Trigger from "../types/Trigger";
 import Where from "../types/Where";
 
@@ -6,7 +7,7 @@ export default class Brand {
     // Static fields:
     public static collectionName: string = "Brand";
 
-    public static insteadOfInsert?: Trigger;
+    public static insteadOfInsert?: Trigger = triggerInsteadOfInsertBrand;
     public static insteadOfUpdate?: Trigger;
     public static insteadOfDelete?: Trigger;
     public static forInsert?: Trigger;
