@@ -1,2 +1,2 @@
-type Trigger = { type: "insteadOf" | "for", callback: (inserted?: any, deleted?: any) => Promise<void> };
+type Trigger = (inserted?: any, deleted?: any) => Promise<void>;
 export default Trigger;
