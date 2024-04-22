@@ -1,4 +1,5 @@
 import connect from "../Connector";
+import triggerForDeleteBrand from "../triggers/Brand/triggerforDeleteBrand";
 import triggerInsteadOfDeleteBrand from "../triggers/Brand/triggerInsteadOfDeleteBrand";
 import triggerInsteadOfInsertBrand from "../triggers/Brand/triggerInsteadOfInsertBrand";
 import triggerInsteadOfUpdateBrand from "../triggers/Brand/triggerInsteadOfUpdateBrand";
@@ -14,7 +15,7 @@ export default class Brand {
     public static insteadOfDelete?: Trigger = triggerInsteadOfDeleteBrand;
     public static forInsert?: Trigger;
     public static forUpdate?: Trigger;
-    public static forDelete?: Trigger;
+    public static forDelete?: Trigger = triggerForDeleteBrand;
 
     // Static methods:
     public static async insert(
