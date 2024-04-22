@@ -5,7 +5,7 @@ import Session from "../../utils/Session";
 import RestfulError from "../errors/RestfulError";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class ChangePasswordController extends PermissionRequiredRestfulController {
     //Constructor:  

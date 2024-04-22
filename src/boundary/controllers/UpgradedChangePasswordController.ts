@@ -1,4 +1,4 @@
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 import DomainManager from "../../domain/DomainManager";
 import User from "../../domain/entities/User";
 import SessionFactory from "../../utils/interfaces/SessionFactory";

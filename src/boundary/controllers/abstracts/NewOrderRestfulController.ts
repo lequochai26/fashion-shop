@@ -1,6 +1,6 @@
 import DomainManager from "../../../domain/DomainManager";
 import NewOrderValidateController from "../NewOrderValidateController";
-import PermissionRequiredRestfulController from "../PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
 export default abstract class NewOrderRestfulController extends PermissionRequiredRestfulController {
     // Fields:

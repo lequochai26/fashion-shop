@@ -3,7 +3,7 @@ import Order from "../../domain/entities/Order";
 import OrderStatus from "../../domain/enums/OrderStatus";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class UpdateOrderStatusController extends PermissionRequiredRestfulController {
     //Constructors:

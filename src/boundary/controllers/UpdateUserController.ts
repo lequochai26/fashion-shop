@@ -5,7 +5,7 @@ import Path from "../../domain/enums/Path";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import Controller from "./interfaces/Controller";
 import UpdatePersonalInfoController from "./UpdatePersonalInfoController";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 import RestfulError from "../errors/RestfulError";
 
 export default class UpdateUserController extends PermissionRequiredRestfulController {

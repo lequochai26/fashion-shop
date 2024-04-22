@@ -2,7 +2,7 @@ import DomainManager from "../../../domain/DomainManager";
 import Order from "../../../domain/entities/Order";
 import Converter from "../../../utils/interfaces/Converter";
 import OrderInfo from "../../infos/order/OrderInfo";
-import PermissionRequiredRestfulController from "../PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
 export default abstract class QueryOrderRestfulController extends PermissionRequiredRestfulController {
     // Fields 

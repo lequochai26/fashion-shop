@@ -6,7 +6,7 @@ import User from "../../domain/entities/User";
 import Session from "../../utils/Session";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class AddCartItemController extends PermissionRequiredRestfulController {
     // Constructors:

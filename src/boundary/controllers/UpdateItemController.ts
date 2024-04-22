@@ -6,7 +6,7 @@ import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import ItemImage from "../../domain/entities/ItemImage";
 import ItemMetadata from "../../domain/entities/ItemMetadata";
 import RestfulController from "./abstracts/RestfulController";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 import RestfulError from "../errors/RestfulError";
 
 export default class UpdateItemController extends PermissionRequiredRestfulController {

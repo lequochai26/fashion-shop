@@ -2,7 +2,7 @@ import DomainManager from "../../domain/DomainManager";
 import Item from "../../domain/entities/Item";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class RemoveItemController extends PermissionRequiredRestfulController {
     // Constructors:

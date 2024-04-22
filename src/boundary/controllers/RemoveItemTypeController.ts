@@ -1,7 +1,7 @@
 import DomainManager from "../../domain/DomainManager";
 import ItemType from "../../domain/entities/ItemType";
 import RestfulError from "../errors/RestfulError";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 

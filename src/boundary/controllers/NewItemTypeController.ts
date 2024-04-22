@@ -4,7 +4,7 @@ import ItemType from "../../domain/entities/ItemType";
 import RestfulController from "./abstracts/RestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
 import RestfulError from "../errors/RestfulError";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class NewItemTypeController extends PermissionRequiredRestfulController {
 

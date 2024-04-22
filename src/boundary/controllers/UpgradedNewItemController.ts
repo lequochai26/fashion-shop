@@ -6,7 +6,7 @@ import ItemMetadata from "../../domain/entities/ItemMetadata";
 import ItemType from "../../domain/entities/ItemType";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class UpgradedNewItemController extends PermissionRequiredRestfulController {
     // Constructors:

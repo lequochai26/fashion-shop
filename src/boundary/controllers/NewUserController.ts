@@ -5,7 +5,7 @@ import RestfulError from "../errors/RestfulError";
 import RegisterController from "./RegisterController";
 import Controller from "./interfaces/Controller";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 import Session from "../../utils/Session";
 import Cart from "../../domain/Cart";
 

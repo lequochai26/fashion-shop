@@ -1,10 +1,10 @@
-import DomainManager from "../../domain/DomainManager";
-import RestfulController from "./abstracts/RestfulController";
-import { UserPermissionValidatePath } from "./abstracts/UserPermissionValidateController";
-import EmployeeValidateController from "./EmployeeValidateController";
-import Controller from "./interfaces/Controller";
-import LoginValidateController, { LoginValidateParam, LoginValidatePath } from "./LoginValidateController";
-import ManagerValidateController from "./ManagerValidateController";
+import DomainManager from "../../../domain/DomainManager";
+import RestfulController from "./RestfulController";
+import { UserPermissionValidatePath } from "./UserPermissionValidateController";
+import EmployeeValidateController from "../EmployeeValidateController";
+import Controller from "../interfaces/Controller";
+import LoginValidateController, { LoginValidateParam, LoginValidatePath } from "../LoginValidateController";
+import ManagerValidateController from "../ManagerValidateController";
 
 export default abstract class PermissionRequiredRestfulController extends RestfulController {
     // Fields:

@@ -2,7 +2,7 @@ import DomainManager from "../../../domain/DomainManager";
 import CartItem from "../../../domain/entities/CartItem";
 import Converter from "../../../utils/interfaces/Converter";
 import CartItemInfo from "../../infos/cartitem/CartItemInfo";
-import PermissionRequiredRestfulController from "../PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
 
 export default abstract class QueryCartRestfulController extends PermissionRequiredRestfulController {
     // Fields:

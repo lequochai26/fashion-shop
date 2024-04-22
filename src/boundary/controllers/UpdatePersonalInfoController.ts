@@ -3,7 +3,7 @@ import RestfulError from "../errors/RestfulError";
 import RestfulControllerRequestDispatcher from "../RestfulControllerRequestDispatcher";
 import Controller from "./interfaces/Controller";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class UpdatePersonalInfoController extends PermissionRequiredRestfulController {
     // Fields:

@@ -5,7 +5,7 @@ import RestfulError from "../errors/RestfulError";
 import UserInfo from "../infos/user/UserInfo";
 import QueryUserRestfulController from "./abstracts/QueryUserRestfulController";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class GetLoggedInUserController extends QueryUserRestfulController {
     //constructor:

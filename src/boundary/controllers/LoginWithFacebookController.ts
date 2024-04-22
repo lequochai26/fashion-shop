@@ -1,7 +1,7 @@
 import DomainManager from "../../domain/DomainManager";
 import Session from "../../utils/Session";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 import User from "../../domain/entities/User";
 import fetch from 'node-fetch';
 

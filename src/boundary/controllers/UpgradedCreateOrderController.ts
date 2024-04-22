@@ -5,7 +5,7 @@ import OrderStatus from "../../domain/enums/OrderStatus";
 import OrderType from "../../domain/enums/OrderType";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class UpgradedCreateOrderController extends PermissionRequiredRestfulController {
     // Constructors:

@@ -4,7 +4,7 @@ import User from "../../domain/entities/User";
 import OrderStatus from "../../domain/enums/OrderStatus";
 import RestfulError from "../errors/RestfulError";
 import RestfulControllerParam from "./interfaces/RestfulControllerParam";
-import PermissionRequiredRestfulController from "./PermissionRequiredRestfulController";
+import PermissionRequiredRestfulController from "./abstracts/PermissionRequiredRestfulController";
 
 export default class CancelOrderController extends PermissionRequiredRestfulController {
     // Constructors:
