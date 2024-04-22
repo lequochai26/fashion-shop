@@ -13,13 +13,13 @@ export default class UserInfoConverter implements AsyncConverter<User, UserInfo>
         return {
             address: from.Adress as string,
             avatar: from.Avatar as string,
-            createdOrders: from.CreatedOrders.map(
+            createdOrders: (await from.getCreatedOrders()).map(
                 order => order.Id as string
             ),
             email: from.Email as string,
             fullName: from.FullName as string,
             gender: from.Gender as boolean,
-            orderedOrders: from.OrderedOrders.map(
+            orderedOrders: (await from.getOrderedOrders()).map(
                 order => order.Id as string
             ),
             permission: from.Permission as string,

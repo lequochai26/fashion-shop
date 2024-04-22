@@ -10,6 +10,11 @@ export default class ItemInfoConverter implements AsyncConverter<Item, ItemInfo>
 
     // Methods:
     public async convert(from: Item): Promise<ItemInfo> {
+        const orders: string[] = [];
+        for (const order of await from.getOrders()) {
+            orders.push((await order.getOrder())?.Id as string);
+        }
+
         return {
             id: from.Id as string,
             avatar: from.Avatar as string,
@@ -21,31 +26,27 @@ export default class ItemInfoConverter implements AsyncConverter<Item, ItemInfo>
             gender: from.Gender as boolean,
             metadata: from.Metadata?.toJSON(),
             type: (
-                from.Type
+                (await from.getType())
                 ? {
-                    id: from.Type.Id as string,
-                    name: from.Type.Name as string
+                    id: (await from.getType())?.Id as string,
+                    name: (await from.getType())?.Name as string
                 }
                 : undefined
             ),
             brand: (
-                from.Brand
+                (await from.getBrand())
                 ? {
-                    id: from.Brand.Id as string,
-                    name: from.Brand.Name as string
+                    id: (await from.getBrand())?.Id as string,
+                    name: (await from.getBrand())?.Name as string
                 }
                 : undefined
             ),
-            images: from.Images.map(
+            images: (await from.getImages()).map(
                 function (image) {
                     return image.Path as string;
                 }
             ),
-            orders: from.Orders.map(
-                function (order) {
-                    return order.Order?.Id as string;
-                }
-            )
+            orders
         }
     }
 }

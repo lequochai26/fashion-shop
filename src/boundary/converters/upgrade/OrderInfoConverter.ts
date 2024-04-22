@@ -1,6 +1,7 @@
 import Order from "../../../domain/entities/upgrade/Order";
 import AsyncConverter from "../../../utils/interfaces/AsyncConverter";
 import OrderInfo from "../../infos/order/OrderInfo";
+import OrderInfoItem from "../../infos/order/OrderInfoItem";
 
 export default class OrderInfoConverter implements AsyncConverter<Order, OrderInfo> {
     // Constructors:
@@ -10,28 +11,33 @@ export default class OrderInfoConverter implements AsyncConverter<Order, OrderIn
 
     // Methods:
     public async convert(from: Order): Promise<OrderInfo> {
+        const items: OrderInfoItem[] = [];
+        for (const item of await from.getItems()) {
+            items.push(
+                {
+                    id: (await item.getItem())?.Id as string,
+                    amount: item.Amount as number,
+                    avatar: (await item.getItem())?.Avatar as string,
+                    name: (await item.getItem())?.Name as string,
+                    price: item.Price as number,
+                    metadata: item.Metadata
+                }
+            );
+        }
+
         return {
             id: from.Id as string,
             type: from.Type as string,
-            createdBy: from.CreatedBy && {
-                email: from.CreatedBy.Email as string,
-                fullName: from.CreatedBy.FullName as string
+            createdBy: (await from.getCreatedBy()) && {
+                email: (await from.getCreatedBy())?.Email as string,
+                fullName: (await from.getCreatedBy())?.FullName as string
             },
-            orderedBy: from.OrderedBy && {
-                email: from.OrderedBy.Email as string,
-                fullName: from.OrderedBy.FullName as string
+            orderedBy: (await from.getOrderedBy()) && {
+                email: (await from.getOrderedBy())?.Email as string,
+                fullName: (await from.getOrderedBy())?.FullName as string
             },
             date: from.Date as Date,
-            items: from.Items.map(
-                item => ({
-                    id: item.Item?.Id as string,
-                    amount: item.Amount as number,
-                    name: item.Item?.Name as string,
-                    price: item.Price as number,
-                    metadata: item.Metadata,
-                    avatar: item.Item?.Avatar as string
-                })
-            ),
+            items,
             totalPrice: from.TotalPrice as number,
             status: from.Status as string,
             paymentMethod: from.PaymentMethod as string

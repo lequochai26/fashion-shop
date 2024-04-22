@@ -13,7 +13,7 @@ export default class ItemTypeInfoConverter implements AsyncConverter<ItemType, I
         return {
             id: from.Id as string,
             name: from.Name as string,
-            items: from.Items.map(
+            items: (await from.getItems()).map(
                 function (item) {
                     return item.Id as string;
                 }
