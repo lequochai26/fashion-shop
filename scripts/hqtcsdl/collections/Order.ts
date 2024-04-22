@@ -70,6 +70,7 @@ export default class Order {
         // Get deleted
         const deleted: any = await collection.findOne({ id });
         if (!deleted) {
+            await connection.close();
             return;
         }
 
@@ -83,6 +84,7 @@ export default class Order {
             }
             catch (error: any) {
                 console.error(error);
+                await connection.close();
                 return;
             }
         }
@@ -109,6 +111,7 @@ export default class Order {
         // Get deleted
         const deleted: any = await collection.findOne({ id });
         if (!deleted) {
+            await connection.close();
             return;
         }
 
@@ -119,6 +122,7 @@ export default class Order {
             }
             catch (error: any) {
                 console.error(error);
+                await connection.close();
                 return;
             }
         }
