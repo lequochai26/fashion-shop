@@ -1,4 +1,5 @@
 import connect from "../Connector";
+import triggerInsteadOfDeleteBrand from "../triggers/Brand/triggerInsteadOfDeleteBrand";
 import triggerInsteadOfInsertBrand from "../triggers/Brand/triggerInsteadOfInsertBrand";
 import triggerInsteadOfUpdateBrand from "../triggers/Brand/triggerInsteadOfUpdateBrand";
 import Trigger from "../types/Trigger";
@@ -10,7 +11,7 @@ export default class Brand {
 
     public static insteadOfInsert?: Trigger = triggerInsteadOfInsertBrand;
     public static insteadOfUpdate?: Trigger = triggerInsteadOfUpdateBrand;
-    public static insteadOfDelete?: Trigger;
+    public static insteadOfDelete?: Trigger = triggerInsteadOfDeleteBrand;
     public static forInsert?: Trigger;
     public static forUpdate?: Trigger;
     public static forDelete?: Trigger;
