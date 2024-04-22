@@ -4,7 +4,7 @@ import { Collection, Db, MongoClient } from "mongodb";
 config();
 
 const url: string = process.env.URL as string;
-const dbName: string = process.env.DB_NAME as string;
+const dbName: string = process.env.DBNAME as string;
 
 export default async function connect(collectionName: string): Promise<DBConnectPath> {
     // Connect to db's service
