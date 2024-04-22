@@ -221,7 +221,7 @@ export default class OrderHandler {
         );
 
         // Recovery items amount
-        for (const orderItem of order.Items) {
+        for (const orderItem of (await order.getItems())) {
             const item: Item | undefined = orderItem.Item;
 
             if (!item) {

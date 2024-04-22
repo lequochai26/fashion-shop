@@ -58,10 +58,10 @@ export default class OrderItemManager extends PersistenceHandlerHolder implement
         return executable(this.itemManager);
     }
 
-    private precheckPath(pkey: OrderItemPrimaryKey, path: any[]) : OrderItem | undefined {
+    private async precheckPath(pkey: OrderItemPrimaryKey, path: any[]) : Promise<OrderItem | undefined> {
         for(const obj of path) {
             if(obj instanceof OrderItem) {
-                if(obj.Order?.Id as string === pkey.orderId && obj.Item?.Id as string === pkey.itemId && obj.Metadata === pkey.metadata) {
+                if((await obj.getOrder())?.Id as string === pkey.orderId && obj.Item?.Id as string === pkey.itemId && obj.Metadata === pkey.metadata) {
                     return obj;
                 }
             }
@@ -86,7 +86,7 @@ export default class OrderItemManager extends PersistenceHandlerHolder implement
     //Methods:
     public async get (pkey: OrderItemPrimaryKey,path: any[]): Promise<OrderItem | undefined> {
         //precheck path
-        let entity: OrderItem | undefined = this.precheckPath(pkey, path);
+        let entity: OrderItem | undefined = await this.precheckPath(pkey, path);
 
         if(entity) {
             return entity;
@@ -135,7 +135,7 @@ export default class OrderItemManager extends PersistenceHandlerHolder implement
         //Converting data from data list to entities
         for(const data of dataList) {
             //Precheck path
-            let entity: OrderItem | undefined = this.precheckPath({orderId: data.orderId, itemId: data.itemId, metadata: data.metadata}, path);
+            let entity: OrderItem | undefined = await this.precheckPath({orderId: data.orderId, itemId: data.itemId, metadata: data.metadata}, path);
 
             if(entity) {
                 result.push(entity);
@@ -176,7 +176,7 @@ export default class OrderItemManager extends PersistenceHandlerHolder implement
         //Converting data into entities
         for(const data of dataList) {
             //precheck path
-            let entity: OrderItem | undefined = this.precheckPath({orderId: data.orderId, itemId: data.itemId, metadata: data.metadata}, path);
+            let entity: OrderItem | undefined = await this.precheckPath({orderId: data.orderId, itemId: data.itemId, metadata: data.metadata}, path);
 
             if(entity) {
                 result.push(entity);
