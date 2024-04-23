@@ -56,8 +56,8 @@ export default class User {
     }
 
     //methods:
-    public getOrderedOrder(id: string): Order | undefined {
-        return this.orderedOrders.filter(
+    public async getOrderedOrder(id: string): Promise<Order | undefined> {
+        return (await this.getOrderedOrders()).filter(
             order => order.Id === id
         )[0];
     }

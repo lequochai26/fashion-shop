@@ -59,7 +59,7 @@ export default class CancelOrderController extends PermissionRequiredRestfulCont
         }
 
         // Get order from user
-        const order: Order | undefined = user.getOrderedOrder(id);
+        const order: Order | undefined = await user.getOrderedOrder(id);
 
         // Check order's exist
         if (!order) {
