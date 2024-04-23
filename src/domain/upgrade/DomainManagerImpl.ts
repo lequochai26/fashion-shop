@@ -226,7 +226,7 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    getCartItemsByFilterFunc(filterFunc: (target: CartItem) => boolean): Promise<CartItem[]> {
+    getCartItemsByFilterFunc(filterFunc: (target: CartItem) => boolean | Promise<boolean>): Promise<CartItem[]> {
         throw new Error("Method not implemented.");
     }
 
@@ -341,7 +341,7 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    public async getItemTypesByFilterFunc(filterFunc: (target: ItemType) => boolean): Promise<ItemType[]> {
+    public async getItemTypesByFilterFunc(filterFunc: (target: ItemType) => boolean | Promise<boolean>): Promise<ItemType[]> {
         return this.useItemTypeManager(
             async function (itemtypeManager) {
                 return itemtypeManager.getByFilterFunc(filterFunc);
@@ -414,7 +414,7 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    public async getBrandsByFilterFunc(filterFunc: (target: Brand) => boolean): Promise<Brand[]> {
+    public async getBrandsByFilterFunc(filterFunc: (target: Brand) => boolean | Promise<boolean>): Promise<Brand[]> {
        return this.useBrandManager(
             async function (brandManager) {
                 return brandManager.getByFilterFunc(filterFunc);
@@ -485,7 +485,7 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    public async getUsersByFilterFunc(filterFunc: (target: User) => boolean): Promise<User[]> {
+    public async getUsersByFilterFunc(filterFunc: (target: User) => boolean | Promise<boolean>): Promise<User[]> {
         return this.useUserManager(
             async function (userManager) {
                 return userManager.getByFilterFunc(filterFunc);
@@ -556,7 +556,7 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    public async getItemsByFilterFunc(filterFunc: (target: Item) => boolean): Promise<Item[]> {
+    public async getItemsByFilterFunc(filterFunc: (target: Item) => boolean | Promise<boolean>): Promise<Item[]> {
         return this.useItemManager(
             async function (itemManager) {
                 return itemManager.getByFilterFunc(filterFunc);
@@ -628,7 +628,7 @@ export default class DomainManagerImpl implements DomainManager {
         );
     }
 
-    getOrdersByFilterFunc(filterFunc: (target: Order) => boolean): Promise<Order[]> {
+    getOrdersByFilterFunc(filterFunc: (target: Order) => boolean | Promise<boolean>): Promise<Order[]> {
         throw new Error("Method not implemented.");
     }
     public async searchOrders(keyword: string): Promise<Order[]> {

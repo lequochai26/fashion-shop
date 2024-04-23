@@ -323,10 +323,15 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
         )
     }
 
-    public async getByFilterFunc(filterFunc: (value: Item) => boolean): Promise<Item[]> {
-        return (await this.getAll([])).filter(
-            filterFunc
-        )
+    public async getByFilterFunc(filterFunc: (value: Item) => boolean | Promise<boolean>): Promise<Item[]> {
+        const items = await this.getAll([]);
+        const result: Item[] = [];
+        for (const item of items) {
+            if (await filterFunc(item)) {
+                result.push(item);
+            }
+        }
+        return result;
     }
 
     public async search(keyword: string): Promise<Item[]> {

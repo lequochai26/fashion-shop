@@ -21,7 +21,7 @@ export default interface DomainManager {
     updateCartItem(target: CartItem): Promise<void>
     removeCartItem(target: CartItem): Promise<void>
     removeCartItemByPrimaryKey(pKey: CartItemPrimaryKey): Promise<void>
-    getCartItemsByFilterFunc(filterFunc: (target: CartItem) => boolean): Promise<CartItem[]>
+    getCartItemsByFilterFunc(filterFunc: (target: CartItem) => boolean | Promise<boolean>): Promise<CartItem[]>
 
     getItemImage(pKey: ItemImagePrimaryKey, path: any[]): Promise<ItemImage | undefined>
     getAllItemImages(path: any[]): Promise<ItemImage[]>
@@ -38,7 +38,7 @@ export default interface DomainManager {
     updateItemType(target: ItemType): Promise<void>
     removeItemType(target: ItemType): Promise<void>
     removeItemTypeByPrimaryKey(pKey: string): Promise<void>
-    getItemTypesByFilterFunc(filterFunc: (target: ItemType) => boolean): Promise<ItemType[]>
+    getItemTypesByFilterFunc(filterFunc: (target: ItemType) => boolean | Promise<boolean>): Promise<ItemType[]>
     searchItemTypes(pKey: string): Promise<ItemType[]>
 
     getBrand(pKey: string, path: any[]): Promise<Brand | undefined>
@@ -48,7 +48,7 @@ export default interface DomainManager {
     updateBrand(target: Brand): Promise<void>
     removeBrand(target: Brand): Promise<void>
     removeBrandByPrimaryKey(pKey: string): Promise<void>
-    getBrandsByFilterFunc(filterFunc: (target: Brand) => boolean): Promise<Brand[]>
+    getBrandsByFilterFunc(filterFunc: (target: Brand) => boolean | Promise<boolean>): Promise<Brand[]>
     searchBrands(pKey: string): Promise<Brand[]>
 
     getUser(pKey: string, path: any[]): Promise<User | undefined>
@@ -58,7 +58,7 @@ export default interface DomainManager {
     updateUser(target: User): Promise<void>
     removeUser(target: User): Promise<void>
     removeUserByPrimaryKey(pKey: string): Promise<void>
-    getUsersByFilterFunc(filterFunc: (target: User) => boolean): Promise<User[]>
+    getUsersByFilterFunc(filterFunc: (target: User) => boolean | Promise<boolean>): Promise<User[]>
     searchUsers(pKey: string): Promise<User[]>
 
     getItem(pKey: string, path: any[]): Promise<Item | undefined>
@@ -68,7 +68,7 @@ export default interface DomainManager {
     updateItem(target: Item): Promise<void>
     removeItem(target: Item): Promise<void>
     removeItemByPrimaryKey(pKey: string): Promise<void>
-    getItemsByFilterFunc(filterFunc: (target: Item) => boolean): Promise<Item[]>
+    getItemsByFilterFunc(filterFunc: (target: Item) => boolean | Promise<boolean>): Promise<Item[]>
     searchItems(pKey: string): Promise<Item[]>
 
     getOrder(pKey: string, path: any[]): Promise<Order | undefined>
@@ -78,7 +78,7 @@ export default interface DomainManager {
     updateOrder(target: Order): Promise<void>
     removeOrder(target: Order): Promise<void>
     removeOrderByPrimaryKey(pKey: string): Promise<void>
-    getOrdersByFilterFunc(filterFunc: (target: Order) => boolean): Promise<Order[]>
+    getOrdersByFilterFunc(filterFunc: (target: Order) => boolean | Promise<boolean>): Promise<Order[]>
     searchOrders(pKey: string): Promise<Order[]>
 
     getOrderItem(pKey: OrderItemPrimaryKey, path: any[]): Promise<OrderItem | undefined>

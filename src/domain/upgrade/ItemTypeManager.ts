@@ -247,10 +247,15 @@ export default class ItemTypeManager extends PersistenceHandlerHolder implements
        );
         
     }
-    public async getByFilterFunc(filterFunc: (value: ItemType) => boolean): Promise<ItemType[]> {
-       return (await this.getAll([])).filter(
-           filterFunc
-       )
+    public async getByFilterFunc(filterFunc: (value: ItemType) => boolean | Promise<boolean>): Promise<ItemType[]> {
+       const itemTypes = await this.getAll([]);
+       const result: ItemType[] = [];
+        for (const itemType of itemTypes) {
+            if (await filterFunc(itemType)) {
+                result.push(itemType);
+            }
+        }
+        return result;
     }
     //get va set
     public get ItemTypeConverter(): AsyncReversableConverter<ItemTypeData, ItemType> | undefined {

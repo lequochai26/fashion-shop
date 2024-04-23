@@ -248,11 +248,15 @@ export default class BrandManager extends PersistenceHandlerHolder implements Se
     
     //nhận một keyword và trả về 
     //một Promise chứa một mảng các obj Brand.
-    public async getByFilterFunc(filterFunc: (value: Brand) => boolean): Promise<Brand[]> {
-        return (await this.getAll([])).filter(
-            //lay all brand, dung filterfunc loc
-            filterFunc
-        )
+    public async getByFilterFunc(filterFunc: (value: Brand) => boolean | Promise<boolean>): Promise<Brand[]> {
+        const brands = await this.getAll([]);
+        const result: Brand[] = [];
+        for (const brand of brands) {
+            if (await filterFunc(brand)) {
+                result.push(brand);
+            }
+        }
+        return result;
     }
     //search dua vao getbyfilter de tim kiem 
     public async search(keyword: string): Promise<Brand[]> {

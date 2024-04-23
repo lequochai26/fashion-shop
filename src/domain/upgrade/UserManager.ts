@@ -300,10 +300,15 @@ export default class UserManager extends PersistenceHandlerHolder implements Sea
         )
     }
 
-    public async getByFilterFunc(filterFunc: (value: User) => boolean): Promise<User[]> {
-        return (await this.getAll([])).filter(
-            filterFunc
-        )
+    public async getByFilterFunc(filterFunc: (value: User) => boolean | Promise<boolean>): Promise<User[]> {
+        const users = await this.getAll([]);
+        const result: User[] = [];
+        for (const user of users) {
+            if (await filterFunc(user)) {
+                result.push(user);
+            }
+        }
+        return result;
     }
 
     public async search(keyword: string): Promise<User[]> {
