@@ -1,6 +1,6 @@
 import Item from "../../collections/Item";
 
-export default async function procedureGetHighestItemPrice(): Promise<any> {
+export default async function getHighestItemPrice(): Promise<any> {
     // Selecting and sorting desc
     const items: any[] = (await Item.select())
         .sort((a, b) => b.price - a.price);
