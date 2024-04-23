@@ -1,4 +1,7 @@
 import connect from "../Connector";
+import triggerForDeleteOrder from "../triggers/Order/triggerForDeleteOrder";
+import triggerInsteadOfInsertOrder from "../triggers/Order/triggerInsteadOfInsertOrder";
+import triggerInsteadOfUpdateOrder from "../triggers/Order/triggerInsteadOfUpdateOrder";
 import Trigger from "../types/Trigger";
 import Where from "../types/Where";
 
@@ -6,12 +9,12 @@ export default class Order {
     // Static fields:
     public static collectionName: string = "Order";
 
-    public static insteadOfInsert?: Trigger | undefined = undefined;
-    public static forInsert?: Trigger | undefined = undefined;
-    public static insteadOfUpdate?: Trigger | undefined = undefined;
-    public static forUpdate?: Trigger | undefined = undefined;
-    public static insteadOfDelete?: Trigger | undefined = undefined;
-    public static forDelete?: Trigger | undefined = undefined;
+    public static insteadOfInsert?: Trigger = triggerInsteadOfInsertOrder;
+    public static forInsert?: Trigger;
+    public static insteadOfUpdate?: Trigger = triggerInsteadOfUpdateOrder;
+    public static forUpdate?: Trigger;
+    public static insteadOfDelete?: Trigger = triggerForDeleteOrder;
+    public static forDelete?: Trigger = triggerForDeleteOrder;
 
     // Static methods:
     public static async insert(
