@@ -1,10 +1,11 @@
+import Item from "../../collections/Item";
 
 
 export default async function procedureDeleteItem(id:string):Promise<void>{
-    if(!id){
-        throw new Error("Chưa cung cấp ID của sản phẩm !");
-        
-    }
-
    
+  try {
+    await Item.delete(id);
+  } catch (error:any) {
+    console.error("Lỗi khi xóa ",error);
+  }
 }
