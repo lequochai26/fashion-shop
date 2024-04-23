@@ -1,10 +1,10 @@
-import Item from "../../collections/Item";
-
-export default async function DeleteItem():Promise<any[]> {
-    //select items
-    let items: any[] = await Item.select();
 
 
-    
-    return items;
+export default async function procedureDeleteItem(id:string):Promise<void>{
+    if(!id){
+        throw new Error("Chưa cung cấp ID của sản phẩm !");
+        
+    }
+
+   
 }
