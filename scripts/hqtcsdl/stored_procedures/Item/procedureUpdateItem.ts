@@ -1,5 +1,5 @@
 import Item from "../../collections/Item";
 
-export default async function procedureUpdateItem(){
+export default async function procedureUpdateItem(id:string){
 
 }
