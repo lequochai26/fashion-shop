@@ -1,4 +1,8 @@
 import connect from "../Connector";
+import triggerForDeleteItemType from "../triggers/ItemType/triggerForDeleteItemType";
+import triggerInsteadOfDeleteItemType from "../triggers/ItemType/triggerInsteadOfDeleteItemType";
+import triggerInsteadOfInsertItemType from "../triggers/ItemType/triggerInsteadOfInsertItemType";
+import triggerInsteadOfUpdateItemType from "../triggers/ItemType/triggetInsteadOfUpdateItemType";
 import Trigger from "../types/Trigger";
 import Where from "../types/Where";
 
@@ -6,12 +10,12 @@ export default class ItemType {
     //static
     public static collectionName: string ="ItemType";
 
-    public static insteadOfInsert? : Trigger ;
-    public static insteadOfDelete? : Trigger ;
-    public static insteadOfUpdate? : Trigger ;
+    public static insteadOfInsert? : Trigger = triggerInsteadOfInsertItemType ;
+    public static insteadOfDelete? : Trigger = triggerInsteadOfDeleteItemType;
+    public static insteadOfUpdate? : Trigger = triggerInsteadOfUpdateItemType;
     public static forInsert? : Trigger ;
     public static forUpdate? : Trigger ;
-    public static forDelete? : Trigger ;
+    public static forDelete? : Trigger = triggerForDeleteItemType ;
 
     //method
     public static async inserrt(
