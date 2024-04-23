@@ -18,7 +18,7 @@ export default class ItemType {
     public static forDelete? : Trigger = triggerForDeleteItemType ;
 
     //method
-    public static async inserrt(
+    public static async insert(
         id : string,
         name : string
     ): Promise<void>{
