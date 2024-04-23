@@ -1,6 +1,6 @@
 import Item from "../../collections/Item";
 
-export default async function viewItemsPriceBetween(): Promise<any[]> {
+export default async function viewItemsPriceBetween250_500(): Promise<any[]> {
     //Select items
     let items: any[] = await Item.select();
 
