@@ -59,9 +59,9 @@ export default class OrderItem{
         return this.item;
     }
 
-    public totalPrice(orderType: OrderType): number {
+    public async totalPrice(orderType: OrderType): Promise<number> {
         // Get item
-        const item = this.item;
+        const item = await this.getItem();
 
         // Check item
         if (!item) {
