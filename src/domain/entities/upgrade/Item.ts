@@ -7,8 +7,8 @@ import OrderItem from "./OrderItem";
 
 export default class Item {
     // Static methods:
-    public static createFilterFunc(filter: any, allRequired: boolean): (target: Item) => boolean {
-        return function (target: Item): boolean {
+    public static createFilterFunc(filter: any, allRequired: boolean): (target: Item) => Promise<boolean> {
+        return async function (target: Item): Promise<boolean> {
             // Gender
             if (filter.gender !== undefined) {
                 if (target.Gender !== filter.gender) {
@@ -39,7 +39,7 @@ export default class Item {
 
             // Type
             if (filter.type) {
-                if (target.Type?.Id !== filter.type) {
+                if ((await target.getType())?.Id !== filter.type) {
                     if (allRequired) {
                         return false;
                     }
@@ -53,7 +53,7 @@ export default class Item {
 
             // Brand
             if (filter.brand) {
-                if (target.Brand?.Id !== filter.brand) {
+                if ((await target.getBrand())?.Id !== filter.brand) {
                     if (allRequired) {
                         return false;
                     }

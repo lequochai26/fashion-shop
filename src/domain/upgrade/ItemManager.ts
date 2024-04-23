@@ -336,9 +336,9 @@ export default class ItemManager extends PersistenceHandlerHolder implements Sea
 
     public async search(keyword: string): Promise<Item[]> {
         return this.getByFilterFunc(
-            function (item: Item) {
+            async function (item: Item) {
                 return (
-                    `${item.Id}  ${item.Name} ${item.Description} ${item.Price} ${item.BuyPrice} ${item.Type?.Id} ${item.Type?.Name} ${(item.Gender as boolean ? "Nam" : "Nữ")} ${item.Brand?.Id} ${item.Brand?.Name}`
+                    `${item.Id}  ${item.Name} ${item.Description} ${item.Price} ${item.BuyPrice} ${(await item.getType())?.Id} ${(await item.getType())?.Name} ${(item.Gender as boolean ? "Nam" : "Nữ")} ${(await item.getBrand())?.Id} ${(await item.getBrand())?.Name}`
                     .toLowerCase()
                     .indexOf(
                         keyword.toLowerCase()
