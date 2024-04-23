@@ -90,9 +90,9 @@ export default class Order {
         return this.id;
     }
 
-    public calcTotalPrice(orderType: OrderType): number {
+    public async calcTotalPrice(orderType: OrderType): Promise<number> {
         this.totalPrice = 0;
-        for (const item of this.items) {
+        for (const item of (await this.getItems())) {
             this.totalPrice += item.totalPrice(orderType);
         }
         return this.totalPrice;
