@@ -92,7 +92,7 @@ export default class RemoveOrderController extends PermissionRequiredRestfulCont
 
         //Remove order
         try {
-            for(const orderItem of order.Items) {
+            for(const orderItem of await order.getItems()) {
                 await this.useDomainManager(
                     async function(domainManager){
                         return domainManager.removeOrderItem(orderItem as OrderItem);
