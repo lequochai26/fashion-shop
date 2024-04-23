@@ -5,6 +5,11 @@ const triggerInsteadOfInsertItemType: Trigger = async function (inserted,deleted
     // id
     const id : string = inserted.id;
 
+    if(!id){
+        throw new Error("Mã loại sản phẩm không được rỗng!");
+        
+    }
+
     if((await ItemType.select({id})).length>0){
         throw new Error(`Đã tồn tại loại sản phẩm với mã ${id}!`);
     }
