@@ -410,7 +410,7 @@ export default class UpdateItemController extends PermissionRequiredRestfulContr
                 if (saved) {
                     const deletedItemImagesPath: string[] = [];
 
-                    for (const itemImage of item.Images) {
+                    for (const itemImage of await item.getImages()) {
                         try {
                             await this.useDomainManager(
                                 async function (domainManager) {

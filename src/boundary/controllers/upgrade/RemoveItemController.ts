@@ -91,7 +91,7 @@ export default class RemoveItemController extends PermissionRequiredRestfulContr
         }
 
         // Order dependency
-        if (item.Orders.length > 0) {
+        if ((await item.getOrders()).length > 0) {
             response.json(
                 {
                     success: false,
@@ -104,7 +104,7 @@ export default class RemoveItemController extends PermissionRequiredRestfulContr
         }
 
         // User dependency
-        if (item.Users.length > 0) {
+        if ((await item.getUsers()).length > 0) {
             response.json({
                 success: false,
                 message: "Make sure there's no user linked to this item before performing this action!",
@@ -146,10 +146,10 @@ export default class RemoveItemController extends PermissionRequiredRestfulContr
         }
 
         // Delete item's images if have
-        if (item.Images.length > 0) {
+        if ((await item.getImages()).length > 0) {
             const deletedImagesPath: string[] = [];
 
-            for (const image of item.Images) {
+            for (const image of await item.getImages()) {
                 try {
                     await this.useDomainManager(
                         async function (domainManager) {
