@@ -34,6 +34,12 @@ const triggerInsteadOfUpdateItem: Trigger = async function (inserted, deleted): 
         throw new Error(" không được để trống mô tả")
     }
 
+
+    //Tồn tại mã tương ứng với type
+
+    //Tồn tại mã tương ứng với brand
+    
+
 }
 
 export default triggerInsteadOfUpdateItem;
