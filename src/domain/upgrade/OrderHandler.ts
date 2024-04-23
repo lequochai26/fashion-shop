@@ -90,7 +90,7 @@ export default class OrderHandler {
 
         // Updating Items amount
         for (const orderItem of orderItems) {
-            const item: Item = orderItem.Item as Item;
+            const item: Item = (await orderItem.getItem()) as Item;
 
             if (!orderItem.Metadata) {
                 item.Amount = (item.Amount as number) - (orderItem.Amount as number);
@@ -164,7 +164,7 @@ export default class OrderHandler {
 
         // Update Items amount
         for (const orderItem of orderItems) {
-            const item: Item = orderItem.Item as Item;
+            const item: Item = (await orderItem.getItem()) as Item;
 
             if (!orderItem.Metadata) {
                 item.Amount = (item.Amount as number) + (orderItem.Amount as number);
@@ -222,7 +222,7 @@ export default class OrderHandler {
 
         // Recovery items amount
         for (const orderItem of (await order.getItems())) {
-            const item: Item | undefined = orderItem.Item;
+            const item: Item | undefined = await orderItem.getItem();
 
             if (!item) {
                 continue;
