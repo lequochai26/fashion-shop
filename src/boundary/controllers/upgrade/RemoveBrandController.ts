@@ -92,7 +92,7 @@ export default class RemoveBrandController extends PermissionRequiredRestfulCont
         }
 
         //Item dependency
-        if (brand.Items.length > 0) {
+        if ((await brand.getItems()).length > 0) {
             response.json(
                 {
                     success: false,
