@@ -94,7 +94,7 @@ export default class RemoveItemTypeController extends PermissionRequiredRestfulC
             return;
         }
         //Hệ thống kiểm tra và xác nhận không có sản phẩm nào được liên kết với loại sản phẩm này.
-        if(itemType.Items.length >0){
+        if((await itemType.getItems()).length >0){
             response.json(
                 {
                     success:false,
