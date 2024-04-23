@@ -1,4 +1,8 @@
 import connect from "../Connector";
+import triggerForDeleteUser from "../triggers/User/triggerForDeleteUser";
+import triggerInteadOfDeleteUser from "../triggers/User/triggerInsteadOfDeleteUser";
+import triggerInsteadOfInsertUser from "../triggers/User/triggerInsteadOfInsertUser";
+import triggerInsteadOfUpdateUser from "../triggers/User/triggerInsteadOfUpdateUser";
 import Trigger from "../types/Trigger";
 import Where from "../types/Where";
 
@@ -6,10 +10,10 @@ export default class User {
     // Static fields:
     public static collectionName: string = "User";
 
-    public static insteadOfInsert?: Trigger;
-    public static insteadOfUpdate?: Trigger;
-    public static insteadOfDelete?: Trigger;
-    public static forInsert?: Trigger;
+    public static insteadOfInsert?: Trigger = triggerInsteadOfInsertUser;
+    public static insteadOfUpdate?: Trigger = triggerInsteadOfUpdateUser;
+    public static insteadOfDelete?: Trigger = triggerInteadOfDeleteUser;
+    public static forInsert?: Trigger = triggerForDeleteUser;
     public static forUpdate?: Trigger;
     public static forDelete?: Trigger;
 
