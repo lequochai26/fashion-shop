@@ -62,7 +62,7 @@ export default class RemoveUserController extends RestfulController{
        }
        //check order
 
-       if(user.OrderedOrders.length > 0 ){
+       if((await user.getOrderedOrders()).length > 0 ){
         response.json(
             {
                 success: false,

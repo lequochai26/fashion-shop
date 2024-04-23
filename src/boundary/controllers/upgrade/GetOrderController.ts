@@ -105,7 +105,7 @@ export default class GetOrderController extends QueryOrderRestfulController {
             return;
         }
 
-        const ordered: Order | undefined = user.OrderedOrders.find((ordered) => {
+        const ordered: Order | undefined = (await user.getOrderedOrders()).find((ordered) => {
                 return ordered.Id === id;
         });
 

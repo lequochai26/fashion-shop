@@ -43,7 +43,7 @@ export default class UpgradedCreateOrderController extends PermissionRequiredRes
         }
 
         // Check if user's cart has at least 1 item
-        if (user.Cart.length < 1) {
+        if ((await user.getCart()).length < 1) {
             response.json({
                 success: false,
                 message: "No item in cart!",
@@ -56,7 +56,7 @@ export default class UpgradedCreateOrderController extends PermissionRequiredRes
         const type: string = OrderType.SELL;
         const status: string = OrderStatus.APPROVEMENT_AWAITING;
         const orderedBy: string = user.Email as string;
-        const orderItems: { id: string, amount: number, metadata: any }[] = user.Cart.map(
+        const orderItems: { id: string, amount: number, metadata: any }[] = (await user.getCart()).map(
             cartItem => ({ id: cartItem.Item?.Id as string, amount: cartItem.Amount as number, metadata: cartItem.Metadata })
         );
 
