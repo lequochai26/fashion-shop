@@ -2,7 +2,7 @@ import Item from "../../collections/Item";
 import Brand from "../../collections/Brand";
 import Trigger from "../../types/Trigger";
 
-const triggerInsteadOfInsertItem:Trigger = async function (inserted, deleted): Promise<void> {
+const triggerInsteadOfInsertItem: Trigger = async function (inserted, deleted): Promise<void> {
 
     //kiểm tra 
     const id: string = inserted.id;
@@ -23,7 +23,7 @@ const triggerInsteadOfInsertItem:Trigger = async function (inserted, deleted): P
     }
 
     if ((await Item.select({ id })).length > 0) {
-        throw new Error(`Đã tồn tại thương hiệu với mã ${id} !`);
+        throw new Error(`Đã tồn tại sản phẩm với mã ${id} !`);
     }
 
     //Kiểm tra avatar
@@ -46,7 +46,7 @@ const triggerInsteadOfInsertItem:Trigger = async function (inserted, deleted): P
         throw new Error("Giá mua lại phải lớn hơn không")
     }
     //kiểm tra số lượng
-    if (amount <=0){
+    if (amount <= 0) {
         throw new Error(" số lượng phải lớn hơn không")
     }
 
@@ -57,7 +57,7 @@ const triggerInsteadOfInsertItem:Trigger = async function (inserted, deleted): P
 
 
     //kiểm tra gender
-    if(!gender){
+    if (!gender) {
         throw new Error(" phải chọn giới tính ")
     }
 }
