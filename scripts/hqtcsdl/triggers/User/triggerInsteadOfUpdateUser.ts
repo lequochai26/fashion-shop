@@ -4,8 +4,10 @@ const triggerInsteadOfUpdateUser: Trigger = async function (inserted, deleted): 
     //Password check
     const password: string = inserted.password;
 
-    if (!password) {
-        throw new Error("Mật khẩu không được để rỗng!");
+    if (password) {
+        if(!password) {
+            throw new Error("Mật khẩu không được để rỗng!");
+        }
     }
 
     //Fullname
