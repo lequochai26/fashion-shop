@@ -1,6 +1,6 @@
 import Item from "../../collections/Item";
 
-export default async function procedureGetItemsByKeyWord(keyword: string):Promise<any[]> {
+export default async function viewGetItemsByKeyWord(keyword: string):Promise<any[]> {
     if(!keyword){
         throw new Error('Chưa cung cấp từ khóa!')
     }
