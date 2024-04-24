@@ -1,17 +1,21 @@
 import connect from "../Connector";
 import Trigger from "../types/Trigger";
 import Where from "../types/Where";
+import triggerForDeleteItem from "../triggers/Item/triggerForDeleteItem";
+import triggerInsteadOfDeleteItem from "../triggers/Item/triggerInsteadOfDeleteItem";
+import triggerInsteadOfInsertItem from "../triggers/Item/triggerInsteadOfInsertItem";
+import triggerInsteadOfUpdateItem from "../triggers/Item/triggerInsteadOfUpdateItem";
 
 export default class Item {
     // Static fields:
     public static collectionName: string = "Item";
 
-    public static insteadOfInsert?: Trigger | undefined = undefined;
-    public static insteadOfUpdate?: Trigger | undefined = undefined;
-    public static insteadOfDelete?: Trigger | undefined = undefined;
+    public static insteadOfInsert?: Trigger = triggerInsteadOfInsertItem;
+    public static insteadOfUpdate?: Trigger = triggerInsteadOfUpdateItem;
+    public static insteadOfDelete?: Trigger = triggerInsteadOfDeleteItem;
     public static forInsert?: Trigger | undefined = undefined;
     public static forUpdate?: Trigger | undefined = undefined;
-    public static forDelete?: Trigger | undefined = undefined;
+    public static forDelete?: Trigger = triggerForDeleteItem;
 
     // Static methods:
     public static async insert(
@@ -101,7 +105,7 @@ export default class Item {
 
         // Firing for update trigger
         if (Item.forUpdate) {
-            try { 
+            try {
                 await Item.forUpdate(inserted, deleted);
             }
             catch (error: any) {

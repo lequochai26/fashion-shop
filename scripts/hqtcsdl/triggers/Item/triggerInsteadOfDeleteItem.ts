@@ -1,7 +1,7 @@
 import Order from "../../collections/Order";
 import Trigger from "../../types/Trigger";
 
-const triggerInteadOfDeleteItem: Trigger = async function(inserted, deleted): Promise<void>  {
+const triggerInsteadOfDeleteItem: Trigger = async function(inserted, deleted): Promise<void>  {
     const items: any[] = await Order.select(
         {
             $or: [
@@ -16,4 +16,4 @@ const triggerInteadOfDeleteItem: Trigger = async function(inserted, deleted): Pr
     }
 }
 
-export default triggerInteadOfDeleteItem;
+export default triggerInsteadOfDeleteItem;
