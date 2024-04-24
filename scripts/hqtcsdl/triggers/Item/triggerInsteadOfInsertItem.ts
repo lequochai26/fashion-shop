@@ -7,13 +7,11 @@ const triggerInsteadOfInsertItem: Trigger = async function (inserted, deleted): 
 
     //kiểm tra 
     const id: string = inserted.id;
-    const avatar: string = inserted.id;
     const name: string = inserted.name;
     const description: string = inserted.description;
     const price: number = inserted.price;
     const buyPrice: number = inserted.buyPrice;
     const amount: number = inserted.amount;
-    const gender: boolean = inserted.gender;
     const type: string | undefined = inserted.type;
     const brand: string | undefined = inserted.brand;
 
