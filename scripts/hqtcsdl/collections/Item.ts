@@ -20,17 +20,22 @@ export default class Item {
     // Static methods:
     public static async insert(
         id: string,
-        avatar: string,
         name: string,
         description: string,
         price: number,
         buyPrice: number,
         amount: number,
         gender: boolean,
+        avatar?: string | undefined,
         metadata?: string | undefined,
         type?: string | undefined,
         brand?: string | undefined
     ): Promise<void> {
+        // Avatar default
+        if (!avatar) {
+            avatar = "/assets/avatar/default.png";
+        }
+
         // Inserted
         const inserted: any = { id, avatar, name, description, price, buyPrice, amount, gender, metadata, type, brand };
 
@@ -82,6 +87,11 @@ export default class Item {
         if (!deleted) {
             await connection.close();
             return;
+        }
+
+        // Avatar default
+        if (!avatar) {
+            avatar = "/assets/avatar/default.png";
         }
 
         // Get inserted
