@@ -50,7 +50,7 @@ export default class BrandRestfulApi extends RestfulApi {
     }
 
     // Methods:
-    public async get_(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
+    public async get(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
         // Get method from request
         const method: string | undefined = request.query.method as string | undefined;
 
