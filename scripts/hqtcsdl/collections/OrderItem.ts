@@ -63,7 +63,7 @@ export default class OrderItem{
         const { connection, collection } = await connect(OrderItem.collectionName);
 
         // Get deleted
-        const deleted: any = await collection.findOne({ orderId: orderId});
+        const deleted: any = await collection.findOne({ $and:[{orderId: orderId},{itemId: itemId}] });
         if (!deleted) {
             await connection.close();
             return;
@@ -84,7 +84,7 @@ export default class OrderItem{
         }
 
         // Updating
-        await collection.updateOne({orderId:orderId},{ $set: inserted });
+        await collection.updateOne({ $and:[{orderId:orderId},{itemId:itemId}] },{ $set: inserted });
         await connection.close();
 
         // Fiting for trigger
@@ -98,12 +98,13 @@ export default class OrderItem{
         }
     }
 
-    public static async delete(orderId:string):Promise<void>{
+    public static async delete(orderId:string, itemId: string):Promise<void>{
         //connect database
         const { connection, collection } = await connect(OrderItem.collectionName);
 
         //get delete
-        const deleted: any = await collection.findOne({ orderId:orderId });
+        const deleted: any = await collection.findOne({ $and:[{orderId:orderId},{itemId:itemId}] });
+        
         if(!deleted){
             await connection.close();
             return;
@@ -120,7 +121,7 @@ export default class OrderItem{
             }
         }
 
-        await collection.deleteOne({orderId:orderId});
+        await collection.deleteOne({ $and:[{orderId:orderId},{itemId:itemId}] });
         await connection.close();
 
     
