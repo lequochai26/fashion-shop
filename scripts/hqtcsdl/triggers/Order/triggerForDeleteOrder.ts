@@ -5,7 +5,7 @@ const triggerForDeleteOrder:Trigger = async function (inserted,deleted) {
     const orderItems: any [] = await OrderItem.select({ orderId : deleted.orderId })
 
     for(const orderItem of orderItems){
-        await OrderItem.delete(orderItem.orderId,deleted.itemId)
+        await OrderItem.delete(orderItem.orderId)
     }
 }
 export default triggerForDeleteOrder

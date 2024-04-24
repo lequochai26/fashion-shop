@@ -1,5 +1,6 @@
 import Brand from "../../collections/Brand";
 import Order from "../../collections/Order";
+import User from "../../collections/User";
 import Trigger from "../../types/Trigger";
 
 const triggerInsteadOfInsertOrder:Trigger = async function (inserted,deleted):Promise <void> {
@@ -45,15 +46,18 @@ const triggerInsteadOfInsertOrder:Trigger = async function (inserted,deleted):Pr
     }
 
     //check createdBy
-    if((await Order.select({createdBy})).length === 0){
-        throw new Error('email không tồn tại!')
+    if(createdBy){
+        if((await User.select({id: createdBy})).length === 0){
+            throw new Error('email không tồn tại!')
+        }
     }
     
     //check orderedBy
-    if((await Order.select({orderedBy})).length === 0){
-        throw new Error('email không tồn tại!')
+    if(orderedBy){
+        if((await User.select({id: orderedBy})).length === 0){
+            throw new Error('email không tồn tại!')
+        }
     }
-
 }
 
 export default triggerInsteadOfInsertOrder;
