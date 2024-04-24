@@ -3,7 +3,7 @@ import Trigger from "../../types/Trigger";
 
 const triggerForDeleteItemType: Trigger = async function (inserted,deleted) {
     //Cập nhật itemtye field của Items thuộc ItemType này thành undefined
-    const items: any[] = await Item.select({type : inserted.id});
+    const items: any[] = await Item.select({type : deleted.id});
 
     for (const item of items){
         await Item.update(
