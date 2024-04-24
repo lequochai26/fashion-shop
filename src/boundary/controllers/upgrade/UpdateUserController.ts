@@ -5,7 +5,8 @@ import RestfulError from "../../errors/RestfulError";
 import PermissionRequiredRestfulController from "../abstracts/upgrade/PermissionRequiredRestfulController";
 import Controller from "../interfaces/Controller";
 import RestfulControllerParam from "../interfaces/RestfulControllerParam";
-import UpdatePersonalInfoController from "../UpdatePersonalInfoController";
+import UpdatePersonalInfoController from "./UpdatePersonalInfoController";
+
 
 export default class UpdateUserController extends PermissionRequiredRestfulController {
 
