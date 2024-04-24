@@ -1,5 +1,4 @@
 import Item from "../../collections/Item";
-import Brand from "../../collections/Brand";
 import Trigger from "../../types/Trigger";
 
 const triggerInsteadOfInsertItem: Trigger = async function (inserted, deleted): Promise<void> {
@@ -59,6 +58,15 @@ const triggerInsteadOfInsertItem: Trigger = async function (inserted, deleted): 
     //kiểm tra gender
     if (!gender) {
         throw new Error(" phải chọn giới tính ")
+    }
+
+    if (!type) {
+        throw new Error(" Phải có loại sản phẩm phù hợp ")
+
+    }
+
+    if(!brand){
+        throw new Error ("không được để trống thương hiệu")
     }
 }
 
