@@ -20,13 +20,13 @@ export default class Item {
     // Static methods:
     public static async insert(
         id: string,
-        avatar: string,
         name: string,
         description: string,
         price: number,
         buyPrice: number,
         amount: number,
         gender: boolean,
+        avatar?: string | undefined,
         metadata?: string | undefined,
         type?: string | undefined,
         brand?: string | undefined
