@@ -5,9 +5,24 @@ export default async function viewHighestItemPrice(): Promise<any[]> {
     const items: any[] = (await Item.select())
         .sort((a, b) => b.price - a.price);
 
-    // Get highest price item
-    const highestPriceItem = items[0];
 
-    // Return highest price item
-    return highestPriceItem;
+    const result: any[] = [];
+
+
+    if (items.length < 1) {
+        return result;
+    }
+
+    const original = items[0];
+    for (const item of items) {
+
+        if (item.price !== original.price) {
+            break;
+
+        }
+        result.push(item);
+    }
+
+    return result;
+
 }
