@@ -1,6 +1,6 @@
 import User from "../../collections/User";
 
-export default async function procedureGetUserByKeyword(keyword: string): Promise<any> {
+export default async function procedureGetUsersByKeyword(keyword: string): Promise<any> {
     if(!keyword) {
         throw new Error("Chưa cung cấp từ khoá tìm kiếm!");
     }
