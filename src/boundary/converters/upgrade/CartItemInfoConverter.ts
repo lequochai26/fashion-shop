@@ -16,7 +16,8 @@ export default class CartItemInfoConverter implements AsyncConverter<CartItem, C
                     avatar: (await from.getItem())?.Avatar as string,
                     id: (await from.getItem())?.Id as string,
                     name: (await from.getItem())?.Name as string,
-                    price: (await from.getItem())?.Price as number
+                    price: (await from.getItem())?.Price as number,
+                    metadata: (await from.getItem())?.Metadata
                 }
             ),
             amount: from.Amount as number,
