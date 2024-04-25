@@ -356,6 +356,9 @@ export default class UpdateItemController extends PermissionRequiredRestfulContr
         );
 
         if (images.length > 0) {
+            // Get current images
+            const curImages: ItemImage[] = await item.getImages();
+
             // Writing images files
             const wroteImagesPath: string[] = [];
             for (const image of images) {
@@ -410,7 +413,7 @@ export default class UpdateItemController extends PermissionRequiredRestfulContr
                 if (saved) {
                     const deletedItemImagesPath: string[] = [];
 
-                    for (const itemImage of await item.getImages()) {
+                    for (const itemImage of curImages) {
                         try {
                             await this.useDomainManager(
                                 async function (domainManager) {
