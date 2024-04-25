@@ -8,11 +8,11 @@ const triggerForDeleteItem: Trigger = async function (inserted, deleted) {
     const itemImages: any[] = await ItemImage.select({path: deleted.path}); 
 
     for(const cartItem of cartItems) {
-        await CartItem.delete(cartItem.email, deleted.itemId);
+        await CartItem.delete(deleted.id, cartItem.itemId);
     }
 
     for(const itemImage of itemImages){ 
-        await ItemImage.delete(itemImage.path,deleted.itemId); 
+        await ItemImage.delete(deleted.id,itemImage.itemId); 
     }
 }
 

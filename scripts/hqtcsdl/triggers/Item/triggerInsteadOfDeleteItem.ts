@@ -1,12 +1,15 @@
 import Trigger from "../../types/Trigger";
-import OrderItem from "../../collections/OrderItem";
+import Order from "../../collections/Order";
 
-const triggerInsteadOfDeleteItem: Trigger = async function(inserted, deleted): Promise<void>  {
-    const items: any[] = await OrderItem.select({orderId: deleted.id});
+const triggerInsteadOfDeleteItem: Trigger = async function (inserted, deleted): Promise<void> {
 
-    if(items.length < 0 ){
-        throw new Error("Xảy ra lỗi trong quá trình xoá sản phẩm");
+    const items: any[] = await Order.select({items: deleted.id});
+
+    if (items.length > 0) {
+        throw new Error("Xảy ra lỗi khi xoá đơn hàng");
     }
 }
+
+
 
 export default triggerInsteadOfDeleteItem;
