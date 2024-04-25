@@ -1,5 +1,6 @@
 import connect from "../Connector";
 import triggerForDeleteOrder from "../triggers/Order/triggerForDeleteOrder";
+import triggerInsteadOfDeleteOrder from "../triggers/Order/triggerInsteadOfDeleteOrder";
 import triggerInsteadOfInsertOrder from "../triggers/Order/triggerInsteadOfInsertOrder";
 import triggerInsteadOfUpdateOrder from "../triggers/Order/triggerInsteadOfUpdateOrder";
 import Trigger from "../types/Trigger";
@@ -13,7 +14,7 @@ export default class Order {
     public static forInsert?: Trigger;
     public static insteadOfUpdate?: Trigger = triggerInsteadOfUpdateOrder;
     public static forUpdate?: Trigger;
-    public static insteadOfDelete?: Trigger = triggerForDeleteOrder;
+    public static insteadOfDelete?: Trigger = triggerInsteadOfDeleteOrder;
     public static forDelete?: Trigger = triggerForDeleteOrder;
 
     // Static methods:
