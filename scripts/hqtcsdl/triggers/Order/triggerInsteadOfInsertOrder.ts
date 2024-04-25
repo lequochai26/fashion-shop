@@ -10,8 +10,8 @@ const triggerInsteadOfInsertOrder:Trigger = async function (inserted,deleted):Pr
     const totalPrice: number = inserted.totalPrice;
     const status: string = inserted.status;
     const paymentMethod: string = inserted.paymentMethod;
-    const createdBy: string = inserted.orderedBy;
-    const orderedBy: string = inserted.createdBy;
+    const createdBy: string | undefined = inserted.orderedBy;
+    const orderedBy: string | undefined = inserted.createdBy;
 
     //id check
     if(!id){
@@ -47,14 +47,14 @@ const triggerInsteadOfInsertOrder:Trigger = async function (inserted,deleted):Pr
 
     //check createdBy
     if(createdBy){
-        if((await User.select({id: createdBy})).length === 0){
+        if((await User.select({email: createdBy})).length === 0){
             throw new Error('email không tồn tại!')
         }
     }
     
     //check orderedBy
     if(orderedBy){
-        if((await User.select({id: orderedBy})).length === 0){
+        if((await User.select({email: orderedBy})).length === 0){
             throw new Error('email không tồn tại!')
         }
     }

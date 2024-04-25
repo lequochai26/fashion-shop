@@ -43,14 +43,14 @@ const triggerInsteadOfUpdateOrder:Trigger = async function (inserted,deleted):Pr
     
     //Check createdBy
     if(newCreatedBy){
-        if((await User.select({id: newCreatedBy})).length === 0){
+        if((await User.select({email: newCreatedBy})).length === 0){
             throw new Error('email không tồn tại!')
         }
     }
     
     //check orderedBy
     if(newOrderedBy){
-        if((await User.select({id: newOrderedBy})).length === 0){
+        if((await User.select({email: newOrderedBy})).length === 0){
             throw new Error('email không tồn tại!')
         }
     }
