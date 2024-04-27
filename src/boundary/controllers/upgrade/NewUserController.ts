@@ -288,27 +288,27 @@ export class NewUserController extends PermissionRequiredRestfulController {
         }
 
         // Cart handling
-        if (dispatchedFrom instanceof RegisterController) {
-            // Get session
-            const session: Session = (request as any).session;
+        // if (dispatchedFrom instanceof RegisterController) {
+        //     // Get session
+        //     const session: Session = (request as any).session;
 
-            // Get cart
-            const cart: Cart | undefined = session.get("cart");
+        //     // Get cart
+        //     const cart: Cart | undefined = session.get("cart");
 
-            // Cart exist case
-            if (cart) {
-                // Attach cart to given user
-                try {
-                    await cart.attach(user, path);
-                }
-                catch (error: any) {
-                    console.error(error);
-                }
+        //     // Cart exist case
+        //     if (cart) {
+        //         // Attach cart to given user
+        //         try {
+        //             await cart.attach(user, path);
+        //         }
+        //         catch (error: any) {
+        //             console.error(error);
+        //         }
 
-                // Remove cart from session
-                session.remove("cart");
-            }
-        }
+        //         // Remove cart from session
+        //         session.remove("cart");
+        //     }
+        // }
 
         response.json(
             { success: true }
