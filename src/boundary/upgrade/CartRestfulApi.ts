@@ -13,6 +13,7 @@ import RemoveCartItemController from "../controllers/upgrade/RemoveCartIttemCont
 import CartItemInfoConverter from "../converters/upgrade/CartItemInfoConverter";
 import CartItemInfo from "../infos/cartitem/CartItemInfo";
 import UpgradedGetCartController from "../controllers/upgrade/UpgradedGetCartController";
+import AttachCartItemController from "../controllers/upgrade/AttachCartItemController";
 
 export default class CartRestfulApi extends RestfulApi {
     // Static fields:
@@ -21,6 +22,7 @@ export default class CartRestfulApi extends RestfulApi {
     // Fields:
     private cartItemInfoConverter: AsyncConverter<CartItem, CartItemInfo>;
     private addCartItemController: Controller<RestfulControllerParam, void>;
+    private attachCartItemController: Controller<RestfulControllerParam, void>;
     private removeCartItemController: Controller<RestfulControllerParam, void>;
     private getCartController: Controller<RestfulControllerParam, void>;
 
@@ -36,6 +38,7 @@ export default class CartRestfulApi extends RestfulApi {
         this.cartItemInfoConverter = new CartItemInfoConverter();
 
         this.addCartItemController = new AddCartItemController(this.domainManager);
+        this.attachCartItemController = new AttachCartItemController(this.domainManager);
         this.removeCartItemController = new RemoveCartItemController(domainManager);
         this.getCartController = new UpgradedGetCartController(this.cartItemInfoConverter, this.domainManager);
     }
@@ -46,7 +49,26 @@ export default class CartRestfulApi extends RestfulApi {
     }
 
     public async post(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {
-        return this.addCartItemController.execute({ request, response });
+        const method: string | undefined = request.query.method as string | undefined;
+
+        let controller: Controller<RestfulControllerParam, void>;
+        switch (method) {
+            case 'add': {
+                controller = this.addCartItemController;
+                break;
+            }
+
+            case 'attach': {
+                controller = this.attachCartItemController;
+                break;
+            }
+
+            default: {
+                controller = this.invalidMethodController
+            }
+        }
+
+        return controller.execute({ request, response });
     }
 
     public async put(request: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, response: Response<any, Record<string, any>>): Promise<void> {

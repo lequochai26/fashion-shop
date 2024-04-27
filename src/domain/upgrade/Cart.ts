@@ -8,7 +8,7 @@ export default class Cart {
 
     // Fields:
     private user?: User | undefined;
-    private items: { id: string, amount: number, metadata?: any | undefined }[];
+    private items: SessionCartItem[];
     private domainManager: DomainManager;
 
     // Constructors:
@@ -81,7 +81,51 @@ export default class Cart {
         }
     }
 
+    public async contains(id: string, metadata?: any): Promise<boolean> {
+        if (this.user) {
+            return await this.getUserCartItem(id, metadata) !== undefined;
+        }
+        else {
+            return this.getLocalItem(id, metadata) !== undefined;
+        }
+    }
+
+    public async attachItem(target: Cart, path: any[], id: string, metadata?: any): Promise<void> {
+        // User cart case
+        if (this.user) {
+            return this.attachUserCartItem(target, path, id, metadata);
+        }
+        // Session cart case
+        else {
+            return this.attachLocalItem(target, path, id, metadata);
+        }
+    }
+
     // Private methods:
+    private async attachLocalItem(target: Cart, path: any[], id: string, metadata?: any): Promise<void> {
+        // Get item
+        const item: SessionCartItem | undefined = this.getLocalItem(id, metadata);
+        if (!item) {
+            return;
+        }
+
+        // Attaching
+        await target.addItem(item.id, item.amount, path, item.metadata);
+        await this.removeItem(item.id, path, undefined, item.metadata);
+    }
+
+    private async attachUserCartItem(target: Cart, path: any[], id: string, metadata?: any): Promise<void> {
+        // Get item
+        const item: CartItem | undefined = await this.getUserCartItem(id, metadata);
+        if (!item) {
+            return;
+        }
+
+        // Attaching
+        await target.addItem(item.Item?.Id as string, item.Amount as number, path, item.Metadata);
+        await this.removeItem(id, path, undefined, metadata);
+    }
+
     private async clearUserCart() {
         // Get user
         const user: User = this.user as User;
@@ -113,7 +157,7 @@ export default class Cart {
         }
     }
 
-    private getLocalItem(id: string, metadata?: any | undefined): { id: string, amount: number, metadata?: any | undefined } | undefined {
+    private getLocalItem(id: string, metadata?: any | undefined): SessionCartItem | undefined {
         for (const item of this.items) {
             if (item.id === id) {
                 let match = true;
@@ -255,4 +299,8 @@ export default class Cart {
             cartItem.User = undefined;
         }
     }
+}
+
+export interface SessionCartItem {
+    id: string, amount: number, metadata?: any | undefined
 }
