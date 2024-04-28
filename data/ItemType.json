@@ -1,35 +1,42 @@
 [{
   "_id": {
-    "$oid": "661c0782f64bc6e6c4810cbb"
+    "$oid": "662d6145dbdcc62fce65f35a"
   },
-  "id": "FASHION_SET",
-  "name": "Set quần áo"
-},
-{
-  "_id": {
-    "$oid": "661c078df64bc6e6c4810cbc"
-  },
-  "id": "SHIRT",
-  "name": "Áo"
-},
-{
-  "_id": {
-    "$oid": "661c0799f64bc6e6c4810cbd"
-  },
-  "id": "PANTS",
+  "id": "QUAN",
   "name": "Quần"
 },
 {
   "_id": {
-    "$oid": "661c07a4f64bc6e6c4810cbe"
+    "$oid": "662d6155dbdcc62fce65f35b"
   },
-  "id": "SHOES",
+  "id": "AO",
+  "name": "Áo"
+},
+{
+  "_id": {
+    "$oid": "662d61d0dbdcc62fce65f35c"
+  },
+  "id": "SET_QUAN_AO",
+  "name": "Set quần áo"
+},
+{
+  "_id": {
+    "$oid": "662d627fdbdcc62fce65f35d"
+  },
+  "id": "GIAY",
   "name": "Giày"
 },
 {
   "_id": {
-    "$oid": "661c07b6f64bc6e6c4810cbf"
+    "$oid": "662d6290dbdcc62fce65f35e"
   },
-  "id": "ACCESSORY",
-  "name": "Phụ Kiện"
+  "id": "DEP",
+  "name": "Dép"
+},
+{
+  "_id": {
+    "$oid": "662d62a1dbdcc62fce65f35f"
+  },
+  "id": "PHU_KIEN",
+  "name": "Phụ kiện"
 }]

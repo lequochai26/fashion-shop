@@ -1,80 +1,192 @@
 [{
   "_id": {
-    "$oid": "661c86cc6189c48bc0801f7e"
+    "$oid": "662d6671dbdcc62fce65f361"
   },
-  "id": "ACCESSORY001",
-  "avatar": "/assets/itemImages/d9c6e432cc273dff9d93af4391305fb392195764b86a35b1c1103499d1897b8d.jpg",
-  "name": "Túi Prada",
-  "description": "Đơn giản và thanh lịch",
-  "price": 2000,
-  "buyPrice": 1000,
-  "amount": 30,
+  "id": "GIAY_NIKE_AF_LV8",
+  "avatar": "/assets/itemImages/543c59e2140598f96917d4109e19ea67a5f8434a480956e46ef55889b6170458.png",
+  "name": "Nike Air Force 1 '07 LV8",
+  "description": "Thoải mái, bền bỉ và vượt thời gian — đó là số 1 vì một lý do. Cấu trúc cổ điển của thập niên 80 kết hợp với tông màu trung tính cho phong cách theo dõi cho dù bạn đang ở trên sân hay trên đường đi.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
   "gender": true,
-  "metadata": "{\"options\":{\"size\":[\"M\"],\"color\":[\"black\"]},\"mappings\":[{\"size\":\"M\",\"color\":\"black\",\"amount\":30,\"price\":2000}]}",
-  "type": "ACCESSORY",
-  "brand": "PRADA"
+  "metadata": "{\"options\":{\"size\":[\"EU40\",\"EU40.5\",\"EU41\",\"EU42\",\"EU42.5\",\"EU43\",\"EU44\",\"EU44.5\",\"EU45\",\"EU45.5\",\"EU46\",\"EU47\",\"EU47.5\"]},\"mappings\":[{\"size\":\"EU40\",\"price\":3519000,\"buyPrice\":3000000,\"amount\":1000},{\"size\":\"EU40.5\",\"price\":3550000,\"buyPrice\":3125000,\"amount\":952},{\"size\":\"EU41\",\"price\":3680000,\"buyPrice\":3400000,\"amount\":550},{\"size\":\"EU42\",\"price\":3680000,\"buyPrice\":3500000,\"amount\":1142},{\"size\":\"EU42.5\",\"price\":4000000,\"buyPrice\":3850000,\"amount\":125},{\"size\":\"EU43\",\"price\":4000000,\"buyPrice\":3850000,\"amount\":450},{\"size\":\"EU44\",\"price\":4250000,\"buyPrice\":4125000,\"amount\":1223},{\"size\":\"EU44.5\",\"price\":4350000,\"buyPrice\":4125000,\"amount\":532},{\"size\":\"EU45\",\"price\":4500000,\"buyPrice\":4325000,\"amount\":100},{\"size\":\"EU45.5\",\"price\":4500000,\"buyPrice\":4325000,\"amount\":125},{\"size\":\"EU46\",\"price\":4680000,\"buyPrice\":4500000,\"amount\":321},{\"size\":\"EU47\",\"price\":4680000,\"buyPrice\":4500000,\"amount\":1458},{\"size\":\"EU47.5\",\"price\":5000000,\"buyPrice\":4825000,\"amount\":137}]}",
+  "type": "GIAY",
+  "brand": "NIKE"
 },
 {
   "_id": {
-    "$oid": "661c92a7b54f2e84f89973c6"
+    "$oid": "662d690cdbdcc62fce65f369"
   },
-  "id": "SHOES001",
-  "avatar": "/assets/itemImages/e58eb0a08eb0490fad7a27e02fcb1ba480155b337e60e57b6129102d9bf2b603.jpg",
-  "name": "Cổ Cao Convert",
-  "description": "Item thời thượng",
-  "price": 1500,
-  "buyPrice": 1000,
-  "amount": 30,
+  "id": "NIKE_MMA",
+  "avatar": "/assets/itemImages/14605f8911afab0f181f623ff383a2d1ce00d1b916f41d6f12ca36e5e1c86997.png",
+  "name": "Nike Men's Marina Anorak",
+  "description": "Sắc nét và nhẹ, anorak chống thấm nước này từ bộ sưu tập Nike Club của chúng tôi mang đến cho bạn một lớp mới để giúp bảo vệ bạn khỏi các yếu tố. Sự vừa vặn rộng rãi được kết hợp với mũ trùm đầu và viền có thể điều chỉnh để cho phép bạn xếp lớp theo cách bạn muốn.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
   "gender": true,
-  "metadata": "{\"options\":{\"size\":[\"L\",\"XL\"],\"color\":[\"green\",\"yellow\",\"black\"]},\"mappings\":[{\"size\":\"L\",\"color\":\"green\",\"amount\":500,\"price\":132},{\"size\":\"L\",\"color\":\"yellow\",\"amount\":100,\"price\":355},{\"size\":\"L\",\"color\":\"black\",\"amount\":25,\"price\":1022},{\"size\":\"XL\",\"color\":\"green\",\"amount\":35,\"price\":632},{\"size\":\"XL\",\"color\":\"yellow\",\"amount\":100,\"price\":134},{\"size\":\"XL\",\"color\":\"black\",\"amount\":20,\"price\":225}]}",
-  "type": "SHOES",
-  "brand": "CONVERSE"
+  "metadata": "{\"options\":{\"color\":[\"white\",\"black\"],\"size\":[\"S\",\"M\",\"L\",\"XL\",\"2XL\"]},\"mappings\":[{\"color\":\"white\",\"price\":1939000,\"buyPrice\":1500000,\"amount\":1035,\"size\":\"S\"},{\"color\":\"white\",\"price\":1950000,\"buyPrice\":1600000,\"amount\":688,\"size\":\"M\"},{\"color\":\"white\",\"price\":2000000,\"buyPrice\":1680000,\"amount\":500,\"size\":\"L\"},{\"color\":\"white\",\"price\":2150000,\"buyPrice\":1980000,\"amount\":256,\"size\":\"XL\"},{\"color\":\"white\",\"price\":2500000,\"buyPrice\":2000000,\"amount\":315,\"size\":\"2XL\"},{\"color\":\"black\",\"price\":1939000,\"buyPrice\":1500000,\"amount\":958,\"size\":\"S\"},{\"color\":\"black\",\"price\":1950000,\"buyPrice\":1600000,\"amount\":755,\"size\":\"M\"},{\"color\":\"black\",\"price\":2000000,\"buyPrice\":1680000,\"amount\":355,\"size\":\"L\"},{\"color\":\"black\",\"price\":2150000,\"buyPrice\":2000000,\"amount\":50,\"size\":\"XL\"},{\"color\":\"black\",\"price\":2350000,\"buyPrice\":2000000,\"amount\":155,\"size\":\"2XL\"}]}",
+  "type": "AO",
+  "brand": "NIKE"
 },
 {
   "_id": {
-    "$oid": "661c9302b54f2e84f89973c9"
+    "$oid": "662d6a9fdbdcc62fce65f36f"
   },
-  "id": "SHIRT001",
-  "avatar": "/assets/itemImages/032dbab9f495b9a32f2034da20c56040c8e18aec4f158783c9fd5be273e35afa.jpg",
-  "name": "Áo Calvin Klein",
-  "description": "Đơn giản và thanh lịch",
-  "price": 800,
-  "buyPrice": 400,
-  "amount": 16,
+  "id": "NIKE_MCT",
+  "avatar": "/assets/itemImages/b46251d521b1a9799eccabca1cc69475265dea92666117fac9e4199b38d0face.png",
+  "name": "Nike Men's Carpenter Trousers",
+  "description": "Một phần của bộ sưu tập Nike Life của chúng tôi, những chiếc quần thợ mộc này được tạo ra cho tất cả những điều bạn làm trong cuộc sống ngoài thể thao. Cứng cáp và dai, vải cotton twill vẫn bị mài mòn. Thiết kế chân thẳng, vừa vặn thoải mái giúp bạn giải quyết mọi công việc hàng ngày một cách thoải mái. Vẻ ngoài 7 túi, lấy cảm hứng từ quần áo bảo hộ lao động mang lại một liều lượng chức năng nặng nề cho tủ quần áo của bạn.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
   "gender": true,
-  "metadata": "{\"options\":{\"size\":[\"L\",\"XL\"],\"color\":[\"green\",\"yellow\",\"black\"]},\"mappings\":[{\"size\":\"L\",\"color\":\"green\",\"amount\":500,\"price\":132},{\"size\":\"L\",\"color\":\"yellow\",\"amount\":100,\"price\":355},{\"size\":\"L\",\"color\":\"black\",\"amount\":25,\"price\":1022},{\"size\":\"XL\",\"color\":\"green\",\"amount\":35,\"price\":632},{\"size\":\"XL\",\"color\":\"yellow\",\"amount\":100,\"price\":134},{\"size\":\"XL\",\"color\":\"black\",\"amount\":20,\"price\":225}]}",
-  "type": "SHIRT",
-  "brand": "CALVIN KLEIN"
+  "metadata": "{\"options\":{\"color\":[\"brown\",\"black\"],\"size\":[\"30\",\"32\",\"34\",\"36\"]},\"mappings\":[{\"color\":\"brown\",\"price\":2215000,\"buyPrice\":2000000,\"amount\":1520,\"size\":\"30\"},{\"color\":\"brown\",\"price\":2250000,\"buyPrice\":2000000,\"amount\":987,\"size\":\"32\"},{\"color\":\"brown\",\"price\":2532000,\"buyPrice\":2100000,\"amount\":599,\"size\":\"34\"},{\"color\":\"brown\",\"price\":3000000,\"buyPrice\":2500000,\"amount\":983,\"size\":\"36\"},{\"color\":\"black\",\"price\":2215000,\"buyPrice\":2000000,\"amount\":1000,\"size\":\"30\"},{\"color\":\"black\",\"price\":2250000,\"buyPrice\":2000000,\"amount\":958,\"size\":\"32\"},{\"color\":\"black\",\"price\":2532000,\"buyPrice\":2122000,\"amount\":588,\"size\":\"34\"},{\"color\":\"black\",\"price\":2980000,\"buyPrice\":2500000,\"amount\":900,\"size\":\"36\"}]}",
+  "type": "QUAN",
+  "brand": "NIKE"
 },
 {
   "_id": {
-    "$oid": "661c9341b54f2e84f89973cb"
+    "$oid": "662d6bc1dbdcc62fce65f373"
   },
-  "id": "SHIRT002",
-  "avatar": "/assets/itemImages/589c707b0703588ae31ae73c51d4afd2a5d1a6feac19240938c89a6a3b06605f.jpg",
-  "name": "Áo Cổ lọ ngắn tay",
-  "description": "Đơn giản và thanh lịch",
-  "price": 500,
-  "buyPrice": 200,
-  "amount": 20,
+  "id": "NIKE_APEX",
+  "avatar": "/assets/itemImages/520a1a95cd70b4d0454e5f4251bcdf1a6b1066374c3276830cccd0187d131f78.jpg",
+  "name": "Nike Apex",
+  "description": "Chiếc mũ bucket Apex có thể đảo ngược này cho phép bạn thay đổi phong cách của mình bất cứ lúc nào nhờ màu đồng nhất ở một bên và đồ họa in hoa ở bên kia. Trọng lượng nhẹ và thoáng khí, nó cung cấp độ che phủ 360 độ để ngăn ánh nắng mặt trời chiếu vào mắt bạn khi bạn ra ngoài.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
   "gender": true,
-  "metadata": "{\"options\":{\"size\":[\"L\",\"XL\"],\"color\":[\"green\",\"yellow\",\"black\"]},\"mappings\":[{\"size\":\"L\",\"color\":\"green\",\"amount\":500,\"price\":132},{\"size\":\"L\",\"color\":\"yellow\",\"amount\":100,\"price\":355},{\"size\":\"L\",\"color\":\"black\",\"amount\":25,\"price\":1022},{\"size\":\"XL\",\"color\":\"green\",\"amount\":35,\"price\":632},{\"size\":\"XL\",\"color\":\"yellow\",\"amount\":100,\"price\":134},{\"size\":\"XL\",\"color\":\"black\",\"amount\":20,\"price\":225}]}",
-  "type": "SHIRT",
-  "brand": "PRADA"
+  "metadata": "{\"options\":{\"color\":[\"white\",\"black\"],\"size\":[\"S\",\"M\",\"L\"]},\"mappings\":[{\"color\":\"white\",\"price\":820000,\"buyPrice\":712000,\"amount\":1253,\"size\":\"S\"},{\"color\":\"white\",\"price\":852000,\"buyPrice\":700000,\"amount\":900,\"size\":\"M\"},{\"color\":\"white\",\"price\":900000,\"buyPrice\":815000,\"amount\":358,\"size\":\"L\"},{\"color\":\"black\",\"price\":820000,\"buyPrice\":712000,\"amount\":1220,\"size\":\"S\"},{\"color\":\"black\",\"price\":852000,\"buyPrice\":700000,\"amount\":398,\"size\":\"M\"},{\"color\":\"black\",\"price\":1000000,\"buyPrice\":815200,\"amount\":811,\"size\":\"L\"}]}",
+  "type": "PHU_KIEN",
+  "brand": "NIKE"
 },
 {
   "_id": {
-    "$oid": "661c93a9b54f2e84f89973cd"
+    "$oid": "662d6ffcdbdcc62fce65f375"
   },
-  "id": "SHOES002",
-  "avatar": "/assets/itemImages/51531f3d6012a30b02602cf3ea02a5491326e392bf2f246e8b3b7ed977516906.jpg",
-  "name": "Giày Adidas xanh",
-  "description": "Đơn giản và thanh lịch",
-  "price": 4000,
-  "buyPrice": 3000,
-  "amount": 22,
+  "id": "NIKE_STFW",
+  "avatar": "/assets/itemImages/57b2d8a18875a0b3b4b7a226b9d2f0332c09b3c6b8b9149fd1256a4ba1ca3b40.jpg",
+  "name": "Nike Sportswear Tech Fleece Windrunner",
+  "description": "Kết hợp 2 vẻ ngoài mang tính biểu tượng nhất của chúng tôi, chiếc áo hoodie toàn khóa kéo này lấy cảm hứng thiết kế từ chiếc áo khoác Windrunner vượt thời gian của chúng tôi, cũng như áo khoác Tech Fleece của chúng tôi. Nó được thiết kế để cảm thấy thư giãn qua vai, ngực và cơ thể để phù hợp với thể thao mà bạn có thể xếp lớp. Lông cừu cao cấp, mịn màng ở cả hai mặt của chúng tôi cho cảm giác ấm áp và mềm mại hơn bao giờ hết trong khi vẫn giữ nguyên cấu trúc nhẹ mà bạn yêu thích.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
+  "gender": true,
+  "metadata": "{\"options\":{\"color\":[\"blue\",\"brown\",\"white\",\"black\"],\"size\":[\"S\",\"M\",\"L\",\"XL\"]},\"mappings\":[{\"color\":\"blue\",\"price\":3500000,\"buyPrice\":3100000,\"amount\":1000,\"size\":\"S\"},{\"color\":\"blue\",\"price\":4000000,\"buyPrice\":3800000,\"amount\":1235,\"size\":\"M\"},{\"color\":\"blue\",\"price\":4500000,\"buyPrice\":4325000,\"amount\":1235,\"size\":\"L\"},{\"color\":\"blue\",\"price\":4750000,\"buyPrice\":4521000,\"amount\":851,\"size\":\"XL\"},{\"color\":\"brown\",\"price\":3515000,\"buyPrice\":3100000,\"amount\":923,\"size\":\"S\"},{\"color\":\"brown\",\"price\":4010000,\"buyPrice\":3800000,\"amount\":1222,\"size\":\"M\"},{\"color\":\"brown\",\"price\":4515000,\"buyPrice\":4310000,\"amount\":1225,\"size\":\"L\"},{\"color\":\"brown\",\"price\":4755000,\"buyPrice\":4521000,\"amount\":115,\"size\":\"XL\"},{\"color\":\"white\",\"price\":3550000,\"buyPrice\":3125000,\"amount\":828,\"size\":\"S\"},{\"color\":\"white\",\"price\":4100000,\"buyPrice\":3800000,\"amount\":1121,\"size\":\"M\"},{\"color\":\"white\",\"price\":4515000,\"buyPrice\":4310000,\"amount\":1008,\"size\":\"L\"},{\"color\":\"white\",\"price\":4813000,\"buyPrice\":4610000,\"amount\":250,\"size\":\"XL\"},{\"color\":\"black\",\"price\":3750000,\"buyPrice\":3250000,\"amount\":800,\"size\":\"S\"},{\"color\":\"black\",\"price\":4125000,\"buyPrice\":3800000,\"amount\":1125,\"size\":\"M\"},{\"color\":\"black\",\"price\":4575000,\"buyPrice\":4325000,\"amount\":881,\"size\":\"L\"},{\"color\":\"black\",\"price\":4900000,\"buyPrice\":4750000,\"amount\":248,\"size\":\"XL\"}]}",
+  "type": "SET_QUAN_AO",
+  "brand": "NIKE"
+},
+{
+  "_id": {
+    "$oid": "662d71a3dbdcc62fce65f37e"
+  },
+  "id": "DIOR_DWAY_SLIDE",
+  "avatar": "/assets/itemImages/cadc403a3f2e352697c980afcd8231aa29347b405efc6f77a19874ab84f1ffff.avif",
+  "name": "Dior Dway Slide",
+  "description": "Đường trượt Dway là biểu tượng và vượt thời gian, thể hiện họa tiết Paris trắng và đen đặc trưng của bộ sưu tập, tôn vinh tháp Eiffel theo tinh thần đồ họa. Phần trên có chữ ký Christian Dior Paris thêu cho một liên lạc dễ nhận biết ngay lập tức, trong khi hình bóng được sắp xếp hợp lý giúp bạn dễ dàng trượt vào để hoàn thành một cái nhìn thoải mái. Slide có thể được ghép nối với các sáng tạo khác của Paris từ bộ sưu tập.",
+  "price": 22000000,
+  "buyPrice": 20000000,
+  "amount": 129,
   "gender": false,
-  "metadata": "{\"options\":{\"size\":[\"L\",\"XL\"],\"color\":[\"green\",\"yellow\",\"black\"]},\"mappings\":[{\"size\":\"L\",\"color\":\"green\",\"amount\":500,\"price\":132},{\"size\":\"L\",\"color\":\"yellow\",\"amount\":100,\"price\":355},{\"size\":\"L\",\"color\":\"black\",\"amount\":25,\"price\":1022},{\"size\":\"XL\",\"color\":\"green\",\"amount\":35,\"price\":632},{\"size\":\"XL\",\"color\":\"yellow\",\"amount\":100,\"price\":134},{\"size\":\"XL\",\"color\":\"black\",\"amount\":20,\"price\":225}]}",
-  "type": "SHOES",
-  "brand": "ADIDAS"
+  "metadata": null,
+  "type": "DEP",
+  "brand": "DIOR"
+},
+{
+  "_id": {
+    "$oid": "662d723bdbdcc62fce65f385"
+  },
+  "id": "DIOR_MEDIUM_BOOK_TOTE",
+  "avatar": "/assets/itemImages/efbcdc72ef844a9f0dab6b334ddbb5f0aecb0c0567414f26c1a9d3c2515c25e0.avif",
+  "name": "Medium Dior Book Tote",
+  "description": "Được giới thiệu bởi Maria Grazia Chiuri, Giám đốc sáng tạo của Christian Dior, Dior Book Tote đã trở thành một yếu tố chính của thẩm mỹ Dior. Được thiết kế để chứa tất cả các nhu yếu phẩm hàng ngày, phong cách được thêu hoàn toàn với họa tiết Paris trắng và đen, một trụ cột của bộ sưu tập tôn vinh tháp Eiffel theo tinh thần đồ họa. Được trang trí bằng chữ ký Christian Dior Paris ở mặt trước, tote trung bình thể hiện sự savoir-faire của Nhà và có thể được mang bằng tay hoặc đeo qua vai.",
+  "price": 95000000,
+  "buyPrice": 83250000,
+  "amount": 315,
+  "gender": false,
+  "metadata": null,
+  "type": "PHU_KIEN",
+  "brand": "DIOR"
+},
+{
+  "_id": {
+    "$oid": "662d749edbdcc62fce65f38b"
+  },
+  "id": "DIOR_ASYMMETRIC_SHIRT",
+  "avatar": "/assets/itemImages/4b5b69b2bd71aa43f0ade960456479c4afdef8c1149013979716dce6a61c8b87.avif",
+  "name": "Dior Asymmetric Shirt",
+  "description": "Ra mắt tại Xuân Hè 2024 Fashion Show, chiếc áo mang đến một sự giải cấu trúc trên tủ quần áo cổ điển. Được chế tác bằng poplin cotton trắng, nó có cổ áo bất đối xứng để lộ vai trần ở một bên. Cúc áo phía trước, áo sơ mi có thể được mặc với quần hoặc váy từ bộ sưu tập để có vẻ ngoài thời trang cao cấp.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
+  "gender": false,
+  "metadata": "{\"options\":{\"color\":[\"white\",\"black\"],\"size\":[\"34\",\"36\",\"38\",\"40\"]},\"mappings\":[{\"color\":\"white\",\"price\":50000000,\"buyPrice\":45000000,\"amount\":105,\"size\":\"34\"},{\"color\":\"white\",\"price\":56500000,\"buyPrice\":4500000,\"amount\":395,\"size\":\"36\"},{\"color\":\"white\",\"price\":58500000,\"buyPrice\":50000000,\"amount\":432,\"size\":\"38\"},{\"color\":\"white\",\"price\":60000000,\"buyPrice\":58000000,\"amount\":392,\"size\":\"40\"},{\"color\":\"black\",\"price\":55000000,\"buyPrice\":45000000,\"amount\":125,\"size\":\"34\"},{\"color\":\"black\",\"price\":57500000,\"buyPrice\":47000000,\"amount\":250,\"size\":\"36\"},{\"color\":\"black\",\"price\":58700000,\"buyPrice\":51200000,\"amount\":392,\"size\":\"38\"},{\"color\":\"black\",\"price\":61250000,\"buyPrice\":58000000,\"amount\":95,\"size\":\"40\"}]}",
+  "type": "AO",
+  "brand": "DIOR"
+},
+{
+  "_id": {
+    "$oid": "662eaeee33a4192a1a634956"
+  },
+  "id": "DIOR_RFB",
+  "avatar": "/assets/itemImages/a5ef9f2a9e7cb673a987407a1be521000ee0bfeda32d0d2c21d1c62b37591f3a.avif",
+  "name": "Dior Relaxed-Fit Bobby T-shirt",
+  "description": "Điểm mới cho mùa hè 2024, chiếc áo phông có hình thú cưng của ông Dior, tên đã được sử dụng cho nhiều thiết kế House trong những năm qua. Được chế tác trong áo sơ mi cotton slub trắng, nó được tô điểm bằng thêu Bobby và chữ ký Dior 1947, tôn vinh di sản Dior thông qua một ngày quan trọng trong lịch sử của House. Với sự vừa vặn thoải mái và cổ phi hành đoàn có gân, áo phông có thể được kết hợp với bất kỳ trang phục giản dị nào.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
+  "gender": true,
+  "metadata": "{\"options\":{\"color\":[\"black\",\"white\"],\"size\":[\"S\",\"M\",\"L\",\"XL\",\"XXL\",\"XXXL\"]},\"mappings\":[{\"color\":\"black\",\"price\":26000000,\"buyPrice\":20000000,\"amount\":125,\"size\":\"S\"},{\"color\":\"black\",\"price\":26000000,\"buyPrice\":20000000,\"amount\":315,\"size\":\"M\"},{\"color\":\"black\",\"price\":27500000,\"buyPrice\":21250000,\"amount\":390,\"size\":\"L\"},{\"color\":\"black\",\"price\":27500000,\"buyPrice\":21250000,\"amount\":891,\"size\":\"XL\"},{\"color\":\"black\",\"price\":28000000,\"buyPrice\":26500000,\"amount\":158,\"size\":\"XXL\"},{\"color\":\"black\",\"price\":30000000,\"buyPrice\":28000000,\"amount\":377,\"size\":\"XXXL\"},{\"color\":\"white\",\"price\":26000000,\"buyPrice\":20000000,\"amount\":367,\"size\":\"S\"},{\"color\":\"white\",\"price\":26000000,\"buyPrice\":20000000,\"amount\":1022,\"size\":\"M\"},{\"color\":\"white\",\"price\":27000000,\"buyPrice\":20000000,\"amount\":938,\"size\":\"L\"},{\"color\":\"white\",\"price\":27000000,\"buyPrice\":2000000,\"amount\":955,\"size\":\"XL\"},{\"color\":\"white\",\"price\":28500000,\"buyPrice\":24500000,\"amount\":399,\"size\":\"XXL\"},{\"color\":\"white\",\"price\":30000000,\"buyPrice\":27500000,\"amount\":478,\"size\":\"XXXL\"}]}",
+  "type": "QUAN",
+  "brand": "DIOR"
+},
+{
+  "_id": {
+    "$oid": "662eb0c133a4192a1a63495a"
+  },
+  "id": "DIOR_GEM_RING",
+  "avatar": "/assets/itemImages/2f32c3ccfaf423a35ee517cb87d1a089af8cee54d565bd744ab7daaca1ea9f7e.avif",
+  "name": "GEM DIOR Ring",
+  "description": "Lấy cảm hứng từ các mẫu vải được ghim vào tường của xưởng may Christian Dior và được diễn giải lại dưới dạng tầng khoáng sản, bộ sưu tập GEM DIOR nổi bật bởi các đường nét đồ họa.\r\nĐược trang trí bằng vàng vàng, vàng hồng hoặc vàng trắng, đôi khi được đính kim cương, các mảnh GEM DIOR cực kỳ hiện đại mang đến kiểu dáng vô hạn, từ cấu trúc đến tinh vi. Các yếu tố cần thiết mới sẽ thêm sự khác biệt độc đáo cho vẻ ngoài hàng ngày.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
+  "gender": false,
+  "metadata": "{\"options\":{\"material\":[\"gold\",\"silver\"]},\"mappings\":[{\"material\":\"gold\",\"price\":250000000,\"buyPrice\":220000000,\"amount\":132},{\"material\":\"silver\",\"price\":200000000,\"buyPrice\":175000000,\"amount\":312}]}",
+  "type": "PHU_KIEN",
+  "brand": "DIOR"
+},
+{
+  "_id": {
+    "$oid": "662eb44833a4192a1a634961"
+  },
+  "id": "VERSACE_BGS",
+  "avatar": "/assets/itemImages/94a1d3a00dbae7bbcfa81ab4cd716ece530624fe8c5938f97e44535c964d416c.avif",
+  "name": "VERSACE BAROCCO GRECA SNEAKERS",
+  "description": "Hình bóng thấp được đặc trưng bởi một mô hình Greca khắc trên đế lưu hóa và có thêu Greca ở phần trên. Một con dấu logo ở mặt sau làm nổi bật phong cách. Những đôi giày thể thao Greca này có 38% Đầu vào có trách nhiệm và 100% không có động vật. Giày thể thao Greca mùa mới được sản xuất bằng vật liệu có trách nhiệm với hàm lượng tái chế được chứng nhận và / hoặc có nguồn gốc từ nguồn gốc tái tạo.",
+  "price": 0,
+  "buyPrice": 0,
+  "amount": 0,
+  "gender": true,
+  "metadata": "{\"options\":{\"color\":[\"black\",\"beige\",\"lightblue\"],\"size\":[\"38\",\"39\",\"40\",\"41\",\"42\"]},\"mappings\":[{\"color\":\"black\",\"price\":16000000,\"buyPrice\":12500000,\"amount\":1003,\"size\":\"38\"},{\"color\":\"black\",\"price\":16000000,\"buyPrice\":12500000,\"amount\":398,\"size\":\"39\"},{\"color\":\"black\",\"price\":17350000,\"buyPrice\":13500000,\"amount\":139,\"size\":\"40\"},{\"color\":\"black\",\"price\":17450000,\"buyPrice\":13450000,\"amount\":98,\"size\":\"41\"},{\"color\":\"black\",\"price\":18000000,\"buyPrice\":15350000,\"amount\":148,\"size\":\"42\"},{\"color\":\"beige\",\"price\":15000000,\"buyPrice\":11250000,\"amount\":980,\"size\":\"38\"},{\"color\":\"beige\",\"price\":15000000,\"buyPrice\":11250000,\"amount\":681,\"size\":\"39\"},{\"color\":\"beige\",\"price\":16123000,\"buyPrice\":13210000,\"amount\":651,\"size\":\"40\"},{\"color\":\"beige\",\"price\":16850000,\"buyPrice\":13830000,\"amount\":988,\"size\":\"41\"},{\"color\":\"beige\",\"price\":17000000,\"buyPrice\":14000000,\"amount\":377,\"size\":\"42\"},{\"color\":\"lightblue\",\"price\":16000000,\"buyPrice\":12350000,\"amount\":322,\"size\":\"38\"},{\"color\":\"lightblue\",\"price\":16000000,\"buyPrice\":13210000,\"amount\":999,\"size\":\"39\"},{\"color\":\"lightblue\",\"price\":17452000,\"buyPrice\":14325000,\"amount\":477,\"size\":\"40\"},{\"color\":\"lightblue\",\"price\":18000000,\"buyPrice\":14000000,\"amount\":931,\"size\":\"41\"},{\"color\":\"lightblue\",\"price\":20000000,\"buyPrice\":17500000,\"amount\":315,\"size\":\"42\"}]}",
+  "type": "GIAY",
+  "brand": "VERSACE"
+},
+{
+  "_id": {
+    "$oid": "662eb59133a4192a1a634967"
+  },
+  "id": "VERSACE_CELB3",
+  "avatar": "/assets/itemImages/bc95353144bf12aa3a939d8fa1356353f2796ab756a98cccae542605e3d93d13.avif",
+  "name": "VERSACE CROC-EFFECT LEATHER BELT 3 CM",
+  "description": "Thắt lưng da với hiệu ứng cá sấu dập nổi xuyên suốt.",
+  "price": 15010000,
+  "buyPrice": 12000000,
+  "amount": 933,
+  "gender": true,
+  "metadata": null,
+  "type": "PHU_KIEN",
+  "brand": "VERSACE"
 }]

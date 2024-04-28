@@ -1,54 +1,54 @@
 [{
   "_id": {
-    "$oid": "661c3fc7e87a69c7d83afc43"
+    "$oid": "662d7667dbdcc62fce65f39b"
   },
-  "email": "hieuntt889@gmail.com",
-  "itemId": "SHIRT001",
+  "email": "admin@gmail.com",
+  "itemId": "DIOR_DWAY_SLIDE",
   "amount": 1,
   "metadata": null
 },
 {
   "_id": {
-    "$oid": "661c873c6189c48bc0801f80"
+    "$oid": "662d7674dbdcc62fce65f39d"
   },
-  "email": "mina@gmail.com",
-  "itemId": "SHOES001",
-  "amount": 2,
-  "metadata": null
+  "email": "admin@gmail.com",
+  "itemId": "NIKE_STFW",
+  "amount": 1,
+  "metadata": "{\"color\":\"blue\",\"size\":\"S\"}"
 },
 {
   "_id": {
-    "$oid": "661c89386189c48bc0801f82"
+    "$oid": "662d767cdbdcc62fce65f39e"
   },
-  "email": "mina@gmail.com",
-  "itemId": "ACCESSORY001",
-  "amount": 3,
-  "metadata": null
+  "email": "admin@gmail.com",
+  "itemId": "NIKE_STFW",
+  "amount": 1,
+  "metadata": "{\"color\":\"black\",\"size\":\"XL\"}"
 },
 {
   "_id": {
-    "$oid": "661c9528b54f2e84f89973d4"
+    "$oid": "662d7898dbdcc62fce65f3a0"
   },
-  "email": "hieuntt889@gmail.com",
-  "itemId": "SHIRT002",
-  "amount": 3,
-  "metadata": null
+  "email": "mrmouse.guru@gmail.com",
+  "itemId": "NIKE_APEX",
+  "amount": 1,
+  "metadata": "{\"color\":\"white\",\"size\":\"S\"}"
 },
 {
   "_id": {
-    "$oid": "661c9587b54f2e84f89973d5"
+    "$oid": "662d78a2dbdcc62fce65f3a1"
   },
-  "email": "minhcool@gmail.com",
-  "itemId": "SHIRT002",
-  "amount": 3,
-  "metadata": null
+  "email": "mrmouse.guru@gmail.com",
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "amount": 1,
+  "metadata": "{\"color\":\"black\",\"size\":\"40\"}"
 },
 {
   "_id": {
-    "$oid": "661c9595b54f2e84f89973d6"
+    "$oid": "662e1e3910def03b561c605f"
   },
-  "email": "minhcool@gmail.com",
-  "itemId": "SHIRT001",
-  "amount": 4,
+  "email": "admin@gmail.com",
+  "itemId": "DIOR_MEDIUM_BOOK_TOTE",
+  "amount": 1,
   "metadata": null
 }]

@@ -1,98 +1,28 @@
 [{
   "_id": {
-    "$oid": "66175735902b9526317beda2"
-  },
-  "email": "mina@gmail.com",
-  "password": "123456",
-  "fullName": "Trần Thảo My",
-  "gender": true,
-  "phoneNumber": "09463788949",
-  "address": "38 Võ Văn Kiệt,quận 3,TPHCM",
-  "avatar": "/assets/avatar/86c9f120921725b9466a56c64c6b38efa11f1a8996fc9d5dfc932090018b26ac.png",
-  "permission": "CUSTOMER",
-  "wallet": null
-},
-{
-  "_id": {
-    "$oid": "661c00d9dac63f4689ba05c4"
-  },
-  "email": "chaububle@gmail.com",
-  "password": "123456",
-  "fullName": "Nguyễn Bảo Châu",
-  "gender": true,
-  "phoneNumber": "0978453678",
-  "address": "79 Nguyễn Xí,quận Bình Thạnh",
-  "avatar": "/assets/avatar/default.png",
-  "permission": "CUSTOMER",
-  "wallet": null
-},
-{
-  "_id": {
-    "$oid": "661c0561f64bc6e6c4810caf"
-  },
-  "email": "hieuntt889@gmail.com",
-  "password": "123456",
-  "fullName": "Nguyễn Thị Thanh Hiếu",
-  "gender": true,
-  "phoneNumber": "0945782547",
-  "address": "92 Nguyễn Huy Cảnh,quận Bình Thạnh",
-  "avatar": "/assets/avatar/default.png",
-  "permission": "MANAGER",
-  "wallet": null
-},
-{
-  "_id": {
-    "$oid": "661c0918f64bc6e6c4810cc0"
-  },
-  "email": "bao888bmt@gmail.com",
-  "password": "12345678",
-  "fullName": "Hoàng Minh Bảo",
-  "gender": false,
-  "phoneNumber": "0945375837",
-  "address": "67 Võ Văn Kiệt,quận 3",
-  "avatar": "/assets/avatar/default.png",
-  "permission": "EMPLOYEE",
-  "wallet": null
-},
-{
-  "_id": {
-    "$oid": "661c93f4b54f2e84f89973cf"
-  },
-  "email": "minhcool@gmail.com",
-  "password": "12345678",
-  "fullName": "Bùi Khăc Minh",
-  "gender": false,
-  "phoneNumber": "0945376847",
-  "address": "89 Bàn Cờ,quận 4",
-  "avatar": "/assets/avatar/default.png",
-  "permission": "CUSTOMER",
-  "wallet": null
-},
-{
-  "_id": {
-    "$oid": "661c941ab54f2e84f89973d0"
-  },
-  "email": "meme@gmail.com",
-  "password": "12345678",
-  "fullName": "Huỳnh Khả Như",
-  "gender": true,
-  "phoneNumber": "0935682668",
-  "address": "78 An Dương Vương,quận 5",
-  "avatar": "/assets/avatar/default.png",
-  "permission": "CUSTOMER",
-  "wallet": null
-},
-{
-  "_id": {
-    "$oid": "661c9e02d187af6ac0087c47"
+    "$oid": "662d610adbdcc62fce65f359"
   },
   "email": "admin@gmail.com",
   "password": "Abc123456",
-  "fullName": "Le Quoc Hai",
+  "fullName": "Admin",
   "gender": true,
-  "phoneNumber": "0902031167",
-  "address": "118/33 Mieu Go Xoai, Binh Tan",
-  "avatar": "/assets/avatar/43f10ff8359c79b4a8149051abcee8e7bd2ceac7ca1c37a01442c8a75d20d265.png",
+  "phoneNumber": "0931068637",
+  "address": "118/33 Nguyễn Trãi, P. 8, Q. 6, Tp. Hồ Chí Minh.",
+  "avatar": "/assets/avatar/abc6a471a2a4c4ef9fd2c3b5c67ffa5e8ad00a180eef2f7f4716e6e54382292d.png",
   "permission": "MANAGER",
+  "wallet": null
+},
+{
+  "_id": {
+    "$oid": "662d7825dbdcc62fce65f39f"
+  },
+  "email": "mrmouse.guru@gmail.com",
+  "password": "Abc123456",
+  "fullName": "Mr. Tèo",
+  "gender": true,
+  "phoneNumber": "09093168306",
+  "address": "Gò Vấp, Tp. Hồ Chí Minh.",
+  "avatar": "/assets/avatar/9392472f11e5c3fd32cd59fc038c502f2602d4413c0ea82121b9b494ea385ba1.jpg",
+  "permission": "CUSTOMER",
   "wallet": null
 }]

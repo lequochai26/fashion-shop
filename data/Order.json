@@ -1,45 +1,29 @@
 [{
   "_id": {
-    "$oid": "661c3aade87a69c7d83afc3f"
+    "$oid": "662d7514dbdcc62fce65f396"
   },
-  "id": "1713126061093",
+  "id": "1714255124439",
   "type": "SELL",
   "date": {
-    "$date": "2024-04-14T20:21:01.093Z"
+    "$date": "2024-04-27T21:58:44.439Z"
   },
-  "totalPrice": 32990,
+  "totalPrice": 22000000,
   "metadata": null,
-  "createdBy": "hieuntt889@gmail.com",
-  "orderedBy": null,
-  "status": "SUCCESS",
+  "createdBy": null,
+  "orderedBy": "admin@gmail.com",
+  "status": "CANCELLED",
   "paymentMethod": "ON_RECEIVING"
 },
 {
   "_id": {
-    "$oid": "661c94deb54f2e84f89973d1"
+    "$oid": "662d7590dbdcc62fce65f399"
   },
-  "id": "1713149150909",
-  "type": "BUY",
-  "date": {
-    "$date": "2024-04-15T02:45:50.909Z"
-  },
-  "totalPrice": 6400,
-  "metadata": null,
-  "createdBy": "hieuntt889@gmail.com",
-  "orderedBy": null,
-  "status": "SUCCESS",
-  "paymentMethod": null
-},
-{
-  "_id": {
-    "$oid": "661ca01fd187af6ac0087c61"
-  },
-  "id": "1713152031678",
+  "id": "1714255248902",
   "type": "SELL",
   "date": {
-    "$date": "2024-04-15T03:33:51.678Z"
+    "$date": "2024-04-27T22:00:48.902Z"
   },
-  "totalPrice": 12000,
+  "totalPrice": 1640000,
   "metadata": null,
   "createdBy": null,
   "orderedBy": "admin@gmail.com",

@@ -1,40 +1,20 @@
 [{
   "_id": {
-    "$oid": "661c3aade87a69c7d83afc40"
+    "$oid": "662d7514dbdcc62fce65f397"
   },
-  "orderId": "1713126061093",
-  "itemId": "SHIRT001",
-  "amount": 10,
-  "price": 22990,
-  "metadata": null
-},
-{
-  "_id": {
-    "$oid": "661c3aade87a69c7d83afc41"
-  },
-  "orderId": "1713126061093",
-  "itemId": "SHOES001",
-  "amount": 10,
-  "price": 10000,
-  "metadata": null
-},
-{
-  "_id": {
-    "$oid": "661c94deb54f2e84f89973d2"
-  },
-  "orderId": "1713149150909",
-  "itemId": "SHOES002",
-  "amount": 2,
-  "price": 6000,
-  "metadata": null
-},
-{
-  "_id": {
-    "$oid": "661c94deb54f2e84f89973d3"
-  },
-  "orderId": "1713149150909",
-  "itemId": "SHIRT001",
+  "orderId": "1714255124439",
+  "itemId": "DIOR_DWAY_SLIDE",
   "amount": 1,
-  "price": 400,
+  "price": 22000000,
   "metadata": null
+},
+{
+  "_id": {
+    "$oid": "662d7590dbdcc62fce65f39a"
+  },
+  "orderId": "1714255248902",
+  "itemId": "NIKE_APEX",
+  "amount": 2,
+  "price": 1640000,
+  "metadata": "{\"color\":\"white\",\"size\":\"S\"}"
 }]

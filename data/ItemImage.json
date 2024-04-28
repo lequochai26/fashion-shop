@@ -1,140 +1,399 @@
 [{
   "_id": {
-    "$oid": "661c1c9d008ada6d0498d201"
+    "$oid": "662d6671dbdcc62fce65f362"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/bf54c3b5ffaa6c93d2f34d8d5af653f16646d5d6b4b0ebb20b9ca7760f27b506.webp"
+  "itemId": "GIAY_NIKE_AF_LV8",
+  "path": "/assets/itemImages/5933abe496a44d95211bd15d48cd0a5b11aa824f2c7afbaaec47beaa25614732.png"
 },
 {
   "_id": {
-    "$oid": "661c1f6fd84e1e341490ab82"
+    "$oid": "662d6671dbdcc62fce65f363"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/0dee7cd1df6cf13f4ee971d32a057fa3117488674c1a0314560e648cbeecb6cc.jpg"
+  "itemId": "GIAY_NIKE_AF_LV8",
+  "path": "/assets/itemImages/880716fda5c932f5046b1f419d041f269b910d604d660734fb5821e0f7943bdf.png"
 },
 {
   "_id": {
-    "$oid": "661c3469e87a69c7d83afc25"
+    "$oid": "662d6671dbdcc62fce65f364"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/724d4ca47c0ee612136cd503f86b8ab3b037ef1428f285af6a5c397064f459fb.jpg"
+  "itemId": "GIAY_NIKE_AF_LV8",
+  "path": "/assets/itemImages/b7d128469b8f6e83823baa3d0b69ba79bccd239176abe13086d546741d64c457.png"
 },
 {
   "_id": {
-    "$oid": "661c3469e87a69c7d83afc26"
+    "$oid": "662d6671dbdcc62fce65f365"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/9a38be4c78e7543a4f3dc1376c540b80b3d2dc8fb0f423ed2dd31bb8075ca9f1.jpg"
+  "itemId": "GIAY_NIKE_AF_LV8",
+  "path": "/assets/itemImages/67a96cd8aa060e79f9128b19ee5a70f09445db191a7f21c5dbc2c719dfd30086.png"
 },
 {
   "_id": {
-    "$oid": "661c349fe87a69c7d83afc28"
+    "$oid": "662d6671dbdcc62fce65f366"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/3128d878883a35f10a6c3affa7303ca213e945bc7e01535f96840187513ec96e.jpg"
+  "itemId": "GIAY_NIKE_AF_LV8",
+  "path": "/assets/itemImages/d3a880c359afd52678a76b1fb88ff4b4073372e60ba88cec7d8adacf58021c21.png"
 },
 {
   "_id": {
-    "$oid": "661c349fe87a69c7d83afc29"
+    "$oid": "662d6671dbdcc62fce65f367"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/163085f92982fd95da6ed1decd3d4394fc4fde4b62ce47fb1127e8a845dc8ca7.jpg"
+  "itemId": "GIAY_NIKE_AF_LV8",
+  "path": "/assets/itemImages/706cbf66e7fb1a8743a435d49c9179a4aca5ceb0b27c88a33854a1234b66e236.png"
 },
 {
   "_id": {
-    "$oid": "661c358ee87a69c7d83afc2b"
+    "$oid": "662d6671dbdcc62fce65f368"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/918f201c122d16900c9881ae29363a62c7fbbacbf09f73c880e07a60d3fb1511.webp"
+  "itemId": "GIAY_NIKE_AF_LV8",
+  "path": "/assets/itemImages/1f580fc8a9be15efc02f08d18a1f7302764473b2d01a9d14e1b1c6c262747afd.png"
 },
 {
   "_id": {
-    "$oid": "661c3633e87a69c7d83afc2d"
+    "$oid": "662d690cdbdcc62fce65f36a"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/316d783dd8429caa4ec3af189100a03824ce1855c71640052860755a825071ac.webp"
+  "itemId": "NIKE_MMA",
+  "path": "/assets/itemImages/dff6c82047a87aca068922ca271f444cfb23d494929cabc0e02ffd9c378c3508.png"
 },
 {
   "_id": {
-    "$oid": "661c371ce87a69c7d83afc2f"
+    "$oid": "662d690cdbdcc62fce65f36b"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/506f17efdc7e37121e5e311cff8372ca5bc6ad62c32a90af334add4632182705.webp"
+  "itemId": "NIKE_MMA",
+  "path": "/assets/itemImages/967295949ce2caf249081c82ddb92aa1b14fa1cba6d198be710873b893ebd443.png"
 },
 {
   "_id": {
-    "$oid": "661c386be87a69c7d83afc34"
+    "$oid": "662d690cdbdcc62fce65f36c"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/ed82e6f870da7d66ee3f517f432dd62397ee4dd873bc1cfd87eb95581847398f.webp"
+  "itemId": "NIKE_MMA",
+  "path": "/assets/itemImages/d5beb8086c1b20414ef3adef590bb49896f37c0e6afacbb3e727844aee04a46e.png"
 },
 {
   "_id": {
-    "$oid": "661c38a4e87a69c7d83afc36"
+    "$oid": "662d690cdbdcc62fce65f36d"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/38910e157264ce8fe86706eb4ed803b08f3e69c0deefb0251975df703f607435.webp"
+  "itemId": "NIKE_MMA",
+  "path": "/assets/itemImages/60c68fc5e291835ae0220bebb423b1cfefb4019e15361ef7ff59c146ccd2beb4.png"
 },
 {
   "_id": {
-    "$oid": "661c3986e87a69c7d83afc38"
+    "$oid": "662d690cdbdcc62fce65f36e"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/4eb3b33c8b5efe6d8aad5a7d3c852cffb4a13eace1c88ff1a9574a3be02e5710.webp"
+  "itemId": "NIKE_MMA",
+  "path": "/assets/itemImages/b655765b62a7da985e81f47a8f692c0279fdbef178882e5ea536f3543ea52c60.jpg"
 },
 {
   "_id": {
-    "$oid": "661c398be87a69c7d83afc3a"
+    "$oid": "662d6a9fdbdcc62fce65f370"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/4cc6c13d6192dbf5de68e2ed7107629be7a43ff6da3af9fed80ed7f14a3a6a6d.jpg"
+  "itemId": "NIKE_MCT",
+  "path": "/assets/itemImages/c8c3e11fc790eeaad0607aebb6d943f89c6216dd21825c156880dbd68b39db7b.jpg"
 },
 {
   "_id": {
-    "$oid": "661c398be87a69c7d83afc3b"
+    "$oid": "662d6a9fdbdcc62fce65f371"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/92bafd984359a737ed0d161509178add1880837883fe45047f87fbce5202aad7.jpg"
+  "itemId": "NIKE_MCT",
+  "path": "/assets/itemImages/f9ba391417c9e7a1a4eb625e92123661b4d31ecd2ac46fdc3c87341fedab7289.png"
 },
 {
   "_id": {
-    "$oid": "661c86cc6189c48bc0801f7f"
+    "$oid": "662d6a9fdbdcc62fce65f372"
   },
-  "itemId": "ACCESSORY001",
-  "path": "/assets/itemImages/91e0f4d256f3eeb1e91c66ec555c450614b9052db6991a02b08c8a19704001e3.jpg"
+  "itemId": "NIKE_MCT",
+  "path": "/assets/itemImages/e63aafb393e8000e8d9b4cc7ccc367252cadc59723cc7f264e262c392601ae02.jpg"
 },
 {
   "_id": {
-    "$oid": "661c92a7b54f2e84f89973c7"
+    "$oid": "662d6bc1dbdcc62fce65f374"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/fb11a9784d598e529096db10bdc8d8bbaa57f10e3f3e67c0138ec511b3563e06.jpg"
+  "itemId": "NIKE_APEX",
+  "path": "/assets/itemImages/3fd63f8bbbe9a9c8e91317ff2ab65995649396afdf070e22642dba471f5ffd23.jpg"
 },
 {
   "_id": {
-    "$oid": "661c92a7b54f2e84f89973c8"
+    "$oid": "662d6ffcdbdcc62fce65f376"
   },
-  "itemId": "SHOES001",
-  "path": "/assets/itemImages/4235da2c7ca7abcc9c77ea82fb3ee5cd376273e696c46299d2a9059e5662c7ef.jpg"
+  "itemId": "NIKE_STFW",
+  "path": "/assets/itemImages/80a61654289d6a35c3375a3a47668a28e4cd7211ff5854fefd8d7c2af37ca9a6.png"
 },
 {
   "_id": {
-    "$oid": "661c9302b54f2e84f89973ca"
+    "$oid": "662d6ffcdbdcc62fce65f377"
   },
-  "itemId": "SHIRT001",
-  "path": "/assets/itemImages/48eac8ce4b7082f7b1c1c0271f38489537973aad26d4483d55e3648ee2916614.jpg"
+  "itemId": "NIKE_STFW",
+  "path": "/assets/itemImages/a86a330c3a2becf70917c56ebe6ba19fa6277251b3d289cb52c1a4560843b499.png"
 },
 {
   "_id": {
-    "$oid": "661c9341b54f2e84f89973cc"
+    "$oid": "662d6ffcdbdcc62fce65f378"
   },
-  "itemId": "SHIRT002",
-  "path": "/assets/itemImages/46ab575d6849bc78dfc6359993ba69f63ea02b272095d0f0bcf160414bc3e0c5.webp"
+  "itemId": "NIKE_STFW",
+  "path": "/assets/itemImages/72a83113eaf1c39ac0c36415cf9d8665385efead69a2f04ae3c14fb92b0a2362.png"
 },
 {
   "_id": {
-    "$oid": "661c93a9b54f2e84f89973ce"
+    "$oid": "662d6ffcdbdcc62fce65f379"
   },
-  "itemId": "SHOES002",
-  "path": "/assets/itemImages/d77e7ee70ebb9ee2c389e4f43051312afd6f39e20ddabc8e6ba482b051554354.jpg"
+  "itemId": "NIKE_STFW",
+  "path": "/assets/itemImages/9cd03f3969450b8a062c11a3913f5db7f5ca91082d376989c037ed92cc42949d.png"
+},
+{
+  "_id": {
+    "$oid": "662d6ffcdbdcc62fce65f37a"
+  },
+  "itemId": "NIKE_STFW",
+  "path": "/assets/itemImages/d25ec6275ef1b3e6410f9166381520a356a817b67ffc1249645731e94571a536.png"
+},
+{
+  "_id": {
+    "$oid": "662d6ffcdbdcc62fce65f37b"
+  },
+  "itemId": "NIKE_STFW",
+  "path": "/assets/itemImages/7fdb8bf232e239e139a591e386b22e18399ce13a40c9562794e95b88de21a5ee.jpg"
+},
+{
+  "_id": {
+    "$oid": "662d6ffcdbdcc62fce65f37c"
+  },
+  "itemId": "NIKE_STFW",
+  "path": "/assets/itemImages/afc34bb9bc666f3228576135c968666098908f7a89e4994b5b1973f6d16862dd.png"
+},
+{
+  "_id": {
+    "$oid": "662d71a3dbdcc62fce65f37f"
+  },
+  "itemId": "DIOR_DWAY_SLIDE",
+  "path": "/assets/itemImages/aae1ee0d702fcb4feceb733de901eab1f91092a153d9d0b7e0d1323efd7cd877.avif"
+},
+{
+  "_id": {
+    "$oid": "662d71a3dbdcc62fce65f380"
+  },
+  "itemId": "DIOR_DWAY_SLIDE",
+  "path": "/assets/itemImages/9166b8706a6c32287b925472cc0ce7f52a25db3bb5bd332e7f62500da49424e6.avif"
+},
+{
+  "_id": {
+    "$oid": "662d71a3dbdcc62fce65f381"
+  },
+  "itemId": "DIOR_DWAY_SLIDE",
+  "path": "/assets/itemImages/a15976e8a09596c2eafbfc7bfce2c9ff7eb1b1b11528ab2ef52adb266b618758.avif"
+},
+{
+  "_id": {
+    "$oid": "662d71a3dbdcc62fce65f382"
+  },
+  "itemId": "DIOR_DWAY_SLIDE",
+  "path": "/assets/itemImages/08d7f3c0d0df70b633455022027e1ce753e1780349e5107de755f95b8264c863.avif"
+},
+{
+  "_id": {
+    "$oid": "662d71a3dbdcc62fce65f383"
+  },
+  "itemId": "DIOR_DWAY_SLIDE",
+  "path": "/assets/itemImages/1c07b8b182d094f2972a9bb7bfe3797db0ac87a1c94eca32618a64994d4a8f70.avif"
+},
+{
+  "_id": {
+    "$oid": "662d71a3dbdcc62fce65f384"
+  },
+  "itemId": "DIOR_DWAY_SLIDE",
+  "path": "/assets/itemImages/9be059b8d954ebfbfd1e0ce36462ee7e77d6332c43304798b824282657648c3f.avif"
+},
+{
+  "_id": {
+    "$oid": "662d723bdbdcc62fce65f386"
+  },
+  "itemId": "DIOR_MEDIUM_BOOK_TOTE",
+  "path": "/assets/itemImages/0e8a5f08370e094e135453bc79f4b1a1d16567d8cabf3823b178799f463b898c.avif"
+},
+{
+  "_id": {
+    "$oid": "662d723bdbdcc62fce65f387"
+  },
+  "itemId": "DIOR_MEDIUM_BOOK_TOTE",
+  "path": "/assets/itemImages/a80c9d85e64df2d9c94b40fc7138fb86c7b41c5a514c04d81db306fc46c2ec89.avif"
+},
+{
+  "_id": {
+    "$oid": "662d723bdbdcc62fce65f388"
+  },
+  "itemId": "DIOR_MEDIUM_BOOK_TOTE",
+  "path": "/assets/itemImages/23e1d2bd1327d185479723dcde6509d50084c9d649ed416e0a84ee4b34fba25a.avif"
+},
+{
+  "_id": {
+    "$oid": "662d723bdbdcc62fce65f389"
+  },
+  "itemId": "DIOR_MEDIUM_BOOK_TOTE",
+  "path": "/assets/itemImages/c818c32eee440c59f88de38491c9f01819553a5c4dd608e64e30ac476b26d8ca.avif"
+},
+{
+  "_id": {
+    "$oid": "662d723bdbdcc62fce65f38a"
+  },
+  "itemId": "DIOR_MEDIUM_BOOK_TOTE",
+  "path": "/assets/itemImages/d17875b82f73bc25f03936395076cb804f4e8a98aea0a45fa51418fec8129a40.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f38c"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/1f7498952a3bf75b25ceaefd7d61cc2d6d9c68b708b3abd2ddea472b7b87324b.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f38d"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/4aa60be7bea6cc2abdac863fb382eda7739cd36a33a9f05cc8427a0bdfe61cde.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f38e"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/47711a2f36b32ea3bfe94d7a4c3096409039a48a7e7129fd06bf5ab52822acd7.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f38f"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/dabd69776ffaf1f2b6e34ae58c5b91d896249cc8a6b675648980c9d12d5015d9.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f390"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/5a22a68f9d6129c3f9f3d5f6b8838e4bbc1760b12fe4f3f1b9b0ad865600cf3d.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f391"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/9c30c76380f632d9e91539cf3c5d66b7222e7f4fef6968b49c33bfc2fd80eaba.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f392"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/34c81275f5a6897c941af8bbcd3d81fd70e5cd813f81373410643125db916973.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f393"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/8d40e343ce221559e47d484bb4a7e5834d3cd1e37a7ee554459a8e57e4766bfe.avif"
+},
+{
+  "_id": {
+    "$oid": "662d749fdbdcc62fce65f394"
+  },
+  "itemId": "DIOR_ASYMMETRIC_SHIRT",
+  "path": "/assets/itemImages/d2233f59476c0e1ba591d90dadc7b27eeb890342dd59e4cbc892e2a4d2539c59.avif"
+},
+{
+  "_id": {
+    "$oid": "662eaeee33a4192a1a634957"
+  },
+  "itemId": "DIOR_RFB",
+  "path": "/assets/itemImages/4ac434fd327de24accccd07a0e29f6e0ac238359ad2c1b62d5fca97322559fbb.avif"
+},
+{
+  "_id": {
+    "$oid": "662eaeee33a4192a1a634958"
+  },
+  "itemId": "DIOR_RFB",
+  "path": "/assets/itemImages/c480730f781dac95d2c9d88b831b67d32f44229afab6f9006c095eff8d153e52.avif"
+},
+{
+  "_id": {
+    "$oid": "662eaeee33a4192a1a634959"
+  },
+  "itemId": "DIOR_RFB",
+  "path": "/assets/itemImages/96db89ec54002a9e074c294399b54dcc2a4198fd68a466e944a709449e191af5.avif"
+},
+{
+  "_id": {
+    "$oid": "662eb0c133a4192a1a63495b"
+  },
+  "itemId": "DIOR_GEM_RING",
+  "path": "/assets/itemImages/03db2040f57b49eb4b0ee0382fef898d38bdc6f494555090063444f8128f5566.webp"
+},
+{
+  "_id": {
+    "$oid": "662eb0c133a4192a1a63495c"
+  },
+  "itemId": "DIOR_GEM_RING",
+  "path": "/assets/itemImages/b41c1096a15529779132f81bd024903cb4e4ae6a294cca1caa3e66c9aaa8443c.webp"
+},
+{
+  "_id": {
+    "$oid": "662eb0c133a4192a1a63495d"
+  },
+  "itemId": "DIOR_GEM_RING",
+  "path": "/assets/itemImages/497356dfbde2b65bb2530b386ec31e2795aa3a912092320257cedb5cd8ee6a16.webp"
+},
+{
+  "_id": {
+    "$oid": "662eb0c133a4192a1a63495e"
+  },
+  "itemId": "DIOR_GEM_RING",
+  "path": "/assets/itemImages/60e4bbd8167cd878d983e44a0187ee726bdd17c407718376b4bb35b6625491e1.webp"
+},
+{
+  "_id": {
+    "$oid": "662eb0c133a4192a1a63495f"
+  },
+  "itemId": "DIOR_GEM_RING",
+  "path": "/assets/itemImages/c85b5cc8ef0d9dc65638fd3193db0769bfaa1c616d96e4a697703b88390841b4.avif"
+},
+{
+  "_id": {
+    "$oid": "662eb44833a4192a1a634962"
+  },
+  "itemId": "VERSACE_BGS",
+  "path": "/assets/itemImages/e2e8f7f33fefb0cdbfcaba4bd688b7faad352d7b8873fbe2f756c82137cc80ac.avif"
+},
+{
+  "_id": {
+    "$oid": "662eb44833a4192a1a634963"
+  },
+  "itemId": "VERSACE_BGS",
+  "path": "/assets/itemImages/304006bc442789d2db90eec5e2011902a0b4ccdf30681b30e3b3ce8a00556182.avif"
+},
+{
+  "_id": {
+    "$oid": "662eb44833a4192a1a634964"
+  },
+  "itemId": "VERSACE_BGS",
+  "path": "/assets/itemImages/ee76b5ae565eb4b5f1ab2f2a63ff4f0b2fe11be3ff5a6075fe1d4b8519b7e558.avif"
+},
+{
+  "_id": {
+    "$oid": "662eb44833a4192a1a634965"
+  },
+  "itemId": "VERSACE_BGS",
+  "path": "/assets/itemImages/8c819ddf15ddcb23ec63fe6e5d8408caf20b1cf9da0c25cdb3e79d13b7e5be7e.avif"
+},
+{
+  "_id": {
+    "$oid": "662eb44833a4192a1a634966"
+  },
+  "itemId": "VERSACE_BGS",
+  "path": "/assets/itemImages/e29c88d1b8272f24941657bfcc663e616d5c9a229a54c61b7bb42352e71b09cb.avif"
+},
+{
+  "_id": {
+    "$oid": "662eb59133a4192a1a634968"
+  },
+  "itemId": "VERSACE_CELB3",
+  "path": "/assets/itemImages/14a0c0e4f6bb2e27af46d51cf5930ca32febcd64c77fa9e6e6198afdfe84d111.avif"
 }]
