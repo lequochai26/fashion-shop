@@ -19,7 +19,8 @@ export default class OrderInfoConverter implements AsyncConverter<Order, OrderIn
                         id: (await item.getItem())?.Id as string,
                         name: (await item.getItem())?.Name as string,
                         avatar: (await item.getItem())?.Avatar as string,
-                        metadata: (await item.getItem())?.Metadata
+                        metadata: (await item.getItem())?.Metadata,
+                        price: (await item.getItem())?.Price as number
                     },
                     amount: item.Amount as number,
                     price: item.Price as number,

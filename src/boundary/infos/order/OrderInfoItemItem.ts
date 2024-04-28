@@ -3,4 +3,5 @@ export default interface OrderInfoItemItem {
     name: string;
     avatar: string;
     metadata?: any;
+    price: number;
 }
