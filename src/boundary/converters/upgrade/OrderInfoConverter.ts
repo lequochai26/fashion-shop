@@ -16,10 +16,10 @@ export default class OrderInfoConverter implements AsyncConverter<Order, OrderIn
             items.push(
                 {
                     item: {
-                        id: item.Item?.Id as string,
-                        name: item.Item?.Name as string,
-                        avatar: item.Item?.Avatar as string,
-                        metadata: item.Item?.Metadata
+                        id: (await item.getItem())?.Id as string,
+                        name: (await item.getItem())?.Name as string,
+                        avatar: (await item.getItem())?.Avatar as string,
+                        metadata: (await item.getItem())?.Metadata
                     },
                     amount: item.Amount as number,
                     price: item.Price as number,
