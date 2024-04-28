@@ -1,8 +1,8 @@
+import OrderInfoItemItem from "./OrderInfoItemItem";
+
 export default interface OrderInfoItem {
-    id: string;
-    name: string;
+    item: OrderInfoItemItem;
     amount: number;
     price: number;
     metadata?: any;
-    avatar: string;
 }
